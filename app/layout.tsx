@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, IBM_Plex_Mono } from 'next/font/google'
 import "./globals.css";
-import Navbar from "@/Components/Navbar";
+import Navbar from "@/Components/landing_page/Navbar";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -23,9 +23,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#13110f]">
+      <body className="min-h-full flex flex-col bg-[#0D0905]">
         <Navbar />
         {children}
         </body>

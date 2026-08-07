@@ -4,3 +4,59 @@
   --font-sans: var(--font-space);
   --font-mono: var(--font-mono-face);
 }
+
+.grid-horizontal{
+
+    stroke:rgba(255,255,255,.15);
+
+    stroke-width:1;
+
+    stroke-dasharray:5 5;
+
+    stroke-dashoffset:2000;
+
+    animation:
+        drawHorizontal 1.4s ease forwards;
+}
+
+.grid-vertical{
+
+    stroke:rgba(255,255,255,.15);
+
+    stroke-width:1;
+
+    stroke-dasharray:5 5;
+
+    stroke-dashoffset:2000;
+
+    animation:
+        drawVertical 1.4s ease forwards;
+}
+
+@keyframes drawHorizontal{
+
+    from{
+
+        stroke-dashoffset:2000;
+    }
+
+    to{
+
+        stroke-dashoffset:0;
+    }
+
+}
+
+@keyframes drawVertical{
+
+    from{
+
+        stroke-dashoffset:2000;
+    }
+
+    to{
+
+        stroke-dashoffset:0;
+    }
+
+}
