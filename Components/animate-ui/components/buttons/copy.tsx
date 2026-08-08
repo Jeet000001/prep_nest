@@ -8,7 +8,7 @@ import { CheckIcon, CopyIcon } from 'lucide-react';
 import {
   Button as ButtonPrimitive,
   type ButtonProps as ButtonPrimitiveProps,
-} from '@/components/animate-ui/primitives/buttons/button';
+} from '@/Components/animate-ui/primitives/buttons/button';
 import { cn } from '@/lib/utils';
 import { useControlledState } from '@/hooks/use-controlled-state';
 
