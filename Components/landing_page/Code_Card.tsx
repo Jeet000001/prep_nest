@@ -3,16 +3,22 @@
 import {
   Code,
   CodeBlock,
-  CodeHeader,
 } from "@/Components/animate-ui/components/animate/code";
-import { Code2 } from "lucide-react";
 
-export const CodeDemo = ({ duration, delay, writing, cursor }) => {
-  return (
-    <Code
-      key={`${duration}-${delay}-${writing}-${cursor}`}
-      className="w-full sm:w-110 h-120 border-none"
-      code={`import { useState, useEffect } from "react";
+interface CodeDemoProps {
+  duration?: number;
+  delay?: number;
+  writing?: boolean;
+  cursor?: boolean;
+}
+
+export const CodeDemo = ({
+  duration = 40,
+  delay = 0,
+  writing = true,
+  cursor = true,
+}: CodeDemoProps) => {
+  const code = `import { useState, useEffect } from "react";
 
 const useFetch = (url, options) => {
   const [data, setData] = useState(null);
@@ -22,12 +28,18 @@ const useFetch = (url, options) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
+
       try {
         const response = await fetch(url, options);
+
         if (!response.ok) {
-          throw new Error('HTTP error! status: response.status');
+          throw new Error(
+            \`HTTP error! status: \${response.status}\`
+          );
         }
+
         const result = await response.json();
+
         setData(result);
         setError(null);
       } catch (err) {
@@ -38,17 +50,21 @@ const useFetch = (url, options) => {
     };
 
     fetchData();
-  }, [url, options]); // Re-run effect if URL or options change
+  }, [url, options]);
 
   return { data, loading, error };
 };
 
-export default useFetch;'
-`}
+export default useFetch;`;
+
+  return (
+    <Code
+      className="h-120 w-full border-none sm:w-110"
+      code={code}
     >
-      <CodeHeader icon={Code2} copyButton>
+      <div className="px-4 py-3 font-mono text-sm text-neutral-400">
         use-fetch.jsx
-      </CodeHeader>
+      </div>
 
       <CodeBlock
         cursor={cursor}
