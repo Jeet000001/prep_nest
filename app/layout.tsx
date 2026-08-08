@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Mono } from 'next/font/google'
+import { Space_Grotesk, IBM_Plex_Mono, Geist } from 'next/font/google'
 import "./globals.css";
 import Navbar from "@/Components/landing_page/Navbar";
+import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/Components/theme-provider";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -23,11 +27,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${ibmPlexMono.variable} antialiased`}
+      className={cn("antialiased", spaceGrotesk.variable, ibmPlexMono.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-full flex flex-col bg-[#0D0905]">
-        <Navbar />
-        {children}
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Navbar />
+            {children}
+          </ThemeProvider>
         </body>
     </html>
   );

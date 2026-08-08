@@ -16,7 +16,7 @@ const BackgroundGrid = () => {
             <path
               d="M40 0H0V40"
               fill="none"
-              stroke="rgba(255,255,255,0.16)"
+              stroke="rgb(248, 225, 175)"
               strokeWidth="1"
               strokeDasharray="5 5"
             />
