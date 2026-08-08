@@ -4,7 +4,7 @@ import {
   Code,
   CodeBlock,
   CodeHeader,
-} from "@/components/animate-ui/components/animate/code";
+} from "@/Components/animate-ui/components/animate/code";
 import { Code2 } from "lucide-react";
 
 export const CodeDemo = ({ duration, delay, writing, cursor }) => {
