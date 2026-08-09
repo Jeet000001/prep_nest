@@ -29,7 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={cn("antialiased", spaceGrotesk.variable, ibmPlexMono.variable, "font-sans", geist.variable)}
     >
-      <body className="min-h-full flex flex-col bg-[#0D0905]">
+      <body className="min-h-full flex flex-col bg-[#0B0907]">
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
