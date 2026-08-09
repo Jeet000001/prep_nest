@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, IBM_Plex_Mono, Geist } from 'next/font/google'
 import "./globals.css";
-import Navbar from "@/Components/landing_page/Navbar";
+import Navbar from "@/Components/Navbar";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/Components/theme-provider";
 
