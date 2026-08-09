@@ -28,8 +28,8 @@ const Navbar = () => {
         }`}
       />
 
-      <nav className="fixed inset-x-0 top-0 z-50 mx-auto max-w-7xl backdrop-blur-xl lg:py-4">
-        <div className="flex items-center justify-between border-b border-amber-400/40 px-6 py-3 lg:mx-8 lg:rounded-2xl lg:border">
+      <nav className="fixed inset-x-0 top-0 z-50 mx-auto max-w-7xl lg:py-4">
+        <div className="flex items-center justify-between border-b border-amber-400/40 px-6 py-3 lg:mx-8 lg:rounded-2xl lg:border backdrop-blur-xl">
           {/* Logo */}
           <Link href="/" className="font-mono text-lg text-amber-400">
             Prep<span className="text-white">Nest</span>

@@ -20,10 +20,10 @@ const Hero = () => {
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#F6DAA0]/20 bg-[#F6DAA0]/5 px-3.5 py-2 backdrop-blur-sm sm:mb-7 sm:px-4">
               <Sparkles
                 size={14}
-                className="shrink-0 text-[#F6DAA0] sm:h-[15px] sm:w-[15px]"
+                className="shrink-0 text-[#eec675] sm:h-[15px] sm:w-[15px]"
               />
 
-              <span className="font-mono text-[11px] tracking-wide text-[#F6DAA0] sm:text-xs">
+              <span className="font-mono text-[11px] tracking-wide text-[#eec675] sm:text-xs">
                 cleaner way to prepare
               </span>
             </div>
@@ -32,19 +32,16 @@ const Hero = () => {
             <h1 className="font-mono text-[2.5rem] font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl">
               Stop scrolling.
               <br />
-              <span className="text-[#F6DAA0]">
-                Start preparing.
-              </span>
+              <span className="text-amber-400">Start preparing.</span>
             </h1>
 
             {/* Description */}
-            <p className="mx-auto mt-6 max-w-xl text-sm leading-6 text-neutral-400 sm:mt-7 sm:text-base sm:leading-7 lg:mx-0 lg:text-lg">
-              Everything a fresher needs to crack React interviews —
-              HTML, CSS, JavaScript, React theory, and machine coding —
-              in one clean place.
+            <p className="mx-auto mt-6 max-w-xl text-sm leading-6 text-neutral-300 sm:mt-7 sm:text-base sm:leading-7 lg:mx-0 lg:text-lg">
+              Everything a fresher needs to crack React interviews — HTML, CSS,
+              JavaScript, React theory, and machine coding — in one clean place.
             </p>
 
-            <p className="mt-2 font-mono text-xs text-neutral-500 sm:text-sm">
+            <p className="mt-2 font-mono text-xs text-neutral-400 sm:text-sm">
               No login. No payment. No waiting for a DM.
             </p>
 
@@ -52,10 +49,9 @@ const Hero = () => {
             <div className="mt-8 flex flex-col items-center gap-4 sm:mt-9 sm:flex-row sm:justify-center lg:justify-start">
               <Link
                 href="/"
-                className="group inline-flex h-11 w-full max-w-xs items-center justify-center gap-2 rounded-lg bg-[#F6DAA0] px-5 font-mono text-xs font-semibold text-[#0B0907] transition-all duration-300 hover:bg-[#F8E1AF] hover:shadow-[0_0_30px_rgba(246,218,160,0.15)] sm:h-12 sm:w-auto sm:max-w-none sm:px-6 sm:text-sm"
+                className="group inline-flex h-11 w-full max-w-xs items-center justify-center gap-2 rounded-lg bg-amber-400 px-5 font-mono text-xs font-semibold text-[#0B0907] transition-all duration-300 hover:bg-amber-300 hover:shadow-[0_0_30px_rgba(246,218,160,0.15)] sm:h-12 sm:w-auto sm:max-w-none sm:px-6 sm:text-sm"
               >
                 Start Exploring Free Resources
-
                 <ArrowRight
                   size={17}
                   className="transition-transform duration-300 group-hover:translate-x-1 sm:h-[18px] sm:w-[18px]"
@@ -75,11 +71,8 @@ const Hero = () => {
 
           {/* Right */}
           <div className="relative flex w-full items-center justify-center lg:w-auto lg:justify-end">
-            <div className="w-full max-w-[34rem] lg:max-w-[31rem] xl:max-w-[34rem]">
-              <CodeDemo
-                duration={10000}
-                writing
-              />
+            <div className="w-full flex justify-center max-w-[34rem] lg:max-w-[31rem] xl:max-w-[34rem]">
+              <CodeDemo duration={10000} writing />
             </div>
           </div>
         </div>

@@ -5,23 +5,28 @@
 const problems = [
   {
     number: "01",
-    title: "Watching dozens of tutorials and still not knowing what interviews actually ask.",
+    title:
+      "Watching dozens of tutorials and still not knowing what interviews actually ask.",
   },
   {
     number: "02",
-    title: "Jumping between random YouTube playlists, half-finished notes, and scattered Drive links.",
+    title:
+      "Jumping between random YouTube playlists, half-finished notes, and scattered Drive links.",
   },
   {
     number: "03",
-    title: "Spending weeks in tutorial hell without solving one proper machine coding problem.",
+    title:
+      "Spending weeks in tutorial hell without solving one proper machine coding problem.",
   },
   {
     number: "04",
-    title: "Freezing when someone asks you to explain a concept clearly or build under pressure.",
+    title:
+      "Freezing when someone asks you to explain a concept clearly or build under pressure.",
   },
   {
     number: "05",
-    title: "Feeling lost because there is no path — only noise and endless roadmap posts.",
+    title:
+      "Feeling lost because there is no path — only noise and endless roadmap posts.",
   },
 ];
 
@@ -37,9 +42,9 @@ const ProblemSection = () => {
           <div className="lg:sticky lg:top-32 lg:h-fit">
             {/* Eyebrow */}
             <div className="mb-5 flex items-center gap-3">
-              <span className="h-px w-7 bg-[#F6DAA0]" />
+              <span className="h-px w-7 bg-[#eec675]" />
 
-              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.25em] text-[#F6DAA0] sm:text-xs">
+              <span className="font-mono text-[10px] font-medium uppercase tracking-[0.25em] text-[#eec675] sm:text-xs">
                 The real problem
               </span>
             </div>
@@ -50,21 +55,17 @@ const ProblemSection = () => {
               <br />
               feel like
               <br />
-              <span className="text-[#F6DAA0]">
-                detective work.
-              </span>
+              <span className="text-amber-400">detective work.</span>
             </h2>
 
             {/* Description */}
             <p className="mt-7 max-w-md text-sm leading-7 text-neutral-400 sm:text-base">
-              You don&apos;t need another 40-hour course. You need to know
-              what matters, then actually practice it.
+              You don&apos;t need another 40-hour course. You need to know what
+              matters, then actually practice it.
             </p>
 
             {/* Small indicator */}
             <div className="mt-10 hidden items-center gap-3 lg:flex">
-              
-
               <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-500">
                 Know the problem
               </span>
@@ -80,11 +81,11 @@ const ProblemSection = () => {
                   className="group relative flex gap-5 py-7 transition-all duration-300 sm:gap-7 sm:py-8 lg:py-9 lg: px-5"
                 >
                   {/* Hover Line */}
-                  <div className="absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-[#F6DAA0] transition-transform duration-500 group-hover:scale-y-100" />
+                  <div className="absolute left-0 top-0 h-full w-px origin-top scale-y-0 bg-[#eec675] transition-transform duration-500 group-hover:scale-y-100" />
 
                   {/* Number */}
                   <div className="w-8 shrink-0 pt-1 sm:w-10">
-                    <span className="font-mono text-[10px] font-medium text-[#F6DAA0] sm:text-xs">
+                    <span className="font-mono text-[10px] font-medium text-[#eec675] sm:text-xs">
                       {problem.number}
                     </span>
                   </div>
