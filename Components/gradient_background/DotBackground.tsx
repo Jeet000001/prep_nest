@@ -15,7 +15,7 @@ const DotBackground = ({
   strength = 18,
   dotSize = 2,
 }: DotBackgroundProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const mouseRef = useRef({
     x: -1000,
@@ -29,7 +29,6 @@ const DotBackground = ({
     rows: 0,
   });
 
-  // Create dots according to component size
   useEffect(() => {
     const container = containerRef.current;
 
@@ -47,9 +46,7 @@ const DotBackground = ({
 
     updateGrid();
 
-    const resizeObserver = new ResizeObserver(
-      updateGrid
-    );
+    const resizeObserver = new ResizeObserver(updateGrid);
 
     resizeObserver.observe(container);
 
@@ -58,24 +55,18 @@ const DotBackground = ({
     };
   }, [gap]);
 
-  // Mouse position
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       const container = containerRef.current;
 
       if (!container) return;
 
-      const rect =
-        container.getBoundingClientRect();
+      const rect = container.getBoundingClientRect();
 
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
 
-      const isInside =
-        x >= 0 &&
-        x <= rect.width &&
-        y >= 0 &&
-        y <= rect.height;
+      const isInside = x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
 
       if (isInside) {
         mouseRef.current.x = x;
@@ -86,83 +77,63 @@ const DotBackground = ({
       }
     };
 
-    window.addEventListener(
-      "mousemove",
-      handleMouseMove
-    );
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener(
-        "mousemove",
-        handleMouseMove
-      );
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
-  // Wave + glow animation
   useEffect(() => {
     const animate = () => {
       const container = containerRef.current;
 
       if (!container) return;
 
-      const dots =
-        container.querySelectorAll<HTMLElement>(
-          "[data-dot]"
-        );
+      const dots = container.querySelectorAll<HTMLElement>("[data-dot]");
 
       const mouseX = mouseRef.current.x;
       const mouseY = mouseRef.current.y;
 
-      let closestDot: HTMLElement | null = null;
+      let closestIndex = -1;
       let closestDistance = Infinity;
 
-      // Find closest dot
-      dots.forEach((dot) => {
+      dots.forEach((dot, index) => {
         const dotX = Number(dot.dataset.x);
         const dotY = Number(dot.dataset.y);
 
         const dx = dotX - mouseX;
         const dy = dotY - mouseY;
 
-        const distance = Math.sqrt(
-          dx * dx + dy * dy
-        );
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < closestDistance) {
           closestDistance = distance;
-          closestDot = dot;
+          closestIndex = index;
         }
       });
 
-      dots.forEach((dot) => {
+      dots.forEach((dot, index) => {
         const dotX = Number(dot.dataset.x);
         const dotY = Number(dot.dataset.y);
 
         const dx = dotX - mouseX;
         const dy = dotY - mouseY;
 
-        const distance = Math.sqrt(
-          dx * dx + dy * dy
-        );
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        dot.style.boxShadow = "none";
+
+        dot.style.scale = "1";
 
         if (distance < radius) {
-          const force =
-            1 - distance / radius;
+          const force = 1 - distance / radius;
 
-          const smoothForce =
-            force * force;
+          const smoothForce = force * force;
 
-          // Push dot away from cursor
-          const moveX =
-            (dx / (distance || 1)) *
-            smoothForce *
-            strength;
+          const moveX = (dx / (distance || 1)) * smoothForce * strength;
 
-          const moveY =
-            (dy / (distance || 1)) *
-            smoothForce *
-            strength;
+          const moveY = (dy / (distance || 1)) * smoothForce * strength;
 
           dot.style.transform = `
             translate3d(
@@ -172,46 +143,40 @@ const DotBackground = ({
             )
           `;
 
-          dot.style.opacity = String(
-            0.18 + smoothForce * 0.65
-          );
+          dot.style.opacity = String(0.18 + smoothForce * 0.65);
         } else {
-          dot.style.transform =
-            "translate3d(0, 0, 0)";
+          dot.style.transform = "translate3d(0, 0, 0)";
 
           dot.style.opacity = "0.18";
         }
 
-        // Reset glow
-        dot.style.boxShadow = "none";
+        if (index === closestIndex && closestDistance < 35) {
+          const sizeProgress = 1 - closestDistance / 35;
+
+          const scale = 1 + sizeProgress * 2;
+
+          dot.style.scale = String(scale);
+
+          dot.style.opacity = "1";
+
+          dot.style.boxShadow = `
+            0 0 5px rgba(239, 181, 77, 0.9),
+            0 0 12px rgba(239, 181, 77, 0.6),
+            0 0 22px rgba(239, 181, 77, 0.35)
+          `;
+        }
       });
 
-      // Glow the closest dot
-      if (
-        closestDot &&
-        closestDistance < 35
-      ) {
-        closestDot.style.opacity = "1";
-
-        closestDot.style.boxShadow = `
-          0 0 5px rgba(239, 181, 77, 0.9),
-          0 0 12px rgba(239, 181, 77, 0.6),
-          0 0 22px rgba(239, 181, 77, 0.35)
-        `;
-      }
-
-      animationRef.current =
-        requestAnimationFrame(animate);
+      animationRef.current = requestAnimationFrame(animate);
     };
 
-    animationRef.current =
-      requestAnimationFrame(animate);
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(
-          animationRef.current
-        );
+      if (animationRef.current !== null) {
+        cancelAnimationFrame(animationRef.current);
+
+        animationRef.current = null;
       }
     };
   }, [radius, strength]);
@@ -224,7 +189,6 @@ const DotBackground = ({
         pointer-events-none
         absolute
         inset-0
-        z-0
         overflow-hidden
       "
     >
@@ -245,22 +209,15 @@ const DotBackground = ({
         }}
       >
         {Array.from({
-          length:
-            grid.columns * grid.rows,
+          length: grid.columns * grid.rows,
         }).map((_, index) => {
-          const column =
-            index % grid.columns;
+          const column = index % grid.columns;
 
-          const row =
-            Math.floor(
-              index / grid.columns
-            );
+          const row = Math.floor(index / grid.columns);
 
-          const x =
-            column * gap + gap / 2;
+          const x = column * gap + gap / 2;
 
-          const y =
-            row * gap + gap / 2;
+          const y = row * gap + gap / 2;
 
           return (
             <span
@@ -268,7 +225,10 @@ const DotBackground = ({
               data-dot
               data-x={x}
               data-y={y}
-              className="rounded-full bg-[#d8c9ae]"
+              className="
+                rounded-full
+                bg-[#d8c9ae]
+              "
               style={{
                 width: `${dotSize}px`,
                 height: `${dotSize}px`,
@@ -277,11 +237,12 @@ const DotBackground = ({
 
                 opacity: 0.18,
 
-                willChange:
-                  "transform, opacity, box-shadow",
+                scale: 1,
+
+                willChange: "transform, opacity, scale, box-shadow",
 
                 transition:
-                  "transform 100ms cubic-bezier(0.22, 1, 0.36, 1), opacity 150ms ease, box-shadow 150ms ease",
+                  "transform 100ms cubic-bezier(0.22, 1, 0.36, 1), opacity 150ms ease, scale 120ms ease, box-shadow 150ms ease",
               }}
             />
           );
