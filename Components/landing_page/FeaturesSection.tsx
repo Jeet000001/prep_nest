@@ -49,7 +49,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="relative overflow-hidden bg-[#0B0907] py-24 sm:py-28 lg:py-32">
+    <section className="relative overflow-hidden py-24 sm:py-28 lg:py-32">
       {/* Background Glow */}
       <div className="pointer-events-none absolute -right-40 top-20 h-80 w-80 rounded-full bg-[#F6DAA0]/5 blur-[120px]" />
 
