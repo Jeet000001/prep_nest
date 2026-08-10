@@ -2,32 +2,30 @@
 
 import { useEffect, useRef, useState } from "react";
 
-interface DotBackgroundProps {
-  gap?: number;
-  radius?: number;
-  strength?: number;
-  dotSize?: number;
-}
+const DOT_GAP = 40;
+const DOT_SIZE = 2;
 
-const DotBackground = ({
-  gap = 42,
-  radius = 180,
-  strength = 18,
-  dotSize = 2,
-}: DotBackgroundProps) => {
+const WAVE_RADIUS = 180;
+const WAVE_STRENGTH = 18;
+
+const DotBackground = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const mouseRef = useRef({
+  const mouse = useRef({
     x: -1000,
     y: -1000,
   });
 
-  const animationRef = useRef<number | null>(null);
+  const animationFrame = useRef<number | null>(null);
 
   const [grid, setGrid] = useState({
     columns: 0,
     rows: 0,
   });
+
+  // --------------------------------
+  // Calculate dots according to component
+  // --------------------------------
 
   useEffect(() => {
     const container = containerRef.current;
@@ -39,21 +37,25 @@ const DotBackground = ({
       const height = container.clientHeight;
 
       setGrid({
-        columns: Math.ceil(width / gap) + 1,
-        rows: Math.ceil(height / gap) + 1,
+        columns: Math.ceil(width / DOT_GAP) + 1,
+        rows: Math.ceil(height / DOT_GAP) + 1,
       });
     };
 
     updateGrid();
 
-    const resizeObserver = new ResizeObserver(updateGrid);
+    const observer = new ResizeObserver(updateGrid);
 
-    resizeObserver.observe(container);
+    observer.observe(container);
 
     return () => {
-      resizeObserver.disconnect();
+      observer.disconnect();
     };
-  }, [gap]);
+  }, []);
+
+  // --------------------------------
+  // Mouse + Wave animation
+  // --------------------------------
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -64,76 +66,53 @@ const DotBackground = ({
       const rect = container.getBoundingClientRect();
 
       const x = event.clientX - rect.left;
+
       const y = event.clientY - rect.top;
 
-      const isInside = x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
+      // Mouse component ke andar hai ya nahi
+      const inside = x >= 0 && x <= rect.width && y >= 0 && y <= rect.height;
 
-      if (isInside) {
-        mouseRef.current.x = x;
-        mouseRef.current.y = y;
+      if (inside) {
+        mouse.current.x = x;
+        mouse.current.y = y;
       } else {
-        mouseRef.current.x = -1000;
-        mouseRef.current.y = -1000;
+        mouse.current.x = -1000;
+        mouse.current.y = -1000;
       }
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
-  useEffect(() => {
     const animate = () => {
       const container = containerRef.current;
 
       if (!container) return;
 
-      const dots = container.querySelectorAll<HTMLElement>("[data-dot]");
+      const dots = container.querySelectorAll<HTMLDivElement>("[data-dot]");
 
-      const mouseX = mouseRef.current.x;
-      const mouseY = mouseRef.current.y;
+      const mouseX = mouse.current.x;
+      const mouseY = mouse.current.y;
 
-      let closestIndex = -1;
-      let closestDistance = Infinity;
-
-      dots.forEach((dot, index) => {
+      dots.forEach((dot) => {
         const dotX = Number(dot.dataset.x);
+
         const dotY = Number(dot.dataset.y);
 
         const dx = dotX - mouseX;
+
         const dy = dotY - mouseY;
 
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = index;
-        }
-      });
+        if (distance < WAVE_RADIUS) {
+          // 0 -> far
+          // 1 -> mouse ke bilkul paas
+          const strength = 1 - distance / WAVE_RADIUS;
 
-      dots.forEach((dot, index) => {
-        const dotX = Number(dot.dataset.x);
-        const dotY = Number(dot.dataset.y);
+          // Smooth wave falloff
+          const smoothStrength = strength * strength;
 
-        const dx = dotX - mouseX;
-        const dy = dotY - mouseY;
+          const moveX = (dx / (distance || 1)) * smoothStrength * WAVE_STRENGTH;
 
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        dot.style.boxShadow = "none";
-
-        dot.style.scale = "1";
-
-        if (distance < radius) {
-          const force = 1 - distance / radius;
-
-          const smoothForce = force * force;
-
-          const moveX = (dx / (distance || 1)) * smoothForce * strength;
-
-          const moveY = (dy / (distance || 1)) * smoothForce * strength;
+          const moveY = (dy / (distance || 1)) * smoothStrength * WAVE_STRENGTH;
 
           dot.style.transform = `
             translate3d(
@@ -143,55 +122,39 @@ const DotBackground = ({
             )
           `;
 
-          dot.style.opacity = String(0.18 + smoothForce * 0.65);
+          dot.style.opacity = String(0.25 + smoothStrength * 0.75);
+
+          // Slightly increase size near mouse
+          const scale = 1 + smoothStrength * 1.5;
+
+          dot.style.scale = String(scale);
         } else {
           dot.style.transform = "translate3d(0, 0, 0)";
 
-          dot.style.opacity = "0.18";
-        }
+          dot.style.opacity = "0.25";
 
-        if (index === closestIndex && closestDistance < 35) {
-          const sizeProgress = 1 - closestDistance / 35;
-
-          const scale = 1 + sizeProgress * 2;
-
-          dot.style.scale = String(scale);
-
-          dot.style.opacity = "1";
-
-          dot.style.boxShadow = `
-            0 0 5px rgba(239, 181, 77, 0.9),
-            0 0 12px rgba(239, 181, 77, 0.6),
-            0 0 22px rgba(239, 181, 77, 0.35)
-          `;
+          dot.style.scale = "1";
         }
       });
 
-      animationRef.current = requestAnimationFrame(animate);
+      animationFrame.current = requestAnimationFrame(animate);
     };
 
-    animationRef.current = requestAnimationFrame(animate);
+    window.addEventListener("mousemove", handleMouseMove);
+
+    animate();
 
     return () => {
-      if (animationRef.current !== null) {
-        cancelAnimationFrame(animationRef.current);
+      window.removeEventListener("mousemove", handleMouseMove);
 
-        animationRef.current = null;
+      if (animationFrame.current) {
+        cancelAnimationFrame(animationFrame.current);
       }
     };
-  }, [radius, strength]);
+  }, []);
 
   return (
-    <div
-      ref={containerRef}
-      aria-hidden="true"
-      className="
-        pointer-events-none
-        absolute
-        inset-0
-        overflow-hidden
-      "
-    >
+    <div ref={containerRef} className="absolute inset-0">
       <div
         className="absolute inset-0"
         style={{
@@ -199,12 +162,12 @@ const DotBackground = ({
 
           gridTemplateColumns: `repeat(
             ${grid.columns},
-            ${gap}px
+            ${DOT_GAP}px
           )`,
 
           gridTemplateRows: `repeat(
             ${grid.rows},
-            ${gap}px
+            ${DOT_GAP}px
           )`,
         }}
       >
@@ -215,12 +178,12 @@ const DotBackground = ({
 
           const row = Math.floor(index / grid.columns);
 
-          const x = column * gap + gap / 2;
+          const x = column * DOT_GAP + DOT_GAP / 2;
 
-          const y = row * gap + gap / 2;
+          const y = row * DOT_GAP + DOT_GAP / 2;
 
           return (
-            <span
+            <div
               key={index}
               data-dot
               data-x={x}
@@ -230,19 +193,19 @@ const DotBackground = ({
                 bg-[#d8c9ae]
               "
               style={{
-                width: `${dotSize}px`,
-                height: `${dotSize}px`,
+                width: `${DOT_SIZE}px`,
+                height: `${DOT_SIZE}px`,
 
                 margin: "auto",
 
-                opacity: 0.18,
+                opacity: 0.25,
 
-                scale: 1,
-
-                willChange: "transform, opacity, scale, box-shadow",
+                transform: "translate3d(0, 0, 0)",
 
                 transition:
-                  "transform 100ms cubic-bezier(0.22, 1, 0.36, 1), opacity 150ms ease, scale 120ms ease, box-shadow 150ms ease",
+                  "transform 100ms cubic-bezier(0.22, 1, 0.36, 1), opacity 150ms ease, scale 150ms ease",
+
+                willChange: "transform, opacity, scale",
               }}
             />
           );
