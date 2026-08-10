@@ -11,7 +11,7 @@ const Cta = () => {
       <div className="mx-auto w-full max-w-[1088px]">
         <div className="relative overflow-hidden rounded-[28px] border border-[#302b24] bg-[#12100d]">
           {/* Dotted interactive background */}
-          <DotBackground gap={42} radius={180} strength={18} dotSize={2} />
+          <DotBackground />
 
           {/* Subtle inner gradient */}
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,190,70,0.035),transparent_35%)]" />
