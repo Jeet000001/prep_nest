@@ -1,6 +1,15 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 const BackgroundGrid = () => {
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden">
+    <motion.div
+      className="absolute inset-0 -z-10 overflow-hidden"
+      initial={{ opacity: 0.15, filter: "blur(8px)" }}
+      animate={{ opacity: 1, filter: "blur(0px)" }}
+      transition={{ duration: 1.6, ease: [0.25, 0.1, 0.25, 1] }}
+    >
       {/* Desktop */}
       <svg
         className="absolute inset-0 hidden h-full w-full md:block"
@@ -92,7 +101,7 @@ const BackgroundGrid = () => {
           mask="url(#fade-mask-mobile)"
         />
       </svg>
-    </div>
+    </motion.div>
   );
 };
 
