@@ -1,7 +1,7 @@
 import Cta from '@/Components/landing_page/Cta'
 import FeaturesSection from '@/Components/landing_page/FeaturesSection'
 import Hero from '@/Components/landing_page/Hero'
-import ProblemSection from '@/Components/landing_page/RealProblem'
+import ProblemSection from '@/Components/landing_page/RealProblemSection'
 import WhyThisExists from '@/Components/landing_page/WhyThisExistsSection'
 import React from 'react'
 

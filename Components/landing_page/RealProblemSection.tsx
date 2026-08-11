@@ -33,9 +33,6 @@ const problems = [
 const ProblemSection = () => {
   return (
     <section className="relative overflow-hidden bg-[#0B0907] py-24 sm:py-28 lg:py-32">
-      {/* Background Glow */}
-      <div className="pointer-events-none absolute left-[-15%] top-1/3 h-72 w-72 rounded-full bg-[#F6DAA0]/5 blur-[120px]" />
-
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 xl:gap-28">
           {/* Left */}
@@ -50,7 +47,7 @@ const ProblemSection = () => {
             </div>
 
             {/* Heading */}
-            <h2 className="max-w-xl font-mono text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[3.4rem] xl:text-[4rem]">
+            <h2 className="max-w-xl font-heading text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[3.4rem] xl:text-[4rem]">
               Prep shouldn&apos;t
               <br />
               feel like

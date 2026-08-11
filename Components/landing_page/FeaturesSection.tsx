@@ -49,10 +49,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="relative overflow-hidden py-24 sm:py-28 lg:py-32">
-      {/* Background Glow */}
-      <div className="pointer-events-none absolute -right-40 top-20 h-80 w-80 rounded-full bg-[#F6DAA0]/5 blur-[120px]" />
-
+    <section className="overflow-hidden py-24 sm:py-28 lg:py-32">
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
@@ -67,14 +64,14 @@ const FeaturesSection = () => {
             </div>
 
             {/* Heading */}
-            <h2 className="max-w-3xl font-mono text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h2 className="max-w-3xl font-heading text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
               The useful stuff.
               <br className="hidden sm:block" /> In one place.
             </h2>
           </div>
 
           {/* Header Description */}
-          <p className="max-w-sm text-sm leading-6 text-neutral-500 lg:pb-1 lg:text-right">
+          <p className="max-w-sm text-sm leading-6 text-neutral-400 lg:pb-1 lg:text-right">
             No accounts. No gated content.
             <br className="hidden lg:block" />
             No community joining required.
@@ -112,7 +109,7 @@ const FeaturesSection = () => {
                   </p>
 
                   {/* Title */}
-                  <h3 className="mt-4 font-mono text-xl font-medium tracking-tight text-white sm:text-2xl">
+                  <h3 className="mt-4 font-heading text-xl font-medium tracking-tight text-white sm:text-2xl">
                     {feature.title}
                   </h3>
 
