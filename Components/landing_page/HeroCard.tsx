@@ -52,29 +52,26 @@ const HeroCard = () => {
               <div>
                 <div className="mb-3 flex items-center gap-2">
                   <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#F6DAA0]/20 bg-[#F6DAA0]/5">
-                    <Sparkles
-                      size={15}
-                      className="text-[#F6DAA0]"
-                    />
+                    <Sparkles size={15} className="text-[#eec675]" />
                   </div>
 
-                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#F6DAA0]">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[#eec675]">
                     PrepNest Path
                   </span>
                 </div>
 
-                <h3 className="font-mono text-xl font-semibold tracking-tight text-white sm:text-2xl">
+                <h3 className="font-heading text-xl font-semibold tracking-tight text-white sm:text-2xl">
                   From confused to ready.
                 </h3>
 
-                <p className="mt-2 max-w-sm text-xs leading-5 text-neutral-500 sm:text-sm">
+                <p className="mt-2 text-mono max-w-sm text-xs leading-5 text-neutral-500 sm:text-sm">
                   A simple path to prepare for frontend interviews without
                   jumping between random resources.
                 </p>
               </div>
 
-              <div className="hidden rounded-full border border-white/10 px-3 py-1.5 sm:block">
-                <span className="font-mono text-[9px] text-neutral-500">
+              <div className="hidden rounded-full border border-white/20 px-3 py-1.5 sm:flex items-center gap-1.5">
+                <span className="font-mono text-[9px] text-[#eec675]">
                   FREE
                 </span>
               </div>
@@ -87,10 +84,7 @@ const HeroCard = () => {
                 const isActive = index === 0;
 
                 return (
-                  <div
-                    key={step.number}
-                    className="group relative flex gap-4"
-                  >
+                  <div key={step.number} className="group relative flex gap-4">
                     {/* Timeline */}
                     {index !== preparationSteps.length - 1 && (
                       <div className="absolute left-[17px] top-10 h-[calc(100%-10px)] w-px bg-white/10" />
@@ -100,7 +94,7 @@ const HeroCard = () => {
                     <div
                       className={`relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-all duration-300 ${
                         isActive
-                          ? "border-[#F6DAA0]/40 bg-[#F6DAA0]/10 text-[#F6DAA0]"
+                          ? "border-[#F6DAA0]/40 bg-[#F6DAA0]/10 text-[#eec675]"
                           : "border-white/10 bg-[#0D0B09] text-neutral-600 group-hover:border-white/20 group-hover:text-neutral-400"
                       }`}
                     >
@@ -113,27 +107,25 @@ const HeroCard = () => {
                         <div className="flex items-center gap-2">
                           <span
                             className={`font-mono text-sm font-medium ${
-                              isActive
-                                ? "text-white"
-                                : "text-neutral-300"
+                              isActive ? "text-white" : "text-neutral-300"
                             }`}
                           >
                             {step.title}
                           </span>
 
                           {isActive && (
-                            <span className="rounded-full bg-[#F6DAA0]/10 px-2 py-0.5 font-mono text-[8px] uppercase tracking-wider text-[#F6DAA0]">
+                            <span className="rounded-full bg-[#F6DAA0]/10 px-2 py-0.5 font-mono text-[8px] uppercase tracking-wider text-[#eec675]">
                               Start
                             </span>
                           )}
                         </div>
 
-                        <p className="mt-1 font-mono text-[10px] text-neutral-600 sm:text-xs">
+                        <p className="mt-1 font-mono text-[10px] text-neutral-500 sm:text-xs">
                           {step.description}
                         </p>
                       </div>
 
-                      <span className="hidden font-mono text-[9px] text-neutral-700 sm:block">
+                      <span className="hidden font-mono text-[9px] text-neutral-500 sm:block">
                         {step.number}
                       </span>
                     </div>
@@ -146,10 +138,7 @@ const HeroCard = () => {
             <div className="mt-1 rounded-2xl border border-white/10 bg-[#0D0B09] p-4">
               <div className="flex items-center gap-3">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F6DAA0]/10">
-                  <Check
-                    size={15}
-                    className="text-[#F6DAA0]"
-                  />
+                  <Check size={15} className="text-[#eec675]" />
                 </div>
 
                 <div className="min-w-0 flex-1">
@@ -157,15 +146,12 @@ const HeroCard = () => {
                     No more random preparation.
                   </p>
 
-                  <p className="mt-0.5 text-[10px] text-neutral-600">
+                  <p className="mt-0.5 text-[10px] text-neutral-500">
                     Learn what matters. Practice what gets asked.
                   </p>
                 </div>
 
-                <ArrowRight
-                  size={16}
-                  className="shrink-0 text-neutral-700"
-                />
+                <ArrowRight size={16} className="shrink-0 text-neutral-600" />
               </div>
             </div>
           </div>

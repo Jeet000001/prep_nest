@@ -29,7 +29,7 @@ const itemVariants = {
     y: 0,
     filter: "blur(0px)",
     transition: {
-      duration: 0.7,
+      duration: 1,
       ease: [0.25, 0.1, 0.25, 1] as const,
     },
   },
@@ -71,7 +71,7 @@ const Hero = () => {
             {/* Heading */}
             <motion.h1
               variants={itemVariants}
-              className="font-heading text-[2.5rem] font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl"
+              className="font-heading text-[2.5rem] text-5xl font-bold leading-[0.98] tracking-[-0.065em] sm:text-7xl lg:text-8xl"
             >
               Stop scrolling.
               <br />
@@ -81,16 +81,11 @@ const Hero = () => {
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="font-sans mx-auto mt-6 max-w-xl text-sm leading-6 text-neutral-300 sm:mt-7 sm:text-base sm:leading-7 lg:mx-0 lg:text-lg"
+              className="mx-auto mt-6 max-w-2xl text-sm leading-6 text-neutral-300 sm:mt-7 sm:text-base sm:leading-7 lg:mx-0 lg:text-lg"
             >
               Everything a fresher needs to crack React interviews — HTML, CSS,
               JavaScript, React theory, and machine coding — in one clean place.
-            </motion.p>
-
-            <motion.p
-              variants={itemVariants}
-              className="mt-2 font-mono text-xs text-neutral-400 sm:text-sm"
-            >
+              <br />
               No login. No payment. No waiting for a DM.
             </motion.p>
 
@@ -101,7 +96,7 @@ const Hero = () => {
             >
               <Link
                 href="/"
-                className="group inline-flex h-11 w-full max-w-xs items-center justify-center gap-2 rounded-lg bg-amber-400 px-5 font-mono text-xs font-semibold text-[#0B0907] transition-all duration-300 hover:bg-amber-300 hover:shadow-[0_0_30px_rgba(246,218,160,0.15)] sm:h-12 sm:w-auto sm:max-w-none sm:px-6 sm:text-sm"
+                className="group inline-flex h-11 w-full max-w-xs items-center justify-center gap-2 rounded-lg bg-amber-400 px-5 font-heading text-xs font-semibold text-[#0B0907] transition-all duration-300 hover:bg-amber-300 hover:shadow-[0_0_30px_rgba(246,218,160,0.15)] sm:h-12 sm:w-auto sm:max-w-none sm:px-6 sm:text-sm"
               >
                 Start Exploring Free Resources
                 <ArrowRight
