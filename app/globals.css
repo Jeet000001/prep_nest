@@ -6,5 +6,21 @@
 
 @theme {
   --font-mono: var(--font-mono-face);
-  --font-heading: var(--font-geist);
+  --font-heading: var(--font-space);
+}
+
+@keyframes hero-float {
+
+  0%,
+  100% {
+    transform: translateY(-10px);
+  }
+
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.animate-hero-float {
+  animation: hero-float 2s ease-in-out infinite;
 }
