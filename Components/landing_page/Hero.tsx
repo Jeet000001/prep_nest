@@ -2,6 +2,7 @@ import BackgroundGrid from "@/Components/gradient_background/BackgroundGrid";
 import { Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { CodeDemo } from "./Code_Card";
+import HeroCard from "./HeroCard";
 
 const Hero = () => {
   return (
@@ -29,14 +30,14 @@ const Hero = () => {
             </div>
 
             {/* Heading */}
-            <h1 className="font-mono text-[2.5rem] font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl">
+            <h1 className="font-heading text-[2.5rem] font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl">
               Stop scrolling.
               <br />
               <span className="text-amber-400">Start preparing.</span>
             </h1>
 
             {/* Description */}
-            <p className="mx-auto mt-6 max-w-xl text-sm leading-6 text-neutral-300 sm:mt-7 sm:text-base sm:leading-7 lg:mx-0 lg:text-lg">
+            <p className="font-sans mx-auto mt-6 max-w-xl text-sm leading-6 text-neutral-300 sm:mt-7 sm:text-base sm:leading-7 lg:mx-0 lg:text-lg">
               Everything a fresher needs to crack React interviews — HTML, CSS,
               JavaScript, React theory, and machine coding — in one clean place.
             </p>
@@ -72,7 +73,7 @@ const Hero = () => {
           {/* Right */}
           <div className="relative flex w-full items-center justify-center lg:w-auto lg:justify-end">
             <div className="w-full flex justify-center max-w-[34rem] lg:max-w-[31rem] xl:max-w-[34rem]">
-              <CodeDemo duration={10000} writing />
+              <HeroCard />
             </div>
           </div>
         </div>
