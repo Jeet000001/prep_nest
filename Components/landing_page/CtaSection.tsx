@@ -2,8 +2,38 @@
 
 import Link from "next/link";
 import { ArrowRight, Code2, BookOpen } from "lucide-react";
+import { motion } from "framer-motion";
 
 import DotBackground from "../gradient_background/DotBackground";
+
+// Parent container - orchestrates the stagger timing between children
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+// Each child: blurred + slightly below + invisible -> sharp + in place + visible
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+    filter: "blur(12px)",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.1, 0.25, 1] as const,
+    },
+  },
+};
 
 const Cta = () => {
   return (
@@ -17,24 +47,42 @@ const Cta = () => {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,190,70,0.035),transparent_35%)]" />
 
           {/* Content */}
-          <div className=" relative z-10 px-6 py-10 sm:px-8 sm:py-12 md:px-12 md:py-14 lg:px-16 lg:py-16">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.4 }}
+            className=" relative z-10 px-6 py-10 sm:px-8 sm:py-12 md:px-12 md:py-14 lg:px-16 lg:py-16"
+          >
             {/* Eyebrow */}
-            <p className="mb-5 font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-[#e8aa3d] sm:text-[11px]">
+            <motion.p
+              variants={itemVariants}
+              className="mb-5 font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-[#e8aa3d] sm:text-[11px]"
+            >
               NO MORE WAITING
-            </p>
+            </motion.p>
 
             {/* Heading */}
-            <h2 className="max-w-[700px] text-[38px] font-semibold leading-[1.02] tracking-[-0.045em] text-[#f4efe7] sm:text-[48px] md:text-[56px] lg:text-[60px]">
+            <motion.h2
+              variants={itemVariants}
+              className="max-w-[700px] text-[38px] font-semibold leading-[1.02] tracking-[-0.045em] text-[#f4efe7] sm:text-[48px] md:text-[56px] lg:text-[60px]"
+            >
               Ready when you are.
-            </h2>
+            </motion.h2>
 
             {/* Subtitle */}
-            <p className="mt-5 max-w-[620px] text-[15px] leading-7 text-[#a79e92] sm:text-[16px]">
+            <motion.p
+              variants={itemVariants}
+              className="mt-5 max-w-[620px] text-[15px] leading-7 text-[#a79e92] sm:text-[16px]"
+            >
               No signup. No payment. No waiting for a DM.
-            </p>
+            </motion.p>
 
             {/* Buttons */}
-            <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <motion.div
+              variants={itemVariants}
+              className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+            >
               {/* Primary */}
               <Link
                 href="/"
@@ -68,8 +116,8 @@ const Cta = () => {
 
                 <span>React Theory Notes</span>
               </Link>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

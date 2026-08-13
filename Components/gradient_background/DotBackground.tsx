@@ -1,12 +1,31 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 
 const DOT_GAP = 40;
 const DOT_SIZE = 2;
 
 const WAVE_RADIUS = 180;
 const WAVE_STRENGTH = 18;
+
+// Same entrance timing/curve used in the Hero section
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+    filter: "blur(12px)",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.1, 0.25, 1] as const,
+    },
+  },
+};
 
 const DotBackground = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -154,7 +173,13 @@ const DotBackground = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="absolute inset-0">
+    <motion.div
+      ref={containerRef}
+      className="absolute inset-0"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
       <div
         className="absolute inset-0"
         style={{
@@ -211,7 +236,7 @@ const DotBackground = () => {
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,4 +1,4 @@
-import Cta from '@/Components/landing_page/Cta'
+import Cta from '@/Components/landing_page/CtaSection'
 import FeaturesSection from '@/Components/landing_page/FeaturesSection'
 import Hero from '@/Components/landing_page/Hero'
 import ProblemSection from '@/Components/landing_page/RealProblemSection'
