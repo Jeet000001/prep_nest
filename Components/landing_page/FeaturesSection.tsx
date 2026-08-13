@@ -7,6 +7,7 @@ import {
   Layers3,
   TerminalSquare,
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const features = [
   {
@@ -47,45 +48,96 @@ const features = [
   },
 ];
 
+// Parent container - orchestrates the stagger timing between children
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+// Each child: blurred + slightly below + invisible -> sharp + in place + visible
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+    filter: "blur(12px)",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 0.7,
+      ease: [0.25, 0.1, 0.25, 1] as const,
+    },
+  },
+};
+
 const FeaturesSection = () => {
   return (
     <section className="overflow-hidden py-24 sm:py-28 lg:py-32">
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-12 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="mb-12 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between"
+        >
           <div>
             {/* Eyebrow */}
-            <div className="mb-5 flex items-center gap-3">
+            <motion.div
+              variants={itemVariants}
+              className="mb-5 flex items-center gap-3"
+            >
               <span className="h-px w-7 bg-[#F6DAA0]" />
 
               <span className="font-mono text-[10px] font-medium uppercase tracking-[0.25em] text-[#eec675] sm:text-xs">
                 What this site is
               </span>
-            </div>
+            </motion.div>
 
             {/* Heading */}
-            <h2 className="max-w-3xl font-heading text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <motion.h2
+              variants={itemVariants}
+              className="max-w-3xl font-heading text-4xl font-semibold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
+            >
               The useful stuff.
               <br className="hidden sm:block" /> In one place.
-            </h2>
+            </motion.h2>
           </div>
 
           {/* Header Description */}
-          <p className="max-w-sm text-sm leading-6 text-neutral-400 lg:pb-1 lg:text-right">
+          <motion.p
+            variants={itemVariants}
+            className="max-w-sm text-sm leading-6 text-neutral-400 lg:pb-1 lg:text-right"
+          >
             No accounts. No gated content.
             <br className="hidden lg:block" />
             No community joining required.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Feature Grid */}
-        <div className="grid gap-4 md:grid-cols-2 lg:gap-5">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid gap-4 md:grid-cols-2 lg:gap-5"
+        >
           {features.map((feature) => {
             const Icon = feature.icon;
 
             return (
-              <article
+              <motion.article
                 key={feature.number}
+                variants={itemVariants}
                 className="group relative flex min-h-[330px] flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#12100D] p-6 transition-all duration-500 hover:-translate-y-1 hover:border-[#F6DAA0]/25 hover:bg-[#15120F] sm:min-h-[340px] sm:p-7 lg:p-8"
               >
                 {/* Hover Glow */}
@@ -130,10 +182,10 @@ const FeaturesSection = () => {
                     </span>
                   ))}
                 </div>
-              </article>
+              </motion.article>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
