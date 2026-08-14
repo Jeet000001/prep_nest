@@ -49,8 +49,8 @@ const Navbar = () => {
               Mock Tests
             </Link>
 
-            <Link href="/" className={navLinkClass}>
-              Resources
+            <Link href="/contact" className={navLinkClass}>
+              Contact
             </Link>
           </nav>
 
@@ -104,11 +104,11 @@ const Navbar = () => {
               </Link>
 
               <Link
-                href="/"
+                href="/contact"
                 onClick={() => setOpen(false)}
                 className={mobileLinkClass}
               >
-                Resources
+                Contact
               </Link>
 
               <button
