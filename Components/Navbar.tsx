@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X, Star } from "lucide-react";
 import { useState } from "react";
 
 const Navbar = () => {
@@ -16,6 +16,9 @@ const Navbar = () => {
   const exploreButtonClass =
     "flex items-center justify-center gap-2 bg-amber-400 font-mono text-sm font-semibold text-black transition-colors duration-300 hover:bg-amber-300";
 
+  const githubButtonClass =
+    "flex items-center justify-center gap-2 border border-white/10 bg-white/[0.03] font-mono text-sm font-semibold text-neutral-300 transition-all duration-300 hover:border-amber-400/40 hover:bg-amber-400/5 hover:text-amber-400";
+
   return (
     <>
       {/* Background Blur */}
@@ -29,7 +32,7 @@ const Navbar = () => {
       />
 
       <nav className="fixed inset-x-0 top-0 z-50 mx-auto max-w-7xl lg:py-4">
-        <div className="flex items-center justify-between border-b border-amber-400/40 px-6 py-3 lg:mx-8 lg:rounded-2xl lg:border backdrop-blur-xl">
+        <div className="flex items-center justify-between border-b border-amber-400/40 px-6 py-3 backdrop-blur-xl lg:mx-8 lg:rounded-2xl lg:border">
           {/* Logo */}
           <Link href="/" className="font-mono text-lg text-amber-400">
             Prep<span className="text-white">Nest</span>
@@ -55,12 +58,26 @@ const Navbar = () => {
           </nav>
 
           {/* Desktop CTA */}
-          <button
-            className={`${exploreButtonClass} hidden h-11 rounded-lg px-6 lg:flex`}
-          >
-            Start Exploring
-            <ArrowRight size={18} />
-          </button>
+          <div className="hidden items-center gap-2 lg:flex">
+            {/* GitHub Star */}
+            <a
+              href="https://github.com/Jeet000001/prep_nest"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${githubButtonClass} h-11 rounded-lg px-4`}
+            >
+              <Star size={16} />
+              Star
+            </a>
+
+            {/* Start Exploring */}
+            <button
+              className={`${exploreButtonClass} h-11 rounded-lg px-6`}
+            >
+              Start Exploring
+              <ArrowRight size={18} />
+            </button>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -111,8 +128,20 @@ const Navbar = () => {
                 Contact
               </Link>
 
+              {/* Mobile GitHub Star */}
+              <Link
+                href="https://github.com/Jeet000001/prep_nest"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${githubButtonClass} mt-2 h-11 w-full rounded-full`}
+              >
+                <Star size={16} />
+                Star on GitHub
+              </Link>
+
+              {/* Mobile Explore */}
               <button
-                className={`${exploreButtonClass} mt-3 h-11 w-full rounded-full`}
+                className={`${exploreButtonClass} h-11 w-full rounded-full`}
               >
                 Start Exploring
                 <ArrowRight size={18} />
