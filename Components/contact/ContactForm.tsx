@@ -290,7 +290,7 @@ const ContactForm = () => {
               </button>
 
               {/* Footer note */}
-              <p className="text-center font-mono text-[9px] leading-4 text-neutral-600 sm:text-left sm:text-[10px]">
+              <p className="text-center font-mono text-[9px] leading-4 text-neutral-500 sm:text-left sm:text-[10px]">
                 No spam, no newsletter. Just a reply from a real person.
               </p>
             </form>
