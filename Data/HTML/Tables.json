@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "question": "How do you create a table in HTML?",
+    "answer": "To create a table in HTML, we use the <table> tag. Inside the table, we use <tr> for table rows, <th> for header cells, and <td> for normal data cells. We can also use <thead>, <tbody>, and <tfoot> to organize the table structure better. Tables are useful for displaying data in rows and columns.",
+    "code": "<table border=\"1\">\n  <tr>\n    <th>Name</th>\n    <th>Age</th>\n    <th>City</th>\n  </tr>\n  <tr>\n    <td>Rahul</td>\n    <td>22</td>\n    <td>Delhi</td>\n  </tr>\n  <tr>\n    <td>Priya</td>\n    <td>25</td>\n    <td>Mumbai</td>\n  </tr>\n</table>"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between cellpadding and cellspacing?",
+    "answer": "Both are attributes of the <table> tag (mostly used in older HTML). cellpadding controls the space between the cell content and the cell border (inside the cell). cellspacing controls the space between individual cells (outside the cells). In modern HTML/CSS, we prefer using CSS properties like padding and border-spacing instead of these attributes.",
+    "code": "<!-- Old way -->\n<table border=\"1\" cellpadding=\"10\" cellspacing=\"5\">\n  <tr>\n    <td>Cell 1</td>\n    <td>Cell 2</td>\n  </tr>\n</table>\n\n<!-- Modern way using CSS -->\n<table style=\"border-spacing: 5px;\">\n  <tr>\n    <td style=\"padding: 10px;\">Cell 1</td>\n    <td style=\"padding: 10px;\">Cell 2</td>\n  </tr>\n</table>"
+  },
+  {
+    "id": 3,
+    "question": "Explain the use of <thead>, <tbody>, <tfoot>, <th>, and <td>.",
+    "answer": "These tags help in creating a well-structured table:\n- <thead>: Contains the header rows of the table (usually column titles).\n- <tbody>: Contains the main data rows of the table.\n- <tfoot>: Contains the footer rows (like totals or summary).\n- <th>: Defines a header cell (usually bold and centered by default).\n- <td>: Defines a normal data cell.\nUsing <thead>, <tbody>, and <tfoot> makes the table more semantic and easier to style with CSS.",
+    "code": "<table border=\"1\">\n  <thead>\n    <tr>\n      <th>Product</th>\n      <th>Price</th>\n      <th>Quantity</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Laptop</td>\n      <td>50000</td>\n      <td>2</td>\n    </tr>\n    <tr>\n      <td>Mouse</td>\n      <td>500</td>\n      <td>5</td>\n    </tr>\n  </tbody>\n  <tfoot>\n    <tr>\n      <td>Total</td>\n      <td>52500</td>\n      <td>7</td>\n    </tr>\n  </tfoot>\n</table>"
+  },
+  {
+    "id": 4,
+    "question": "How do you merge cells using colspan and rowspan?",
+    "answer": "We use colspan and rowspan attributes to merge cells in a table. colspan is used to merge cells horizontally (across columns). rowspan is used to merge cells vertically (across rows). These attributes are added to <td> or <th> tags. For example, colspan=\"2\" means the cell will span 2 columns.",
+    "code": "<table border=\"1\">\n  <tr>\n    <th colspan=\"2\">Student Details</th>\n  </tr>\n  <tr>\n    <th>Name</th>\n    <th>Age</th>\n  </tr>\n  <tr>\n    <td>Amit</td>\n    <td rowspan=\"2\">20</td>\n  </tr>\n  <tr>\n    <td>Suman</td>\n  </tr>\n</table>\n\n<!-- Explanation:\ncolspan=\"2\" merges two columns in the first row.\nrowspan=\"2\" merges two rows in the Age column. -->"
+  }
+]
