@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "question": "What is HTML?",
+    "answer": "HTML stands for HyperText Markup Language. It is the standard language used to create and structure the content of web pages. HTML uses tags to define elements like headings, paragraphs, images, links, and more. Browsers read HTML code and display it as a webpage.",
+    "code": null
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between HTML and HTML5?",
+    "answer": "HTML is the general term for the markup language. HTML5 is the latest version of HTML. The main differences are: HTML5 introduced new semantic tags (like <header>, <footer>, <article>, <section>), better support for multimedia (audio and video tags without plugins), improved forms, canvas for graphics, and better mobile support. HTML5 is more modern, cleaner, and powerful than older versions of HTML.",
+    "code": null
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between HTML and XHTML?",
+    "answer": "HTML is more flexible and forgiving with syntax errors. XHTML (Extensible HyperText Markup Language) is stricter and follows XML rules. In XHTML, all tags must be properly closed, tags must be in lowercase, and attributes must have quotes. HTML5 is more popular today because it is less strict and easier to write than XHTML.",
+    "code": null
+  },
+  {
+    "id": 4,
+    "question": "Explain the basic structure of an HTML document.",
+    "answer": "A basic HTML document has these main parts: 1. <!DOCTYPE html> declaration, 2. <html> root element, 3. <head> section (contains meta information, title, CSS links), 4. <body> section (contains the visible content of the page). This structure tells the browser how to interpret the page.",
+    "code": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>My First Page</title>\n</head>\n<body>\n  <h1>Hello World</h1>\n  <p>This is a paragraph.</p>\n</body>\n</html>"
+  },
+  {
+    "id": 5,
+    "question": "What is the purpose of the <!DOCTYPE html> declaration?",
+    "answer": "The <!DOCTYPE html> declaration tells the browser which version of HTML the document is written in. For HTML5, we simply write <!DOCTYPE html>. It helps the browser render the page correctly in standards mode instead of quirks mode. It should always be the very first thing in an HTML document.",
+    "code": "<!DOCTYPE html>"
+  },
+  {
+    "id": 6,
+    "question": "What are HTML tags, elements, and attributes?",
+    "answer": "Tags are the building blocks of HTML, written with angle brackets like <p> or <h1>. An element is the complete structure that includes the opening tag, content, and closing tag (e.g., <p>Hello</p>). Attributes provide extra information about an element and are written inside the opening tag (e.g., <img src=\"image.jpg\" alt=\"photo\">). Attributes usually come in name=\"value\" pairs.",
+    "code": "<!-- Tag -->\n<p>\n\n<!-- Element -->\n<p>This is a paragraph</p>\n\n<!-- Attribute -->\n<img src=\"photo.jpg\" alt=\"A beautiful photo\">"
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between tags and elements?",
+    "answer": "A tag is just the markup itself, like <h1> or </h1>. An element is the full unit that consists of the opening tag + content + closing tag. For example, <h1>Welcome</h1> is an element, while <h1> and </h1> are tags. Some elements (void elements) have only one tag.",
+    "code": "<!-- Tag -->\n<h1>\n\n<!-- Element -->\n<h1>Welcome to my website</h1>"
+  },
+  {
+    "id": 8,
+    "question": "What are void (empty/self-closing) elements? Give examples.",
+    "answer": "Void elements (also called empty or self-closing elements) are HTML elements that do not have any content and do not need a closing tag. They stand alone. Common examples are: <img>, <br>, <hr>, <input>, <meta>, <link>, <area>, <source>, etc. In HTML5 we usually write them without the slash, but both ways work.",
+    "code": "<img src=\"logo.png\" alt=\"Logo\">\n<br>\n<hr>\n<input type=\"text\" placeholder=\"Enter name\">\n<meta charset=\"UTF-8\">"
+  },
+  {
+    "id": 9,
+    "question": "What is the difference between block-level and inline elements?",
+    "answer": "Block-level elements take up the full width available and always start on a new line. Examples: <div>, <p>, <h1> to <h6>, <ul>, <li>, <section>. Inline elements only take up as much width as needed and stay in the same line. Examples: <span>, <a>, <img>, <strong>, <em>, <button>. You can change this behavior using CSS (display property).",
+    "code": "<!-- Block-level -->\n<div>This is a block</div>\n<p>This is also a block</p>\n\n<!-- Inline -->\n<span>This is inline</span>\n<a href=\"#\">This is also inline</a>"
+  },
+  {
+    "id": 10,
+    "question": "What is the difference between id and class attributes?",
+    "answer": "The id attribute is used to uniquely identify a single element on a page. It must be unique (only one element can have a particular id). The class attribute is used to group multiple elements that share the same style or behavior. Multiple elements can have the same class. In CSS we select id with # and class with .",
+    "code": "<!-- ID - unique -->\n<div id=\"header\">Only one header</div>\n\n<!-- Class - can be reused -->\n<p class=\"highlight\">First paragraph</p>\n<p class=\"highlight\">Second paragraph</p>"
+  },
+  {
+    "id": 11,
+    "question": "What are meta tags and why are they used?",
+    "answer": "Meta tags provide metadata (information about the webpage) that is not displayed on the page itself but is used by browsers and search engines. They are placed inside the <head> section. Common uses: character encoding, page description for SEO, viewport settings for mobile, author information, and social media previews.",
+    "code": "<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"description\" content=\"Learn HTML for beginners\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <meta name=\"author\" content=\"Your Name\">\n</head>"
+  },
+  {
+    "id": 12,
+    "question": "What is the purpose of the lang attribute in the <html> tag?",
+    "answer": "The lang attribute specifies the language of the webpage content. It helps search engines, screen readers, and browsers understand the language. This improves accessibility and SEO. For example, lang=\"en\" means English, lang=\"hi\" means Hindi.",
+    "code": "<html lang=\"en\">\n<!-- or -->\n<html lang=\"hi\">"
+  }
+]
