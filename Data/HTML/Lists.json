@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "question": "What are the different types of lists in HTML?",
+    "answer": "There are three main types of lists in HTML: 1) Ordered List (<ol>) – shows items with numbers or letters, 2) Unordered List (<ul>) – shows items with bullets, 3) Description List (<dl>) – used for terms and their descriptions (like a dictionary). Inside ordered and unordered lists we use <li> tags for each item. In description lists we use <dt> for the term and <dd> for the description.",
+    "code": "<!-- Ordered List -->\n<ol>\n  <li>HTML</li>\n  <li>CSS</li>\n  <li>JavaScript</li>\n</ol>\n\n<!-- Unordered List -->\n<ul>\n  <li>Apple</li>\n  <li>Banana</li>\n  <li>Mango</li>\n</ul>\n\n<!-- Description List -->\n<dl>\n  <dt>HTML</dt>\n  <dd>HyperText Markup Language</dd>\n  <dt>CSS</dt>\n  <dd>Cascading Style Sheets</dd>\n</dl>"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between ordered (<ol>), unordered (<ul>), and description (<dl>) lists?",
+    "answer": "Ordered List (<ol>): Displays items in a numbered sequence (1, 2, 3... or A, B, C...). Used when the order of items matters (like steps in a process). Unordered List (<ul>): Displays items with bullets. Used when the order does not matter (like a list of features). Description List (<dl>): Used to display terms and their descriptions. It has two parts – <dt> (definition term) and <dd> (definition description). It is useful for glossaries, FAQs, or key-value pairs.",
+    "code": "<!-- Ordered List - order matters -->\n<ol>\n  <li>Open the browser</li>\n  <li>Type the URL</li>\n  <li>Press Enter</li>\n</ol>\n\n<!-- Unordered List - order does not matter -->\n<ul>\n  <li>Fast</li>\n  <li>Secure</li>\n  <li>Easy to use</li>\n</ul>\n\n<!-- Description List - term + description -->\n<dl>\n  <dt>Frontend</dt>\n  <dd>The part of the website that users see and interact with.</dd>\n  <dt>Backend</dt>\n  <dd>The server-side part that handles data and logic.</dd>\n</dl>"
+  }
+]
