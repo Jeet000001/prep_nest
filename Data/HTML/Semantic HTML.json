@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What are semantic elements in HTML? Why are they important?",
+    "answer": "Semantic elements are HTML tags that clearly describe their meaning and purpose to both the browser and the developer. Examples are <header>, <footer>, <article>, <section>, etc. They are important because: 1) They make the code more readable and meaningful, 2) They improve SEO (search engines understand the content better), 3) They help accessibility tools (like screen readers) navigate the page properly, and 4) They make the structure of the website clearer.",
+    "code": null
+  },
+  {
+    "id": 2,
+    "question": "List some new semantic elements introduced in HTML5.",
+    "answer": "HTML5 introduced many useful semantic elements. Some of the most important ones are: <header>, <footer>, <nav>, <main>, <section>, <article>, <aside>, <figure>, <figcaption>, <mark>, <time>, <details>, <summary>, and <address>. These tags give clear meaning to different parts of a webpage.",
+    "code": null
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between <div> and semantic tags like <section>, <article>, etc.?",
+    "answer": "<div> is a generic container that has no special meaning. It is used only for grouping and styling. Semantic tags like <section>, <article>, <header>, etc. have specific meaning. Using semantic tags makes the code more meaningful, improves SEO, and helps accessibility. We should prefer semantic tags over <div> whenever possible.",
+    "code": "<!-- Using div (no meaning) -->\n<div class=\"post\">\n  <div class=\"title\">My Blog Post</div>\n  <div class=\"content\">This is the content...</div>\n</div>\n\n<!-- Using semantic tags (clear meaning) -->\n<article>\n  <h2>My Blog Post</h2>\n  <p>This is the content...</p>\n</article>"
+  },
+  {
+    "id": 4,
+    "question": "Explain the difference between <strong> and <b>, and between <em> and <i>.",
+    "answer": "<b> and <i> are presentational tags. They only change the look (bold and italic) but have no special meaning. <strong> and <em> are semantic tags. <strong> means the text is important (usually shown bold), and <em> means the text should be emphasized (usually shown italic). Screen readers treat <strong> and <em> differently, so they are better for accessibility and SEO. Prefer <strong> and <em> over <b> and <i>.",
+    "code": "<!-- Presentational -->\n<p>This is <b>bold</b> and this is <i>italic</i>.</p>\n\n<!-- Semantic (preferred) -->\n<p>This is <strong>important</strong> and this is <em>emphasized</em>.</p>"
+  },
+  {
+    "id": 5,
+    "question": "What is the purpose of the <header>, <footer>, <nav>, <main>, <aside>, <article>, and <section> tags?",
+    "answer": "These are important semantic tags:\n- <header>: Defines the header of a page or section (usually contains logo, title, navigation).\n- <footer>: Defines the footer of a page or section (copyright, contact info, links).\n- <nav>: Defines a section of navigation links.\n- <main>: Represents the main content of the page (should be unique and not repeated).\n- <aside>: Defines content that is related but not the main content (sidebars, related posts).\n- <article>: Represents independent, self-contained content (blog post, news article, comment).\n- <section>: Defines a thematic grouping of content, usually with a heading.",
+    "code": "<body>\n  <header>\n    <h1>My Website</h1>\n    <nav>\n      <a href=\"#\">Home</a>\n      <a href=\"#\">About</a>\n    </nav>\n  </header>\n\n  <main>\n    <article>\n      <h2>Blog Title</h2>\n      <p>Article content goes here...</p>\n    </article>\n\n    <aside>\n      <h3>Related Posts</h3>\n      <p>Some related content...</p>\n    </aside>\n  </main>\n\n  <footer>\n    <p>&copy; 2026 My Website</p>\n  </footer>\n</body>"
+  },
+  {
+    "id": 6,
+    "question": "What is the <figure> and <figcaption> tag used for?",
+    "answer": "The <figure> tag is used to group media content like images, illustrations, diagrams, or code snippets along with their caption. The <figcaption> tag is used to add a caption or description for the content inside <figure>. This makes the relationship between the image and its description clear to both browsers and users.",
+    "code": "<figure>\n  <img src=\"mountain.jpg\" alt=\"Beautiful mountain view\">\n  <figcaption>A beautiful view of the Himalayas at sunrise.</figcaption>\n</figure>"
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between <section> and <div>?",
+    "answer": "<div> is a generic container with no semantic meaning. It is mainly used for styling or grouping elements with CSS or JavaScript. <section> is a semantic element that represents a thematic grouping of content, usually with a heading. Use <section> when the content has a clear meaning or theme. Use <div> only when no suitable semantic tag is available.",
+    "code": "<!-- Better: using section -->\n<section>\n  <h2>Our Services</h2>\n  <p>We provide web development and design services.</p>\n</section>\n\n<!-- Only when no meaning is needed -->\n<div class=\"wrapper\">\n  <!-- content for styling purposes -->\n</div>"
+  }
+]
