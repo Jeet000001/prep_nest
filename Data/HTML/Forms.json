@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "question": "How do you create a form in HTML?",
+    "answer": "To create a form in HTML, we use the <form> tag. Inside the form, we add input fields, labels, buttons, etc. The form has two important attributes: action (the URL where form data will be sent) and method (GET or POST). We also use <label> for better accessibility and <button> or <input type=\"submit\"> to submit the form.",
+    "code": "<form action=\"/submit\" method=\"post\">\n  <label for=\"name\">Name:</label>\n  <input type=\"text\" id=\"name\" name=\"name\">\n\n  <label for=\"email\">Email:</label>\n  <input type=\"email\" id=\"email\" name=\"email\">\n\n  <button type=\"submit\">Submit</button>\n</form>"
+  },
+  {
+    "id": 2,
+    "question": "What are the different types of <input> elements?",
+    "answer": "The <input> element can have many different types using the type attribute. Common types are: text, password, email, number, checkbox, radio, submit, reset, file, date, time, color, range, search, tel, url, hidden, etc. Each type changes how the input looks and behaves.",
+    "code": "<input type=\"text\" placeholder=\"Enter name\">\n<input type=\"password\" placeholder=\"Enter password\">\n<input type=\"email\" placeholder=\"Enter email\">\n<input type=\"number\" min=\"1\" max=\"100\">\n<input type=\"checkbox\">\n<input type=\"radio\" name=\"gender\">\n<input type=\"submit\" value=\"Submit\">\n<input type=\"file\">\n<input type=\"date\">\n<input type=\"color\">"
+  },
+  {
+    "id": 3,
+    "question": "What new input types were introduced in HTML5?",
+    "answer": "HTML5 introduced many useful new input types to make forms better and reduce the need for JavaScript validation. Some important ones are: email, url, tel, number, range, date, time, datetime-local, month, week, color, search, and file (improved). These types give better mobile keyboards and built-in validation.",
+    "code": "<input type=\"email\" placeholder=\"Enter email\">\n<input type=\"url\" placeholder=\"Enter website\">\n<input type=\"tel\" placeholder=\"Enter phone\">\n<input type=\"number\" min=\"0\" max=\"100\">\n<input type=\"range\" min=\"0\" max=\"10\">\n<input type=\"date\">\n<input type=\"time\">\n<input type=\"color\">\n<input type=\"search\" placeholder=\"Search here\">"
+  },
+  {
+    "id": 4,
+    "question": "What is the purpose of the required, placeholder, pattern, min, max, and maxlength attributes?",
+    "answer": "These are useful HTML5 attributes for forms:\n- required: Makes the field mandatory (user must fill it).\n- placeholder: Shows a hint text inside the input field.\n- pattern: Defines a regular expression that the input must match.\n- min and max: Set the minimum and maximum value for number or date inputs.\n- maxlength: Limits the maximum number of characters the user can type.",
+    "code": "<input type=\"text\" required placeholder=\"Enter your name\">\n\n<input type=\"email\" required placeholder=\"example@gmail.com\">\n\n<input type=\"text\" pattern=\"[A-Za-z]{3,}\" title=\"At least 3 letters\">\n\n<input type=\"number\" min=\"1\" max=\"100\">\n\n<input type=\"text\" maxlength=\"20\" placeholder=\"Max 20 characters\">"
+  },
+  {
+    "id": 5,
+    "question": "How do you make an HTML form accessible?",
+    "answer": "To make a form accessible: 1) Always use <label> and connect it with the input using the for and id attributes. 2) Use proper input types. 3) Add required and other validation attributes. 4) Provide clear error messages. 5) Use fieldset and legend for grouping related fields. 6) Make sure the form can be used with keyboard only. 7) Use aria attributes when needed.",
+    "code": "<form>\n  <fieldset>\n    <legend>Personal Information</legend>\n\n    <label for=\"fullname\">Full Name:</label>\n    <input type=\"text\" id=\"fullname\" name=\"fullname\" required>\n\n    <label for=\"email\">Email:</label>\n    <input type=\"email\" id=\"email\" name=\"email\" required>\n  </fieldset>\n\n  <button type=\"submit\">Submit</button>\n</form>"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between GET and POST methods in a form?",
+    "answer": "GET method: Sends form data in the URL (as query parameters). It is visible in the address bar, less secure, has length limitations, and is mainly used for searching or filtering. POST method: Sends form data in the request body. It is more secure, can send large amounts of data, and is preferred for login, registration, or uploading files.",
+    "code": "<!-- GET method -->\n<form action=\"/search\" method=\"get\">\n  <input type=\"text\" name=\"query\">\n  <button type=\"submit\">Search</button>\n</form>\n\n<!-- POST method -->\n<form action=\"/login\" method=\"post\">\n  <input type=\"email\" name=\"email\">\n  <input type=\"password\" name=\"password\">\n  <button type=\"submit\">Login</button>\n</form>"
+  },
+  {
+    "id": 7,
+    "question": "What is the enctype attribute and when is multipart/form-data used?",
+    "answer": "The enctype attribute specifies how the form data should be encoded before sending it to the server. The default value is application/x-www-form-urlencoded. We use multipart/form-data when the form has a file upload (<input type=\"file\">). Without multipart/form-data, the file will not be uploaded properly.",
+    "code": "<form action=\"/upload\" method=\"post\" enctype=\"multipart/form-data\">\n  <label for=\"file\">Choose file:</label>\n  <input type=\"file\" id=\"file\" name=\"file\">\n  <button type=\"submit\">Upload</button>\n</form>"
+  },
+  {
+    "id": 8,
+    "question": "Explain the difference between <button> and <input type=\"submit\">.",
+    "answer": "Both can submit a form, but they are different. <input type=\"submit\"> is an older way and can only contain text (using the value attribute). <button> is more flexible — it can contain text, images, icons, or HTML elements inside it. Also, <button> can have type=\"submit\", type=\"reset\", or type=\"button\". Prefer using <button type=\"submit\"> in modern HTML.",
+    "code": "<!-- Using input -->\n<input type=\"submit\" value=\"Submit Form\">\n\n<!-- Using button (preferred) -->\n<button type=\"submit\">Submit Form</button>\n\n<button type=\"submit\">\n  <img src=\"icon.png\" alt=\"\"> Submit\n</button>"
+  },
+  {
+    "id": 9,
+    "question": "What are form validation attributes in HTML5?",
+    "answer": "HTML5 provides built-in form validation attributes so we can validate user input without writing JavaScript. Important validation attributes are: required (field must be filled), pattern (must match a regex), min and max (for numbers and dates), minlength and maxlength (for text length), type (like email, url, number which have built-in checks), and step (for number increments). Browsers automatically show error messages if validation fails.",
+    "code": "<form>\n  <input type=\"text\" required minlength=\"3\" maxlength=\"20\" placeholder=\"Name\">\n\n  <input type=\"email\" required placeholder=\"Email\">\n\n  <input type=\"number\" min=\"18\" max=\"60\" required>\n\n  <input type=\"text\" pattern=\"[0-9]{10}\" title=\"Enter 10 digit phone number\" required>\n\n  <button type=\"submit\">Submit</button>\n</form>"
+  }
+]
