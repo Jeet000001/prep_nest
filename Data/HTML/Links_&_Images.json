@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "question": "How do you create a hyperlink in HTML?",
+    "answer": "To create a hyperlink in HTML, we use the <a> (anchor) tag. The most important attribute is href, which specifies the destination URL. The text or content between the opening and closing <a> tags becomes the clickable link. We can also use target=\"_blank\" to open the link in a new tab.",
+    "code": "<!-- Basic link -->\n<a href=\"https://www.google.com\">Visit Google</a>\n\n<!-- Open in new tab -->\n<a href=\"https://www.google.com\" target=\"_blank\">Visit Google</a>\n\n<!-- Link to another page -->\n<a href=\"about.html\">About Us</a>\n\n<!-- Link to an email -->\n<a href=\"mailto:example@gmail.com\">Send Email</a>"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between absolute and relative URLs?",
+    "answer": "Absolute URL: It is the complete address of a webpage or resource, including the protocol (https://) and domain name. Example: https://www.example.com/about.html. It works from anywhere. Relative URL: It is a partial path that is relative to the current page location. Example: about.html or /images/logo.png. Relative URLs are shorter and commonly used for linking pages within the same website.",
+    "code": "<!-- Absolute URL -->\n<a href=\"https://www.example.com/contact.html\">Contact</a>\n\n<!-- Relative URL -->\n<a href=\"contact.html\">Contact</a>\n<a href=\"/images/photo.jpg\">Photo</a>\n<a href=\"../about.html\">About (going one folder up)</a>"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between src and href attributes?",
+    "answer": "src (source) is used to embed or load an external resource into the page, such as images, scripts, or iframes. Example: <img src=\"image.jpg\"> or <script src=\"script.js\">. href (hypertext reference) is used to create a link or reference to another resource, such as pages, CSS files, or downloadable files. Example: <a href=\"page.html\"> or <link href=\"style.css\">. In short: src embeds the resource, href links to the resource.",
+    "code": "<!-- src example -->\n<img src=\"logo.png\" alt=\"Logo\">\n<script src=\"app.js\"></script>\n\n<!-- href example -->\n<a href=\"https://www.google.com\">Google</a>\n<link rel=\"stylesheet\" href=\"style.css\">"
+  },
+  {
+    "id": 4,
+    "question": "How do you add an image in HTML? What attributes are important for images?",
+    "answer": "To add an image, we use the <img> tag (it is a void/self-closing element). The most important attributes are: src (path of the image), alt (alternative text), width and height (to set size), and title (tooltip text). Always include the alt attribute for accessibility and SEO.",
+    "code": "<img src=\"photo.jpg\" alt=\"A beautiful mountain view\" width=\"400\" height=\"300\" title=\"Mountain\">\n\n<!-- Recommended modern way -->\n<img src=\"photo.jpg\" alt=\"A beautiful mountain view\" style=\"width: 100%; max-width: 400px;\">"
+  },
+  {
+    "id": 5,
+    "question": "What is the purpose of the alt attribute?",
+    "answer": "The alt (alternative text) attribute provides a text description of the image. It is very important for: 1) Accessibility – screen readers read the alt text for visually impaired users, 2) SEO – search engines use alt text to understand the image, 3) Fallback – if the image fails to load, the alt text is displayed instead. Always write meaningful alt text that describes the image.",
+    "code": "<!-- Good alt text -->\n<img src=\"dog.jpg\" alt=\"A golden retriever playing in the park\">\n\n<!-- Bad alt text -->\n<img src=\"dog.jpg\" alt=\"image\">\n\n<!-- Decorative image (empty alt is okay) -->\n<img src=\"decoration.png\" alt=\"\">"
+  },
+  {
+    "id": 6,
+    "question": "How do you make images responsive using HTML?",
+    "answer": "To make images responsive (so they adjust according to screen size), the simplest way in HTML is to set the max-width to 100% and height to auto using CSS or the style attribute. This ensures the image never overflows its container and scales down on smaller screens. We can also use the <picture> element or srcset attribute for more advanced responsive images.",
+    "code": "<!-- Simple responsive image -->\n<img src=\"photo.jpg\" alt=\"Responsive image\" style=\"max-width: 100%; height: auto;\">\n\n<!-- Using CSS class (recommended) -->\n<img src=\"photo.jpg\" alt=\"Responsive image\" class=\"responsive-img\">\n\n/* CSS */\n.responsive-img {\n  max-width: 100%;\n  height: auto;\n}\n\n<!-- Advanced: using srcset -->\n<img src=\"small.jpg\"\n     srcset=\"small.jpg 400w, medium.jpg 800w, large.jpg 1200w\"\n     alt=\"Responsive image with different sizes\">"
+  }
+]
