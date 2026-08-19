@@ -40,7 +40,7 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-9 lg:flex xl:gap-12">
-            <Link href="/" className={navLinkClass}>
+            <Link href="/concepts" className={navLinkClass}>
               Concepts
             </Link>
 
@@ -97,7 +97,7 @@ const Navbar = () => {
           <div className="rounded-3xl border border-white/10 bg-[#0D0B09]/90 p-5 shadow-[0_25px_60px_rgba(0,0,0,0.45)] backdrop-blur-3xl">
             <nav className="flex flex-col gap-5">
               <Link
-                href="/"
+                href="/concepts"
                 onClick={() => setOpen(false)}
                 className={mobileLinkClass}
               >
