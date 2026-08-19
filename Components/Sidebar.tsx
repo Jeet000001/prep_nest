@@ -31,7 +31,10 @@ const topicGroups: TopicGroup[] = [
     topics: [
       { name: "HTML Basics", href: "/concepts/html/basics" },
       { name: "Semantic HTML", href: "/concepts/html/semantic-html" },
-      { name: "Headings & Paragraphs", href: "/concepts/html/headings-paragraphs" },
+      {
+        name: "Headings & Paragraphs",
+        href: "/concepts/html/headings-paragraphs",
+      },
       { name: "Links & Images", href: "/concepts/html/links-images" },
       { name: "Lists", href: "/concepts/html/lists" },
       { name: "Tables", href: "/concepts/html/tables" },
@@ -90,7 +93,10 @@ const topicGroups: TopicGroup[] = [
       { name: "Props", href: "/concepts/react/props" },
       { name: "State", href: "/concepts/react/state" },
       { name: "Events", href: "/concepts/react/events" },
-      { name: "Conditional Rendering", href: "/concepts/react/conditional-rendering" },
+      {
+        name: "Conditional Rendering",
+        href: "/concepts/react/conditional-rendering",
+      },
       { name: "Lists & Keys", href: "/concepts/react/lists-keys" },
       { name: "useState", href: "/concepts/react/use-state" },
       { name: "useEffect", href: "/concepts/react/use-effect" },
@@ -138,7 +144,7 @@ const Sidebar = () => {
 
   const totalTopics = topicGroups.reduce(
     (total, group) => total + group.topics.length,
-    0
+    0,
   );
 
   return (
@@ -150,15 +156,11 @@ const Sidebar = () => {
       <aside className="hidden lg:block lg:w-60 xl:w-64 2xl:w-68">
         <div className="sticky top-24 h-[calc(100vh-7rem)]">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10  backdrop-blur-xl">
-
             {/* Header */}
 
             <div className="border-b border-white/10 px-4 py-4">
               <div className="flex items-center gap-2">
-                <LayoutGrid
-                  size={15}
-                  className="text-amber-400"
-                />
+                <LayoutGrid size={15} className="text-amber-400" />
 
                 <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-neutral-400">
                   Concepts
@@ -180,7 +182,6 @@ const Sidebar = () => {
 
                   return (
                     <div key={group.name}>
-
                       {/* Parent */}
 
                       <button
@@ -294,10 +295,7 @@ const Sidebar = () => {
           "
         >
           <div className="flex items-center gap-2">
-            <LayoutGrid
-              size={17}
-              className="text-amber-400"
-            />
+            <LayoutGrid size={17} className="text-amber-400" />
 
             <span>Browse Concepts</span>
           </div>
@@ -307,10 +305,7 @@ const Sidebar = () => {
               {totalTopics}
             </span>
 
-            <ChevronDown
-              size={15}
-              className="text-neutral-500"
-            />
+            <ChevronDown size={15} className="text-neutral-500" />
           </div>
         </button>
       </div>
@@ -351,11 +346,7 @@ const Sidebar = () => {
           ease-[cubic-bezier(0.22,1,0.36,1)]
           lg:hidden
 
-          ${
-            open
-              ? "translate-y-0"
-              : "translate-y-full"
-          }
+          ${open ? "translate-y-0" : "translate-y-full"}
         `}
         style={{
           maxHeight: "80dvh",
@@ -371,10 +362,7 @@ const Sidebar = () => {
 
         <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
           <div className="flex items-center gap-2">
-            <LayoutGrid
-              size={16}
-              className="text-amber-400"
-            />
+            <LayoutGrid size={16} className="text-amber-400" />
 
             <span className="font-mono text-xs font-semibold uppercase tracking-widest text-neutral-400">
               Concepts
@@ -413,7 +401,6 @@ const Sidebar = () => {
 
               return (
                 <div key={group.name}>
-
                   {/* Parent */}
 
                   <button
@@ -430,10 +417,7 @@ const Sidebar = () => {
                     "
                   >
                     <span className="flex items-center gap-3">
-                      <Icon
-                        size={18}
-                        className="text-amber-400"
-                      />
+                      <Icon size={18} className="text-amber-400" />
 
                       {group.name}
                     </span>
@@ -463,8 +447,7 @@ const Sidebar = () => {
                     <div className="min-h-0 overflow-hidden">
                       <div className="ml-5 border-l border-white/8 py-1 pl-2">
                         {group.topics.map((topic) => {
-                          const active =
-                            isTopicActive(topic.href);
+                          const active = isTopicActive(topic.href);
 
                           return (
                             <Link
