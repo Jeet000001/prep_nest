@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "question": "How do you make a webpage accessible using HTML?",
+    "answer": "We can make a webpage accessible by using semantic HTML, proper headings, meaningful link text, labels for form controls, alternative text for images, keyboard-friendly elements, and ARIA only when necessary. For example, use <button> for actions instead of a <div>, use <label> with form inputs, use meaningful alt text for important images, and maintain a logical heading structure. The goal is to make the page usable by people who use screen readers, keyboards, or other assistive technologies.",
+    "code": "<!-- Good semantic structure -->\n<header>\n  <nav aria-label=\"Main navigation\">\n    <a href=\"/\">Home</a>\n    <a href=\"/about\">About</a>\n  </nav>\n</header>\n\n<main>\n  <h1>Contact Us</h1>\n\n  <!-- Accessible image -->\n  <img src=\"team.jpg\" alt=\"Our development team\">\n\n  <!-- Accessible form -->\n  <form>\n    <label for=\"email\">Email address</label>\n    <input id=\"email\" type=\"email\" name=\"email\">\n\n    <button type=\"submit\">Send Message</button>\n  </form>\n</main>"
+  },
+  {
+    "id": 2,
+    "question": "What is the importance of semantic HTML for accessibility and SEO?",
+    "answer": "Semantic HTML means using HTML elements according to their meaning, such as <header>, <nav>, <main>, <article>, <section>, <button>, and <footer>. It improves accessibility because screen readers and other assistive technologies can better understand the structure and purpose of the page. It also helps SEO because search engines can better understand the content and structure of a webpage. For example, using <h1> for the main heading is more meaningful than using a generic <div> with large text.",
+    "code": "<!-- Semantic HTML -->\n<header>\n  <h1>Frontend Interview Guide</h1>\n</header>\n\n<nav>\n  <a href=\"/html\">HTML</a>\n  <a href=\"/css\">CSS</a>\n  <a href=\"/javascript\">JavaScript</a>\n</nav>\n\n<main>\n  <article>\n    <h2>HTML Interview Questions</h2>\n    <p>Learn common HTML interview concepts.</p>\n  </article>\n</main>\n\n<footer>\n  <p>© 2026 Interview Guide</p>\n</footer>"
+  },
+  {
+    "id": 3,
+    "question": "What is ARIA and when do you use it?",
+    "answer": "ARIA stands for Accessible Rich Internet Applications. It is a set of attributes that provides additional accessibility information to HTML elements, especially for custom or dynamic UI components. ARIA can define roles, states, and properties that help assistive technologies understand an element. We should use native semantic HTML first and use ARIA only when HTML alone cannot provide the required accessibility information. For example, a native <button> is usually better than a <div role=\"button\"> because the native button already provides keyboard and accessibility behavior.",
+    "code": "<!-- Prefer native HTML -->\n<button type=\"button\">\n  Open Menu\n</button>\n\n<!-- ARIA can be useful for custom/dynamic UI -->\n<button\n  type=\"button\"\n  aria-expanded=\"false\"\n  aria-controls=\"menu\"\n>\n  Menu\n</button>\n\n<ul id=\"menu\" hidden>\n  <li><a href=\"/profile\">Profile</a></li>\n  <li><a href=\"/settings\">Settings</a></li>\n</ul>"
+  },
+  {
+    "id": 4,
+    "question": "Why should you avoid using tables for layout?",
+    "answer": "Tables should be used for displaying tabular data, not for controlling the visual layout of a webpage. Using tables for layout can make the page harder to understand for screen readers and can create problems with responsive design and maintenance. Semantic layout elements such as <header>, <nav>, <main>, <section>, <article>, and CSS Flexbox or Grid should be used for page layout. Tables are appropriate when the content represents a real relationship between rows and columns, such as a product price table or exam results.",
+    "code": "<!-- ❌ Avoid tables for page layout -->\n<table>\n  <tr>\n    <td>Logo</td>\n    <td>Navigation</td>\n  </tr>\n</table>\n\n<!-- ✅ Use semantic HTML + CSS for layout -->\n<header>\n  <div>Logo</div>\n  <nav>\n    <a href=\"/\">Home</a>\n    <a href=\"/about\">About</a>\n  </nav>\n</header>\n\n<!-- ✅ Use table for actual tabular data -->\n<table>\n  <thead>\n    <tr>\n      <th>Name</th>\n      <th>Score</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Rahul</td>\n      <td>85</td>\n    </tr>\n  </tbody>\n</table>"
+  }
+]

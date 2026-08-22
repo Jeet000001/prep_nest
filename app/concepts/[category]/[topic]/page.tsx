@@ -18,6 +18,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     multimedia: "Multimedia.json",
     tables: "Tables.json",
     forms: "Forms.json",
+	html5: "HTML5.json",
+	accessibility: "Accessibility.json"
   },
 };
 

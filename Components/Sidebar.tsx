@@ -39,7 +39,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Lists", href: "/concepts/html/lists" },
       { name: "Links & Images", href: "/concepts/html/links-images" },
       { name: "Multimedia", href: "/concepts/html/multimedia" },
-      { name: "HTML5", href: "/concepts/html/attributes" },
+      { name: "HTML5", href: "/concepts/html/html5" },
       { name: "Accessibility", href: "/concepts/html/accessibility" },
     ],
   },

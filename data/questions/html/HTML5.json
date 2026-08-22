@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "question": "What are the key new features of HTML5?",
+    "answer": "HTML5 was a big upgrade over HTML4 and introduced many powerful features. Some key ones are: 1) New semantic tags like <header>, <footer>, <nav>, <article>, <section>, <aside> which make the page structure more meaningful instead of using plain <div>s. 2) Native <audio> and <video> tags for playing media without plugins like Flash. 3) The <canvas> element for drawing graphics with JavaScript. 4) Web Storage (localStorage and sessionStorage) to store data in the browser. 5) Geolocation API to get the user's location. 6) New form input types like email, date, number, range, and built-in form validation. 7) Web Workers for running JavaScript in the background without freezing the page. 8) Drag and Drop API. 9) Better support for SVG and offline applications. Overall, HTML5 reduced the need for third-party plugins and made the web more app-like.",
+    "code": "<!-- Semantic tags example -->\n<header>My Website</header>\n<nav>Home | About | Contact</nav>\n<section>\n  <article>\n    <h2>Blog Post Title</h2>\n    <p>Content goes here...</p>\n  </article>\n</section>\n<footer>© 2025 My Website</footer>\n\n<!-- New input type example -->\n<input type=\"email\" required>\n<input type=\"date\">\n<input type=\"range\" min=\"0\" max=\"100\">"
+  },
+  {
+    "id": 2,
+    "question": "What is Web Storage in HTML5? Differentiate between localStorage and sessionStorage.",
+    "answer": "Web Storage is an HTML5 feature that lets us store key-value data directly in the browser instead of using cookies. It is faster, can store more data (around 5-10MB vs cookies' ~4KB), and this data is never sent to the server with every request, unlike cookies. There are two types: localStorage stores data with no expiry date — it stays even after closing and reopening the browser, until it is manually cleared. sessionStorage stores data only for one tab session — as soon as that tab is closed, the data is deleted. So localStorage is used for things like saving user preferences or theme settings, while sessionStorage is used for temporary data like a multi-step form that should reset after the tab closes.",
+    "code": "// localStorage - persists even after closing browser\nlocalStorage.setItem('username', 'John');\nconsole.log(localStorage.getItem('username')); // 'John'\nlocalStorage.removeItem('username');\n\n// sessionStorage - cleared when tab is closed\nsessionStorage.setItem('formStep', '2');\nconsole.log(sessionStorage.getItem('formStep')); // '2'\nsessionStorage.clear();"
+  },
+  {
+    "id": 3,
+    "question": "What are data attributes (data-*)? How and when do you use them?",
+    "answer": "Data attributes let us store extra custom information directly on an HTML element without affecting its layout or using non-standard attributes. Any attribute that starts with 'data-' (like data-id, data-user-role) is valid and can be read easily using JavaScript's 'dataset' property or with jQuery. They are commonly used when we need to attach some data to an element that JavaScript will use later, for example storing a product ID on a button, or a user role on a row, without creating hidden inputs or extra variables.",
+    "code": "<button data-id=\"101\" data-user-role=\"admin\">View Profile</button>\n\n<script>\n  const btn = document.querySelector('button');\n  console.log(btn.dataset.id);        // '101'\n  console.log(btn.dataset.userRole);  // 'admin' (note: camelCase in JS)\n\n  btn.addEventListener('click', () => {\n    alert('Fetching data for user ID: ' + btn.dataset.id);\n  });\n</script>"
+  },
+  {
+    "id": 4,
+    "question": "What is Geolocation API in HTML5?",
+    "answer": "The Geolocation API is an HTML5 feature that lets a website ask the user's permission to access their current geographic location (latitude and longitude) using the device's GPS, Wi-Fi, or IP address. It's commonly used in apps like maps, weather apps, or nearby store locators. The browser always asks for the user's permission first for privacy and security reasons, and it only works on secure (HTTPS) connections in modern browsers. We access it through 'navigator.geolocation' and its 'getCurrentPosition()' method, which returns the coordinates in a success callback.",
+    "code": "if (navigator.geolocation) {\n  navigator.geolocation.getCurrentPosition(\n    function(position) {\n      console.log('Latitude: ' + position.coords.latitude);\n      console.log('Longitude: ' + position.coords.longitude);\n    },\n    function(error) {\n      console.log('Error getting location: ' + error.message);\n    }\n  );\n} else {\n  console.log('Geolocation is not supported by this browser.');\n}"
+  },
+  {
+    "id": 5,
+    "question": "What are some important HTML5 APIs?",
+    "answer": "Along with tags, HTML5 also introduced several JavaScript-based APIs that add powerful capabilities to web apps: 1) Web Storage API (localStorage/sessionStorage) for storing data in the browser. 2) Geolocation API for getting the user's location. 3) Canvas API for drawing 2D graphics. 4) Drag and Drop API to let users drag elements and drop them elsewhere on the page. 5) Web Workers API to run JavaScript in a background thread so the UI doesn't freeze during heavy tasks. 6) Web Sockets API for real-time, two-way communication between browser and server (used in chat apps). 7) History API (pushState/replaceState) to change the URL without reloading the page, used in Single Page Applications. 8) File API to let JavaScript read files selected by the user. These APIs together are what make modern, app-like web experiences possible.",
+    "code": "// Drag and Drop example\n<div id=\"box\" draggable=\"true\" ondragstart=\"event.dataTransfer.setData('text', event.target.id)\">Drag me</div>\n<div id=\"dropZone\" ondrop=\"drop(event)\" ondragover=\"event.preventDefault()\">Drop here</div>\n\n<script>\n  function drop(e) {\n    e.preventDefault();\n    const id = e.dataTransfer.getData('text');\n    e.target.appendChild(document.getElementById(id));\n  }\n</script>\n\n// Web Worker example\nconst worker = new Worker('worker.js');\nworker.postMessage('start');\nworker.onmessage = (e) => console.log('Result from worker:', e.data);"
+  }
+]
