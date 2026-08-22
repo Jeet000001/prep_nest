@@ -29,17 +29,17 @@ const topicGroups: TopicGroup[] = [
     name: "HTML",
     icon: FileCode2,
     topics: [
-      { name: "HTML Basics", href: "/concepts/html/basics" },
+      { name: "Introduction", href: "/concepts/html/introduction" },
       { name: "Semantic HTML", href: "/concepts/html/semantic-html" },
       {
-        name: "Headings & Paragraphs",
-        href: "/concepts/html/headings-paragraphs",
+        name: "Forms",
+        href: "/concepts/html/forms",
       },
-      { name: "Links & Images", href: "/concepts/html/links-images" },
-      { name: "Lists", href: "/concepts/html/lists" },
       { name: "Tables", href: "/concepts/html/tables" },
-      { name: "Forms", href: "/concepts/html/forms" },
-      { name: "HTML Attributes", href: "/concepts/html/attributes" },
+      { name: "Lists", href: "/concepts/html/lists" },
+      { name: "Links & Images", href: "/concepts/html/links-images" },
+      { name: "Multimedia", href: "/concepts/html/" },
+      { name: "HTML5", href: "/concepts/html/attributes" },
       { name: "Accessibility", href: "/concepts/html/accessibility" },
     ],
   },
@@ -154,7 +154,7 @@ const Sidebar = () => {
       ===================================================== */}
 
       <aside className="hidden lg:block lg:w-60 xl:w-64 2xl:w-68">
-        <div className="sticky top-24 h-[calc(100vh-7rem)]">
+        <div className="sticky top-20 h-dvh">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10  backdrop-blur-xl">
             {/* Header */}
 
