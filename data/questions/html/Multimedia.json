@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "question": "How do you embed audio and video in HTML5?",
+    "answer": "In HTML5, we can embed audio using the <audio> tag and video using the <video> tag. These tags allow browsers to play media without requiring external plugins. We can use the controls attribute to display built-in play, pause, volume, and other controls. The <source> tag can be used to provide multiple media formats for better browser compatibility.",
+    "code": "<!-- Audio -->\n<audio controls>\n  <source src=\"audio.mp3\" type=\"audio/mpeg\">\n  Your browser does not support the audio element.\n</audio>\n\n<!-- Video -->\n<video controls width=\"500\">\n  <source src=\"video.mp4\" type=\"video/mp4\">\n  Your browser does not support the video element.\n</video>"
+  },
+  {
+    "id": 2,
+    "question": "What are the important attributes of the <video> and <audio> tags?",
+    "answer": "The important attributes are: controls – shows built-in media controls; autoplay – starts the media automatically; loop – plays the media repeatedly; muted – starts the media without sound; preload – tells the browser how much media information should be loaded; poster – used with <video> to display an image before the video starts; width and height – used with <video> to control its dimensions. In interviews, the most commonly mentioned attributes are controls, autoplay, loop, muted, preload, and poster.",
+    "code": "<video\n  controls\n  autoplay\n  muted\n  loop\n  poster=\"thumbnail.jpg\"\n  width=\"600\"\n  height=\"350\"\n>\n  <source src=\"video.mp4\" type=\"video/mp4\">\n</video>\n\n<audio\n  controls\n  loop\n  preload=\"metadata\"\n>\n  <source src=\"audio.mp3\" type=\"audio/mpeg\">\n</audio>"
+  },
+  {
+    "id": 3,
+    "question": "What is the purpose of the <canvas> element?",
+    "answer": "The <canvas> element provides a drawing area on a web page where we can create graphics dynamically using JavaScript. It can be used for drawings, charts, animations, games, image manipulation, and other graphics. The canvas itself does not draw anything; JavaScript is used to draw on it through a 2D or WebGL rendering context.",
+    "code": "<canvas id=\"myCanvas\" width=\"300\" height=\"150\"></canvas>\n\n<script>\n  const canvas = document.getElementById(\"myCanvas\");\n  const ctx = canvas.getContext(\"2d\");\n\n  ctx.fillStyle = \"blue\";\n  ctx.fillRect(50, 40, 150, 70);\n</script>"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between <canvas> and SVG?",
+    "answer": "The main difference is how they handle graphics. Canvas is a pixel-based drawing system, while SVG is a vector-based graphics system. Canvas is generally better for complex or frequently changing graphics, such as games and real-time animations. SVG is better for scalable graphics, icons, logos, and diagrams because SVG elements remain sharp at any size and can be individually styled and manipulated using CSS and JavaScript. In an interview, a simple way to remember it is: Canvas = pixel-based and JavaScript-driven; SVG = vector-based and DOM-based.",
+    "code": "<!-- Canvas -->\n<canvas id=\"canvas\" width=\"200\" height=\"100\"></canvas>\n\n<script>\n  const canvas = document.getElementById(\"canvas\");\n  const ctx = canvas.getContext(\"2d\");\n\n  ctx.fillStyle = \"red\";\n  ctx.fillRect(20, 20, 100, 50);\n</script>\n\n<!-- SVG -->\n<svg width=\"200\" height=\"100\">\n  <rect x=\"20\" y=\"20\" width=\"100\" height=\"50\" fill=\"red\" />\n</svg>"
+  }
+]
