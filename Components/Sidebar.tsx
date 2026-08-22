@@ -174,7 +174,7 @@ const Sidebar = () => {
 
             {/* Topics */}
 
-            <div className="flex-1 overflow-y-auto p-3">
+            <div className="hide-scrollbar flex-1 overflow-y-auto p-3">
               <nav className="space-y-1">
                 {topicGroups.map((group) => {
                   const Icon = group.icon;
@@ -393,7 +393,7 @@ const Sidebar = () => {
 
         {/* Mobile Topics */}
 
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="hide-scrollbar flex-1 overflow-y-auto p-4">
           <nav className="space-y-1">
             {topicGroups.map((group) => {
               const Icon = group.icon;

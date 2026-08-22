@@ -57,7 +57,7 @@ export default async function TopicPage({
         </h1>
       </header>
 
-      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto pt-4">
+      <div className="hide-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto pt-4">
         {questions.map((item) => (
           <article
             key={item.id}
