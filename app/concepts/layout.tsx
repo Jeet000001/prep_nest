@@ -6,7 +6,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="mx-auto flex h-dvh w-full max-w-7xl gap-3 overflow-hidden px-5 pt-24 sm:px-6 lg:px-8">
+    <main className="mx-auto flex h-dvh w-full max-w-7xl gap-3 overflow-hidden px-5 pb-4 pt-24 sm:px-6 lg:px-8">
       {/* Sidebar */}
       <Sidebar />
 
