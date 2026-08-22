@@ -153,8 +153,8 @@ const Sidebar = () => {
           DESKTOP SIDEBAR
       ===================================================== */}
 
-      <aside className="hidden lg:block lg:w-60 xl:w-64 2xl:w-68">
-        <div className="sticky top-20 h-dvh">
+      <aside className="hidden h-full lg:block lg:w-60 xl:w-64 2xl:w-68">
+        <div className="h-full">
           <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-white/10  backdrop-blur-xl">
             {/* Header */}
 

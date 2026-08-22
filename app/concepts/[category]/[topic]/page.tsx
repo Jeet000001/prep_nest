@@ -47,7 +47,7 @@ export default async function TopicPage({
   const questions = JSON.parse(file) as Question[];
 
   return (
-    <div className="flex h-210 min-h-0 w-full flex-col rounded-2xl border border-white/10 p-4 sm:p-6">
+    <div className="flex h-full min-h-0 w-full flex-col rounded-2xl border border-white/10 p-4 sm:p-6">
       <header className="border-b border-white/10 pb-4">
         <p className="font-mono text-xs uppercase tracking-[0.18em] text-amber-400">
           {category}
