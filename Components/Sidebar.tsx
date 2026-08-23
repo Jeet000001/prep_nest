@@ -57,7 +57,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Grid", href: "/concepts/css/grid" },
       { name: "Responsive Design", href: "/concepts/css/responsive-design" },
       { name: "Units", href: "/concepts/css/units" },
-      { name: "Transitions", href: "/concepts/css/transitions" },
+      { name: "Positioning Element", href: "/concepts/css/position_element" },
       { name: "Animations", href: "/concepts/css/animations" },
     ],
   },

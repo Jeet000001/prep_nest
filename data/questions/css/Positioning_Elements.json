@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "question": "How do you create a sticky header using CSS?",
+    "answer": "A sticky header stays fixed at the top of the viewport once the user scrolls past it, while still behaving like a normal element until that point. This is achieved using position: sticky along with a top value (usually 0). The header will scroll normally with the page until it reaches the top of the viewport, then it 'sticks' there. Note: position: sticky works relative to its nearest scrolling ancestor, and the parent container must not have overflow: hidden set on it, or sticky won't work.",
+    "code": "header {\n  position: sticky;\n  top: 0;\n  background: #fff;\n  z-index: 100;\n  padding: 10px 20px;\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1);\n}"
+  },
+  {
+    "id": 2,
+    "question": "How do you create a two-column layout using CSS?",
+    "answer": "A two-column layout can be created in multiple ways, but the most common and modern approaches are Flexbox and CSS Grid. With Flexbox, you set the container's display to flex, and the two child elements automatically sit side by side; you can control their widths using flex-basis or width. With Grid, you use grid-template-columns to define exactly how much space each column should take (e.g. 1fr 1fr for two equal columns). Grid is preferred when you need precise control over column sizes.",
+    "code": "/* Using Flexbox */\n.container {\n  display: flex;\n  gap: 20px;\n}\n.column {\n  flex: 1;\n}\n\n/* Using Grid */\n.container {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 20px;\n}"
+  },
+  {
+    "id": 3,
+    "question": "How do you vertically align text/content inside a div?",
+    "answer": "The easiest and most reliable modern way is using Flexbox. By setting display: flex and align-items: center on the parent, the content inside gets vertically centered. If you also want horizontal centering, add justify-content: center. Older methods like using line-height (for single-line text) or position: absolute with transform: translateY(-50%) also work, but Flexbox is cleaner and works for any type of content, not just text.",
+    "code": "/* Flexbox method (recommended) */\n.box {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 200px;\n}\n\n/* Alternative: line-height (for single line text only) */\n.single-line {\n  height: 50px;\n  line-height: 50px;\n}"
+  },
+  {
+    "id": 4,
+    "question": "How do you make an element overflow scrollable?",
+    "answer": "To make an element scrollable when its content is bigger than its defined size, you set a fixed height and/or width on it and then use the overflow property (or overflow-y / overflow-x for a single direction) with a value of scroll or auto. auto is generally preferred because it only shows the scrollbar when the content actually overflows, whereas scroll always shows it even if not needed.",
+    "code": ".scrollable-box {\n  height: 200px;\n  width: 300px;\n  overflow-y: auto;\n  border: 1px solid #ccc;\n}"
+  },
+  {
+    "id": 5,
+    "question": "What is the overflow property and its values (visible, hidden, scroll, auto)?",
+    "answer": "The overflow property controls what happens when an element's content is too large to fit inside its box. It has four main values: 1) visible (default) - content overflows and is shown outside the box without clipping, 2) hidden - content that overflows is clipped and simply not shown, no scrollbar appears, 3) scroll - a scrollbar is always shown (both horizontal and vertical, even if content doesn't overflow in that direction), 4) auto - a scrollbar appears only when the content actually overflows, which makes it the most commonly used value in practice. You can also use overflow-x and overflow-y to control horizontal and vertical overflow separately.",
+    "code": ".visible { overflow: visible; }\n.hidden  { overflow: hidden; }\n.scroll  { overflow: scroll; }\n.auto    { overflow: auto; }"
+  }
+]

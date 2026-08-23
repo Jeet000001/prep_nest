@@ -30,7 +30,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     flexbox: "Flexbox.json",
     grid: "Grid.json",
     "responsive-design": "Responsive_Design.json",
-    units: "Units.json"
+    units: "Units.json",
+    position_element: "Positioning_Elements.json"
   }
 };
 
