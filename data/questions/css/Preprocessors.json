@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "question": "What is a CSS preprocessor and why is it used?",
+    "answer": "A CSS preprocessor is a scripting language that extends the default capabilities of CSS. It allows us to use features like variables, nesting, mixins, functions, and loops, which are not available in plain CSS. The code written in a preprocessor is compiled into normal CSS before it is used in the browser. It is used because: 1) It makes CSS more maintainable and reusable, 2) It reduces code repetition, 3) It allows better organization of large stylesheets, and 4) It speeds up development with features like variables and mixins. Popular preprocessors are SASS, LESS, and Stylus.",
+    "code": null
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between SASS and plain CSS?",
+    "answer": "Plain CSS is the standard styling language understood directly by browsers, but it lacks programming features like variables, nesting, functions, and reusable code blocks. SASS is a preprocessor that adds these extra features on top of CSS. SASS code needs to be compiled into regular CSS before the browser can use it. In short, SASS makes writing CSS faster, more organized, and easier to maintain, especially in large projects, while plain CSS is simpler but repetitive for big stylesheets.",
+    "code": "/* Plain CSS */\n.button {\n  color: blue;\n}\n.link {\n  color: blue;\n}\n\n/* SASS */\n$primary-color: blue;\n\n.button {\n  color: $primary-color;\n}\n.link {\n  color: $primary-color;\n}"
+  },
+  {
+    "id": 3,
+    "question": "What are mixins in SASS?",
+    "answer": "A mixin in SASS is like a reusable function or block of CSS code that can be included in multiple selectors. It helps avoid repeating the same CSS rules again and again. Mixins can also accept parameters, making them flexible for different use cases (for example, applying the same style with different values). We define a mixin using @mixin and use it in a selector using @include.",
+    "code": "// Defining a mixin\n@mixin flex-center {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n\n// Using the mixin\n.container {\n  @include flex-center;\n}\n\n// Mixin with parameters\n@mixin button-style($bg-color) {\n  background-color: $bg-color;\n  padding: 10px 20px;\n  border-radius: 5px;\n}\n\n.primary-btn {\n  @include button-style(blue);\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is nesting in SASS/LESS?",
+    "answer": "Nesting is a feature in SASS and LESS that allows us to write CSS rules for child elements inside their parent element's rule block, similar to how HTML elements are nested. This makes the code more readable and reflects the actual structure of the HTML, instead of writing long, repetitive selectors in plain CSS. However, too much nesting should be avoided as it can make the compiled CSS overly specific and harder to maintain.",
+    "code": "// Nested SASS\nnav {\n  background-color: #333;\n\n  ul {\n    list-style: none;\n\n    li {\n      display: inline-block;\n\n      a {\n        color: white;\n        text-decoration: none;\n\n        &:hover {\n          color: yellow;\n        }\n      }\n    }\n  }\n}"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between SASS and SCSS?",
+    "answer": "SASS and SCSS are actually two different syntax options of the same preprocessor. SASS (the older syntax) does not use curly braces or semicolons; it relies on indentation to define code blocks, similar to Python. SCSS (Sassy CSS, the newer syntax) uses curly braces {} and semicolons, just like normal CSS, which makes it easier for developers already familiar with CSS to learn. SCSS is the more commonly used syntax today because it looks and feels closer to standard CSS.",
+    "code": "// SASS syntax (indentation based, no braces/semicolons)\n.button\n  color: white\n  background-color: blue\n  padding: 10px\n\n// SCSS syntax (uses braces and semicolons, like CSS)\n.button {\n  color: white;\n  background-color: blue;\n  padding: 10px;\n}"
+  }
+]
