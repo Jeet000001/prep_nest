@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "question": "What is the difference between px, %, em, rem, vh, vw?",
+    "answer": "These are all CSS units used to define sizes, but they behave differently. 1) px (pixel) is an absolute unit — it stays fixed no matter what, doesn't scale with parent or root font-size. 2) % (percentage) is relative to the size of its parent element (e.g., width: 50% means half of the parent's width). 3) em is relative to the font-size of the parent element (or the current element itself for font-size), so it can compound in nested elements. 4) rem (root em) is relative to the font-size of the root <html> element, so it stays consistent throughout the page and doesn't compound like em. 5) vh (viewport height) is relative to 1% of the viewport's height. 6) vw (viewport width) is relative to 1% of the viewport's width. vh and vw are commonly used for full-screen sections and responsive layouts.",
+    "code": "html { font-size: 16px; }\n\n.box-px {\n  width: 200px;       /* fixed, always 200px */\n}\n\n.box-percent {\n  width: 50%;         /* 50% of parent width */\n}\n\n.box-em {\n  font-size: 2em;     /* 2 x parent's font-size */\n}\n\n.box-rem {\n  font-size: 2rem;    /* 2 x root (html) font-size = 32px */\n}\n\n.box-vh-vw {\n  height: 100vh;      /* full viewport height */\n  width: 50vw;        /* half viewport width */\n}"
+  },
+  {
+    "id": 2,
+    "question": "When should you use rem over em?",
+    "answer": "Use rem when you want consistent, predictable sizing across the whole page, because it is always based on the root <html> font-size and doesn't get affected by nesting. This avoids the 'compounding problem' of em, where sizes multiply unexpectedly if elements are nested inside each other. Use em when you want a size to scale relative to its immediate parent, such as spacing or font-size inside a specific component that should scale together (like padding inside a button that should grow with the button's own font-size). In general, for font-sizing on a whole website, rem is preferred for consistency, while em is useful for component-level, context-based scaling.",
+    "code": "/* Problem with em (compounding) */\n.parent { font-size: 20px; }\n.child { font-size: 1.5em; }   /* 20 x 1.5 = 30px */\n.grandchild { font-size: 1.5em; } /* 30 x 1.5 = 45px (unexpected growth) */\n\n/* Solution with rem (consistent) */\nhtml { font-size: 16px; }\n.child { font-size: 1.5rem; }      /* always 24px */\n.grandchild { font-size: 1.5rem; } /* always 24px, no compounding */"
+  },
+  {
+    "id": 3,
+    "question": "What is a relative unit vs an absolute unit?",
+    "answer": "Absolute units have a fixed size that does not change based on any other element — px is the most common example, and it stays the same regardless of screen size, parent element, or root font-size. Other absolute units include cm, mm, in, and pt, mostly used for print. Relative units, on the other hand, are calculated based on some other value, like a parent element's size, the root font-size, or the viewport size. Examples include %, em, rem, vh, and vw. Relative units are preferred in responsive web design because they automatically adjust based on screen size or user settings (like browser zoom or accessibility font preferences), while absolute units like px do not adapt well to different devices.",
+    "code": "/* Absolute unit — fixed, doesn't adapt */\n.box-absolute {\n  width: 300px;\n  font-size: 16px;\n}\n\n/* Relative units — adapt based on context */\n.box-relative {\n  width: 80%;        /* relative to parent */\n  font-size: 1.2rem; /* relative to root font-size */\n  padding: 2vw;       /* relative to viewport width */\n}"
+  }
+]
