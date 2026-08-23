@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What is the CSS Box Model?",
+    "answer": "The CSS Box Model describes how every HTML element is represented as a rectangular box. It consists of four parts, from inside to outside: 1) Content - the actual text/image inside the element, 2) Padding - space between the content and the border, 3) Border - the line around the padding, and 4) Margin - space outside the border that separates the element from other elements. Understanding the box model is important because it controls the total size and spacing of every element on a page.",
+    "code": "div {\n  width: 200px;\n  padding: 20px;\n  border: 5px solid black;\n  margin: 10px;\n}\n/* Total width = 200 + 20+20 (padding) + 5+5 (border) = 250px */"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between content-box and border-box?",
+    "answer": "These are values of the box-sizing property and they decide how the width/height of an element is calculated. content-box is the default value - here width/height applies only to the content, and padding and border are added extra on top of that, which increases the actual size. border-box changes this behavior - here width/height includes the content, padding, and border all together, so the element's final size stays exactly what you set, making layouts more predictable.",
+    "code": "/* content-box (default) */\n.box1 {\n  box-sizing: content-box;\n  width: 200px;\n  padding: 20px;\n  border: 5px solid black;\n  /* actual width = 200 + 40 + 10 = 250px */\n}\n\n/* border-box */\n.box2 {\n  box-sizing: border-box;\n  width: 200px;\n  padding: 20px;\n  border: 5px solid black;\n  /* actual width stays 200px, content shrinks to fit */\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between margin and padding?",
+    "answer": "Padding is the space inside the element, between its content and its border. It is used to create breathing room inside the box, and background color/image applies to the padding area too. Margin is the space outside the element, between its border and neighboring elements. It is used to create separation between different elements and margin is always transparent - the background never shows through it.",
+    "code": "div {\n  padding: 15px;  /* space inside, between content and border */\n  margin: 20px;   /* space outside, between this element and others */\n  background-color: lightblue; /* fills content + padding, not margin */\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is margin collapsing? When does it happen?",
+    "answer": "Margin collapsing is a behavior in CSS where the top and bottom margins of adjacent block-level elements combine into a single margin, instead of adding up. Instead of the two margins being summed, only the larger of the two margins is applied. This mainly happens: 1) Between two sibling elements stacked vertically, 2) Between a parent and its first/last child when there is no padding, border, or content separating them, and 3) When an element is empty (its own top and bottom margins collapse into each other). Note: margin collapsing only happens with vertical margins (top/bottom), not horizontal margins (left/right), and it does not happen with flexbox or grid containers.",
+    "code": "<div class=\"box1\">Box 1</div>\n<div class=\"box2\">Box 2</div>\n\n<style>\n.box1 { margin-bottom: 30px; }\n.box2 { margin-top: 20px; }\n/* Actual gap between them = 30px (the larger margin), not 50px */\n</style>"
+  },
+  {
+    "id": 5,
+    "question": "How do you center a div using CSS?",
+    "answer": "There are multiple ways to center a div depending on the use case. The most common and modern method is using Flexbox, where the parent is given display: flex along with justify-content and align-items set to center. Another very popular method for horizontal centering is using margin: 0 auto along with a fixed width, but this only centers horizontally, not vertically. CSS Grid with place-items: center is also a modern one-line solution. For older approaches, absolute positioning with top: 50%, left: 50%, and transform: translate(-50%, -50%) is used to center an element both horizontally and vertically.",
+    "code": "/* Method 1: Flexbox (most common) */\n.parent {\n  display: flex;\n  justify-content: center; /* horizontal */\n  align-items: center;     /* vertical */\n  height: 100vh;\n}\n\n/* Method 2: Grid (shortest) */\n.parent {\n  display: grid;\n  place-items: center;\n  height: 100vh;\n}\n\n/* Method 3: Margin auto (horizontal only) */\n.child {\n  width: 200px;\n  margin: 0 auto;\n}\n\n/* Method 4: Absolute positioning */\n.child {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n}"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between width: auto and width: 100%?",
+    "answer": "width: auto lets the browser calculate the width automatically based on the element's content and its box model (it takes into account the parent's available space minus the element's own margin, border, and padding). width: 100% forces the element's content box to be exactly equal to the full width of its parent container, and if box-sizing is content-box, this can cause the element to overflow its parent because padding and border get added on top of that 100%. In simple terms, width: auto is safer for block elements as it naturally respects the box model, while width: 100% can cause unwanted overflow if not combined with box-sizing: border-box.",
+    "code": "/* width: auto - safely fits within parent, accounting for margin/padding */\n.box1 {\n  width: auto;\n  padding: 20px;\n  margin: 10px;\n}\n\n/* width: 100% - can overflow parent if padding/border added without border-box */\n.box2 {\n  width: 100%;\n  padding: 20px; /* this adds extra width, causing overflow */\n  box-sizing: border-box; /* fix: prevents overflow */\n}"
+  },
+  {
+    "id": 7,
+    "question": "What happens when you set box-sizing: border-box?",
+    "answer": "When you set box-sizing: border-box on an element, the width and height properties you define include the content, padding, and border all together, instead of just the content. This means when you add padding or a border, the element's total size does not increase - instead, the browser automatically reduces the content area to fit everything within the specified width/height. This makes layouts much easier to manage and is why many developers apply box-sizing: border-box to all elements globally at the start of a project.",
+    "code": "/* Common best practice: apply to all elements */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\n\n.box {\n  width: 300px;\n  padding: 20px;\n  border: 10px solid gray;\n  /* Total width stays exactly 300px, content area shrinks automatically */\n}"
+  }
+]

@@ -48,9 +48,9 @@ const topicGroups: TopicGroup[] = [
     name: "CSS",
     icon: Code2,
     topics: [
-      { name: "CSS Basics", href: "/concepts/css/basics" },
-      { name: "Selectors", href: "/concepts/css/selectors" },
+      { name: "Introduction", href: "/concepts/css/introduction" },
       { name: "Box Model", href: "/concepts/css/box-model" },
+      { name: "Specificity", href: "/concepts/css/specificity" },
       { name: "Display", href: "/concepts/css/display" },
       { name: "Position", href: "/concepts/css/position" },
       { name: "Flexbox", href: "/concepts/css/flexbox" },

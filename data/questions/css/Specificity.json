@@ -1,0 +1,38 @@
+// [
+//   {
+//     "id": 1,
+//     "question": "What is CSS specificity and how is it calculated?",
+//     "answer": "CSS specificity is a set of rules that the browser uses to decide which CSS rule applies when multiple rules target the same element. The more specific a selector is, the higher its priority. Specificity is calculated using four categories, usually written as (a, b, c, d): 1) Inline styles (highest priority), 2) IDs, 3) Classes, attributes, and pseudo-classes, 4) Elements and pseudo-elements (lowest priority). The browser compares selectors category by category, from left to right, and the selector with the higher value in the higher category wins.",
+//     "code": "/* Specificity comparison */\np { color: blue; }              /* (0,0,0,1) - element */\n.text { color: green; }         /* (0,0,1,0) - class */\n#main { color: red; }           /* (0,1,0,0) - id */\n<p id=\"main\" class=\"text\" style=\"color: purple;\">Hello</p>\n/* Result: text is purple because inline style has highest specificity */"
+//   },
+//   {
+//     "id": 2,
+//     "question": "What is the CSS cascade?",
+//     "answer": "The CSS cascade is the algorithm the browser uses to decide which style rule to apply when there are conflicting rules for the same element. It works by considering three main factors in order: 1) Importance (normal rules vs !important rules), 2) Specificity (ID beats class, class beats element), 3) Source order (if specificity is equal, the rule that comes later in the CSS wins). The word 'cascade' means styles flow down and combine from multiple sources like browser default styles, external stylesheets, internal styles, and inline styles.",
+//     "code": "p { color: blue; }\np { color: green; }\n/* Both have same specificity, so the later rule wins */\n/* Result: text color will be green */"
+//   },
+//   {
+//     "id": 3,
+//     "question": "What is the difference between specificity and inheritance?",
+//     "answer": "Specificity and inheritance are two different concepts. Specificity decides which CSS rule wins when multiple rules directly target the same element with conflicting styles. Inheritance is when a child element automatically receives certain CSS property values from its parent element, even if no rule is written for the child. For example, color and font-family are usually inherited, but border and padding are not. Specificity only comes into play when there is a conflict between rules; inheritance comes into play when there is no direct rule for the child element.",
+//     "code": "<div style=\"color: blue;\">\n  <p>This text will also be blue (inherited)</p>\n</div>\n\n/* Specificity example - direct conflict */\np { color: red; }\n.text { color: green; }\n<p class=\"text\">This will be green (class wins over element)</p>"
+//   },
+//   {
+//     "id": 4,
+//     "question": "What is !important and why should it be avoided?",
+//     "answer": "!important is a keyword in CSS that, when added to a property value, overrides all other declarations for that property, regardless of specificity or source order (except another !important rule with higher specificity). It should generally be avoided because: 1) It breaks the natural cascade and makes CSS harder to predict and debug, 2) It makes maintaining and overriding styles later very difficult, especially in large projects, 3) It can lead to a 'specificity war' where developers keep adding more !important rules to override each other. It should only be used as a last resort, such as for utility classes or fixing third-party CSS you cannot edit.",
+//     "code": "p {\n  color: blue !important;\n}\n.text {\n  color: green;\n}\n<p class=\"text\">This will still be blue because of !important</p>"
+//   },
+//   {
+//     "id": 5,
+//     "question": "Which properties are inherited by default in CSS?",
+//     "answer": "Some CSS properties are inherited by default, meaning child elements automatically get the same value as their parent unless overridden. Commonly inherited properties are mostly related to text and fonts, such as: color, font-family, font-size, font-weight, font-style, line-height, letter-spacing, text-align, visibility, and cursor. Properties related to box model and layout, such as margin, padding, border, width, height, background, and position, are NOT inherited by default.",
+//     "code": "body {\n  color: darkblue;\n  font-family: Arial, sans-serif;\n}\n/* All text inside body, like in <p>, <h1>, <span>, will inherit color and font-family */\n\n/* To force inheritance of a non-inherited property */\n.child {\n  border: inherit;\n}"
+//   },
+//   {
+//     "id": 6,
+//     "question": "What is the order of precedence in CSS (inline, ID, class, element)?",
+//     "answer": "When multiple CSS rules target the same element, the browser follows this order of precedence, from highest to lowest priority: 1) !important rules (highest priority, overrides everything), 2) Inline styles (written directly in the style attribute of an HTML element), 3) ID selectors (#id), 4) Class selectors, attribute selectors, and pseudo-classes (.class, [type], :hover), 5) Element (type) selectors and pseudo-elements (p, div, ::before) - lowest priority. If two rules have the same specificity, the one that appears later in the CSS (source order) wins.",
+//     "code": "p { color: black; }              /* Element - lowest */\n.highlight { color: orange; }    /* Class */\n#title { color: red; }           /* ID */\n<p id=\"title\" class=\"highlight\" style=\"color: green;\">Text</p>\n/* Result: Text is green because inline style has highest precedence */"
+//   }
+// ]

@@ -21,6 +21,11 @@ const topicFiles: Record<string, Record<string, string>> = {
 	html5: "HTML5.json",
 	accessibility: "Accessibility.json"
   },
+  css: {
+    introduction: "Introduction.json",
+    "box-model": "Box_Model.json",
+    specificity: "Specificity.json"
+  }
 };
 
 export default async function TopicPage({
