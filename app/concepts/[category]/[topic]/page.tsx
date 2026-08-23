@@ -31,7 +31,9 @@ const topicFiles: Record<string, Record<string, string>> = {
     grid: "Grid.json",
     "responsive-design": "Responsive_Design.json",
     units: "Units.json",
-    position_element: "Positioning_Elements.json"
+    "position-element": "Positioning_Elements.json",
+    "transitions-animations": "Transitions_&_Animations.json"
+
   }
 };
 

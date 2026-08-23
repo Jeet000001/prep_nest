@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "question": "What is the difference between CSS transitions and animations?",
+    "answer": "Transitions and animations both create motion effects in CSS, but they work differently. A transition smoothly changes a property's value from one state to another over a duration, but it only runs when triggered by something like :hover, :focus, or a class change (it needs a trigger and has only a start and end state). An animation uses @keyframes to define multiple stages of change, can run automatically without any trigger, can repeat infinitely, and gives much more control over the motion (multiple steps, direction, delay, iteration count, etc.).",
+    "code": null
+  },
+  {
+    "id": 2,
+    "question": "What is the transition property and its sub-properties?",
+    "answer": "The transition property in CSS is used to animate changes in a property's value smoothly instead of changing instantly. It is a shorthand for four sub-properties: 1) transition-property - which CSS property to animate (e.g., background-color, all), 2) transition-duration - how long the transition takes (e.g., 0.3s), 3) transition-timing-function - the speed curve of the animation (e.g., ease, linear, ease-in-out), and 4) transition-delay - how long to wait before starting the transition.",
+    "code": "button {\n  background-color: blue;\n  transition-property: background-color;\n  transition-duration: 0.3s;\n  transition-timing-function: ease-in-out;\n  transition-delay: 0s;\n\n  /* Shorthand version */\n  transition: background-color 0.3s ease-in-out 0s;\n}\n\nbutton:hover {\n  background-color: red;\n}"
+  },
+  {
+    "id": 3,
+    "question": "What are @keyframes used for?",
+    "answer": "@keyframes is used to define the steps of a CSS animation. It lets you specify what styles an element should have at different points in time during the animation, using percentages (0% to 100%) or the keywords 'from' and 'to'. Once defined, the @keyframes rule is applied to an element using the animation property. This gives much more control than transitions because you can define multiple in-between states, not just a start and end.",
+    "code": "@keyframes slideIn {\n  0% {\n    transform: translateX(-100%);\n    opacity: 0;\n  }\n  50% {\n    opacity: 0.5;\n  }\n  100% {\n    transform: translateX(0);\n    opacity: 1;\n  }\n}\n\n.box {\n  animation: slideIn 1s ease-in-out;\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between transform and transition?",
+    "answer": "transform and transition serve completely different purposes and are often used together. transform is a property used to visually change an element's appearance in space, such as moving, rotating, scaling, or skewing it (e.g., translate, rotate, scale). transition, on the other hand, is used to control how smoothly a property change happens over time. In simple words, transform decides WHAT change happens, while transition decides HOW SMOOTHLY that change happens.",
+    "code": "/* transform: what changes */\n.box {\n  transform: scale(1);\n}\n\n.box:hover {\n  transform: scale(1.2); /* the actual change */\n}\n\n/* transition: how smoothly it changes */\n.box {\n  transition: transform 0.3s ease;\n}"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between transform: translate() and changing top/left?",
+    "answer": "Both can be used to move an element, but they work very differently internally. Changing top/left affects the element's actual position in the document layout, which forces the browser to recalculate layout (reflow) and can also trigger repaint for other elements. transform: translate() moves the element visually without changing its position in the normal document flow, and it does not trigger layout recalculation. Because of this, translate() is much more efficient, especially for animations.",
+    "code": "/* Less efficient: triggers layout recalculation */\n.box {\n  position: relative;\n  top: 0;\n  left: 0;\n  transition: top 0.3s, left 0.3s;\n}\n.box:hover {\n  top: 20px;\n  left: 20px;\n}\n\n/* More efficient: no layout recalculation */\n.box {\n  transition: transform 0.3s;\n}\n.box:hover {\n  transform: translate(20px, 20px);\n}"
+  },
+  {
+    "id": 6,
+    "question": "Why is transform preferred over changing top/left for animations (performance)?",
+    "answer": "transform (and opacity) is preferred for animations because it can be handled directly by the browser's compositor on the GPU, without needing to recalculate layout (reflow) or repaint the rest of the page. Changing properties like top, left, width, or height forces the browser to recalculate the layout of the page and repaint elements, which is expensive and can cause janky, slow animations, especially on complex pages or low-end devices. Using transform (and opacity) results in smoother, more performant 60fps animations.",
+    "code": null
+  }
+]
