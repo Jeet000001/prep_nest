@@ -33,7 +33,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     units: "Units.json",
     "position-element": "Positioning_Elements.json",
     "transitions-animations": "Transitions_&_Animations.json",
-    "pseudo-classes": "Pseudo_Classes.json"
+    "pseudo-classes": "Pseudo_Classes.json",
+    "css-variables": "CSS_Variables.json",
 
   }
 };
@@ -78,7 +79,7 @@ export default async function TopicPage({
         {questions.map((item) => (
           <article
             key={item.id}
-            className="rounded-xl border border-white/10 bg-white/[0.03] p-4"
+            className="rounded-xl border border-white/10 bg-white/3 p-4"
           >
             <h2 className="text-lg font-medium text-white">{item.question}</h2>
             <p className="mt-3 whitespace-pre-line text-sm leading-7 text-neutral-400">

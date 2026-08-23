@@ -52,14 +52,21 @@ const topicGroups: TopicGroup[] = [
       { name: "Box Model", href: "/concepts/css/box-model" },
       { name: "Specificity", href: "/concepts/css/specificity" },
       { name: "Position", href: "/concepts/css/position" },
-      { name: "Display & Visibility", href: "/concepts/css/display-visibility" },
+      {
+        name: "Display & Visibility",
+        href: "/concepts/css/display-visibility",
+      },
       { name: "Flexbox", href: "/concepts/css/flexbox" },
       { name: "Grid", href: "/concepts/css/grid" },
       { name: "Responsive Design", href: "/concepts/css/responsive-design" },
       { name: "Units", href: "/concepts/css/units" },
       { name: "Positioning Element", href: "/concepts/css/position_element" },
-      { name: "Transitions Animations", href: "/concepts/css/transitions-animations" },
+      {
+        name: "Transitions Animations",
+        href: "/concepts/css/transitions-animations",
+      },
       { name: "Pseudo Classes", href: "/concepts/css/pseudo-classes" },
+      { name: "CSS Variables", href: "/concepts/css/css-variables" },
     ],
   },
 

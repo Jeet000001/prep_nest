@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "question": "What are CSS variables (custom properties)?",
+    "answer": "CSS variables, also called custom properties, allow you to store reusable values (like colors, sizes, or fonts) in one place and use them throughout your stylesheet. They start with two dashes (--) and are defined inside a selector, usually :root for global use. The main benefits are: 1) Easy maintenance (change value in one place, updates everywhere), 2) Reusability across the stylesheet, 3) They can be changed dynamically using JavaScript, and 4) They support inheritance and can be overridden at different levels (unlike SASS variables).",
+    "code": null
+  },
+  {
+    "id": 2,
+    "question": "How do you declare and use a CSS variable?",
+    "answer": "A CSS variable is declared using two hyphens (--) followed by the variable name and a value, usually inside the :root selector so it's available globally. To use the variable anywhere in the stylesheet, the var() function is used, with an optional second argument as a fallback value if the variable is not defined.",
+    "code": ":root {\n  --primary-color: #3498db;\n  --font-size-base: 16px;\n}\n\nbutton {\n  background-color: var(--primary-color);\n  font-size: var(--font-size-base);\n}\n\n/* Using a fallback value */\np {\n  color: var(--text-color, black);\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is the scope of a CSS variable?",
+    "answer": "CSS variables follow the normal CSS cascade and inheritance rules, so their scope depends on where they are declared. If declared inside :root, the variable becomes globally available to the entire document. If declared inside a specific selector (like a class or a component), the variable is scoped only to that element and its children (local scope). A variable declared in a child selector can also override the value inherited from a parent, without affecting the global value.",
+    "code": ":root {\n  --text-color: black;\n}\n\n.dark-box {\n  --text-color: white; /* overrides only inside .dark-box */\n  background-color: #222;\n}\n\np {\n  color: var(--text-color);\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between CSS variables and SASS/LESS variables?",
+    "answer": "CSS variables are native to the browser and can be accessed and changed at runtime using JavaScript, which makes them dynamic. SASS/LESS variables are compile-time only, meaning they get converted into fixed values when the code is compiled to plain CSS, and cannot be changed after that. CSS variables also follow the cascade and inheritance, so their value can change based on scope (e.g., different values inside different elements), while SASS/LESS variables do not follow the cascade — they act more like a fixed find-and-replace before the CSS is generated. Because of this, CSS variables are better for things like theming (dark mode/light mode), while SASS/LESS variables are better for build-time logic like loops and calculations.",
+    "code": null
+  }
+]
