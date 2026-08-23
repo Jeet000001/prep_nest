@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "question": "What are vendor prefixes in CSS and why are they used?",
+    "answer": "Vendor prefixes are special keywords added before a CSS property to make it work in specific browsers before that property becomes a standard. Different browsers use different prefixes: -webkit- (Chrome, Safari, newer Opera), -moz- (Firefox), -ms- (Internet Explorer/Edge), and -o- (older Opera). They are used because when a new CSS feature is introduced, browsers implement it experimentally first, and the vendor prefix tells the browser to apply its own experimental version of that property. Once the feature becomes stable, it works without a prefix.",
+    "code": ".box {\n  display: -webkit-box;      /* old Safari/Chrome */\n  display: -ms-flexbox;      /* IE 10 */\n  display: flex;             /* standard */\n\n  -webkit-transform: rotate(20deg);\n  -moz-transform: rotate(20deg);\n  -ms-transform: rotate(20deg);\n  transform: rotate(20deg);\n}"
+  },
+  {
+    "id": 2,
+    "question": "How do you handle cross-browser compatibility issues in CSS?",
+    "answer": "Cross-browser compatibility means making sure a website looks and works the same across different browsers like Chrome, Firefox, Safari, and Edge. Some common ways to handle this are: 1) Use a CSS reset or normalize.css to remove default browser styling differences, 2) Add vendor prefixes for properties not fully supported everywhere, 3) Check property support on caniuse.com before using new CSS features, 4) Use Autoprefixer (a build tool) to automatically add vendor prefixes, 5) Test the website on multiple browsers and devices regularly, 6) Use feature queries like @supports to apply CSS only if a browser supports it, and 7) Avoid relying on browser-specific behavior and stick to well-supported CSS properties.",
+    "code": "/* Feature query example */\n@supports (display: grid) {\n  .container {\n    display: grid;\n  }\n}\n\n@supports not (display: grid) {\n  .container {\n    display: flex; /* fallback for older browsers */\n  }\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is normalize.css vs reset.css?",
+    "answer": "Both normalize.css and reset.css are used to handle inconsistent default styling that browsers apply to HTML elements, but they work differently. reset.css completely removes all default browser styling (margins, padding, font sizes, list styles, etc.), giving every element a blank/plain look, so you have to style everything from scratch. normalize.css does not remove default styles completely; instead, it makes default styling consistent across all browsers while still keeping useful default styles (like list bullets, bold on <strong>, etc.). Normalize.css is generally preferred nowadays because it requires less rewriting of basic styles and preserves sensible defaults.",
+    "code": "/* Example: reset.css style */\n* {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  list-style: none;\n}\n\n/* Example: normalize.css style (keeps useful defaults, just makes them consistent) */\nh1 {\n  font-size: 2em;\n  margin: 0.67em 0;\n}\nb, strong {\n  font-weight: bolder;\n}"
+  }
+]

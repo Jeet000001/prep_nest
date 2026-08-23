@@ -36,7 +36,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "pseudo-classes": "Pseudo_Classes.json",
     "css-variables": "CSS_Variables.json",
     preprocessors: "Preprocessors.json",
-    performance: "Performance.json"
+    performance: "Performance.json",
+    "browser-compatibility": "Browser_Compatibility.json"
 
   }
 };

@@ -69,6 +69,7 @@ const topicGroups: TopicGroup[] = [
       { name: "CSS Variables", href: "/concepts/css/css-variables" },
       { name: "Preprocessors", href: "/concepts/css/preprocessors" },
       { name: "Performance", href: "/concepts/css/performance" },
+      { name: "Browser Compatibility", href: "/concepts/css/browser-compatibility" },
     ],
   },
 
