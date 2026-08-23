@@ -52,7 +52,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Box Model", href: "/concepts/css/box-model" },
       { name: "Specificity", href: "/concepts/css/specificity" },
       { name: "Position", href: "/concepts/css/position" },
-      { name: "Display", href: "/concepts/css/display" },
+      { name: "Display & Visibility", href: "/concepts/css/display-visibility" },
       { name: "Flexbox", href: "/concepts/css/flexbox" },
       { name: "Grid", href: "/concepts/css/grid" },
       { name: "Responsive Design", href: "/concepts/css/responsive-design" },

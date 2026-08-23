@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "question": "What is the difference between display: none and visibility: hidden?",
+    "answer": "Both hide an element visually, but they behave differently. display: none completely removes the element from the page layout — it takes up no space, as if it doesn't exist in the DOM flow. visibility: hidden hides the element visually, but it still takes up its space in the layout (an empty gap remains). Also, child elements of a visibility: hidden parent can still be shown individually using visibility: visible, but this is not possible with display: none.",
+    "code": "<div class=\"box1\">Box 1</div>\n<div class=\"box2\">Box 2</div>\n<div class=\"box3\">Box 3</div>\n\n<style>\n.box2 {\n  display: none; /* Box 2 disappears completely, no space left */\n}\n.box3 {\n  visibility: hidden; /* Box 3 is invisible, but space is still reserved */\n}\n</style>"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between block, inline, and inline-block?",
+    "answer": "block: The element takes up the full width available, always starts on a new line, and width/height can be set (e.g., <div>, <p>, <h1>). inline: The element takes up only as much width as its content needs, does not start on a new line, and width/height properties do not work on it (e.g., <span>, <a>, <strong>). inline-block: A mix of both — it behaves like inline (sits in the same line as other elements) but width/height, margin, and padding can be set like a block element.",
+    "code": "<style>\n.block { display: block; width: 200px; background: lightblue; }\n.inline { display: inline; width: 200px; background: lightgreen; } /* width ignored */\n.inline-block { display: inline-block; width: 200px; background: lightpink; }\n</style>\n\n<span class=\"block\">Block</span>\n<span class=\"inline\">Inline</span>\n<span class=\"inline-block\">Inline-Block</span>"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between display: none and opacity: 0?",
+    "answer": "display: none completely removes the element from the layout — it takes no space, is not visible, and cannot be clicked or interacted with. opacity: 0 makes the element fully transparent (invisible to the eye), but it still occupies its space in the layout and remains clickable/interactable unless separately disabled with pointer-events: none. Also, opacity: 0 can be animated smoothly with transitions, while display: none cannot be animated (it toggles instantly).",
+    "code": "<style>\n.hidden-none {\n  display: none; /* no space, not clickable */\n}\n.hidden-opacity {\n  opacity: 0; /* space reserved, still clickable by default */\n  transition: opacity 0.3s; /* can be animated */\n}\n</style>"
+  },
+  {
+    "id": 4,
+    "question": "What does display: contents do?",
+    "answer": "display: contents makes an element's own box (its wrapper) disappear from the layout, but its children are still rendered as if they were direct children of the parent. This means the element itself has no visual presence — no box, no background, no padding/margin — but its children remain visible and behave as if the wrapping element wasn't there. It's often used when you want to group elements semantically in HTML but don't want that grouping to affect layout (e.g., in Flexbox or Grid).",
+    "code": "<div class=\"parent\" style=\"display:flex;\">\n  <div class=\"wrapper\" style=\"display: contents;\">\n    <span>Child 1</span>\n    <span>Child 2</span>\n  </div>\n</div>\n<!-- Here, .wrapper's own box disappears,\n     and Child 1 & Child 2 behave as direct flex items of .parent -->"
+  }
+]
