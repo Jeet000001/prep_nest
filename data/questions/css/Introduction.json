@@ -1,62 +1,62 @@
-// [
-//   {
-//     "id": 1,
-//     "question": "What is CSS and why is it used?",
-//     "answer": "CSS stands for Cascading Style Sheets. It is a stylesheet language used to describe the presentation and look of an HTML document. CSS is used to control colors, fonts, spacing, layout, and the overall visual appearance of a webpage, separating the design (style) from the structure (HTML). This makes websites more attractive, consistent, and easier to maintain.",
-//     "code": null
-//   },
-//   {
-//     "id": 2,
-//     "question": "What are the different ways to add CSS to an HTML document (inline, internal, external)?",
-//     "answer": "There are three ways to add CSS to HTML: 1) Inline CSS - written directly inside an HTML tag using the style attribute, used for quick single-element styling. 2) Internal CSS - written inside a <style> tag in the <head> section of the HTML file, used for styling a single page. 3) External CSS - written in a separate .css file and linked using the <link> tag, used for styling multiple pages and is the most maintainable approach.",
-//     "code": "<!-- Inline CSS -->\n<p style=\"color: red;\">Hello</p>\n\n<!-- Internal CSS -->\n<head>\n  <style>\n    p { color: red; }\n  </style>\n</head>\n\n<!-- External CSS -->\n<head>\n  <link rel=\"stylesheet\" href=\"style.css\">\n</head>"
-//   },
-//   {
-//     "id": 3,
-//     "question": "What is the difference between CSS and CSS3?",
-//     "answer": "CSS is the original styling language used to style HTML pages with basic features like colors, fonts, and layout. CSS3 is the latest version of CSS, which added many new and powerful features on top of the original CSS, such as animations, transitions, flexbox, grid, media queries, rounded corners (border-radius), shadows (box-shadow), and gradients. CSS3 is backward compatible with older CSS.",
-//     "code": null
-//   },
-//   {
-//     "id": 4,
-//     "question": "What are the different types of CSS selectors?",
-//     "answer": "CSS selectors are patterns used to select and style HTML elements. The main types are: 1) Element selector (selects by tag name), 2) Class selector (selects by class attribute using a dot), 3) ID selector (selects by id attribute using a hash), 4) Universal selector (selects all elements using *), 5) Attribute selector (selects elements based on an attribute), 6) Pseudo-class selector (selects elements based on state, like :hover), and 7) Pseudo-element selector (selects a part of an element, like ::before).",
-//     "code": "p { color: blue; }          /* Element selector */\n.title { font-size: 20px; } /* Class selector */\n#header { padding: 10px; }  /* ID selector */\n* { margin: 0; }             /* Universal selector */\ninput[type=\"text\"] { }       /* Attribute selector */\na:hover { color: red; }      /* Pseudo-class */\np::first-line { }            /* Pseudo-element */"
-//   },
-//   {
-//     "id": 5,
-//     "question": "What is the difference between class and id selectors?",
-//     "answer": "A class selector is used to select and style one or more elements that share the same class name, and it is written with a dot (.) before the name. An id selector is used to select a single unique element on the page, and it is written with a hash (#) before the name. A class can be reused on multiple elements, but an id should be unique and used only once per page. ID selectors also have higher specificity than class selectors.",
-//     "code": "/* Class - can be used multiple times */\n.card { border: 1px solid #ccc; }\n\n/* ID - should be unique on the page */\n#main-header { font-size: 24px; }"
-//   },
-//   {
-//     "id": 6,
-//     "question": "What is the difference between id, class, and element selectors in terms of specificity?",
-//     "answer": "Specificity determines which CSS rule is applied when multiple rules target the same element. From highest to lowest priority: ID selectors have the highest specificity, followed by class selectors (and attribute/pseudo-class selectors), and element (tag) selectors have the lowest specificity. So if the same property is set using an id, a class, and an element selector, the id selector's style will win.",
-//     "code": "p { color: blue; }        /* Specificity: 0-0-1 (lowest) */\n.text { color: green; }   /* Specificity: 0-1-0 */\n#para { color: red; }     /* Specificity: 1-0-0 (highest) */\n\n/* If all three target the same <p id=\"para\" class=\"text\">, \n   final color will be red, because ID has highest specificity */"
-//   },
-//   {
-//     "id": 7,
-//     "question": "What are pseudo-classes and pseudo-elements? Give examples.",
-//     "answer": "A pseudo-class is used to define a special state of an element, such as when a user hovers over it or when it is the first child. It is written with a single colon (:). Examples include :hover, :focus, :first-child, and :nth-child(). A pseudo-element is used to style a specific part of an element, such as the first letter or a piece of content added before/after an element. It is written with a double colon (::). Examples include ::before, ::after, and ::first-letter.",
-//     "code": "/* Pseudo-class - state based */\nbutton:hover {\n  background-color: blue;\n}\n\n/* Pseudo-element - part of an element */\np::first-letter {\n  font-size: 200%;\n}\n\n.box::before {\n  content: \"★\";\n}"
-//   },
-//   {
-//     "id": 8,
-//     "question": "What is the difference between :hover, :focus, and :active?",
-//     "answer": ":hover applies a style when the mouse pointer is placed over an element, without clicking. :focus applies a style when an element (usually a form input or link) is selected or focused, such as by clicking into it or navigating with the Tab key. :active applies a style during the moment an element is being clicked, that is, between the mouse button being pressed down and released.",
-//     "code": "a:hover {\n  color: orange; /* on mouse over */\n}\n\ninput:focus {\n  border-color: blue; /* when input is selected */\n}\n\nbutton:active {\n  transform: scale(0.95); /* while being clicked */\n}"
-//   },
-//   {
-//     "id": 9,
-//     "question": "What is the universal selector in CSS?",
-//     "answer": "The universal selector is represented by an asterisk (*) and it selects all elements on the page, regardless of their tag, class, or id. It is commonly used to apply a base style to every element, such as resetting margin and padding, or setting box-sizing to border-box for consistent layouts across browsers.",
-//     "code": "* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}"
-//   },
-//   {
-//     "id": 10,
-//     "question": "What are CSS comments and how do you write them?",
-//     "answer": "CSS comments are used to add notes or explanations within a CSS file that are ignored by the browser and not displayed on the webpage. They help developers document their code, explain complex sections, or temporarily disable a piece of CSS during testing. A CSS comment starts with /* and ends with */, and it can span multiple lines.",
-//     "code": "/* This is a single-line comment */\np {\n  color: red; /* sets text color to red */\n}\n\n/*\n  This is a\n  multi-line comment\n*/"
-//   }
-// ]
+[
+  {
+    "id": 1,
+    "question": "What is CSS and why is it used?",
+    "answer": "CSS stands for Cascading Style Sheets. It is a stylesheet language used to describe the presentation and look of an HTML document. CSS is used to control colors, fonts, spacing, layout, and the overall visual appearance of a webpage, separating the design (style) from the structure (HTML). This makes websites more attractive, consistent, and easier to maintain.",
+    "code": null
+  },
+  {
+    "id": 2,
+    "question": "What are the different ways to add CSS to an HTML document (inline, internal, external)?",
+    "answer": "There are three ways to add CSS to HTML: 1) Inline CSS - written directly inside an HTML tag using the style attribute, used for quick single-element styling. 2) Internal CSS - written inside a <style> tag in the <head> section of the HTML file, used for styling a single page. 3) External CSS - written in a separate .css file and linked using the <link> tag, used for styling multiple pages and is the most maintainable approach.",
+    "code": "<!-- Inline CSS -->\n<p style=\"color: red;\">Hello</p>\n\n<!-- Internal CSS -->\n<head>\n  <style>\n    p { color: red; }\n  </style>\n</head>\n\n<!-- External CSS -->\n<head>\n  <link rel=\"stylesheet\" href=\"style.css\">\n</head>"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between CSS and CSS3?",
+    "answer": "CSS is the original styling language used to style HTML pages with basic features like colors, fonts, and layout. CSS3 is the latest version of CSS, which added many new and powerful features on top of the original CSS, such as animations, transitions, flexbox, grid, media queries, rounded corners (border-radius), shadows (box-shadow), and gradients. CSS3 is backward compatible with older CSS.",
+    "code": null
+  },
+  {
+    "id": 4,
+    "question": "What are the different types of CSS selectors?",
+    "answer": "CSS selectors are patterns used to select and style HTML elements. The main types are: 1) Element selector (selects by tag name), 2) Class selector (selects by class attribute using a dot), 3) ID selector (selects by id attribute using a hash), 4) Universal selector (selects all elements using *), 5) Attribute selector (selects elements based on an attribute), 6) Pseudo-class selector (selects elements based on state, like :hover), and 7) Pseudo-element selector (selects a part of an element, like ::before).",
+    "code": "p { color: blue; }          /* Element selector */\n.title { font-size: 20px; } /* Class selector */\n#header { padding: 10px; }  /* ID selector */\n* { margin: 0; }             /* Universal selector */\ninput[type=\"text\"] { }       /* Attribute selector */\na:hover { color: red; }      /* Pseudo-class */\np::first-line { }            /* Pseudo-element */"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between class and id selectors?",
+    "answer": "A class selector is used to select and style one or more elements that share the same class name, and it is written with a dot (.) before the name. An id selector is used to select a single unique element on the page, and it is written with a hash (#) before the name. A class can be reused on multiple elements, but an id should be unique and used only once per page. ID selectors also have higher specificity than class selectors.",
+    "code": "/* Class - can be used multiple times */\n.card { border: 1px solid #ccc; }\n\n/* ID - should be unique on the page */\n#main-header { font-size: 24px; }"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between id, class, and element selectors in terms of specificity?",
+    "answer": "Specificity determines which CSS rule is applied when multiple rules target the same element. From highest to lowest priority: ID selectors have the highest specificity, followed by class selectors (and attribute/pseudo-class selectors), and element (tag) selectors have the lowest specificity. So if the same property is set using an id, a class, and an element selector, the id selector's style will win.",
+    "code": "p { color: blue; }        /* Specificity: 0-0-1 (lowest) */\n.text { color: green; }   /* Specificity: 0-1-0 */\n#para { color: red; }     /* Specificity: 1-0-0 (highest) */\n\n/* If all three target the same <p id=\"para\" class=\"text\">, \n   final color will be red, because ID has highest specificity */"
+  },
+  {
+    "id": 7,
+    "question": "What are pseudo-classes and pseudo-elements? Give examples.",
+    "answer": "A pseudo-class is used to define a special state of an element, such as when a user hovers over it or when it is the first child. It is written with a single colon (:). Examples include :hover, :focus, :first-child, and :nth-child(). A pseudo-element is used to style a specific part of an element, such as the first letter or a piece of content added before/after an element. It is written with a double colon (::). Examples include ::before, ::after, and ::first-letter.",
+    "code": "/* Pseudo-class - state based */\nbutton:hover {\n  background-color: blue;\n}\n\n/* Pseudo-element - part of an element */\np::first-letter {\n  font-size: 200%;\n}\n\n.box::before {\n  content: \"★\";\n}"
+  },
+  {
+    "id": 8,
+    "question": "What is the difference between :hover, :focus, and :active?",
+    "answer": ":hover applies a style when the mouse pointer is placed over an element, without clicking. :focus applies a style when an element (usually a form input or link) is selected or focused, such as by clicking into it or navigating with the Tab key. :active applies a style during the moment an element is being clicked, that is, between the mouse button being pressed down and released.",
+    "code": "a:hover {\n  color: orange; /* on mouse over */\n}\n\ninput:focus {\n  border-color: blue; /* when input is selected */\n}\n\nbutton:active {\n  transform: scale(0.95); /* while being clicked */\n}"
+  },
+  {
+    "id": 9,
+    "question": "What is the universal selector in CSS?",
+    "answer": "The universal selector is represented by an asterisk (*) and it selects all elements on the page, regardless of their tag, class, or id. It is commonly used to apply a base style to every element, such as resetting margin and padding, or setting box-sizing to border-box for consistent layouts across browsers.",
+    "code": "* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n}"
+  },
+  {
+    "id": 10,
+    "question": "What are CSS comments and how do you write them?",
+    "answer": "CSS comments are used to add notes or explanations within a CSS file that are ignored by the browser and not displayed on the webpage. They help developers document their code, explain complex sections, or temporarily disable a piece of CSS during testing. A CSS comment starts with /* and ends with */, and it can span multiple lines.",
+    "code": "/* This is a single-line comment */\np {\n  color: red; /* sets text color to red */\n}\n\n/*\n  This is a\n  multi-line comment\n*/"
+  }
+]
