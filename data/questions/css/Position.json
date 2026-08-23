@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "question": "What are the different values of the position property?",
+    "answer": "The position property in CSS defines how an element is positioned in the document. The main values are: 1) static - default value, element follows normal document flow, 2) relative - positioned relative to its normal position, 3) absolute - positioned relative to the nearest positioned ancestor, 4) fixed - positioned relative to the browser viewport and stays fixed even on scroll, and 5) sticky - toggles between relative and fixed based on the scroll position.",
+    "code": "div {\n  position: static;   /* default */\n}\ndiv {\n  position: relative;\n}\ndiv {\n  position: absolute;\n}\ndiv {\n  position: fixed;\n}\ndiv {\n  position: sticky;\n}"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between relative, absolute, fixed, and sticky positioning?",
+    "answer": "relative: the element is positioned relative to its own normal position, and it still occupies space in the document flow. absolute: the element is removed from the normal flow and positioned relative to its nearest ancestor that has position other than static (if none exists, it's positioned relative to the document). fixed: the element is removed from the normal flow and positioned relative to the browser viewport, so it stays in the same place even when the page is scrolled. sticky: the element behaves like relative until a defined scroll point is reached, then it behaves like fixed, sticking to that position.",
+    "code": "/* relative - shifts from its own position */\n.relative-box {\n  position: relative;\n  top: 10px;\n  left: 20px;\n}\n\n/* absolute - positioned relative to nearest positioned parent */\n.parent {\n  position: relative;\n}\n.absolute-box {\n  position: absolute;\n  top: 0;\n  right: 0;\n}\n\n/* fixed - stays fixed on scroll */\n.fixed-box {\n  position: fixed;\n  bottom: 10px;\n  right: 10px;\n}\n\n/* sticky - sticks after scrolling past top: 0 */\n.sticky-box {\n  position: sticky;\n  top: 0;\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is the z-index property and how does stacking context work?",
+    "answer": "The z-index property controls the stacking order of elements that overlap each other along the z-axis (front to back). An element with a higher z-index value appears in front of an element with a lower value. z-index only works on elements that have a position value other than static (relative, absolute, fixed, or sticky). Stacking context is a conceptual layer in which elements are grouped together and their z-index values are compared only within that group, not globally. A new stacking context is created by certain properties like position with z-index, opacity less than 1, transform, and a few others, and elements inside one stacking context cannot be placed behind or in front of elements in another stacking context except as a whole group.",
+    "code": ".box1 {\n  position: absolute;\n  z-index: 1;\n}\n.box2 {\n  position: absolute;\n  z-index: 2;   /* box2 appears above box1 */\n}\n\n/* Creating a new stacking context */\n.parent {\n  position: relative;\n  z-index: 1;   /* creates a stacking context */\n}\n.child {\n  position: absolute;\n  z-index: 9999;  /* still limited within .parent's stacking context */\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between static and relative positioning?",
+    "answer": "static is the default position value, where the element follows the normal document flow and properties like top, left, right, and bottom have no effect on it. relative is similar to static in that the element still takes up space in the normal flow, but you can shift its position using top, left, right, and bottom properties relative to where it would normally be. Also, relative positioning allows the element to become a reference point for any absolutely positioned child elements, while static does not.",
+    "code": "/* static - top/left has no effect */\n.static-box {\n  position: static;\n  top: 20px;  /* ignored */\n}\n\n/* relative - top/left shifts it from its normal position */\n.relative-box {\n  position: relative;\n  top: 20px;\n  left: 10px;\n}"
+  },
+  {
+    "id": 5,
+    "question": "How does position: sticky work?",
+    "answer": "position: sticky makes an element act like relative positioning until the page is scrolled to a specified threshold (defined using top, bottom, left, or right), after which it behaves like fixed positioning and sticks to that position within its parent container. Once the user scrolls past the parent element's boundary, the sticky element scrolls away along with its parent. It is commonly used for sticky headers, table headers, or sidebar navigation.",
+    "code": "nav {\n  position: sticky;\n  top: 0;\n  background: white;\n  z-index: 10;\n}\n\n/* nav stays at top: 0 once you scroll to it,\n   and scrolls away once its parent container ends */"
+  },
+  {
+    "id": 6,
+    "question": "What is a stacking context in CSS?",
+    "answer": "A stacking context is a three-dimensional grouping of elements based on their z-axis stacking order. It is formed by an element that has certain properties, such as position (relative, absolute, fixed, sticky) combined with a z-index value other than auto, an opacity less than 1, or a transform property. Once a stacking context is created, all child elements are stacked relative to each other within that context, and this entire group is treated as a single unit when compared with elements outside the context. This is why setting a very high z-index on a child sometimes still doesn't make it appear above an element outside its parent's stacking context.",
+    "code": "/* .parent creates a new stacking context because of position + z-index */\n.parent {\n  position: relative;\n  z-index: 1;\n}\n\n/* .child z-index only matters within .parent's stacking context */\n.child {\n  position: absolute;\n  z-index: 999;\n}\n\n/* .sibling is outside .parent, so it compares stacking\n   at the same level as .parent, not .child */\n.sibling {\n  position: relative;\n  z-index: 2;  /* can appear above .parent even though .child has z-index: 999 */\n}"
+  }
+]

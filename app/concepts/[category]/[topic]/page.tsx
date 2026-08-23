@@ -24,7 +24,8 @@ const topicFiles: Record<string, Record<string, string>> = {
   css: {
     introduction: "Introduction.json",
     "box-model": "Box_Model.json",
-    specificity: "Specificity.json"
+    specificity: "Specificity.json",
+    position: "Position.json"
   }
 };
 
