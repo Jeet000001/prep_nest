@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What is responsive web design?",
+    "answer": "Responsive web design is an approach to building websites so that they look and work well on all screen sizes — mobile, tablet, and desktop. Instead of creating separate websites for each device, we use flexible layouts, flexible images, and media queries so the same website automatically adjusts itself based on the screen size. The main goal is to give users a good experience no matter what device they are using.",
+    "code": null
+  },
+  {
+    "id": 2,
+    "question": "What are media queries and how do you use them?",
+    "answer": "Media queries are a CSS feature that let us apply different styles based on conditions like screen width, height, orientation, or device type. They are the main tool used to build responsive websites. We write a media query using the @media rule, followed by a condition, and inside it we put the CSS rules that should apply only when that condition is true.",
+    "code": "/* Apply styles when screen width is 768px or less */\n@media (max-width: 768px) {\n  body {\n    background-color: lightblue;\n  }\n  .container {\n    flex-direction: column;\n  }\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between min-width and max-width in media queries?",
+    "answer": "min-width applies the styles when the screen width is equal to or greater than the given value — it is used for a 'from this size upward' condition. max-width applies the styles when the screen width is equal to or smaller than the given value — it is used for a 'up to this size' condition. min-width is commonly used in the mobile-first approach, and max-width is commonly used in the desktop-first approach.",
+    "code": "/* min-width: applies from 600px and above (mobile-first) */\n@media (min-width: 600px) {\n  .container {\n    display: flex;\n  }\n}\n\n/* max-width: applies up to 600px (desktop-first) */\n@media (max-width: 600px) {\n  .container {\n    display: block;\n  }\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is the mobile-first approach in CSS?",
+    "answer": "Mobile-first is a design approach where we write the base CSS for small screens (mobile) first, and then use min-width media queries to add or override styles for larger screens like tablets and desktops. This approach is preferred because most users browse on mobile devices, it keeps the base CSS simple and lightweight, and it forces developers to focus on the essential content first before adding extra styling for bigger screens.",
+    "code": "/* Base styles for mobile (default) */\n.container {\n  display: block;\n  padding: 10px;\n}\n\n/* Styles for tablet and above */\n@media (min-width: 768px) {\n  .container {\n    display: flex;\n    padding: 20px;\n  }\n}\n\n/* Styles for desktop and above */\n@media (min-width: 1024px) {\n  .container {\n    padding: 40px;\n  }\n}"
+  },
+  {
+    "id": 5,
+    "question": "What are viewport units (vw, vh, vmin, vmax)?",
+    "answer": "Viewport units are CSS units that are relative to the size of the browser's viewport (visible screen area). vw stands for viewport width — 1vw equals 1% of the viewport's width. vh stands for viewport height — 1vh equals 1% of the viewport's height. vmin gives the smaller value between vw and vh at any moment. vmax gives the larger value between vw and vh at any moment. These units are very useful for creating fully responsive layouts, full-screen sections, and responsive font sizes.",
+    "code": "/* Full screen section */\n.hero {\n  width: 100vw;\n  height: 100vh;\n}\n\n/* Responsive font size */\n.title {\n  font-size: 5vw;\n}\n\n/* Square that fits smaller dimension */\n.box {\n  width: 50vmin;\n  height: 50vmin;\n}"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between relative units (em, rem, %) and absolute units (px)?",
+    "answer": "Absolute units like px (pixel) have a fixed size that does not change based on any parent element or root setting — 1px always stays the same size. Relative units like em, rem, and % are flexible and their actual size depends on something else: em depends on the font-size of its parent element, rem depends on the font-size of the root (html) element, and % depends on the parent element's size. Relative units are preferred for responsive design because they scale automatically, while px is better when we need a fixed, exact size (like a 1px border).",
+    "code": "/* Absolute unit - always 16px, never changes */\np {\n  font-size: 16px;\n}\n\n/* Relative units - scale based on parent/root */\n.parent {\n  font-size: 20px;\n}\n.child {\n  font-size: 1.5em; /* = 30px, relative to parent (20px) */\n}\nhtml {\n  font-size: 16px;\n}\n.text {\n  font-size: 2rem; /* = 32px, always relative to root */\n}"
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between em and rem?",
+    "answer": "Both em and rem are relative units used for sizing, but they are relative to different things. em is relative to the font-size of its own parent element, so if elements are nested, the size can multiply and become unpredictable. rem is relative only to the font-size of the root (html) element, so its value stays consistent everywhere in the document, no matter how deeply nested the element is. Because of this, rem is generally preferred for font sizes and spacing in modern CSS, as it gives more predictable and easier-to-manage results.",
+    "code": "html {\n  font-size: 16px; /* root font-size */\n}\n\n.parent {\n  font-size: 20px;\n}\n\n.child-em {\n  font-size: 1.5em; /* 1.5 x 20px (parent) = 30px */\n}\n\n.child-rem {\n  font-size: 1.5rem; /* 1.5 x 16px (root) = 24px, always consistent */\n}"
+  }
+]
