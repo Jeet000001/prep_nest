@@ -59,6 +59,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Units", href: "/concepts/css/units" },
       { name: "Positioning Element", href: "/concepts/css/position_element" },
       { name: "Transitions Animations", href: "/concepts/css/transitions-animations" },
+      { name: "Pseudo Classes", href: "/concepts/css/pseudo-classes" },
     ],
   },
 

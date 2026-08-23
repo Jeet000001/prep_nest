@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "question": "What is the difference between ::before and ::after?",
+    "answer": "::before and ::after are pseudo-elements used to insert content before or after the actual content of an element, without adding extra HTML. ::before inserts content right at the start of the element's content, and ::after inserts content right at the end. Both require the 'content' property to work (even if empty). They are commonly used for adding icons, decorative elements, tooltips, or clearing floats without modifying the HTML structure.",
+    "code": "p::before {\n  content: \"→ \";\n  color: blue;\n}\n\np::after {\n  content: \" ←\";\n  color: red;\n}\n\n/* <p>Hello</p> will visually show: → Hello ← */"
+  },
+  {
+    "id": 2,
+    "question": "What is :nth-child() and how is it used?",
+    "answer": "The :nth-child() pseudo-class selects one or more elements based on their position among sibling elements, regardless of the element type. It accepts a number, a keyword (odd/even), or a formula (like 2n, 3n+1). It's commonly used to style alternating rows in a table, apply zebra striping to lists, or target specific items in a repeated set of elements.",
+    "code": "li:nth-child(2) {\n  color: red; /* selects the 2nd li */\n}\n\nli:nth-child(odd) {\n  background: #f2f2f2; /* selects 1st, 3rd, 5th... */\n}\n\nli:nth-child(3n) {\n  font-weight: bold; /* selects every 3rd li */\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between :first-child and :first-of-type?",
+    "answer": ":first-child selects an element only if it is the very first child of its parent, regardless of its tag type. If any other element comes before it, it won't match. :first-of-type selects the first occurrence of a specific tag type among its siblings, even if other different elements come before it. This makes :first-of-type more flexible when the parent contains a mix of different tags.",
+    "code": "<div>\n  <h2>Title</h2>\n  <p>First paragraph</p>\n  <p>Second paragraph</p>\n</div>\n\n/* This will NOT select the first <p> because h2 is the actual first child */\np:first-child { color: red; }\n\n/* This WILL select the first <p>, since it's the first p-type element */\np:first-of-type { color: blue; }"
+  },
+  {
+    "id": 4,
+    "question": "What is :not() selector used for?",
+    "answer": "The :not() pseudo-class is used to select elements that do NOT match a given selector. It's useful when you want to apply a style to all elements except a specific one, without needing extra classes. It can also be combined with other selectors and pseudo-classes for more precise targeting.",
+    "code": "/* Style all buttons except the one with class 'disabled' */\nbutton:not(.disabled) {\n  background: green;\n  cursor: pointer;\n}\n\n/* Style all list items except the last one */\nli:not(:last-child) {\n  border-bottom: 1px solid #ccc;\n}"
+  }
+]
