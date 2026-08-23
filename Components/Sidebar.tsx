@@ -68,6 +68,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Pseudo Classes", href: "/concepts/css/pseudo-classes" },
       { name: "CSS Variables", href: "/concepts/css/css-variables" },
       { name: "Preprocessors", href: "/concepts/css/preprocessors" },
+      { name: "Performance", href: "/concepts/css/performance" },
     ],
   },
 

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "question": "How can you optimize CSS for better performance?",
+    "answer": "CSS performance can be improved by following some best practices: 1) Minify and compress CSS files to reduce file size, 2) Combine multiple CSS files into one to reduce HTTP requests, 3) Avoid deeply nested selectors and overly specific selectors, 4) Use shorthand properties (like 'margin' instead of separate top/right/bottom/left), 5) Remove unused CSS (dead code), 6) Load only critical CSS first and defer the rest, 7) Avoid using '@import' as it blocks parallel downloading, 8) Use CSS animations/transforms instead of JavaScript for animations, and 9) Use a Content Delivery Network (CDN) to serve CSS faster.",
+    "code": "/* Bad: too specific and nested */\nbody div.container ul li a.link {\n  color: blue;\n}\n\n/* Good: simple and reusable */\n.link {\n  color: blue;\n}"
+  },
+  {
+    "id": 2,
+    "question": "What is critical CSS?",
+    "answer": "Critical CSS is the minimal set of CSS required to render the visible part of a webpage (above-the-fold content) as fast as possible. Instead of waiting for the entire CSS file to load, critical CSS is placed directly inside a <style> tag in the <head> of the HTML, so the browser can render the initial view immediately. The rest of the non-critical CSS is loaded later (asynchronously), which improves page load speed and the user's first impression.",
+    "code": "<head>\n  <!-- Critical CSS inlined for fast first paint -->\n  <style>\n    header { background: #333; color: #fff; padding: 10px; }\n    h1 { font-size: 24px; }\n  </style>\n\n  <!-- Non-critical CSS loaded later -->\n  <link rel=\"preload\" href=\"styles.css\" as=\"style\" onload=\"this.rel='stylesheet'\">\n</head>"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between inline CSS, internal CSS, and external CSS in terms of performance?",
+    "answer": "Inline CSS is written directly on an HTML element using the 'style' attribute. It loads fastest for that single element but is not reusable and makes HTML heavy if used a lot. Internal CSS is written inside a <style> tag in the <head> of the HTML file. It applies only to that page and adds to the page's file size, but avoids an extra HTTP request. External CSS is written in a separate .css file and linked using <link>. It is the best choice for performance on multi-page websites because the browser caches the file, so it only downloads once and is reused across pages, reducing load time on subsequent visits.",
+    "code": "<!-- Inline CSS -->\n<p style=\"color: red;\">Hello</p>\n\n<!-- Internal CSS -->\n<head>\n  <style>\n    p { color: red; }\n  </style>\n</head>\n\n<!-- External CSS (best for performance/caching) -->\n<head>\n  <link rel=\"stylesheet\" href=\"styles.css\">\n</head>"
+  },
+  {
+    "id": 4,
+    "question": "Why should you avoid using @import in CSS files?",
+    "answer": "The '@import' rule is used to import one CSS file into another. It should be avoided because: 1) It blocks parallel downloading — the browser has to download the main CSS file first, discover the '@import' rule, and then download the imported file, which slows down page rendering, 2) It increases page load time compared to using multiple <link> tags which download in parallel, and 3) It can cause a 'flash of unstyled content' (FOUC) since styles load later than expected. Using multiple <link> tags in the HTML <head> is the recommended and faster alternative.",
+    "code": "/* Avoid: blocks parallel loading */\n@import url('base.css');\n@import url('layout.css');\n\n<!-- Better: use link tags, they load in parallel -->\n<link rel=\"stylesheet\" href=\"base.css\">\n<link rel=\"stylesheet\" href=\"layout.css\">"
+  },
+  {
+    "id": 5,
+    "question": "What is CSS specificity war and how do you avoid it?",
+    "answer": "A 'specificity war' happens when developers keep adding more specific selectors or using '!important' repeatedly to override existing styles, which makes the CSS messy, hard to maintain, and unpredictable. To avoid it: 1) Keep selectors simple and flat instead of deeply nested, 2) Avoid using '!important' unless absolutely necessary, 3) Use a consistent naming convention like BEM to reduce the need for high-specificity selectors, 4) Avoid styling based on IDs (since IDs have very high specificity), and 5) Organize CSS in a structured, layered way (like base styles, components, utilities) so overrides are predictable.",
+    "code": "/* Bad: specificity war */\n#header .nav ul li a { color: blue !important; }\n.nav a { color: red !important; }\n\n/* Good: simple, low specificity, easy to override */\n.nav-link { color: blue; }"
+  },
+  {
+    "id": 6,
+    "question": "What is BEM (Block Element Modifier) methodology?",
+    "answer": "BEM stands for Block, Element, Modifier. It is a CSS naming convention that helps write clean, reusable, and maintainable CSS by keeping class names structured and predictable. 'Block' is a standalone, reusable component (like 'card'). 'Element' is a part of the block that has no meaning on its own, written as 'block__element' (like 'card__title'). 'Modifier' represents a different state or version of a block/element, written as 'block--modifier' (like 'card--active'). BEM avoids deeply nested selectors, reduces specificity conflicts, and makes it clear from the class name alone what a piece of CSS does.",
+    "code": "<!-- HTML using BEM -->\n<div class=\"card card--active\">\n  <h2 class=\"card__title\">Title</h2>\n  <p class=\"card__description\">Description text</p>\n</div>\n\n/* CSS using BEM */\n.card { border: 1px solid #ccc; padding: 16px; }\n.card__title { font-size: 18px; font-weight: bold; }\n.card__description { color: #666; }\n.card--active { border-color: blue; }"
+  }
+]

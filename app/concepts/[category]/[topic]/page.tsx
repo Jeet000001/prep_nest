@@ -35,7 +35,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "transitions-animations": "Transitions_&_Animations.json",
     "pseudo-classes": "Pseudo_Classes.json",
     "css-variables": "CSS_Variables.json",
-    preprocessors: "Preprocessors.json"
+    preprocessors: "Preprocessors.json",
+    performance: "Performance.json"
 
   }
 };
