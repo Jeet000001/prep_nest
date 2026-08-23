@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "question": "What is Flexbox and why is it used?",
+    "answer": "Flexbox (Flexible Box Layout) is a one-dimensional CSS layout model used to arrange items in a row or column inside a container. It is used because it makes it very easy to align, distribute space, and reorder elements without using floats or manual positioning. It automatically adjusts item sizes to fit the available space, which is very helpful for building responsive layouts and for centering elements (which used to be difficult in traditional CSS).",
+    "code": ".container {\n  display: flex;\n}"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between justify-content and align-items?",
+    "answer": "justify-content controls the alignment of flex items along the main axis (horizontally, if flex-direction is row). align-items controls the alignment of flex items along the cross axis (vertically, if flex-direction is row). In short: justify-content = main axis alignment, align-items = cross axis alignment.",
+    "code": ".container {\n  display: flex;\n  justify-content: center; /* aligns items horizontally */\n  align-items: center;     /* aligns items vertically */\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between align-items and align-content?",
+    "answer": "align-items aligns individual flex items along the cross axis within a single line. align-content aligns multiple lines of flex items (when flex-wrap: wrap is used) along the cross axis, controlling the space between the lines. align-content has no effect if there is only one line of items.",
+    "code": ".container {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;    /* aligns items within each line */\n  align-content: space-between; /* aligns the lines themselves */\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is flex-grow, flex-shrink, and flex-basis?",
+    "answer": "flex-grow defines how much a flex item should grow relative to other items when there is extra space in the container (default is 0, meaning it won't grow). flex-shrink defines how much a flex item should shrink relative to other items when there is not enough space (default is 1, meaning it will shrink). flex-basis defines the initial/default size of a flex item before extra space is distributed (default is auto). These three are often combined using the shorthand 'flex' property, like flex: 1 1 100px.",
+    "code": ".item {\n  flex-grow: 1;\n  flex-shrink: 1;\n  flex-basis: 200px;\n}\n\n/* shorthand */\n.item {\n  flex: 1 1 200px;\n}"
+  },
+  {
+    "id": 5,
+    "question": "How do you center an element both vertically and horizontally using Flexbox?",
+    "answer": "You can center an element both vertically and horizontally by setting display: flex on the parent container, then using justify-content: center to center horizontally and align-items: center to center vertically. This is one of the most common Flexbox interview questions and a very popular real-world use case.",
+    "code": ".container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100vh;\n}"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between flex-direction: row and column?",
+    "answer": "flex-direction: row arranges flex items horizontally, left to right (this is the default value), making the main axis horizontal. flex-direction: column arranges flex items vertically, top to bottom, making the main axis vertical. This changes how justify-content and align-items behave, since the main axis and cross axis get swapped.",
+    "code": ".row {\n  display: flex;\n  flex-direction: row; /* items side by side */\n}\n\n.column {\n  display: flex;\n  flex-direction: column; /* items stacked vertically */\n}"
+  },
+  {
+    "id": 7,
+    "question": "What does the flex-wrap property do?",
+    "answer": "By default, flex items try to fit into a single line, shrinking if necessary. The flex-wrap property allows items to wrap onto multiple lines if they don't fit in the container. Common values are nowrap (default, all items on one line), wrap (items wrap to the next line), and wrap-reverse (items wrap onto multiple lines in reverse order).",
+    "code": ".container {\n  display: flex;\n  flex-wrap: wrap;\n}"
+  },
+  {
+    "id": 8,
+    "question": "What is the difference between Flexbox and Grid?",
+    "answer": "Flexbox is a one-dimensional layout system, meaning it lays out items in either a row or a column at a time. It is best suited for aligning items within a component, like a navbar or a card layout. CSS Grid is a two-dimensional layout system, meaning it can handle rows and columns at the same time. It is best suited for designing the overall page layout with complex structures. In short: use Flexbox for one-dimensional layouts and Grid for two-dimensional layouts.",
+    "code": "/* Flexbox: one direction at a time */\n.flex-container {\n  display: flex;\n}\n\n/* Grid: rows and columns together */\n.grid-container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  grid-template-rows: auto auto;\n}"
+  }
+]

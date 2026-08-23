@@ -26,7 +26,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "box-model": "Box_Model.json",
     specificity: "Specificity.json",
     position: "Position.json",
-    "display-visibility": "Display_&_Visibility.json"
+    "display-visibility": "Display_&_Visibility.json",
+    flexbox: "Flexbox.json"
   }
 };
 
