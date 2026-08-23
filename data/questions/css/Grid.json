@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What is CSS Grid and how is it different from Flexbox?",
+    "answer": "CSS Grid is a two-dimensional layout system that lets you control both rows and columns at the same time. Flexbox is a one-dimensional layout system that arranges items in a single row or column at a time. Grid is best for building the overall page layout (like header, sidebar, content, footer), while Flexbox is best for aligning items within a component (like a navbar or a card). In real projects, Grid and Flexbox are often used together.",
+    "code": "/* Grid - 2D layout */\n.container {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  grid-template-rows: auto auto;\n}\n\n/* Flexbox - 1D layout */\n.navbar {\n  display: flex;\n  justify-content: space-between;\n}"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between grid-template-columns and grid-template-rows?",
+    "answer": "grid-template-columns defines the number and width of columns in a grid layout. grid-template-rows defines the number and height of rows in a grid layout. Both are used together to define the overall structure of the grid.",
+    "code": ".container {\n  display: grid;\n  grid-template-columns: 100px 200px 1fr; /* 3 columns */\n  grid-template-rows: 80px auto 60px;     /* 3 rows */\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is grid-gap / gap property?",
+    "answer": "The gap property (previously called grid-gap) is used to set spacing between rows and columns in a grid container. It replaces the need for margins on individual grid items. You can set row and column gap separately using row-gap and column-gap, or set both at once using gap.",
+    "code": ".container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr);\n  gap: 20px;          /* same gap for rows and columns */\n  /* OR */\n  row-gap: 10px;\n  column-gap: 20px;\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between fr unit and % in Grid?",
+    "answer": "The fr unit (fraction unit) is specific to CSS Grid and represents a fraction of the available free space in the grid container, after accounting for gaps and fixed-size tracks. Percentage (%) is relative to the size of the parent container and does not automatically account for gaps. fr is generally easier and more flexible for creating responsive grid layouts because it distributes remaining space proportionally.",
+    "code": ".container {\n  display: grid;\n  grid-template-columns: 1fr 2fr 1fr; /* space divided in ratio 1:2:1 */\n}\n\n/* vs percentage, which needs manual calculation with gaps */\n.container2 {\n  display: grid;\n  grid-template-columns: 25% 50% 25%;\n}"
+  },
+  {
+    "id": 5,
+    "question": "What is grid-template-areas used for?",
+    "answer": "grid-template-areas is used to define a visual, named layout for the grid using string values. You give each grid item a name using grid-area, and then arrange those names visually in grid-template-areas. This makes the layout structure much easier to read and understand at a glance.",
+    "code": ".container {\n  display: grid;\n  grid-template-columns: 1fr 3fr;\n  grid-template-rows: auto 1fr auto;\n  grid-template-areas:\n    \"header header\"\n    \"sidebar content\"\n    \"footer footer\";\n}\n\n.header  { grid-area: header; }\n.sidebar { grid-area: sidebar; }\n.content { grid-area: content; }\n.footer  { grid-area: footer; }"
+  },
+  {
+    "id": 6,
+    "question": "How do you make a responsive grid layout without media queries?",
+    "answer": "This is achieved using the repeat() function along with auto-fit or auto-fill, combined with minmax(). This lets the browser automatically decide how many columns fit based on the available space, without writing separate media queries for different screen sizes.",
+    "code": ".container {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n  gap: 16px;\n}\n/* Columns automatically increase or decrease based on screen width */"
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between explicit and implicit grid?",
+    "answer": "Explicit grid is the grid structure you define manually using grid-template-columns and grid-template-rows. Implicit grid is created automatically by the browser when there are more grid items than the defined explicit rows/columns, or when items are placed outside the explicit grid. You can control the size of these auto-generated tracks using grid-auto-rows and grid-auto-columns.",
+    "code": ".container {\n  display: grid;\n  grid-template-columns: repeat(3, 1fr); /* explicit: 3 columns */\n  grid-auto-rows: 100px; /* implicit rows created automatically get this height */\n}\n/* If there are more items than 3 columns fit,\n   extra rows are added automatically (implicit grid) */"
+  }
+]
