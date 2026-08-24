@@ -41,19 +41,20 @@ const topicFiles: Record<string, Record<string, string>> = {
     "browser-compatibility": "Browser_Compatibility.json",
   },
   javascript: {
-        introduction: "Introduction.json",
-        variables: "Variables.json",
-        "data-types": "Data_Types.json",
-        "type-coercion": "Type_Coercion.json",
-        operators: "Operators.json",
-        scope: "Scope.json",
-        hoisting: "Hoisting.json",
-        functions: "Functions.json",
-        "arrow-functions": "Arrow_Functions.json",
-        "this-keyword": "this_Keyword.json",
-        "call-apply-bind": "Call_Apply_Bind.json",
-        closures: "Closures.json"
-  }
+    introduction: "Introduction.json",
+    variables: "Variables.json",
+    "data-types": "Data_Types.json",
+    "type-coercion": "Type_Coercion.json",
+    operators: "Operators.json",
+    scope: "Scope.json",
+    hoisting: "Hoisting.json",
+    functions: "Functions.json",
+    "arrow-functions": "Arrow_Functions.json",
+    "this-keyword": "this_Keyword.json",
+    "call-apply-bind": "Call_Apply_Bind.json",
+    closures: "Closures.json",
+    "execution-context": "Execution_Context.json",
+  },
 };
 
 export default async function TopicPage({

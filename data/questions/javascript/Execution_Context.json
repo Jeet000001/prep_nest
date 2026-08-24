@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "question": "What is an execution context?",
+    "answer": "An execution context is the environment in which JavaScript code is evaluated and executed. It contains the information JavaScript needs to run the code, such as variable bindings, function declarations, and the value of this. Whenever JavaScript starts running code, it creates an appropriate execution context.",
+    "code": "const name = \"Jeet\";\n\nfunction greet() {\n  const message = \"Hello\";\n  console.log(message, name);\n}\n\ngreet();\n\n// JavaScript creates a global execution context\n// and a function execution context for greet()."
+  },
+  {
+    "id": 2,
+    "question": "What are the different types of execution contexts?",
+    "answer": "The main types of execution contexts are: 1. Global Execution Context - created when JavaScript starts executing a script or module. 2. Function Execution Context - created whenever a function is called. 3. Eval Execution Context - created when code is executed using eval(). In modern JavaScript applications, the global and function execution contexts are the most important ones to understand.",
+    "code": "// Global Execution Context\nconst name = \"Jeet\";\n\n// Function Execution Context\nfunction greet() {\n  console.log(name);\n}\n\ngreet();\n\n// Eval Execution Context\n// eval(\"const x = 10; console.log(x);\");"
+  },
+  {
+    "id": 3,
+    "question": "What is the global execution context?",
+    "answer": "The global execution context is the first execution context created when JavaScript begins executing a script or module. It handles top-level code and creates the global environment for the program. There is normally one global execution context for a JavaScript realm. Its exact global object and top-level this behavior depend on the environment and whether the code is a script or module.",
+    "code": "const appName = \"PrepNest\";\n\nfunction startApp() {\n  console.log(appName);\n}\n\nstartApp();\n\n// Top-level code runs in the global execution context.\n// Calling startApp() creates a function execution context."
+  },
+  {
+    "id": 4,
+    "question": "What is a function execution context?",
+    "answer": "A function execution context is created every time a function is called. It contains the information required to execute that particular function call, including its parameters, local variables, function declarations, the value of this, and the function's lexical environment. Each function call gets its own execution context.",
+    "code": "function greet(name) {\n  const message = `Hello, ${name}`;\n  console.log(message);\n}\n\ngreet(\"Jeet\");\ngreet(\"John\");\n\n// Each call creates a separate function execution context."
+  },
+  {
+    "id": 5,
+    "question": "What happens when a function is called?",
+    "answer": "When a function is called, JavaScript creates a new function execution context for that call. Its parameters are initialized with the provided arguments, local variables and declarations become available, this is determined according to the function's call type, and the function body starts executing. The new context is pushed onto the call stack. When the function finishes, its execution context is removed from the stack.",
+    "code": "function add(a, b) {\n  const result = a + b;\n  return result;\n}\n\nconst total = add(10, 20);\n\n// 1. add() is called.\n// 2. Function execution context is created.\n// 3. a = 10 and b = 20.\n// 4. Function body executes.\n// 5. 30 is returned.\n// 6. Context is removed from the call stack."
+  },
+  {
+    "id": 6,
+    "question": "What is the execution context stack?",
+    "answer": "The execution context stack is a conceptual stack used by the JavaScript engine to keep track of execution contexts. The currently running context is placed on top of the stack. When a function is called, its execution context is pushed onto the stack. When the function finishes, its context is popped from the stack and execution returns to the previous context.",
+    "code": "function first() {\n  second();\n}\n\nfunction second() {\n  console.log(\"Hello\");\n}\n\nfirst();\n\n// Stack progression:\n// Global Context\n//      ↓\n// Global → first()\n//      ↓\n// Global → first() → second()\n//      ↓\n// Global → first()\n//      ↓\n// Global"
+  },
+  {
+    "id": 7,
+    "question": "What is the call stack?",
+    "answer": "The call stack is a stack data structure used by JavaScript to keep track of active function calls and their execution contexts. It follows the Last In, First Out (LIFO) principle. When a function is called, it is pushed onto the stack. When it finishes, it is popped from the stack. The call stack is also involved in producing errors such as 'Maximum call stack size exceeded' when recursion becomes too deep.",
+    "code": "function first() {\n  second();\n}\n\nfunction second() {\n  third();\n}\n\nfunction third() {\n  console.log(\"Running third\");\n}\n\nfirst();\n\n// Call stack while third() runs:\n// | third  |  ← top\n// | second |\n// | first  |\n// | global |"
+  },
+  {
+    "id": 8,
+    "question": "How are variables and functions stored inside an execution context?",
+    "answer": "JavaScript maintains lexical environments and variable environments to keep track of identifiers and their bindings. These environments store information about variables, parameters, function declarations, and their relationships with outer scopes. In modern JavaScript, it is more accurate to think in terms of environment records and lexical environments rather than a simple 'memory creation phase' model.",
+    "code": "const globalName = \"Jeet\";\n\nfunction greet(name) {\n  const message = \"Hello\";\n\n  console.log(name);\n  console.log(message);\n  console.log(globalName);\n}\n\ngreet(\"John\");\n\n// The function execution environment keeps track of:\n// name        → \"John\"\n// message     → \"Hello\"\n// outer scope → global environment"
+  },
+  {
+    "id": 9,
+    "question": "What is the relationship between execution context and scope?",
+    "answer": "Execution context and scope are related but they are not the same thing. Scope determines which variables a piece of code can access, while an execution context is the environment in which that code is currently being executed. Lexical environments inside execution contexts provide the bindings used for variable lookup. JavaScript follows lexical scope, so nested code can access variables from its outer scopes.",
+    "code": "const globalValue = \"Global\";\n\nfunction outer() {\n  const outerValue = \"Outer\";\n\n  function inner() {\n    const innerValue = \"Inner\";\n\n    console.log(innerValue); // Current scope\n    console.log(outerValue); // Outer scope\n    console.log(globalValue); // Global scope\n  }\n\n  inner();\n}\n\nouter();\n\n// Scope determines what variables inner() can access.\n// Execution contexts provide the environment in which\n// outer() and inner() execute."
+  }
+]
