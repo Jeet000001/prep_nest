@@ -19,8 +19,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     multimedia: "Multimedia.json",
     tables: "Tables.json",
     forms: "Forms.json",
-	html5: "HTML5.json",
-	accessibility: "Accessibility.json"
+    html5: "HTML5.json",
+    accessibility: "Accessibility.json",
   },
   css: {
     introduction: "Introduction.json",
@@ -38,9 +38,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "css-variables": "CSS_Variables.json",
     preprocessors: "Preprocessors.json",
     performance: "Performance.json",
-    "browser-compatibility": "Browser_Compatibility.json"
-
-  }
+    "browser-compatibility": "Browser_Compatibility.json",
+  },
 };
 
 export default async function TopicPage({
@@ -91,7 +90,10 @@ export default async function TopicPage({
         </h1>
       </header>
 
-      <div className="hide-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto pt-4">
+      <div
+        data-concepts-scroll
+        className="hide-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto pt-4"
+      >
         {highlightedQuestions.map((item) => (
           <article
             key={item.id}

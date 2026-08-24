@@ -126,6 +126,7 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   const [open, setOpen] = useState(false);
+  const [isBottomBarHidden, setIsBottomBarHidden] = useState(false);
 
   // Default opened groups
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
@@ -142,6 +143,38 @@ const Sidebar = () => {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  useEffect(() => {
+    const scrollContainer = document.querySelector<HTMLElement>(
+      "[data-concepts-scroll]",
+    );
+
+    if (!scrollContainer) {
+      return;
+    }
+
+    let previousScrollTop = scrollContainer.scrollTop;
+
+    const handleScroll = () => {
+      const currentScrollTop = scrollContainer.scrollTop;
+
+      if (currentScrollTop <= 0) {
+        setIsBottomBarHidden(false);
+      } else if (currentScrollTop > previousScrollTop) {
+        setIsBottomBarHidden(true);
+      } else if (currentScrollTop < previousScrollTop) {
+        setIsBottomBarHidden(false);
+      }
+
+      previousScrollTop = currentScrollTop;
+    };
+
+    scrollContainer.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      scrollContainer.removeEventListener("scroll", handleScroll);
+    };
+  }, [pathname]);
 
   const toggleGroup = (name: string) => {
     setExpanded((prev) => ({
@@ -287,7 +320,11 @@ const Sidebar = () => {
           MOBILE / TABLET BUTTON
       ===================================================== */}
 
-      <div className="fixed bottom-4 left-0 z-40 flex w-full justify-center px-4 lg:hidden">
+      <div
+        className={`fixed bottom-4 left-0 z-40 flex w-full justify-center px-4 transition-transform duration-300 ease-out lg:hidden ${
+          isBottomBarHidden ? "translate-y-[calc(100%+1rem)]" : "translate-y-0"
+        }`}
+      >
         <button
           type="button"
           onClick={() => setOpen(true)}
