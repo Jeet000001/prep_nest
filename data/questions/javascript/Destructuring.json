@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "question": "What is destructuring in JavaScript?",
+    "answer": "Destructuring is a JavaScript syntax that allows you to extract values from arrays or properties from objects and assign them to variables in a concise way. It makes code cleaner and is commonly used with function parameters, API responses, and React props.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25\n};\n\nconst { name, age } = user;\n\nconsole.log(name); // Jeet\nconsole.log(age);  // 25"
+  },
+  {
+    "id": 2,
+    "question": "What is array destructuring?",
+    "answer": "Array destructuring allows you to extract values from an array and assign them to variables based on their position. The first variable receives the first element, the second variable receives the second element, and so on.",
+    "code": "const fruits = [\"Apple\", \"Banana\", \"Mango\"];\n\nconst [first, second, third] = fruits;\n\nconsole.log(first);  // Apple\nconsole.log(second); // Banana\nconsole.log(third);  // Mango\n\n// Skip an element\nconst [a, , c] = fruits;\nconsole.log(a); // Apple\nconsole.log(c); // Mango"
+  },
+  {
+    "id": 3,
+    "question": "What is object destructuring?",
+    "answer": "Object destructuring allows you to extract properties from an object and assign their values to variables. Unlike array destructuring, object destructuring is based on property names rather than positions.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25,\n  city: \"Kolkata\"\n};\n\nconst { name, age, city } = user;\n\nconsole.log(name); // Jeet\nconsole.log(age);  // 25\nconsole.log(city); // Kolkata"
+  },
+  {
+    "id": 4,
+    "question": "What are default values in destructuring?",
+    "answer": "Default values in destructuring allow you to provide a fallback value when the value being destructured is undefined. If the property or array element exists with a value, that value is used. The default value is used only when the value is undefined.",
+    "code": "const user = {\n  name: \"Jeet\"\n};\n\nconst { name, age = 25 } = user;\n\nconsole.log(name); // Jeet\nconsole.log(age);  // 25\n\nconst numbers = [10];\nconst [first, second = 20] = numbers;\n\nconsole.log(first);  // 10\nconsole.log(second); // 20"
+  },
+  {
+    "id": 5,
+    "question": "How can you rename a variable during object destructuring?",
+    "answer": "You can rename a variable during object destructuring by using the syntax propertyName: newVariableName. The property name comes first, followed by the variable name you want to create. This is useful when you want to avoid naming conflicts or use a clearer variable name.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25\n};\n\nconst { name: userName, age: userAge } = user;\n\nconsole.log(userName); // Jeet\nconsole.log(userAge);  // 25"
+  },
+  {
+    "id": 6,
+    "question": "What is the rest operator in destructuring?",
+    "answer": "The rest syntax in destructuring collects the remaining elements or properties into a new array or object. It is written using three dots (...). In array destructuring, it collects remaining elements into an array. In object destructuring, it collects remaining properties into a new object.",
+    "code": "// Array rest\nconst numbers = [1, 2, 3, 4];\n\nconst [first, ...rest] = numbers;\n\nconsole.log(first); // 1\nconsole.log(rest);  // [2, 3, 4]\n\n// Object rest\nconst user = {\n  name: \"Jeet\",\n  age: 25,\n  city: \"Kolkata\"\n};\n\nconst { name, ...details } = user;\n\nconsole.log(name);    // Jeet\nconsole.log(details); // { age: 25, city: \"Kolkata\" }"
+  },
+  {
+    "id": 7,
+    "question": "What is spread syntax?",
+    "answer": "Spread syntax uses three dots (...) to expand the elements of an iterable or the properties of an object into another array, object, or function call. It is commonly used to copy and combine arrays and objects, pass array values as function arguments, and create shallow copies.",
+    "code": "const numbers = [1, 2, 3];\n\nconst copy = [...numbers];\nconsole.log(copy); // [1, 2, 3]\n\nconst moreNumbers = [...numbers, 4, 5];\nconsole.log(moreNumbers); // [1, 2, 3, 4, 5]\n\nconst user = {\n  name: \"Jeet\"\n};\n\nconst updatedUser = {\n  ...user,\n  age: 25\n};\n\nconsole.log(updatedUser);\n// { name: \"Jeet\", age: 25 }"
+  },
+  {
+    "id": 8,
+    "question": "What is the difference between rest and spread?",
+    "answer": "Both rest and spread use the same three-dot (...) syntax, but they perform opposite operations. Rest collects multiple values into a single array or object, while spread expands an existing array, iterable, or object into individual elements or properties. Rest is commonly used in destructuring and function parameters, while spread is commonly used when copying, combining, or passing values.",
+    "code": "// Rest - collects values\nconst [first, ...rest] = [1, 2, 3, 4];\nconsole.log(rest); // [2, 3, 4]\n\nfunction sum(...numbers) {\n  return numbers.reduce((total, n) => total + n, 0);\n}\n\nconsole.log(sum(1, 2, 3)); // 6\n\n// Spread - expands values\nconst numbers = [1, 2, 3];\nconst combined = [...numbers, 4, 5];\n\nconsole.log(combined); // [1, 2, 3, 4, 5]"
+  },
+  {
+    "id": 9,
+    "question": "How can spread syntax be used to copy an array?",
+    "answer": "You can create a shallow copy of an array by placing the original array inside square brackets with spread syntax. The new array has a different reference from the original array. However, if the array contains objects or nested arrays, those nested values are still shared references.",
+    "code": "const original = [1, 2, 3];\n\nconst copy = [...original];\n\ncopy.push(4);\n\nconsole.log(original); // [1, 2, 3]\nconsole.log(copy);     // [1, 2, 3, 4]\n\nconsole.log(original === copy); // false"
+  },
+  {
+    "id": 10,
+    "question": "How can spread syntax be used to copy an object?",
+    "answer": "You can create a shallow copy of an object by placing the original object inside curly braces with spread syntax. The new object has a different reference from the original object, but nested objects and arrays are still shared references.",
+    "code": "const original = {\n  name: \"Jeet\",\n  age: 25\n};\n\nconst copy = { ...original };\n\ncopy.age = 30;\n\nconsole.log(original.age); // 25\nconsole.log(copy.age);     // 30\n\nconsole.log(original === copy); // false"
+  },
+  {
+    "id": 11,
+    "question": "Does spread syntax create a deep copy?",
+    "answer": "No. Spread syntax creates only a shallow copy. It creates a new outer array or object, but nested objects and arrays are still referenced by both the original and the copy. Therefore, changing nested data through the copy can also affect the original. For a deep copy, structuredClone() is a modern built-in option for many supported data types.",
+    "code": "const original = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst copy = { ...original };\n\ncopy.address.city = \"Delhi\";\n\nconsole.log(original.address.city); // Delhi\n\n// The nested address object is shared.\n\n// Deep copy\nconst deepCopy = structuredClone(original);\ndeepCopy.address.city = \"Mumbai\";\n\nconsole.log(original.address.city); // Delhi\nconsole.log(deepCopy.address.city); // Mumbai"
+  }
+]
