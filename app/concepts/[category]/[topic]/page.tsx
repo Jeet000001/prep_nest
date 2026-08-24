@@ -103,7 +103,7 @@ export default async function TopicPage({
             </p>
             {item.highlightedCode && (
               <div
-                className="shiki-code mt-4 overflow-x-auto rounded-lg text-sm leading-6"
+                className="shiki-code mt-4 min-w-0 max-w-full overflow-hidden rounded-lg text-sm leading-6"
                 dangerouslySetInnerHTML={{ __html: item.highlightedCode }}
               />
             )}
