@@ -50,6 +50,7 @@ const topicFiles: Record<string, Record<string, string>> = {
         hoisting: "Hoisting.json",
         functions: "Functions.json",
         "arrow-functions": "Arrow_Functions.json",
+        "this-keyword": "this_Keyword.json",
   }
 };
 

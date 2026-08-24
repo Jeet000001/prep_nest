@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is the this keyword in JavaScript?",
+    "answer": "The this keyword refers to the value associated with the current execution context. Its value depends on how a function is called, rather than where the function is written, except for arrow functions. In an object method, this usually refers to the object that called the method. In a constructor called with new, this refers to the newly created object.",
+    "code": "const user = {\n  name: \"Jeet\",\n  greet() {\n    console.log(this.name);\n  }\n};\n\nuser.greet(); // Jeet\n\n// Here, this refers to the user object."
+  },
+  {
+    "id": 2,
+    "question": "How is the value of this determined?",
+    "answer": "For regular functions, the value of this is mainly determined by how the function is called. Common cases are: 1. As an object method, this refers to the object before the dot. 2. With new, this refers to the newly created instance. 3. With call(), apply(), or bind(), this can be explicitly specified. 4. In a standalone function call, this is undefined in strict mode and usually the global object in non-strict mode. Arrow functions are different because they inherit this lexically from their surrounding scope.",
+    "code": "const user = {\n  name: \"Jeet\"\n};\n\nfunction greet() {\n  console.log(this.name);\n}\n\n// Method-style call\ngreet.call(user); // Jeet\n\n// Explicitly setting this\ngreet.apply(user); // Jeet\n\n// Binding this\nconst boundGreet = greet.bind(user);\nboundGreet(); // Jeet"
+  },
+  {
+    "id": 3,
+    "question": "What is this inside a regular function?",
+    "answer": "Inside a regular function, this depends on how the function is called. If the function is called as an object method, this refers to the object. If it is called as a standalone function, this is undefined in strict mode and usually refers to the global object in non-strict mode. If the function is called with new, this refers to the newly created object.",
+    "code": "\"use strict\";\n\nfunction greet() {\n  console.log(this);\n}\n\ngreet(); // undefined\n\nconst user = {\n  greet\n};\n\nuser.greet(); // user object"
+  },
+  {
+    "id": 4,
+    "question": "What is this inside an arrow function?",
+    "answer": "Arrow functions do not have their own this. They inherit this from their surrounding lexical scope at the time they are created. This behavior is called lexical this. Unlike regular functions, calling an arrow function as an object method does not make this refer to that object.",
+    "code": "const user = {\n  name: \"Jeet\",\n\n  greet: () => {\n    console.log(this.name);\n  }\n};\n\nuser.greet(); // undefined in a typical module context\n\n// The arrow function does not get this from user.\n// It uses this from its surrounding scope."
+  },
+  {
+    "id": 5,
+    "question": "What is this inside an object method?",
+    "answer": "When a regular function is called as an object method using object.method(), this usually refers to the object before the dot. This allows the method to access other properties and methods of that object. However, if the method is extracted and called separately, it can lose its original this value.",
+    "code": "const user = {\n  name: \"Jeet\",\n\n  greet() {\n    console.log(this.name);\n  }\n};\n\nuser.greet(); // Jeet\n\nconst greet = user.greet;\n// greet(); // undefined in strict mode\n\n// The call style determines this."
+  },
+  {
+    "id": 6,
+    "question": "What is this inside a constructor?",
+    "answer": "When a regular function is called with the new keyword, this refers to the newly created object. The constructor can use this to initialize properties and methods on that object. Classes use the same basic constructor behavior.",
+    "code": "function User(name) {\n  this.name = name;\n}\n\nconst user = new User(\"Jeet\");\n\nconsole.log(user.name); // Jeet\n\n// Here, this refers to the newly created user object."
+  },
+  {
+    "id": 7,
+    "question": "What is this in the global context?",
+    "answer": "The value of this in the global context depends on the JavaScript environment and whether the code is running as a script or an ES module. In a browser script, top-level this is generally the global object, window. In an ES module, top-level this is undefined. In Node.js, the exact value also depends on the module system and execution context, so it is better to avoid assuming that global this always refers to one specific object.",
+    "code": "// Browser script\nconsole.log(this === window); // true\n\n// ES module\nconsole.log(this); // undefined"
+  },
+  {
+    "id": 8,
+    "question": "How does this behave in strict mode?",
+    "answer": "In strict mode, a regular function called without an object or explicit this value gets this as undefined instead of automatically converting it to the global object. Strict mode therefore prevents accidental use of the global object as this. However, if this is explicitly provided through a method call, new, call(), apply(), or bind(), the corresponding rules still apply.",
+    "code": "\"use strict\";\n\nfunction greet() {\n  console.log(this);\n}\n\ngreet(); // undefined\n\nconst user = {\n  name: \"Jeet\"\n};\n\ngreet.call(user); // user object"
+  },
+  {
+    "id": 9,
+    "question": "What is the difference between lexical this and dynamic this?",
+    "answer": "Lexical this means the value of this is inherited from the surrounding scope where the function was created. Arrow functions use lexical this. Dynamic this means the value of this is determined by how a regular function is called. Regular functions generally use dynamic this, so the same function can have different this values depending on the call site.",
+    "code": "const user = {\n  name: \"Jeet\",\n\n  regular() {\n    console.log(this.name);\n  },\n\n  arrow: () => {\n    console.log(this.name);\n  }\n};\n\nuser.regular(); // Jeet\nuser.arrow();   // undefined in a typical module context\n\n// regular() gets this from the call.\n// arrow() gets this from its surrounding scope."
+  },
+  {
+    "id": 10,
+    "question": "How can you explicitly control the value of this?",
+    "answer": "You can explicitly control the value of this in a regular function using call(), apply(), and bind(). call() invokes the function immediately and accepts arguments individually. apply() also invokes it immediately but accepts arguments as an array-like value. bind() creates a new function with this permanently bound to the provided value.",
+    "code": "function greet(message) {\n  console.log(`${message}, ${this.name}`);\n}\n\nconst user = {\n  name: \"Jeet\"\n};\n\n// call()\ngreet.call(user, \"Hello\");\n\n// apply()\ngreet.apply(user, [\"Hi\"]);\n\n// bind()\nconst boundGreet = greet.bind(user);\nboundGreet(\"Welcome\");"
+  }
+]
