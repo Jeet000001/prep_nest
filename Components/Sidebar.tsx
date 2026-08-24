@@ -98,7 +98,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Execution Context", href: "/concepts/javascript/execution-context" },
       { name: "Call Stack", href: "/concepts/javascript/call-stack" },
       { name: "Objects", href: "/concepts/javascript/objects" },
-      // { name: "Arrays", href: "/concepts/javascript/arrays" },
+      { name: "Arrays", href: "/concepts/javascript/arrays" },
       // ,
       // 
       // { name: "DOM", href: "/concepts/javascript/dom" },

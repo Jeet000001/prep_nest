@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "What is an array in JavaScript?",
+    "answer": "An array is an ordered collection of values in JavaScript. Each value is stored at a numeric index starting from 0. An array can contain values of different data types, including numbers, strings, objects, and even other arrays.",
+    "code": "const fruits = [\"Apple\", \"Banana\", \"Mango\"];\n\nconsole.log(fruits[0]); // Apple\nconsole.log(fruits[1]); // Banana\nconsole.log(fruits.length); // 3"
+  },
+  {
+    "id": 2,
+    "question": "How is an array different from an object?",
+    "answer": "Both arrays and objects are used to store collections of data, but they are designed for different purposes. An array is an ordered collection where values are accessed mainly by numeric indexes. An object is a collection of named properties accessed using keys. Arrays are commonly used for lists, while objects are commonly used to represent entities with named properties.",
+    "code": "// Array - ordered list\nconst fruits = [\"Apple\", \"Banana\", \"Mango\"];\nconsole.log(fruits[0]); // Apple\n\n// Object - named properties\nconst user = {\n  name: \"Jeet\",\n  age: 25\n};\n\nconsole.log(user.name); // Jeet"
+  },
+  {
+    "id": 3,
+    "question": "What are the most commonly used array methods?",
+    "answer": "Commonly used array methods include map(), filter(), reduce(), forEach(), find(), findIndex(), some(), every(), includes(), push(), pop(), shift(), unshift(), slice(), splice(), concat(), sort(), reverse(), join(), flat(), and flatMap(). The method you choose depends on whether you want to transform, search, filter, modify, or combine array data.",
+    "code": "const numbers = [1, 2, 3, 4, 5];\n\nnumbers.map(n => n * 2);\nnumbers.filter(n => n > 2);\nnumbers.find(n => n > 3);\nnumbers.some(n => n > 4);\nnumbers.every(n => n > 0);\nnumbers.includes(3);\nnumbers.slice(1, 3);\nnumbers.reduce((sum, n) => sum + n, 0);"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between map() and forEach()?",
+    "answer": "Both map() and forEach() iterate over an array, but they are used for different purposes. map() transforms each element and returns a new array containing the results. forEach() is mainly used to perform an action for each element and does not create a new array from the callback's return values. If you need the transformed result, use map().",
+    "code": "const numbers = [1, 2, 3];\n\n// map() returns a new array\nconst doubled = numbers.map(n => n * 2);\nconsole.log(doubled); // [2, 4, 6]\n\n// forEach() returns undefined\nconst result = numbers.forEach(n => {\n  console.log(n);\n});\n\nconsole.log(result); // undefined"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between filter() and find()?",
+    "answer": "filter() returns a new array containing all elements that satisfy the condition. find() returns the first element that satisfies the condition. If no element matches, filter() returns an empty array, while find() returns undefined.",
+    "code": "const numbers = [10, 20, 30, 40];\n\nconst filtered = numbers.filter(n => n > 20);\nconsole.log(filtered); // [30, 40]\n\nconst found = numbers.find(n => n > 20);\nconsole.log(found); // 30"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between find() and findIndex()?",
+    "answer": "find() returns the first element that satisfies the provided condition, while findIndex() returns the index of the first element that satisfies the condition. If no element matches, find() returns undefined and findIndex() returns -1.",
+    "code": "const users = [\n  { id: 1, name: \"Jeet\" },\n  { id: 2, name: \"John\" },\n  { id: 3, name: \"Alex\" }\n];\n\nconst user = users.find(user => user.id === 2);\nconsole.log(user); // { id: 2, name: \"John\" }\n\nconst index = users.findIndex(user => user.id === 2);\nconsole.log(index); // 1"
+  },
+  {
+    "id": 7,
+    "question": "What does reduce() do?",
+    "answer": "reduce() processes the elements of an array and combines them into a single accumulated result. The accumulator stores the result from each iteration, and the callback determines how the next result is calculated. The final result can be a number, string, object, array, or another value.",
+    "code": "const numbers = [1, 2, 3, 4];\n\nconst sum = numbers.reduce((total, number) => {\n  return total + number;\n}, 0);\n\nconsole.log(sum); // 10"
+  },
+  {
+    "id": 8,
+    "question": "When would you use reduce()?",
+    "answer": "Use reduce() when you need to process an array and produce one accumulated result. Common use cases include calculating totals, counting items, grouping data, creating objects, building arrays, calculating averages, and transforming an array into another data structure. However, if map(), filter(), or another simpler method clearly expresses the operation, prefer the simpler method.",
+    "code": "const products = [\n  { name: \"Laptop\", price: 50000 },\n  { name: \"Mouse\", price: 1000 },\n  { name: \"Keyboard\", price: 2000 }\n];\n\nconst total = products.reduce((sum, product) => {\n  return sum + product.price;\n}, 0);\n\nconsole.log(total); // 53000"
+  },
+  {
+    "id": 9,
+    "question": "What is the difference between slice() and splice()?",
+    "answer": "slice() returns a portion of an array without changing the original array. splice() can add, remove, or replace elements and mutates the original array. A simple way to remember the difference is: slice() does not mutate, while splice() mutates.",
+    "code": "const numbers = [1, 2, 3, 4, 5];\n\n// slice() - does not mutate\nconst result = numbers.slice(1, 4);\nconsole.log(result); // [2, 3, 4]\nconsole.log(numbers); // [1, 2, 3, 4, 5]\n\n// splice() - mutates\nnumbers.splice(1, 2);\nconsole.log(numbers); // [1, 4, 5]"
+  },
+  {
+    "id": 10,
+    "question": "What is the difference between push() and concat()?",
+    "answer": "push() adds one or more elements to the end of the existing array and mutates that array. It returns the new length of the array. concat() combines arrays or values and returns a new array without mutating the original array.",
+    "code": "const numbers = [1, 2];\n\n// push() - mutates original array\nconst length = numbers.push(3, 4);\nconsole.log(numbers); // [1, 2, 3, 4]\nconsole.log(length);  // 4\n\nconst first = [1, 2];\n\n// concat() - returns a new array\nconst combined = first.concat([3, 4]);\nconsole.log(combined); // [1, 2, 3, 4]\nconsole.log(first);    // [1, 2]"
+  },
+  {
+    "id": 11,
+    "question": "What is the difference between pop() and shift()?",
+    "answer": "Both methods remove an element from an array and mutate the original array. pop() removes and returns the last element, while shift() removes and returns the first element. shift() can be less efficient for large arrays because removing the first element requires the remaining indexes to be adjusted.",
+    "code": "const numbers = [1, 2, 3, 4];\n\nconst last = numbers.pop();\nconsole.log(last);    // 4\nconsole.log(numbers); // [1, 2, 3]\n\nconst first = numbers.shift();\nconsole.log(first);   // 1\nconsole.log(numbers); // [2, 3]"
+  },
+  {
+    "id": 12,
+    "question": "What is the difference between unshift() and push()?",
+    "answer": "Both methods add elements to an array and mutate the original array. push() adds elements to the end of the array, while unshift() adds elements to the beginning. Both return the new length of the array.",
+    "code": "const numbers = [2, 3];\n\nnumbers.push(4);\nconsole.log(numbers); // [2, 3, 4]\n\nnumbers.unshift(1);\nconsole.log(numbers); // [1, 2, 3, 4]"
+  },
+  {
+    "id": 13,
+    "question": "Does map() mutate the original array?",
+    "answer": "No. map() does not mutate the original array. It creates and returns a new array containing the values returned by the callback function. However, if the array contains objects, changing the properties of those objects inside the callback can still mutate the same object references.",
+    "code": "const numbers = [1, 2, 3];\n\nconst doubled = numbers.map(n => n * 2);\n\nconsole.log(doubled); // [2, 4, 6]\nconsole.log(numbers); // [1, 2, 3]\n\n// The original array is unchanged."
+  },
+  {
+    "id": 14,
+    "question": "Does sort() mutate the original array?",
+    "answer": "Yes. sort() mutates the original array and returns a reference to that same array. If you want to sort without changing the original array, create a copy first, for example using the spread syntax [...array].",
+    "code": "const numbers = [3, 1, 2];\n\nnumbers.sort((a, b) => a - b);\n\nconsole.log(numbers); // [1, 2, 3]\n\n// Non-mutating approach\nconst original = [3, 1, 2];\nconst sorted = [...original].sort((a, b) => a - b);\n\nconsole.log(original); // [3, 1, 2]\nconsole.log(sorted);   // [1, 2, 3]"
+  },
+  {
+    "id": 15,
+    "question": "How does JavaScript's sort() work?",
+    "answer": "sort() sorts the elements of an array in place. By default, elements are converted to strings and compared according to their UTF-16 code unit values, so numeric arrays can produce unexpected results. To sort numbers correctly, provide a comparison function. If the comparison function returns a negative value, a should come before b; if it returns a positive value, b should come before a; and if it returns 0, their relative order is treated as equal.",
+    "code": "const numbers = [10, 2, 5, 1];\n\n// Default sort - string comparison\nnumbers.sort();\nconsole.log(numbers); // [1, 10, 2, 5]\n\n// Numeric ascending sort\nconst ascending = [10, 2, 5, 1];\nascending.sort((a, b) => a - b);\nconsole.log(ascending); // [1, 2, 5, 10]\n\n// Numeric descending sort\nconst descending = [10, 2, 5, 1];\ndescending.sort((a, b) => b - a);\nconsole.log(descending); // [10, 5, 2, 1]"
+  },
+  {
+    "id": 16,
+    "question": "How can you remove duplicate values from an array?",
+    "answer": "A common and simple way to remove duplicate primitive values is to use a Set and convert it back to an array. Set stores unique values, so duplicate values are automatically removed.",
+    "code": "const numbers = [1, 2, 2, 3, 3, 4];\n\nconst uniqueNumbers = [...new Set(numbers)];\n\nconsole.log(uniqueNumbers); // [1, 2, 3, 4]"
+  },
+  {
+    "id": 17,
+    "question": "How can you flatten a nested array?",
+    "answer": "You can use the flat() method to flatten nested arrays. By default, flat() removes one level of nesting. You can pass a depth value to specify how many levels should be flattened. Using Infinity flattens all nested levels.",
+    "code": "const nested = [1, [2, 3], [4, [5, 6]]];\n\nconsole.log(nested.flat());\n// [1, 2, 3, 4, [5, 6]]\n\nconsole.log(nested.flat(2));\n// [1, 2, 3, 4, 5, 6]\n\nconsole.log(nested.flat(Infinity));\n// [1, 2, 3, 4, 5, 6]"
+  },
+  {
+    "id": 18,
+    "question": "What are some() and every()?",
+    "answer": "some() checks whether at least one element in an array satisfies a condition. It returns true as soon as it finds a matching element. every() checks whether all elements satisfy the condition. It returns false as soon as it finds an element that does not satisfy the condition. Both methods return a boolean and do not mutate the original array.",
+    "code": "const numbers = [1, 2, 3, 4, 5];\n\nconst hasEven = numbers.some(n => n % 2 === 0);\nconsole.log(hasEven); // true\n\nconst allPositive = numbers.every(n => n > 0);\nconsole.log(allPositive); // true\n\nconst allEven = numbers.every(n => n % 2 === 0);\nconsole.log(allEven); // false"
+  },
+  {
+    "id": 19,
+    "question": "What is Array.from()?",
+    "answer": "Array.from() creates a new array from an iterable or array-like object. It is commonly used to convert values such as strings, Sets, Maps, NodeLists, and other array-like objects into actual arrays. It also accepts an optional mapping function.",
+    "code": "const text = \"Hello\";\nconst chars = Array.from(text);\n\nconsole.log(chars);\n// [\"H\", \"e\", \"l\", \"l\", \"o\"]\n\nconst set = new Set([1, 2, 3]);\nconst numbers = Array.from(set);\n\nconsole.log(numbers); // [1, 2, 3]\n\n// With mapping function\nconst doubled = Array.from([1, 2, 3], n => n * 2);\nconsole.log(doubled); // [2, 4, 6]"
+  },
+  {
+    "id": 20,
+    "question": "What is array destructuring?",
+    "answer": "Array destructuring is a syntax that allows you to extract values from an array and assign them to variables based on their position. The first variable receives the first element, the second variable receives the second element, and so on.",
+    "code": "const fruits = [\"Apple\", \"Banana\", \"Mango\"];\n\nconst [first, second, third] = fruits;\n\nconsole.log(first);  // Apple\nconsole.log(second); // Banana\nconsole.log(third);  // Mango\n\n// Skip an element\nconst [a, , c] = fruits;\nconsole.log(a); // Apple\nconsole.log(c); // Mango\n\n// Rest element\nconst [head, ...rest] = fruits;\nconsole.log(head); // Apple\nconsole.log(rest); // [\"Banana\", \"Mango\"]"
+  }
+]
