@@ -40,6 +40,9 @@ const topicFiles: Record<string, Record<string, string>> = {
     performance: "Performance.json",
     "browser-compatibility": "Browser_Compatibility.json",
   },
+  javascript: {
+        introduction: "Introduction.json",
+  }
 };
 
 export default async function TopicPage({

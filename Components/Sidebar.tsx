@@ -29,7 +29,7 @@ const topicGroups: TopicGroup[] = [
     name: "HTML",
     icon: FileCode2,
     topics: [
-      { name: "Introduction", href: "/concepts/html/introduction" },
+      { name: "HTML Introduction", href: "/concepts/html/introduction" },
       { name: "Semantic HTML", href: "/concepts/html/semantic-html" },
       {
         name: "Forms",
@@ -48,7 +48,7 @@ const topicGroups: TopicGroup[] = [
     name: "CSS",
     icon: Code2,
     topics: [
-      { name: "Introduction", href: "/concepts/css/introduction" },
+      { name: "CSS Introduction", href: "/concepts/css/introduction" },
       { name: "Box Model", href: "/concepts/css/box-model" },
       { name: "Specificity", href: "/concepts/css/specificity" },
       { name: "Position", href: "/concepts/css/position" },
@@ -77,7 +77,7 @@ const topicGroups: TopicGroup[] = [
     name: "JavaScript",
     icon: Braces,
     topics: [
-      { name: "JavaScript Basics", href: "/concepts/javascript/basics" },
+      { name: "JavaScript Introduction", href: "/concepts/javascript/introduction" },
       { name: "Variables", href: "/concepts/javascript/variables" },
       { name: "Data Types", href: "/concepts/javascript/data-types" },
       { name: "Operators", href: "/concepts/javascript/operators" },

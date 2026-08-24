@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "question": "What is JavaScript?",
+    "answer": "JavaScript is a high-level, dynamically typed programming language mainly used to make web pages interactive and dynamic. It can run in web browsers as well as on servers using environments like Node.js. For example, JavaScript can handle button clicks, validate forms, update page content, make API requests, and create animations.",
+    "code": "const button = document.querySelector(\"button\");\n\nbutton.addEventListener(\"click\", () => {\n  alert(\"Button clicked!\");\n});"
+  },
+  {
+    "id": 2,
+    "question": "What are the key features of JavaScript?",
+    "answer": "The key features of JavaScript include: 1. It is a high-level programming language. 2. It is dynamically typed. 3. It is single-threaded and uses an event loop for asynchronous operations. 4. It supports object-oriented, functional, and procedural programming styles. 5. It is interpreted or just-in-time compiled by modern JavaScript engines. 6. It supports asynchronous programming using callbacks, Promises, and async/await. 7. It can manipulate the DOM and interact with web APIs. 8. It is supported by all major modern browsers. 9. It can also be used for backend development with Node.js.",
+    "code": "async function getUser() {\n  const response = await fetch(\"https://api.example.com/user\");\n  const user = await response.json();\n  console.log(user);\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between JavaScript and Java?",
+    "answer": "JavaScript and Java are two different programming languages. Java is a general-purpose, class-based programming language mainly used for backend systems, Android applications, enterprise applications, and more. JavaScript was originally created for web browsers and is mainly used to make web applications interactive, although it can also be used on the server with Node.js. Java is statically typed, while JavaScript is dynamically typed. Java uses classes as the primary way to create objects, while JavaScript uses prototype-based inheritance.",
+    "code": "// JavaScript\nlet age = 25;\nage = \"twenty-five\"; // Allowed\n\n// Java\n// int age = 25;\n// age = \"twenty-five\"; // Compilation error"
+  },
+  {
+    "id": 4,
+    "question": "Is JavaScript a compiled language or an interpreted language?",
+    "answer": "JavaScript is traditionally called an interpreted language because its code was originally executed directly by an interpreter. However, modern JavaScript engines use Just-In-Time (JIT) compilation to improve performance. For example, the V8 engine used by Chrome and Node.js interprets and compiles JavaScript during execution. Therefore, a good interview answer is: JavaScript is commonly described as an interpreted language, but modern engines use JIT compilation to execute it efficiently.",
+    "code": "const name = \"Jeet\";\nconsole.log(`Hello, ${name}`);"
+  },
+  {
+    "id": 5,
+    "question": "What is ECMAScript?",
+    "answer": "ECMAScript is the standardized specification that defines how the JavaScript language should work. It is maintained by Ecma International. JavaScript is an implementation of the ECMAScript specification. New features such as let, const, arrow functions, classes, Promises, and many other language features are standardized through ECMAScript versions.",
+    "code": "const greet = (name) => {\n  return `Hello, ${name}`;\n};\n\nconsole.log(greet(\"Jeet\"));"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between JavaScript and ECMAScript?",
+    "answer": "ECMAScript is the specification or standard that defines the rules and features of a scripting language, while JavaScript is a programming language that implements that specification. In simple terms, ECMAScript defines the standard, and JavaScript is one implementation of that standard. JavaScript also provides additional features through host environments such as browsers and Node.js, including APIs like DOM, fetch, and setTimeout.",
+    "code": "// ECMAScript defines language features such as:\nconst user = {\n  name: \"Jeet\"\n};\n\n// Browser JavaScript also provides APIs such as:\ndocument.querySelector(\"h1\");\nsetTimeout(() => {\n  console.log(\"Hello\");\n}, 1000);"
+  },
+  {
+    "id": 7,
+    "question": "What are the different ways to include JavaScript in an HTML page?",
+    "answer": "There are three common ways to include JavaScript in an HTML page: 1. Inline JavaScript: JavaScript is written directly inside an HTML attribute. 2. Internal JavaScript: JavaScript is written inside a <script> tag in the HTML file. 3. External JavaScript: JavaScript is written in a separate .js file and linked using the <script src=\"...\"> tag. External JavaScript is generally preferred because it keeps HTML and JavaScript separate and makes the code easier to maintain.",
+    "code": "<!-- Inline JavaScript -->\n<button onclick=\"alert('Hello')\">Click</button>\n\n<!-- Internal JavaScript -->\n<script>\n  console.log(\"Hello from JavaScript\");\n</script>\n\n<!-- External JavaScript -->\n<script src=\"script.js\"></script>"
+  },
+  {
+    "id": 8,
+    "question": "What is \"use strict\" in JavaScript?",
+    "answer": "\"use strict\" enables strict mode in JavaScript. Strict mode makes JavaScript code safer by changing some problematic behaviors into errors and preventing certain unsafe operations. For example, it prevents accidentally creating global variables when assigning a value to an undeclared variable. Strict mode can be enabled for an entire script or inside a function.",
+    "code": "\"use strict\";\n\nfunction test() {\n  userName = \"Jeet\"; // ReferenceError\n}\n\ntest();"
+  },
+  {
+    "id": 9,
+    "question": "What are JavaScript statements and expressions?",
+    "answer": "A statement is an instruction that tells JavaScript to perform an action. Examples include variable declarations, if statements, loops, and return statements. An expression is a piece of code that produces or evaluates to a value. For example, 10 + 20 is an expression because it produces 30. Statements can contain expressions.",
+    "code": "// Statement\nconst age = 25;\n\n// Expression\n10 + 20;\n\n// Statement containing an expression\nconsole.log(10 + 20);"
+  },
+  {
+    "id": 10,
+    "question": "What is the difference between an expression and a statement?",
+    "answer": "An expression produces a value, while a statement performs an action or controls the flow of a program. For example, 10 + 20 is an expression because it produces the value 30. const total = 10 + 20; is a statement because it declares a variable and performs an action. A simple way to remember it is: an expression evaluates to a value, while a statement does something.",
+    "code": "// Expression\n10 + 20; // Produces 30\n\n// Statement\nconst total = 10 + 20;\n\nif (total > 20) {\n  console.log(\"Total is greater than 20\");\n}"
+  },
+  {
+    "id": 11,
+    "question": "Is JavaScript single-threaded?",
+    "answer": "Yes, JavaScript is single-threaded in terms of its main execution model, which means it has one main call stack and executes one piece of JavaScript code at a time. However, JavaScript can perform asynchronous operations such as timers, network requests, and user events using the runtime environment, Web APIs, the task queues, and the event loop. This allows JavaScript to handle asynchronous work without blocking the main thread.",
+    "code": "console.log(\"Start\");\n\nsetTimeout(() => {\n  console.log(\"Timer finished\");\n}, 1000);\n\nconsole.log(\"End\");\n\n// Output:\n// Start\n// End\n// Timer finished"
+  },
+  {
+    "id": 12,
+    "question": "What does it mean that JavaScript is dynamically typed?",
+    "answer": "JavaScript is dynamically typed because the type of a variable is determined at runtime rather than being explicitly declared when the variable is created. A variable can hold a value of one type and later hold a value of another type. For example, a variable can first contain a number and later contain a string.",
+    "code": "let value = 100;\nconsole.log(typeof value); // number\n\nvalue = \"Hello\";\nconsole.log(typeof value); // string\n\nvalue = true;\nconsole.log(typeof value); // boolean"
+  }
+]
