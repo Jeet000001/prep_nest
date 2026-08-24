@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "What is an object in JavaScript?",
+    "answer": "An object is a collection of properties, where each property has a key and a value. Values can be primitive values, arrays, functions, or even other objects. Objects are commonly used to represent real-world entities and group related data and behavior together.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25,\n  isDeveloper: true,\n  greet() {\n    console.log(\"Hello\");\n  }\n};\n\nconsole.log(user.name); // Jeet\nuser.greet();"
+  },
+  {
+    "id": 2,
+    "question": "How can you create an object?",
+    "answer": "There are several ways to create objects in JavaScript. The most common way is using an object literal. You can also use the new Object() constructor, Object.create(), constructor functions, or classes. In modern JavaScript, object literals and classes are the most common approaches.",
+    "code": "// Object literal\nconst user = {\n  name: \"Jeet\",\n  age: 25\n};\n\n// Object constructor\nconst user2 = new Object();\nuser2.name = \"John\";\n\n// Object.create()\nconst user3 = Object.create(null);\nuser3.name = \"Alex\";\n\n// Class\nclass User {\n  constructor(name) {\n    this.name = name;\n  }\n}\n\nconst user4 = new User(\"Sam\");"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between dot notation and bracket notation?",
+    "answer": "Dot notation and bracket notation are both used to access object properties. Dot notation uses object.property and is convenient when the property name is a valid JavaScript identifier and is known beforehand. Bracket notation uses object[property] and is useful when the property name is stored in a variable, contains special characters, or is dynamically determined.",
+    "code": "const user = {\n  name: \"Jeet\",\n  \"first-name\": \"Jeet Paul\"\n};\n\n// Dot notation\nconsole.log(user.name); // Jeet\n\n// Bracket notation\nconsole.log(user[\"name\"]); // Jeet\n\nconst property = \"name\";\nconsole.log(user[property]); // Jeet\n\n// Required for property names with special characters\nconsole.log(user[\"first-name\"]); // Jeet Paul"
+  },
+  {
+    "id": 4,
+    "question": "How can you add a property to an object?",
+    "answer": "You can add a property to an object using either dot notation or bracket notation. If the property does not already exist, JavaScript creates it with the assigned value.",
+    "code": "const user = {\n  name: \"Jeet\"\n};\n\n// Dot notation\nuser.age = 25;\n\n// Bracket notation\nuser[\"city\"] = \"Kolkata\";\n\nconsole.log(user);\n// { name: \"Jeet\", age: 25, city: \"Kolkata\" }"
+  },
+  {
+    "id": 5,
+    "question": "How can you delete a property from an object?",
+    "answer": "You can use the delete operator to remove a property from an object. After deletion, accessing that property normally returns undefined. The delete operator removes the property itself rather than simply setting its value to undefined.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25\n};\n\ndelete user.age;\n\nconsole.log(user); // { name: \"Jeet\" }\nconsole.log(user.age); // undefined"
+  },
+  {
+    "id": 6,
+    "question": "How can you check whether an object contains a property?",
+    "answer": "You can check whether an object contains a property using the in operator, Object.hasOwn(), or hasOwnProperty(). The in operator checks both the object and its prototype chain. Object.hasOwn() checks only the object's own properties and is the recommended modern approach for checking own properties.",
+    "code": "const user = {\n  name: \"Jeet\"\n};\n\nconsole.log(\"name\" in user); // true\nconsole.log(\"age\" in user);  // false\n\nconsole.log(Object.hasOwn(user, \"name\")); // true\nconsole.log(Object.hasOwn(user, \"age\"));  // false\n\n// Older approach:\nconsole.log(user.hasOwnProperty(\"name\")); // true"
+  },
+  {
+    "id": 7,
+    "question": "What is object destructuring?",
+    "answer": "Object destructuring is a JavaScript syntax that allows you to extract properties from an object and store them in variables. It makes it easier to work with object data without repeatedly accessing properties using dot notation.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25,\n  city: \"Kolkata\"\n};\n\nconst { name, age } = user;\n\nconsole.log(name); // Jeet\nconsole.log(age);  // 25\n\n// Rename while destructuring\nconst { city: location } = user;\nconsole.log(location); // Kolkata"
+  },
+  {
+    "id": 8,
+    "question": "What is object shorthand syntax?",
+    "answer": "Object shorthand syntax allows you to create object properties without repeating the property name when the property name and variable name are the same. It makes object literals shorter and cleaner.",
+    "code": "const name = \"Jeet\";\nconst age = 25;\n\n// Without shorthand\nconst user1 = {\n  name: name,\n  age: age\n};\n\n// With shorthand\nconst user2 = {\n  name,\n  age\n};\n\nconsole.log(user2);\n// { name: \"Jeet\", age: 25 }"
+  },
+  {
+    "id": 9,
+    "question": "What is computed property syntax?",
+    "answer": "Computed property syntax allows you to use an expression inside square brackets when creating an object property. JavaScript evaluates the expression and uses its result as the property name. It is useful when property names need to be created dynamically.",
+    "code": "const propertyName = \"username\";\nconst value = \"Jeet\";\n\nconst user = {\n  [propertyName]: value\n};\n\nconsole.log(user);\n// { username: \"Jeet\" }\n\nconst prefix = \"user\";\nconst id = 101;\n\nconst data = {\n  [`${prefix}_${id}`]: \"Active\"\n};\n\nconsole.log(data);\n// { user_101: \"Active\" }"
+  },
+  {
+    "id": 10,
+    "question": "What is the difference between shallow copy and deep copy?",
+    "answer": "A shallow copy creates a new object, but nested objects and arrays are still shared references with the original object. A deep copy creates a new object along with independent copies of its nested objects and arrays. Therefore, modifying a nested value in a shallow copy can affect the original, while a proper deep copy keeps nested data independent.",
+    "code": "const original = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\n// Shallow copy\nconst shallowCopy = { ...original };\nshallowCopy.address.city = \"Delhi\";\n\nconsole.log(original.address.city); // Delhi\n// Nested object is shared.\n\n// Deep copy\nconst original2 = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst deepCopy = structuredClone(original2);\ndeepCopy.address.city = \"Delhi\";\n\nconsole.log(original2.address.city); // Kolkata"
+  },
+  {
+    "id": 11,
+    "question": "How can you clone an object?",
+    "answer": "You can create a shallow clone using the spread syntax (...) or Object.assign(). For a deep clone, structuredClone() is the modern built-in option for many data types. JSON.parse(JSON.stringify()) is another older technique, but it has important limitations and does not correctly preserve values such as undefined, functions, symbols, Map, Set, and several other types.",
+    "code": "const user = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\n// Shallow clone\nconst copy1 = { ...user };\nconst copy2 = Object.assign({}, user);\n\n// Deep clone\nconst copy3 = structuredClone(user);\n\ncopy3.address.city = \"Delhi\";\n\nconsole.log(user.address.city); // Kolkata"
+  },
+  {
+    "id": 12,
+    "question": "What is Object.assign()?",
+    "answer": "Object.assign() copies enumerable own properties from one or more source objects into a target object and returns the target object. It performs a shallow copy, so nested objects are still shared references.",
+    "code": "const user = {\n  name: \"Jeet\"\n};\n\nconst details = {\n  age: 25,\n  city: \"Kolkata\"\n};\n\nconst result = Object.assign({}, user, details);\n\nconsole.log(result);\n// { name: \"Jeet\", age: 25, city: \"Kolkata\" }"
+  },
+  {
+    "id": 13,
+    "question": "What are Object.keys(), Object.values(), and Object.entries()?",
+    "answer": "Object.keys() returns an array containing the object's own enumerable property names. Object.values() returns an array containing the corresponding property values. Object.entries() returns an array containing key-value pairs as nested arrays. These methods are commonly used when iterating over objects.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25\n};\n\nconsole.log(Object.keys(user));\n// [\"name\", \"age\"]\n\nconsole.log(Object.values(user));\n// [\"Jeet\", 25]\n\nconsole.log(Object.entries(user));\n// [[\"name\", \"Jeet\"], [\"age\", 25]]\n\nObject.entries(user).forEach(([key, value]) => {\n  console.log(key, value);\n});"
+  },
+  {
+    "id": 14,
+    "question": "What is Object.freeze()?",
+    "answer": "Object.freeze() makes an object non-extensible and prevents its existing own properties from being added, removed, or changed. It is a shallow operation, meaning nested objects are not automatically frozen. Object.freeze() returns the same object.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25\n};\n\nObject.freeze(user);\n\nuser.age = 30;       // Does not change in non-strict mode\nuser.city = \"Kolkata\"; // Not added\n\ndelete user.name;    // Does not delete\n\nconsole.log(user);\n// { name: \"Jeet\", age: 25 }"
+  },
+  {
+    "id": 15,
+    "question": "What is Object.seal()?",
+    "answer": "Object.seal() prevents new properties from being added and prevents existing properties from being deleted. However, existing writable properties can still be modified. Like Object.freeze(), Object.seal() is shallow.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25\n};\n\nObject.seal(user);\n\nuser.age = 30;        // Allowed\nuser.city = \"Kolkata\"; // Not added\n\ndelete user.name;     // Not allowed\n\nconsole.log(user);\n// { name: \"Jeet\", age: 30 }"
+  },
+  {
+    "id": 16,
+    "question": "What is the difference between Object.freeze() and Object.seal()?",
+    "answer": "Both Object.freeze() and Object.seal() prevent new properties from being added and are shallow operations. The main difference is that Object.freeze() also prevents existing properties from being changed, while Object.seal() allows existing writable properties to be modified. In short, freeze() prevents adding, deleting, and modifying properties, while seal() prevents adding and deleting but allows modification of existing writable properties.",
+    "code": "const frozenUser = {\n  name: \"Jeet\"\n};\n\nObject.freeze(frozenUser);\nfrozenUser.name = \"John\";\n\nconsole.log(frozenUser.name); // Jeet\n\nconst sealedUser = {\n  name: \"Jeet\"\n};\n\nObject.seal(sealedUser);\nsealedUser.name = \"John\";\n\nconsole.log(sealedUser.name); // John"
+  }
+]

@@ -55,6 +55,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     closures: "Closures.json",
     "execution-context": "Execution_Context.json",
     "call-stack": "Call_Stack.json",
+    objects: "Objects.json",
   },
 };
 
