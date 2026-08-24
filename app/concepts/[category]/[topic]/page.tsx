@@ -48,6 +48,7 @@ const topicFiles: Record<string, Record<string, string>> = {
         "operators": "Operators.json",
         "scope": "Scope.json",
         "hoisting": "Hoisting.json",
+        "functions": "Functions.json",
   }
 };
 

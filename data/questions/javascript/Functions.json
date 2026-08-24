@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "What is a function in JavaScript?",
+    "answer": "A function is a reusable block of code designed to perform a specific task. A function can accept input through parameters, execute some logic, and optionally return a value. Functions help make code reusable, organized, and easier to maintain.",
+    "code": "function add(a, b) {\n  return a + b;\n}\n\nconst result = add(10, 20);\nconsole.log(result); // 30"
+  },
+  {
+    "id": 2,
+    "question": "What are the different ways to create a function?",
+    "answer": "There are several common ways to create functions in JavaScript: 1. Function declaration, 2. Function expression, 3. Arrow function, 4. Anonymous function, 5. Named function expression, and 6. Function constructor using new Function(). In modern JavaScript, function declarations, function expressions, and arrow functions are the most commonly used.",
+    "code": "// Function declaration\nfunction greet() {\n  console.log(\"Hello\");\n}\n\n// Function expression\nconst greetUser = function () {\n  console.log(\"Hello User\");\n};\n\n// Arrow function\nconst add = (a, b) => a + b;\n\n// Function constructor\nconst multiply = new Function(\"a\", \"b\", \"return a * b;\");"
+  },
+  {
+    "id": 3,
+    "question": "What is a function declaration?",
+    "answer": "A function declaration is a function defined using the function keyword followed by a function name. Function declarations are hoisted, so they can be called before they appear in the source code.",
+    "code": "greet();\n\nfunction greet() {\n  console.log(\"Hello, Jeet!\");\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is a function expression?",
+    "answer": "A function expression is a function that is created as part of an expression and usually assigned to a variable. The function can be anonymous or named. Function expressions are not callable before their assignment has been executed.",
+    "code": "const greet = function () {\n  console.log(\"Hello, Jeet!\");\n};\n\ngreet();"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between a function declaration and function expression?",
+    "answer": "The main difference is how they are defined and hoisted. A function declaration has a function name directly after the function keyword and its complete definition is hoisted, so it can be called before its declaration. A function expression is assigned to a variable and follows the hoisting behavior of that variable, so it cannot normally be called before the assignment is executed. Function declarations are often used for reusable named functions, while function expressions are useful when functions need to be assigned, passed, or conditionally created.",
+    "code": "// Function declaration\nsayHello(); // Works\n\nfunction sayHello() {\n  console.log(\"Hello\");\n}\n\n// Function expression\n// greet(); // ReferenceError\n\nconst greet = function () {\n  console.log(\"Hi\");\n};\n\ngreet();"
+  },
+  {
+    "id": 6,
+    "question": "What is an anonymous function?",
+    "answer": "An anonymous function is a function that does not have a name. Anonymous functions are commonly used as callbacks or assigned to variables. The function itself does not have an explicit name in its definition.",
+    "code": "const greet = function () {\n  console.log(\"Hello\");\n};\n\ngreet();\n\n// Anonymous function used as a callback\nsetTimeout(function () {\n  console.log(\"Executed later\");\n}, 1000);"
+  },
+  {
+    "id": 7,
+    "question": "What is a named function expression?",
+    "answer": "A named function expression is a function expression that has its own function name. The name is useful for debugging, recursion, and referring to the function from inside its own body. Unlike a function declaration, the function name of a named function expression is normally available only inside the function itself.",
+    "code": "const factorial = function calculateFactorial(n) {\n  if (n <= 1) {\n    return 1;\n  }\n\n  return n * calculateFactorial(n - 1);\n};\n\nconsole.log(factorial(5)); // 120"
+  },
+  {
+    "id": 8,
+    "question": "What are first-class functions?",
+    "answer": "JavaScript treats functions as first-class values. This means functions can be stored in variables, passed as arguments to other functions, returned from functions, and stored in objects or arrays. This feature allows JavaScript to support functional programming patterns.",
+    "code": "function greet() {\n  return \"Hello\";\n}\n\n// Store function in a variable\nconst fn = greet;\n\n// Pass function as an argument\nfunction execute(callback) {\n  console.log(callback());\n}\n\nexecute(greet);\n\n// Return a function\nfunction createFunction() {\n  return greet;\n}\n\nconst newFunction = createFunction();\nconsole.log(newFunction());"
+  },
+  {
+    "id": 9,
+    "question": "What are higher-order functions?",
+    "answer": "A higher-order function is a function that takes another function as an argument, returns a function, or does both. Higher-order functions are possible because JavaScript treats functions as first-class values. Common examples include map(), filter(), reduce(), and forEach().",
+    "code": "const numbers = [1, 2, 3, 4];\n\nconst doubled = numbers.map(function (number) {\n  return number * 2;\n});\n\nconsole.log(doubled); // [2, 4, 6, 8]\n\n// map() is a higher-order function\n// because it receives a function as an argument."
+  },
+  {
+    "id": 10,
+    "question": "What is a callback function?",
+    "answer": "A callback function is a function passed to another function as an argument so that it can be called later or when a particular operation is completed. Callbacks are commonly used with array methods, event handlers, timers, and asynchronous operations.",
+    "code": "function greet(name) {\n  console.log(`Hello, ${name}`);\n}\n\nfunction processUser(callback) {\n  const name = \"Jeet\";\n  callback(name);\n}\n\nprocessUser(greet);\n\n// greet is passed as a callback."
+  },
+  {
+    "id": 11,
+    "question": "What is a pure function?",
+    "answer": "A pure function is a function that always produces the same output for the same input and does not cause side effects. It does not modify external variables, objects, or other state outside the function. Pure functions are easier to test, understand, and debug.",
+    "code": "function add(a, b) {\n  return a + b;\n}\n\nconsole.log(add(2, 3)); // 5\nconsole.log(add(2, 3)); // 5\n\n// Same inputs always produce the same output.\n// The function does not modify anything outside itself."
+  },
+  {
+    "id": 12,
+    "question": "What is an impure function?",
+    "answer": "An impure function is a function that produces side effects or does not always return the same output for the same input. A function is impure if it modifies external state, depends on external mutable state, performs I/O, or produces different results for the same inputs because of outside factors.",
+    "code": "let count = 0;\n\nfunction increment() {\n  count++;\n  return count;\n}\n\nconsole.log(increment()); // 1\nconsole.log(increment()); // 2\n\n// The function modifies external state,\n// so it is impure."
+  },
+  {
+    "id": 13,
+    "question": "What are default parameters?",
+    "answer": "Default parameters allow you to provide a default value for a function parameter when the caller does not provide a value or passes undefined. They help prevent undefined parameter values and make functions easier to use.",
+    "code": "function greet(name = \"Guest\") {\n  return `Hello, ${name}`;\n}\n\nconsole.log(greet(\"Jeet\")); // Hello, Jeet\nconsole.log(greet());        // Hello, Guest\n\nconsole.log(greet(undefined)); // Hello, Guest"
+  },
+  {
+    "id": 14,
+    "question": "What are rest parameters?",
+    "answer": "Rest parameters use the ... syntax to collect multiple function arguments into a single array. They allow a function to accept any number of arguments. The rest parameter must be the last parameter in the function definition.",
+    "code": "function sum(...numbers) {\n  return numbers.reduce((total, number) => {\n    return total + number;\n  }, 0);\n}\n\nconsole.log(sum(10, 20));       // 30\nconsole.log(sum(10, 20, 30));    // 60\nconsole.log(sum(1, 2, 3, 4, 5)); // 15"
+  },
+  {
+    "id": 15,
+    "question": "What is the arguments object?",
+    "answer": "The arguments object is an array-like object available inside regular functions. It contains all the arguments passed to the function, even if they were not declared as parameters. It has a length property and indexed values, but it is not a real array and does not have all array methods. In modern JavaScript, rest parameters are usually preferred when you need to work with a variable number of arguments.",
+    "code": "function showArguments(a, b) {\n  console.log(arguments.length);\n  console.log(arguments[0]);\n  console.log(arguments[1]);\n  console.log(arguments[2]);\n}\n\nshowArguments(10, 20, 30);\n\n// Output:\n// 3\n// 10\n// 20\n// 30"
+  },
+  {
+    "id": 16,
+    "question": "Can arrow functions access the arguments object?",
+    "answer": "Arrow functions do not have their own arguments object. If an arrow function tries to access arguments, it looks for arguments in its surrounding lexical scope. If the surrounding scope does not provide arguments, a ReferenceError can occur. When you need to access all arguments inside an arrow function, use rest parameters instead.",
+    "code": "function regularFunction() {\n  const arrowFunction = () => {\n    console.log(arguments[0]);\n  };\n\n  arrowFunction();\n}\n\nregularFunction(\"Hello\"); // Hello\n\n// Arrow function uses the arguments\n// object from the surrounding regular function.\n\nconst sum = (...numbers) => {\n  return numbers.reduce((total, n) => total + n, 0);\n};\n\nconsole.log(sum(10, 20, 30)); // 60"
+  }
+]
