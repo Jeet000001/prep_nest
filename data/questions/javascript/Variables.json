@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "question": "What is the difference between var, let, and const?",
+    "answer": "var, let, and const are used to declare variables in JavaScript, but they differ mainly in scope, redeclaration, and reassignment. var is function-scoped and can be redeclared and reassigned. let is block-scoped and can be reassigned but cannot be redeclared in the same scope. const is block-scoped and cannot be reassigned or redeclared in the same scope. In modern JavaScript, let and const are preferred over var. Use const by default and use let when the value needs to change.",
+    "code": "var age = 20;\nvar age = 25; // Allowed\nage = 30;     // Allowed\n\nlet name = \"Jeet\";\n// let name = \"John\"; // Error\nname = \"John\";         // Allowed\n\nconst country = \"India\";\n// const country = \"USA\"; // Error\n// country = \"USA\";       // Error"
+  },
+  {
+    "id": 2,
+    "question": "What is variable declaration, initialization, and assignment?",
+    "answer": "Declaration means creating a variable without giving it a value. Initialization means giving a variable its first value when it is declared. Assignment means giving or changing the value of a variable after it has been declared. For example, in 'let age = 25', 'let age' is the declaration and '= 25' is the initialization. When we later write 'age = 30', that is assignment.",
+    "code": "// Declaration\nlet age;\n\n// Initialization\nlet name = \"Jeet\";\n\n// Assignment\nage = 25;\nage = 30;"
+  },
+  {
+    "id": 3,
+    "question": "Can a const variable be modified?",
+    "answer": "A const variable cannot be reassigned to a different value. However, if the const variable stores an object or an array, the contents of that object or array can still be modified. The const keyword makes the variable binding constant; it does not make the entire object or array immutable.",
+    "code": "const user = {\n  name: \"Jeet\"\n};\n\n// Allowed: modifying object property\nuser.name = \"John\";\n\n// Not allowed: reassigning the variable\n// user = { name: \"Alex\" }; // TypeError\n\nconst numbers = [1, 2, 3];\n\n// Allowed: modifying the array\nnumbers.push(4);\n\n// Not allowed: reassigning the array\n// numbers = [5, 6]; // TypeError"
+  },
+  {
+    "id": 4,
+    "question": "Can you redeclare a let variable?",
+    "answer": "No. A let variable cannot be redeclared in the same scope. If you try to declare another variable with the same name using let in the same scope, JavaScript throws a SyntaxError. However, a let variable can be declared with the same name in a different nested block because each block has its own scope.",
+    "code": "let age = 25;\n\n// let age = 30; // SyntaxError: Identifier 'age' has already been declared\n\n{\n  let age = 30; // Allowed: different block scope\n  console.log(age); // 30\n}\n\nconsole.log(age); // 25"
+  },
+  {
+    "id": 5,
+    "question": "Can you redeclare a var variable?",
+    "answer": "Yes. A var variable can be redeclared in the same scope without causing an error. If the variable is redeclared with a new value, its value is updated. This behavior is one reason var can sometimes lead to unexpected bugs, and modern JavaScript generally prefers let and const.",
+    "code": "var age = 25;\nvar age = 30;\n\nconsole.log(age); // 30\n\nvar name = \"Jeet\";\nvar name = \"John\";\n\nconsole.log(name); // John"
+  },
+  {
+    "id": 6,
+    "question": "What is the scope of var, let, and const?",
+    "answer": "var is function-scoped, while let and const are block-scoped. Function scope means a var variable is available throughout the function in which it is declared. Block scope means let and const are available only inside the block where they are declared, such as an if statement, for loop, or pair of curly braces.",
+    "code": "function example() {\n  if (true) {\n    var a = 10;\n    let b = 20;\n    const c = 30;\n  }\n\n  console.log(a); // 10\n  // console.log(b); // ReferenceError\n  // console.log(c); // ReferenceError\n}\n\nexample();"
+  },
+  {
+    "id": 7,
+    "question": "What is the Temporal Dead Zone (TDZ)?",
+    "answer": "The Temporal Dead Zone, or TDZ, is the period between entering a scope and the point where a let or const variable is declared. During this period, the variable exists in the scope but cannot be accessed. Trying to access it before its declaration results in a ReferenceError. The TDZ helps prevent using variables before they are properly initialized.",
+    "code": "{\n  // TDZ starts here\n  console.log(name); // ReferenceError\n\n  let name = \"Jeet\";\n  // TDZ ends here\n\n  console.log(name); // Jeet\n}"
+  },
+  {
+    "id": 8,
+    "question": "Why does accessing a let or const variable before declaration throw an error?",
+    "answer": "let and const variables are hoisted, but they are not initialized during the hoisting phase. They remain in the Temporal Dead Zone until the execution reaches their declaration. Therefore, trying to access them before the declaration results in a ReferenceError instead of returning undefined.",
+    "code": "console.log(name); // ReferenceError\n\nlet name = \"Jeet\";\n\n// The variable cannot be accessed before\n// its declaration because it is in the TDZ."
+  },
+  {
+    "id": 9,
+    "question": "Why can var be accessed before declaration?",
+    "answer": "var declarations are hoisted to the top of their function or global scope and are automatically initialized with undefined. Therefore, accessing a var variable before its declaration does not throw an error; it returns undefined. However, the assignment happens only when execution reaches the assignment statement.",
+    "code": "console.log(name); // undefined\n\nvar name = \"Jeet\";\n\nconsole.log(name); // Jeet"
+  },
+  {
+    "id": 10,
+    "question": "When should you use let instead of var?",
+    "answer": "Use let when you need to reassign a variable during the program and the variable should have block scope. In modern JavaScript, let is generally preferred over var because block scope makes the code more predictable and helps prevent accidental access or modification outside the intended block.",
+    "code": "let count = 0;\n\nfor (let i = 0; i < 3; i++) {\n  count++;\n}\n\nconsole.log(count); // 3\n\n// 'i' is only available inside the for loop.\n// console.log(i); // ReferenceError"
+  },
+  {
+    "id": 11,
+    "question": "Why is const preferred over let when reassignment is not required?",
+    "answer": "const is preferred when a variable does not need to be reassigned because it clearly communicates that the variable binding should remain the same. This makes the code easier to understand, reduces accidental reassignment, and makes the variable's intent clearer. A common modern JavaScript practice is to use const by default and use let only when reassignment is actually required.",
+    "code": "const userName = \"Jeet\";\nconst age = 25;\n\n// These values are not reassigned,\n// so const clearly communicates the intent.\n\nlet score = 0;\nscore = 10; // let is appropriate because reassignment is required."
+  }
+]
