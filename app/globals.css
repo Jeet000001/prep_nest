@@ -33,3 +33,8 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.shiki-code pre {
+  margin: 0;
+  padding: 1rem;
+}

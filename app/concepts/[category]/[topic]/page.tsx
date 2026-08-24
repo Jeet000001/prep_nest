@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { notFound } from "next/navigation";
+import { codeToHtml } from "shiki";
 
 type Question = {
   id: number;
@@ -66,6 +67,18 @@ export default async function TopicPage({
   );
   const file = await fs.readFile(filePath, "utf-8");
   const questions = JSON.parse(file) as Question[];
+  const language = category === "html" ? "html" : "css";
+  const highlightedQuestions = await Promise.all(
+    questions.map(async (item) => ({
+      ...item,
+      highlightedCode: item.code
+        ? await codeToHtml(item.code, {
+            lang: language,
+            theme: "slack-dark",
+          })
+        : null,
+    })),
+  );
 
   return (
     <div className="flex h-full min-h-0 w-full flex-col rounded-2xl border border-white/10 p-4 sm:p-6">
@@ -79,7 +92,7 @@ export default async function TopicPage({
       </header>
 
       <div className="hide-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto pt-4">
-        {questions.map((item) => (
+        {highlightedQuestions.map((item) => (
           <article
             key={item.id}
             className="rounded-xl border border-white/10 bg-white/3 p-4"
@@ -88,10 +101,11 @@ export default async function TopicPage({
             <p className="mt-3 whitespace-pre-line text-sm leading-7 text-neutral-400">
               {item.answer}
             </p>
-            {item.code && (
-              <pre className="mt-4 overflow-x-auto rounded-lg bg-black/30 p-4 text-sm leading-6 text-amber-100">
-                <code>{item.code}</code>
-              </pre>
+            {item.highlightedCode && (
+              <div
+                className="shiki-code mt-4 overflow-x-auto rounded-lg text-sm leading-6"
+                dangerouslySetInnerHTML={{ __html: item.highlightedCode }}
+              />
             )}
           </article>
         ))}
