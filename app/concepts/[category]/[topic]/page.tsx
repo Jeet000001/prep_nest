@@ -43,6 +43,7 @@ const topicFiles: Record<string, Record<string, string>> = {
   javascript: {
         introduction: "Introduction.json",
         variables: "Variables.json",
+        "data-types": "Data_Types.json",
   }
 };
 

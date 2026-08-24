@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "question": "What are the primitive data types in JavaScript?",
+    "answer": "JavaScript has seven primitive data types: string, number, bigint, boolean, undefined, symbol, and null. Primitive values are immutable and are not objects. They represent a single value. For example, a string stores text, a number stores numeric values, and a boolean stores true or false.",
+    "code": "const name = \"Jeet\";        // string\nconst age = 25;              // number\nconst bigNumber = 123n;       // bigint\nconst isLoggedIn = true;      // boolean\nlet score;                    // undefined\nconst id = Symbol(\"id\");     // symbol\nconst data = null;            // null"
+  },
+  {
+    "id": 2,
+    "question": "What are reference data types in JavaScript?",
+    "answer": "Reference values are values that refer to objects stored in memory. Common reference types include objects, arrays, and functions. Unlike primitive values, reference values can contain multiple values and are mutable. Variables holding reference values store a reference to the object rather than the object value itself.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25\n};\n\nconst numbers = [10, 20, 30];\n\nfunction greet() {\n  console.log(\"Hello\");\n}\n\n// Object, Array, and Function are reference values."
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between primitive and reference values?",
+    "answer": "Primitive values are simple, immutable values, while reference values refer to objects in memory and can be mutable. When a primitive value is copied, the actual value is copied. When a reference value is copied, the reference to the same object is copied. Therefore, modifying one copied reference can affect the original object.",
+    "code": "// Primitive\nlet a = 10;\nlet b = a;\n\nb = 20;\n\nconsole.log(a); // 10\nconsole.log(b); // 20\n\n// Reference\nconst user1 = { name: \"Jeet\" };\nconst user2 = user1;\n\nuser2.name = \"John\";\n\nconsole.log(user1.name); // John\nconsole.log(user2.name); // John"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between null and undefined?",
+    "answer": "undefined usually means a variable has been declared but has not been assigned a value, or that a requested property or function result does not provide a value. null is an intentional value that represents the absence of an object or value. In simple terms, undefined usually means 'value is not available or not assigned', while null means 'there is intentionally no value'.",
+    "code": "let user;\nconsole.log(user); // undefined\n\nconst selectedUser = null;\nconsole.log(selectedUser); // null\n\nconst person = {};\nconsole.log(person.age); // undefined"
+  },
+  {
+    "id": 5,
+    "question": "What is NaN?",
+    "answer": "NaN stands for 'Not-a-Number'. It is a special numeric value that represents an invalid or unsuccessful numeric operation. For example, trying to convert a non-numeric string into a number can produce NaN. Even though its name says 'Not-a-Number', NaN is actually a value of the number type.",
+    "code": "const result = \"hello\" * 10;\n\nconsole.log(result); // NaN\n\nconst value = Number(\"abc\");\nconsole.log(value); // NaN"
+  },
+  {
+    "id": 6,
+    "question": "What is the type of NaN?",
+    "answer": "The type of NaN is number. NaN is a special numeric value defined by the JavaScript Number type. Therefore, typeof NaN returns 'number'.",
+    "code": "console.log(typeof NaN); // \"number\"\n\nconsole.log(Number.isNaN(NaN)); // true"
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between undefined and an undeclared variable?",
+    "answer": "undefined means a variable exists but currently has the value undefined. An undeclared variable means no variable with that name has been declared in the accessible scope. Accessing an undeclared variable normally causes a ReferenceError, while accessing a declared variable whose value is undefined does not.",
+    "code": "let user;\n\nconsole.log(user); // undefined\n\nconsole.log(age); // ReferenceError: age is not defined\n\n// 'user' is declared, but 'age' is undeclared."
+  },
+  {
+    "id": 8,
+    "question": "What is the typeof operator?",
+    "answer": "The typeof operator is used to determine the type of a value. It returns a string describing the type of the operand. It is commonly used to check primitive types such as string, number, boolean, undefined, bigint, symbol, and function.",
+    "code": "console.log(typeof \"Hello\");     // \"string\"\nconsole.log(typeof 25);            // \"number\"\nconsole.log(typeof true);           // \"boolean\"\nconsole.log(typeof undefined);      // \"undefined\"\nconsole.log(typeof 123n);           // \"bigint\"\nconsole.log(typeof Symbol(\"id\"));   // \"symbol\"\nconsole.log(typeof function() {});  // \"function\""
+  },
+  {
+    "id": 9,
+    "question": "What are the limitations of typeof?",
+    "answer": "typeof is useful but has some important limitations. It returns 'object' for arrays, objects, and null, so it cannot reliably distinguish between them. It returns 'function' for functions even though functions are technically objects. It also cannot tell you the specific class or constructor of an object. For example, typeof [] and typeof {} both return 'object'.",
+    "code": "console.log(typeof []);        // \"object\"\nconsole.log(typeof {});        // \"object\"\nconsole.log(typeof null);      // \"object\"\nconsole.log(typeof function() {}); // \"function\"\n\n// typeof cannot distinguish an array from a normal object."
+  },
+  {
+    "id": 10,
+    "question": "Why does typeof null return \"object\"?",
+    "answer": "typeof null returns 'object' because of a historical bug in the early implementation of JavaScript. The original representation of JavaScript values used type tags, and null was incorrectly represented in a way that made typeof identify it as an object. This behavior became part of the language and cannot be changed today without breaking existing JavaScript code. To check specifically for null, use value === null.",
+    "code": "console.log(typeof null); // \"object\"\n\nconst value = null;\n\nconsole.log(value === null); // true"
+  },
+  {
+    "id": 11,
+    "question": "How can you check whether a value is an array?",
+    "answer": "The recommended way to check whether a value is an array is Array.isArray(). It returns true if the value is an array and false otherwise. You should prefer Array.isArray() over typeof because typeof an array returns 'object'.",
+    "code": "const numbers = [1, 2, 3];\nconst user = { name: \"Jeet\" };\n\nconsole.log(Array.isArray(numbers)); // true\nconsole.log(Array.isArray(user));    // false\n\nconsole.log(typeof numbers); // \"object\""
+  },
+  {
+    "id": 12,
+    "question": "How can you check whether a value is NaN?",
+    "answer": "The recommended way to check whether a value is specifically NaN is Number.isNaN(). It returns true only when the value is actually the NaN value. The global isNaN() function is different because it first attempts to convert the value to a number, which can produce unexpected results. Therefore, Number.isNaN() is generally safer and more precise.",
+    "code": "console.log(Number.isNaN(NaN));       // true\nconsole.log(Number.isNaN(\"hello\"));   // false\nconsole.log(Number.isNaN(10));         // false\n\n// Global isNaN() performs type conversion\nconsole.log(isNaN(\"hello\"));           // true\nconsole.log(Number.isNaN(\"hello\"));    // false"
+  }
+]
