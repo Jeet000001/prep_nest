@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "question": "What is hoisting in JavaScript?",
+    "answer": "Hoisting is JavaScript's behavior where declarations are processed before the code in their scope is executed. This allows certain declarations, such as var variables and function declarations, to be referenced before their position in the source code. However, hoisting does not mean that the actual assignment or initialization is moved to the top.",
+    "code": "console.log(name); // undefined\n\nvar name = \"Jeet\";\n\n// Conceptually, JavaScript processes it like:\n// var name;\n// console.log(name);\n// name = \"Jeet\";"
+  },
+  {
+    "id": 2,
+    "question": "Are let and const hoisted?",
+    "answer": "Yes, let and const are hoisted in the sense that their declarations are processed when the scope is created. However, unlike var, they are not initialized with undefined. They remain in the Temporal Dead Zone (TDZ) until execution reaches their declaration. Therefore, accessing them before their declaration causes a ReferenceError.",
+    "code": "console.log(name); // ReferenceError\n\nlet name = \"Jeet\";\n\nconsole.log(age); // ReferenceError\n\nconst age = 25;"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between hoisting of var, let, and const?",
+    "answer": "var, let, and const declarations are all processed before execution, but their initialization behavior is different. A var variable is initialized with undefined, so it can be accessed before its declaration. let and const are not initialized before execution reaches their declarations, so they remain in the Temporal Dead Zone and accessing them early throws a ReferenceError. Additionally, const must be initialized at the time of declaration.",
+    "code": "// var\nconsole.log(a); // undefined\nvar a = 10;\n\n// let\n// console.log(b); // ReferenceError\nlet b = 20;\n\n// const\n// console.log(c); // ReferenceError\nconst c = 30;"
+  },
+  {
+    "id": 4,
+    "question": "What is hoisting of function declarations?",
+    "answer": "Function declarations are hoisted with their complete function definition. This means you can call a function before its declaration appears in the code. JavaScript makes the function available before executing the surrounding code.",
+    "code": "greet();\n\nfunction greet() {\n  console.log(\"Hello, Jeet!\");\n}\n\n// Output:\n// Hello, Jeet!"
+  },
+  {
+    "id": 5,
+    "question": "Are function expressions hoisted?",
+    "answer": "Function expressions follow the hoisting behavior of the variable used to store the function. If a function expression is assigned to a var variable, the variable is hoisted as undefined, but the function assignment happens later. If it is assigned to let or const, accessing it before the declaration causes a ReferenceError because of the Temporal Dead Zone. Therefore, a function expression cannot normally be called before its assignment is executed.",
+    "code": "// var function expression\nsayHello(); // TypeError: sayHello is not a function\n\nvar sayHello = function () {\n  console.log(\"Hello\");\n};\n\n// let/const function expression\n// greet(); // ReferenceError\nconst greet = function () {\n  console.log(\"Hi\");\n};"
+  },
+  {
+    "id": 6,
+    "question": "What happens when you access a variable before its declaration?",
+    "answer": "The result depends on how the variable was declared. If it was declared with var, accessing it before the declaration returns undefined because var is hoisted and initialized with undefined. If it was declared with let or const, accessing it before the declaration throws a ReferenceError because the variable is in the Temporal Dead Zone. If the variable was never declared at all, accessing it also causes a ReferenceError.",
+    "code": "console.log(a); // undefined\nvar a = 10;\n\n// console.log(b); // ReferenceError\nlet b = 20;\n\n// console.log(c); // ReferenceError\nconst c = 30;\n\n// console.log(d); // ReferenceError\n// d was never declared"
+  },
+  {
+    "id": 7,
+    "question": "What is the Temporal Dead Zone?",
+    "answer": "The Temporal Dead Zone (TDZ) is the period between entering a scope and the point where a let or const variable is initialized. During this period, the variable exists in the scope but cannot be accessed. Trying to access it before its declaration results in a ReferenceError. The TDZ ends when execution reaches the variable's declaration and initialization.",
+    "code": "{\n  // TDZ starts here\n  console.log(name); // ReferenceError\n\n  let name = \"Jeet\";\n  // TDZ ends here\n\n  console.log(name); // Jeet\n}"
+  },
+  {
+    "id": 8,
+    "question": "Why can a function declaration be called before its declaration?",
+    "answer": "A function declaration can be called before its declaration because JavaScript hoists the entire function declaration, including its function body, during the creation of the scope. As a result, the function is already available when the code starts executing.",
+    "code": "calculateSum(10, 20);\n\nfunction calculateSum(a, b) {\n  return a + b;\n}\n\n// Output:\n// 30"
+  }
+]

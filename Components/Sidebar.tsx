@@ -83,6 +83,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Type Coercion", href: "/concepts/javascript/type-coercion" },
       { name: "Operators", href: "/concepts/javascript/operators" },
       { name: "Scope", href: "/concepts/javascript/scope" },
+      { name: "Hoisting", href: "/concepts/javascript/hoisting" },
       { name: "Functions", href: "/concepts/javascript/functions" },
       { name: "Arrays", href: "/concepts/javascript/arrays" },
       { name: "Objects", href: "/concepts/javascript/objects" },    
