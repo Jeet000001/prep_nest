@@ -71,7 +71,14 @@ export default async function TopicPage({
   );
   const file = await fs.readFile(filePath, "utf-8");
   const questions = JSON.parse(file) as Question[];
-  const language = category === "html" ? "html" : "css";
+  const language =
+    category === "html"
+      ? "html"
+      : category === "javascript"
+        ? "javascript"
+        : category === "react"
+          ? "tsx"
+          : "css";
   const highlightedQuestions = await Promise.all(
     questions.map(async (item) => ({
       ...item,
