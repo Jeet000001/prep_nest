@@ -60,6 +60,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     destructuring: "Destructuring.json",
     prototype: "Prototype.json",
     "classes-OOP": "Classes_&_OOP.json",
+    immutability: "Immutability.json",
   },
 };
 

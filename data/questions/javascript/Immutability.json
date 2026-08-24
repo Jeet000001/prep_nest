@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What does immutability mean in JavaScript?",
+    "answer": "Immutability means that once a value or data structure is created, it should not be directly changed. Instead of modifying the existing object or array, you create a new version with the required changes. JavaScript does not make objects and arrays immutable by default, so immutability is a programming practice unless you use mechanisms such as Object.freeze().",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25\n};\n\n// Instead of changing the original object:\n// user.age = 26;\n\n// Create a new object\nconst updatedUser = {\n  ...user,\n  age: 26\n};\n\nconsole.log(user.age);        // 25\nconsole.log(updatedUser.age); // 26"
+  },
+  {
+    "id": 2,
+    "question": "Why is immutability important in frontend development?",
+    "answer": "Immutability makes state changes easier to track and predict. It is especially important in frontend frameworks such as React because creating a new object or array makes it easier to detect that state has changed. Immutability also reduces unexpected side effects, makes debugging easier, and helps keep application state predictable.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25\n};\n\n// Immutable update\nconst updatedUser = {\n  ...user,\n  age: 26\n};\n\nconsole.log(user === updatedUser); // false\n\n// A new reference makes the change easy to detect."
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between mutation and immutability?",
+    "answer": "Mutation means directly changing an existing object or array. Immutability means creating a new object or array instead of changing the original. For example, push() mutates an array, while the spread syntax can be used to create a new array with additional elements.",
+    "code": "const numbers = [1, 2, 3];\n\n// Mutation\nnumbers.push(4);\nconsole.log(numbers); // [1, 2, 3, 4]\n\n// Immutable approach\nconst original = [1, 2, 3];\nconst updated = [...original, 4];\n\nconsole.log(original); // [1, 2, 3]\nconsole.log(updated);  // [1, 2, 3, 4]"
+  },
+  {
+    "id": 4,
+    "question": "How can you update an object without mutating it?",
+    "answer": "You can use the spread syntax to create a new object containing the existing properties and then overwrite the property that needs to be updated. This keeps the original object unchanged.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25,\n  city: \"Kolkata\"\n};\n\nconst updatedUser = {\n  ...user,\n  age: 26\n};\n\nconsole.log(user);\n// { name: \"Jeet\", age: 25, city: \"Kolkata\" }\n\nconsole.log(updatedUser);\n// { name: \"Jeet\", age: 26, city: \"Kolkata\" }"
+  },
+  {
+    "id": 5,
+    "question": "How can you update an array without mutating it?",
+    "answer": "You can create a new array using non-mutating methods or spread syntax. For example, you can use map() to update an item, filter() to remove items, or the spread syntax to add items. The original array remains unchanged.",
+    "code": "const users = [\n  { id: 1, name: \"Jeet\" },\n  { id: 2, name: \"John\" }\n];\n\n// Update an item without mutating the array\nconst updatedUsers = users.map(user =>\n  user.id === 1\n    ? { ...user, name: \"Alex\" }\n    : user\n);\n\nconsole.log(users);\n// Original array remains unchanged\n\nconsole.log(updatedUsers);\n// First user's name is now \"Alex\""
+  },
+  {
+    "id": 6,
+    "question": "Does const make an object immutable?",
+    "answer": "No. const prevents the variable from being reassigned to a different value, but it does not make the object itself immutable. The properties of a const object can still be changed, added, or deleted unless the object is explicitly made non-extensible or frozen.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25\n};\n\n// Allowed\nuser.age = 26;\nuser.city = \"Kolkata\";\n\ndelete user.age;\n\nconsole.log(user);\n\n// Not allowed:\n// user = { name: \"John\" };\n// This causes a TypeError because the const variable\n// cannot be reassigned."
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between shallow copy and deep copy?",
+    "answer": "A shallow copy creates a new outer object or array, but nested objects and arrays still share the same references with the original. A deep copy creates independent copies of the nested data as well. Spread syntax and Object.assign() create shallow copies, while structuredClone() can be used for a deep copy of many supported data types.",
+    "code": "const original = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\n// Shallow copy\nconst shallowCopy = { ...original };\n\nshallowCopy.address.city = \"Delhi\";\n\nconsole.log(original.address.city); // Delhi\n// Nested object is shared.\n\n// Deep copy\nconst original2 = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst deepCopy = structuredClone(original2);\n\ndeepCopy.address.city = \"Delhi\";\n\nconsole.log(original2.address.city); // Kolkata\n// Nested object is independent."
+  }
+]
