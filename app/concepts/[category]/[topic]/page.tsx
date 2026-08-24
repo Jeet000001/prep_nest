@@ -51,6 +51,7 @@ const topicFiles: Record<string, Record<string, string>> = {
         functions: "Functions.json",
         "arrow-functions": "Arrow_Functions.json",
         "this-keyword": "this_Keyword.json",
+        "call-apply-bind": "Call_Apply_Bind.json",
   }
 };
 

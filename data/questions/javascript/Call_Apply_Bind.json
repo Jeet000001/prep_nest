@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "question": "What is the call() method?",
+    "answer": "The call() method is used to invoke a regular JavaScript function immediately while explicitly setting the value of this. Arguments are passed to the function individually after the this value. It is useful when you want to borrow a function or control its this value.",
+    "code": "function greet(message) {\n  console.log(`${message}, ${this.name}`);\n}\n\nconst user = {\n  name: \"Jeet\"\n};\n\ngreet.call(user, \"Hello\");\n// Output: Hello, Jeet"
+  },
+  {
+    "id": 2,
+    "question": "What is the apply() method?",
+    "answer": "The apply() method is similar to call(). It immediately invokes a regular function while explicitly setting the value of this. The main difference is that apply() accepts the function arguments as a single array or array-like object.",
+    "code": "function greet(message, age) {\n  console.log(`${message}, ${this.name}. Age: ${age}`);\n}\n\nconst user = {\n  name: \"Jeet\"\n};\n\ngreet.apply(user, [\"Hello\", 25]);\n// Output: Hello, Jeet. Age: 25"
+  },
+  {
+    "id": 3,
+    "question": "What is the bind() method?",
+    "answer": "The bind() method creates and returns a new function with this permanently bound to the specified value. Unlike call() and apply(), bind() does not execute the function immediately. The returned function can be called later. bind() can also be used to pre-set some function arguments.",
+    "code": "function greet(message) {\n  console.log(`${message}, ${this.name}`);\n}\n\nconst user = {\n  name: \"Jeet\"\n};\n\nconst boundGreet = greet.bind(user);\n\n// Function is not executed yet.\nboundGreet(\"Hello\");\n// Output: Hello, Jeet"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between call(), apply(), and bind()?",
+    "answer": "All three methods can explicitly set this for a regular function, but they differ in execution and argument handling. call() immediately executes the function and accepts arguments individually. apply() immediately executes the function and accepts arguments as an array or array-like object. bind() does not execute the function immediately; instead, it returns a new function with this bound to the specified value.",
+    "code": "function greet(message, age) {\n  console.log(`${message}, ${this.name}. Age: ${age}`);\n}\n\nconst user = {\n  name: \"Jeet\"\n};\n\n// call() - executes immediately\ngreet.call(user, \"Hello\", 25);\n\n// apply() - executes immediately, arguments as array\ngreet.apply(user, [\"Hello\", 25]);\n\n// bind() - returns a new function\nconst boundGreet = greet.bind(user, \"Hello\", 25);\nboundGreet();"
+  },
+  {
+    "id": 5,
+    "question": "When would you use bind()?",
+    "answer": "You would use bind() when you need to create a new function that always uses a specific this value. It is especially useful when passing object methods as callbacks, because extracting a method can cause it to lose its original this value. bind() can also be useful when you want to create a partially applied function by pre-setting some arguments.",
+    "code": "const user = {\n  name: \"Jeet\",\n  greet() {\n    console.log(`Hello, ${this.name}`);\n  }\n};\n\n// Without bind(), this can be lost\nconst greet = user.greet;\n\n// With bind(), this is preserved\nconst boundGreet = user.greet.bind(user);\n\nsetTimeout(boundGreet, 1000);\n// Output after 1 second:\n// Hello, Jeet"
+  },
+  {
+    "id": 6,
+    "question": "Does bind() immediately execute a function?",
+    "answer": "No. bind() does not immediately execute the function. It returns a new function with the specified this value and optionally some pre-filled arguments. The returned function must be called separately to execute the original function.",
+    "code": "function greet() {\n  console.log(`Hello, ${this.name}`);\n}\n\nconst user = {\n  name: \"Jeet\"\n};\n\nconst boundGreet = greet.bind(user);\n\n// Nothing is printed here.\n\nboundGreet();\n// Output: Hello, Jeet"
+  },
+  {
+    "id": 7,
+    "question": "What is function borrowing?",
+    "answer": "Function borrowing means using a method that belongs to one object with another object by explicitly setting this to the second object. call(), apply(), and bind() can be used for function borrowing. This allows you to reuse an existing method without duplicating the function.",
+    "code": "const person1 = {\n  name: \"Jeet\",\n  greet() {\n    console.log(`Hello, ${this.name}`);\n  }\n};\n\nconst person2 = {\n  name: \"John\"\n};\n\n// Borrow greet() from person1\nperson1.greet.call(person2);\n\n// Output:\n// Hello, John"
+  },
+  {
+    "id": 8,
+    "question": "How can you change the value of this using call()?",
+    "answer": "You can change the value of this by passing the desired object as the first argument to call(). The function is then executed immediately with that object as its this value. This works with regular functions because their this value is determined by how they are called.",
+    "code": "function introduce() {\n  console.log(`My name is ${this.name}`);\n}\n\nconst user1 = {\n  name: \"Jeet\"\n};\n\nconst user2 = {\n  name: \"John\"\n};\n\nintroduce.call(user1); // My name is Jeet\nintroduce.call(user2); // My name is John"
+  },
+  {
+    "id": 9,
+    "question": "How can you pass arguments using apply()?",
+    "answer": "With apply(), the first argument specifies the value of this, and the second argument contains the function's arguments as an array or array-like object. The function is executed immediately with those arguments.",
+    "code": "function calculateTotal(price, tax) {\n  return price + tax;\n}\n\nconst context = {};\nconst args = [100, 20];\n\nconst total = calculateTotal.apply(context, args);\n\nconsole.log(total); // 120\n\n// args are passed as an array:\n// [100, 20]"
+  }
+]
