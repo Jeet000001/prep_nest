@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is scope in JavaScript?",
+    "answer": "Scope defines where a variable or function can be accessed in a JavaScript program. In simple terms, scope determines the visibility and lifetime of variables. JavaScript mainly has global scope, function scope, and block scope.",
+    "code": "const globalValue = \"Global\";\n\nfunction example() {\n  const functionValue = \"Function\";\n\n  if (true) {\n    const blockValue = \"Block\";\n\n    console.log(globalValue);   // Accessible\n    console.log(functionValue); // Accessible\n    console.log(blockValue);    // Accessible\n  }\n}\n\nexample();"
+  },
+  {
+    "id": 2,
+    "question": "What are the different types of scope in JavaScript?",
+    "answer": "The main types of scope in JavaScript are: 1. Global scope - variables accessible from most parts of the program. 2. Function scope - variables declared with var inside a function are accessible within that function. 3. Block scope - variables declared with let and const inside a block are accessible only within that block. JavaScript also follows lexical scope, which determines how nested code accesses variables based on where the code is written.",
+    "code": "const globalValue = \"Global\"; // Global scope\n\nfunction example() {\n  var functionValue = \"Function\"; // Function scope\n\n  if (true) {\n    let blockValue = \"Block\"; // Block scope\n    const anotherValue = \"Block\";\n  }\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is global scope?",
+    "answer": "Global scope is the outermost scope of a JavaScript program. A variable declared in the global scope can generally be accessed from other scopes inside that program, subject to the execution environment and module rules. In browser scripts, top-level var declarations can become properties of the global object, while top-level let and const do not become global object properties.",
+    "code": "const appName = \"PrepNest\";\n\nfunction showAppName() {\n  console.log(appName);\n}\n\nshowAppName(); // PrepNest"
+  },
+  {
+    "id": 4,
+    "question": "What is function scope?",
+    "answer": "Function scope means a variable declared with var inside a function is accessible throughout that function, but it cannot be accessed from outside the function. Each function creates its own function scope. Variables declared with let and const are block-scoped, even when they are inside a function.",
+    "code": "function example() {\n  var message = \"Hello\";\n\n  console.log(message); // Accessible\n}\n\nexample();\n\n// console.log(message); // ReferenceError\n// message exists only inside the function."
+  },
+  {
+    "id": 5,
+    "question": "What is block scope?",
+    "answer": "Block scope means a variable is accessible only inside the block where it is declared. A block is usually defined by curly braces {}, such as those used with if statements, loops, and standalone blocks. Variables declared with let and const are block-scoped. var does not follow block scope.",
+    "code": "if (true) {\n  let name = \"Jeet\";\n  const age = 25;\n\n  console.log(name); // Jeet\n  console.log(age);  // 25\n}\n\n// console.log(name); // ReferenceError\n// console.log(age);  // ReferenceError"
+  },
+  {
+    "id": 6,
+    "question": "What is lexical scope?",
+    "answer": "Lexical scope means that the scope of a variable is determined by where the code is written in the source code, not by where or how the function is called. A nested function can access variables from the scopes surrounding it because those scopes are determined by the function's position in the code.",
+    "code": "function outer() {\n  const message = \"Hello\";\n\n  function inner() {\n    console.log(message);\n  }\n\n  inner();\n}\n\nouter(); // Hello"
+  },
+  {
+    "id": 7,
+    "question": "What is the scope chain?",
+    "answer": "The scope chain is the chain of accessible lexical environments that JavaScript follows when looking for a variable. When JavaScript cannot find a variable in the current scope, it looks in the outer scope, then continues outward until it finds the variable or reaches the global scope. If the variable is not found anywhere in the chain, JavaScript throws a ReferenceError.",
+    "code": "const globalValue = \"Global\";\n\nfunction outer() {\n  const outerValue = \"Outer\";\n\n  function inner() {\n    const innerValue = \"Inner\";\n\n    console.log(innerValue); // Current scope\n    console.log(outerValue); // Outer scope\n    console.log(globalValue); // Global scope\n  }\n\n  inner();\n}\n\nouter();"
+  },
+  {
+    "id": 8,
+    "question": "How does JavaScript resolve a variable?",
+    "answer": "When JavaScript encounters a variable, it first looks for that variable in the current lexical scope. If it is not found, JavaScript moves to the outer lexical scope and continues searching through the scope chain. If the variable is found, its value is used. If JavaScript reaches the outermost scope without finding it, a ReferenceError is thrown.",
+    "code": "const name = \"Global\";\n\nfunction outer() {\n  const name = \"Outer\";\n\n  function inner() {\n    const name = \"Inner\";\n\n    console.log(name); // Inner\n  }\n\n  inner();\n}\n\nouter();\n\n// JavaScript finds the nearest 'name'\n// in the current scope first."
+  },
+  {
+    "id": 9,
+    "question": "What is the difference between lexical scope and dynamic scope?",
+    "answer": "Lexical scope determines variable access based on where functions and variables are written in the source code. Dynamic scope would determine variable access based on the call stack and where a function is called. JavaScript uses lexical scope, not dynamic scope. Therefore, a function's variable access is determined by where the function was defined, not by where it was called.",
+    "code": "const name = \"Global\";\n\nfunction showName() {\n  console.log(name);\n}\n\nfunction anotherFunction() {\n  const name = \"Local\";\n  showName();\n}\n\nanotherFunction(); // Global\n\n// JavaScript uses lexical scope, so showName()\n// uses the scope where it was defined."
+  },
+  {
+    "id": 10,
+    "question": "Can a child function access variables from its parent function?",
+    "answer": "Yes. A child or nested function can access variables from its parent function because JavaScript uses lexical scope. The nested function can access variables from its own scope and the surrounding outer scopes. This behavior is also the foundation of closures in JavaScript.",
+    "code": "function parent() {\n  const message = \"Hello from parent\";\n\n  function child() {\n    console.log(message);\n  }\n\n  child();\n}\n\nparent(); // Hello from parent"
+  }
+]
