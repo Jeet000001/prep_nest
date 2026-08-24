@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "question": "What is type coercion in JavaScript?",
+    "answer": "Type coercion is the process of converting a value from one data type to another. JavaScript can perform this conversion automatically in some situations or developers can explicitly perform it using functions such as String(), Number(), or Boolean().",
+    "code": "const result = \"10\" + 5;\nconsole.log(result); // \"105\"\n\nconst number = Number(\"10\");\nconsole.log(number); // 10"
+  },
+  {
+    "id": 2,
+    "question": "What is implicit type coercion?",
+    "answer": "Implicit type coercion happens when JavaScript automatically converts one data type into another during an operation or comparison. The developer does not explicitly perform the conversion. For example, when a string is compared with a number using ==, JavaScript may convert the string to a number before comparing them.",
+    "code": "console.log(\"10\" == 10); // true\n\n// JavaScript converts \"10\" to 10\n// before performing the comparison."
+  },
+  {
+    "id": 3,
+    "question": "What is explicit type coercion?",
+    "answer": "Explicit type coercion means manually converting a value from one type to another using JavaScript functions or operators. Common methods include Number(), String(), and Boolean(). Explicit conversion makes the developer's intention clear and is generally easier to understand than relying on implicit conversion.",
+    "code": "const value = \"100\";\n\nconst number = Number(value);\nconst text = String(100);\nconst booleanValue = Boolean(1);\n\nconsole.log(number);        // 100\nconsole.log(text);          // \"100\"\nconsole.log(booleanValue);  // true"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between == and ===?",
+    "answer": "The == operator performs loose equality comparison and allows type coercion before comparing values. The === operator performs strict equality comparison and compares both value and data type without performing type coercion. In modern JavaScript, === is generally preferred because it gives more predictable results.",
+    "code": "console.log(10 == \"10\");  // true\nconsole.log(10 === \"10\"); // false\n\n// == converts \"10\" to 10\n// === checks both value and type"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between != and !==?",
+    "answer": "The != operator performs loose inequality comparison and allows type coercion, while !== performs strict inequality comparison without type coercion. Therefore, !== checks both the value and the data type.",
+    "code": "console.log(10 != \"10\");   // false\nconsole.log(10 !== \"10\");  // true\n\n// 10 and \"10\" are considered equal by ==\n// but they have different types, so === is false."
+  },
+  {
+    "id": 6,
+    "question": "What happens when you compare a number with a string using ==?",
+    "answer": "When a number and a string containing a numeric value are compared using ==, JavaScript usually converts the string to a number and then performs the comparison. This is an example of implicit type coercion. If the string cannot be converted to a meaningful number, the comparison will normally be false.",
+    "code": "console.log(10 == \"10\");    // true\nconsole.log(10 == \"20\");    // false\nconsole.log(10 == \"hello\");  // false\n\n// \"10\" is converted to the number 10."
+  },
+  {
+    "id": 7,
+    "question": "What is truthy and falsy in JavaScript?",
+    "answer": "In JavaScript, a truthy value is a value that is treated as true when used in a boolean context, such as an if statement. A falsy value is a value that is treated as false. Values do not have to literally be true or false to behave this way.",
+    "code": "if (\"Hello\") {\n  console.log(\"Truthy\");\n}\n\nif (0) {\n  console.log(\"This will not run\");\n}\n\n// \"Hello\" is truthy\n// 0 is falsy"
+  },
+  {
+    "id": 8,
+    "question": "What are all the falsy values in JavaScript?",
+    "answer": "The falsy values in JavaScript are: false, 0, -0, 0n, \"\" (empty string), null, undefined, and NaN. These are the values that become false when converted to a boolean. All other JavaScript values are truthy, including empty arrays and empty objects.",
+    "code": "Boolean(false);     // false\nBoolean(0);         // false\nBoolean(-0);        // false\nBoolean(0n);        // false\nBoolean(\"\");        // false\nBoolean(null);      // false\nBoolean(undefined); // false\nBoolean(NaN);       // false\n\n// Examples of truthy values:\nBoolean([]);         // true\nBoolean({});        // true\nBoolean(\"Hello\");   // true"
+  },
+  {
+    "id": 9,
+    "question": "Why is [] truthy?",
+    "answer": "An empty array [] is truthy because arrays are objects in JavaScript, and objects are truthy regardless of whether they contain any elements. Truthiness does not depend on whether an array is empty. Therefore, Boolean([]) returns true.",
+    "code": "const arr = [];\n\nconsole.log(Boolean(arr)); // true\n\nif (arr) {\n  console.log(\"Array is truthy\");\n}\n\nconsole.log(arr.length); // 0"
+  },
+  {
+    "id": 10,
+    "question": "Why is {} truthy?",
+    "answer": "An empty object {} is truthy because objects are truthy values in JavaScript. Whether the object contains properties or not does not affect its truthiness. Therefore, Boolean({}) returns true.",
+    "code": "const user = {};\n\nconsole.log(Boolean(user)); // true\n\nif (user) {\n  console.log(\"Object is truthy\");\n}"
+  },
+  {
+    "id": 11,
+    "question": "What is the result of null == undefined and why?",
+    "answer": "null == undefined returns true. The loose equality operator == has a special rule that considers null and undefined equal to each other. However, null === undefined returns false because they are different types. This is one of the important differences between loose and strict equality.",
+    "code": "console.log(null == undefined);  // true\nconsole.log(null === undefined); // false\n\n// == allows the special null/undefined comparison.\n// === checks both value and type."
+  },
+  {
+    "id": 12,
+    "question": "Why is 0 == false true?",
+    "answer": "0 == false is true because the == operator performs type coercion. When comparing 0 and false, JavaScript converts the boolean false to the number 0. The comparison then becomes 0 == 0, which is true.",
+    "code": "console.log(0 == false); // true\n\n// Conceptually:\n// false -> 0\n// 0 == 0 -> true"
+  },
+  {
+    "id": 13,
+    "question": "Why is 0 === false false?",
+    "answer": "0 === false is false because the === operator performs strict equality and does not perform type coercion. The value 0 is a number, while false is a boolean. Even though false can be converted to 0, === does not perform that conversion, so the values are not strictly equal.",
+    "code": "console.log(0 === false); // false\n\n// 0     -> number\n// false -> boolean\n// Different types -> false"
+  }
+]

@@ -44,6 +44,7 @@ const topicFiles: Record<string, Record<string, string>> = {
         introduction: "Introduction.json",
         variables: "Variables.json",
         "data-types": "Data_Types.json",
+        "type-coercion": "Type_Coercion.json",
   }
 };
 
