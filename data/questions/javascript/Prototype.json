@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is a prototype in JavaScript?",
+    "answer": "A prototype is an object that another object can inherit properties and methods from. Every ordinary JavaScript object has an internal link to another object called its prototype. If a property or method is not found directly on an object, JavaScript can look for it on its prototype.",
+    "code": "const user = {\n  name: \"Jeet\"\n};\n\nconsole.log(user.toString());\n// toString() is not defined directly on user.\n// JavaScript finds it through the prototype chain."
+  },
+  {
+    "id": 2,
+    "question": "What is prototypal inheritance?",
+    "answer": "Prototypal inheritance is the mechanism by which one object can access properties and methods from another object through its prototype. Instead of copying the inherited properties into the child object, JavaScript keeps a prototype relationship between the objects.",
+    "code": "const person = {\n  greet() {\n    console.log(\"Hello\");\n  }\n};\n\nconst user = Object.create(person);\n\nuser.greet();\n// Hello\n\n// user inherits greet() from person."
+  },
+  {
+    "id": 3,
+    "question": "What is the prototype chain?",
+    "answer": "The prototype chain is a sequence of objects that JavaScript follows when looking for a property or method that is not found on the current object. JavaScript starts with the object itself, then checks its prototype, then the prototype's prototype, and continues until it finds the property or reaches null.",
+    "code": "const grandParent = {\n  country: \"India\"\n};\n\nconst parent = Object.create(grandParent);\nparent.city = \"Kolkata\";\n\nconst child = Object.create(parent);\nchild.name = \"Jeet\";\n\nconsole.log(child.name);    // Jeet\nconsole.log(child.city);    // Kolkata\nconsole.log(child.country); // India\n\n// Chain:\n// child → parent → grandParent → Object.prototype → null"
+  },
+  {
+    "id": 4,
+    "question": "What is __proto__?",
+    "answer": "__proto__ is a legacy accessor that exposes an object's internal prototype. It can be used to get or, in some cases, set the prototype of an object. Although it is widely seen in JavaScript code and developer tools, Object.getPrototypeOf() and Object.setPrototypeOf() are generally preferred for explicit prototype operations.",
+    "code": "const person = {\n  greet() {\n    console.log(\"Hello\");\n  }\n};\n\nconst user = Object.create(person);\n\nconsole.log(user.__proto__ === person); // true\n\n// Preferred way to read the prototype\nconsole.log(Object.getPrototypeOf(user) === person); // true"
+  },
+  {
+    "id": 5,
+    "question": "What is the prototype property?",
+    "answer": "The prototype property is a property found on constructor functions and classes. It is the object that will become the prototype of objects created using that constructor with the new keyword. Methods placed on the constructor's prototype can then be shared by all instances instead of creating a separate copy of each method for every object.",
+    "code": "function User(name) {\n  this.name = name;\n}\n\nUser.prototype.greet = function () {\n  console.log(`Hello, ${this.name}`);\n};\n\nconst user1 = new User(\"Jeet\");\nconst user2 = new User(\"John\");\n\nuser1.greet(); // Hello, Jeet\nuser2.greet(); // Hello, John\n\nconsole.log(Object.getPrototypeOf(user1) === User.prototype);\n// true"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between __proto__ and prototype?",
+    "answer": "__proto__ and prototype are related but they are not the same thing. __proto__ refers to the prototype of a particular object, while prototype is a property of constructor functions that becomes the prototype of objects created with new. In simple terms, an instance has a prototype relationship through its internal prototype, while a constructor function provides the prototype object through its prototype property.",
+    "code": "function User(name) {\n  this.name = name;\n}\n\nconst user = new User(\"Jeet\");\n\n// prototype property belongs to the constructor\nconsole.log(User.prototype);\n\n// user object's prototype\nconsole.log(user.__proto__);\n\nconsole.log(user.__proto__ === User.prototype);\n// true\n\n// Preferred modern way:\nconsole.log(Object.getPrototypeOf(user) === User.prototype);\n// true"
+  },
+  {
+    "id": 7,
+    "question": "How does JavaScript look for a property through the prototype chain?",
+    "answer": "When you access a property, JavaScript first checks the object itself. If the property is not found, JavaScript checks the object's prototype. It continues through the prototype chain until the property is found or the chain reaches null. If the property is not found anywhere, JavaScript returns undefined.",
+    "code": "const parent = {\n  name: \"Parent\"\n};\n\nconst child = Object.create(parent);\nchild.age = 25;\n\nconsole.log(child.age);\n// 25\n// Found directly on child.\n\nconsole.log(child.name);\n// Parent\n// Not found on child, so JavaScript checks parent.\n\nconsole.log(child.city);\n// undefined\n// Not found anywhere in the prototype chain."
+  },
+  {
+    "id": 8,
+    "question": "How can you create an object with a specific prototype?",
+    "answer": "You can create an object with a specific prototype using Object.create(). The object passed to Object.create() becomes the new object's prototype.",
+    "code": "const person = {\n  greet() {\n    console.log(\"Hello\");\n  }\n};\n\nconst user = Object.create(person);\nuser.name = \"Jeet\";\n\nuser.greet(); // Hello\n\nconsole.log(Object.getPrototypeOf(user) === person);\n// true"
+  },
+  {
+    "id": 9,
+    "question": "What is Object.create()?",
+    "answer": "Object.create() creates a new object and sets the specified object as its prototype. It is useful when you want explicit control over an object's prototype and is commonly used to demonstrate or implement prototypal inheritance.",
+    "code": "const person = {\n  greet() {\n    console.log(\"Hello, \" + this.name);\n  }\n};\n\nconst user = Object.create(person);\nuser.name = \"Jeet\";\n\nuser.greet();\n// Hello, Jeet\n\nconsole.log(Object.getPrototypeOf(user) === person);\n// true"
+  },
+  {
+    "id": 10,
+    "question": "Why is understanding prototypes important in JavaScript?",
+    "answer": "Understanding prototypes is important because prototypes are the foundation of JavaScript's inheritance model. They explain how objects inherit methods, how constructor functions work, why methods can be shared between instances, and how classes work internally. A good understanding of prototypes also helps when debugging property lookups, working with built-in objects, and understanding JavaScript's object model.",
+    "code": "function User(name) {\n  this.name = name;\n}\n\nUser.prototype.sayHello = function () {\n  return `Hello, ${this.name}`;\n};\n\nconst user1 = new User(\"Jeet\");\nconst user2 = new User(\"John\");\n\nconsole.log(user1.sayHello()); // Hello, Jeet\nconsole.log(user2.sayHello()); // Hello, John\n\n// Both objects share the same method through User.prototype.\nconsole.log(user1.sayHello === user2.sayHello);\n// true"
+  }
+]

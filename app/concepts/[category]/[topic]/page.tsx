@@ -58,6 +58,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     objects: "Objects.json",
     arrays: "Arrays.json",
     destructuring: "Destructuring.json",
+    prototype: "Prototype.json",
   },
 };
 

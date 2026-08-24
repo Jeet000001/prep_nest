@@ -100,8 +100,8 @@ const topicGroups: TopicGroup[] = [
       { name: "Objects", href: "/concepts/javascript/objects" },
       { name: "Arrays", href: "/concepts/javascript/arrays" },
       { name: "Destructuring", href: "/concepts/javascript/destructuring" },
-      // ,
-      // 
+      { name: "Prototype", href: "/concepts/javascript/prototype" },
+
       // { name: "DOM", href: "/concepts/javascript/dom" },
       // { name: "Events", href: "/concepts/javascript/events" },
       // { name: "Promises", href: "/concepts/javascript/promises" },
