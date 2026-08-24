@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "question": "What are arrow functions?",
+    "answer": "Arrow functions are a shorter syntax for writing functions in JavaScript. They were introduced in ES6 (ECMAScript 2015). Arrow functions use the => syntax and are commonly used for callbacks, array methods, and short functions. They also have lexical this, meaning they do not create their own this value.",
+    "code": "// Regular function\nfunction add(a, b) {\n  return a + b;\n}\n\n// Arrow function\nconst addNumbers = (a, b) => {\n  return a + b;\n};\n\n// Short form\nconst multiply = (a, b) => a * b;\n\nconsole.log(multiply(5, 4)); // 20"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between arrow functions and regular functions?",
+    "answer": "Arrow functions and regular functions differ mainly in their behavior of this, arguments, constructors, and syntax. Arrow functions have lexical this, do not have their own arguments object, cannot be used as constructors, and have shorter syntax. Regular functions have their own this depending on how they are called, have an arguments object, and can be used as constructors with new.",
+    "code": "const obj = {\n  name: \"Jeet\",\n\n  regular: function () {\n    console.log(this.name);\n  },\n\n  arrow: () => {\n    console.log(this.name);\n  }\n};\n\nobj.regular(); // \"Jeet\"\nobj.arrow();   // undefined in a typical module/script context\n\n// Regular functions can have their own this.\n// Arrow functions use this from the surrounding scope."
+  },
+  {
+    "id": 3,
+    "question": "How does this behave differently in arrow functions?",
+    "answer": "A regular function gets its this value based on how the function is called. An arrow function does not have its own this; instead, it lexically inherits this from the surrounding scope where the arrow function was created. This makes arrow functions especially useful inside callbacks when you want to preserve the surrounding this.",
+    "code": "const user = {\n  name: \"Jeet\",\n\n  regular() {\n    console.log(this.name);\n  },\n\n  arrow: () => {\n    console.log(this.name);\n  }\n};\n\nuser.regular(); // \"Jeet\"\nuser.arrow();   // undefined in a typical module context"
+  },
+  {
+    "id": 4,
+    "question": "Can arrow functions be used as constructors?",
+    "answer": "No. Arrow functions cannot be used as constructors with the new keyword. They do not have their own prototype property and are not designed to create objects using constructor calls. If you try to use an arrow function with new, JavaScript throws a TypeError.",
+    "code": "const User = (name) => {\n  this.name = name;\n};\n\n// const user = new User(\"Jeet\");\n// TypeError: User is not a constructor\n\n// Use a regular function or class instead:\nfunction Person(name) {\n  this.name = name;\n}\n\nconst person = new Person(\"Jeet\");\nconsole.log(person.name); // Jeet"
+  },
+  {
+    "id": 5,
+    "question": "Can arrow functions have their own this?",
+    "answer": "No. Arrow functions do not have their own this binding. They inherit this from their surrounding lexical scope at the time they are created. Because of this, methods such as call(), apply(), and bind() cannot change the this value of an arrow function.",
+    "code": "const user = {\n  name: \"Jeet\"\n};\n\nconst greet = () => {\n  console.log(this.name);\n};\n\ngreet.call(user);\n\n// call() cannot change the this value\n// of an arrow function."
+  },
+  {
+    "id": 6,
+    "question": "Can arrow functions have their own arguments object?",
+    "answer": "No. Arrow functions do not have their own arguments object. If an arrow function uses arguments, it looks for arguments in its surrounding lexical scope. If you need to collect an arbitrary number of arguments inside an arrow function, use rest parameters (...args).",
+    "code": "function regularFunction() {\n  const arrowFunction = () => {\n    console.log(arguments[0]);\n  };\n\n  arrowFunction();\n}\n\nregularFunction(\"Jeet\"); // Jeet\n\n// Recommended approach with an arrow function:\nconst sum = (...numbers) => {\n  return numbers.reduce((total, number) => total + number, 0);\n};\n\nconsole.log(sum(10, 20, 30)); // 60"
+  },
+  {
+    "id": 7,
+    "question": "When should you use an arrow function?",
+    "answer": "Arrow functions are a good choice for short functions, callbacks, array methods, and situations where you want to preserve the surrounding this value. They are commonly used with map(), filter(), reduce(), event-related callbacks, Promises, and async operations. However, they should generally not be used when you need a function to have its own dynamic this or when you need a constructor.",
+    "code": "const numbers = [1, 2, 3, 4];\n\nconst doubled = numbers.map(number => number * 2);\n\nconsole.log(doubled); // [2, 4, 6, 8]\n\nsetTimeout(() => {\n  console.log(\"Executed after 1 second\");\n}, 1000);"
+  },
+  {
+    "id": 8,
+    "question": "What are the advantages and disadvantages of arrow functions?",
+    "answer": "Advantages: 1. They have shorter and cleaner syntax. 2. They preserve lexical this, which is useful in callbacks. 3. They are convenient for functional programming and array methods. 4. They do not have their own arguments object, which can make their behavior more predictable in some cases. Disadvantages: 1. They cannot be used as constructors. 2. They do not have their own this. 3. They do not have their own arguments object. 4. They are not always suitable for object methods when the method needs this to refer to the object. 5. Their concise syntax can become harder to read when the function contains complex logic.",
+    "code": "const numbers = [1, 2, 3];\n\n// Advantage: concise syntax\nconst doubled = numbers.map(number => number * 2);\n\nconst user = {\n  name: \"Jeet\",\n\n  // Regular method is appropriate when you need this\n  greet() {\n    console.log(`Hello, ${this.name}`);\n  }\n};\n\nuser.greet(); // Hello, Jeet"
+  }
+]

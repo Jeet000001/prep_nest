@@ -69,7 +69,10 @@ const topicGroups: TopicGroup[] = [
       { name: "CSS Variables", href: "/concepts/css/css-variables" },
       { name: "Preprocessors", href: "/concepts/css/preprocessors" },
       { name: "Performance", href: "/concepts/css/performance" },
-      { name: "Browser Compatibility", href: "/concepts/css/browser-compatibility" },
+      {
+        name: "Browser Compatibility",
+        href: "/concepts/css/browser-compatibility",
+      },
     ],
   },
 
@@ -77,7 +80,10 @@ const topicGroups: TopicGroup[] = [
     name: "JavaScript",
     icon: Braces,
     topics: [
-      { name: "JavaScript Introduction", href: "/concepts/javascript/introduction" },
+      {
+        name: "JavaScript Introduction",
+        href: "/concepts/javascript/introduction",
+      },
       { name: "Variables", href: "/concepts/javascript/variables" },
       { name: "Data Types", href: "/concepts/javascript/data-types" },
       { name: "Type Coercion", href: "/concepts/javascript/type-coercion" },
@@ -85,15 +91,18 @@ const topicGroups: TopicGroup[] = [
       { name: "Scope", href: "/concepts/javascript/scope" },
       { name: "Hoisting", href: "/concepts/javascript/hoisting" },
       { name: "Functions", href: "/concepts/javascript/functions" },
-      { name: "Arrays", href: "/concepts/javascript/arrays" },
-      { name: "Objects", href: "/concepts/javascript/objects" },    
-      { name: "Closures", href: "/concepts/javascript/closures" },
-      { name: "DOM", href: "/concepts/javascript/dom" },
-      { name: "Events", href: "/concepts/javascript/events" },
-      { name: "Promises", href: "/concepts/javascript/promises" },
-      { name: "Async / Await", href: "/concepts/javascript/async-await" },
-      { name: "Fetch API", href: "/concepts/javascript/fetch-api" },
-      { name: "ES6+", href: "/concepts/javascript/es6" },
+      { name: "Arrow Functions", href: "/concepts/javascript/arrow-functions" },
+
+
+      // { name: "Arrays", href: "/concepts/javascript/arrays" },
+      // { name: "Objects", href: "/concepts/javascript/objects" },
+      // { name: "Closures", href: "/concepts/javascript/closures" },
+      // { name: "DOM", href: "/concepts/javascript/dom" },
+      // { name: "Events", href: "/concepts/javascript/events" },
+      // { name: "Promises", href: "/concepts/javascript/promises" },
+      // { name: "Async / Await", href: "/concepts/javascript/async-await" },
+      // { name: "Fetch API", href: "/concepts/javascript/fetch-api" },
+      // { name: "ES6+", href: "/concepts/javascript/es6" },
     ],
   },
 
@@ -134,7 +143,7 @@ const Sidebar = () => {
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
     HTML: true,
     CSS: false,
-    JavaScript: false,
+    JavaScript: true,
     React: false,
   });
 

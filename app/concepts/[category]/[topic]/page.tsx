@@ -45,10 +45,11 @@ const topicFiles: Record<string, Record<string, string>> = {
         variables: "Variables.json",
         "data-types": "Data_Types.json",
         "type-coercion": "Type_Coercion.json",
-        "operators": "Operators.json",
-        "scope": "Scope.json",
-        "hoisting": "Hoisting.json",
-        "functions": "Functions.json",
+        operators: "Operators.json",
+        scope: "Scope.json",
+        hoisting: "Hoisting.json",
+        functions: "Functions.json",
+        "arrow-functions": "Arrow_Functions.json",
   }
 };
 
