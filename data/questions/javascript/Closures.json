@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is a closure in JavaScript?",
+    "answer": "A closure is created when a function remembers and can access variables from its outer (lexical) scope even after the outer function has finished executing. In simple terms, a closure allows a function to remember the environment in which it was created.",
+    "code": "function outer() {\n  const message = \"Hello, Jeet\";\n\n  function inner() {\n    console.log(message);\n  }\n\n  return inner;\n}\n\nconst greet = outer();\ngreet(); // Hello, Jeet\n\n// outer() has already finished,\n// but inner() still remembers message."
+  },
+  {
+    "id": 2,
+    "question": "How does a closure work?",
+    "answer": "A closure works because JavaScript uses lexical scope. When a nested function is created, it keeps access to variables from its surrounding lexical scope. If that function is returned or passed somewhere else, it can still access those variables later, even after the outer function has completed.",
+    "code": "function createCounter() {\n  let count = 0;\n\n  return function () {\n    count++;\n    return count;\n  };\n}\n\nconst counter = createCounter();\n\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\nconsole.log(counter()); // 3\n\n// The returned function remembers count."
+  },
+  {
+    "id": 3,
+    "question": "Why are closures useful?",
+    "answer": "Closures are useful because they allow a function to remember and use data from its surrounding scope. They are commonly used to create private state, preserve data between function calls, create function factories, maintain state in callbacks, and implement patterns such as currying and memoization.",
+    "code": "function createCounter() {\n  let count = 0;\n\n  return () => {\n    count++;\n    return count;\n  };\n}\n\nconst counter = createCounter();\n\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n\n// count is preserved between calls."
+  },
+  {
+    "id": 4,
+    "question": "What are the real-world use cases of closures?",
+    "answer": "Common real-world uses of closures include data privacy, counters and state management, function factories, event handlers, callbacks, timers, memoization, debouncing, throttling, and maintaining state in asynchronous operations. Closures are especially useful when a function needs to remember some information between executions.",
+    "code": "function createGreeting(greeting) {\n  return function (name) {\n    return `${greeting}, ${name}!`;\n  };\n}\n\nconst sayHello = createGreeting(\"Hello\");\nconst sayHi = createGreeting(\"Hi\");\n\nconsole.log(sayHello(\"Jeet\")); // Hello, Jeet!\nconsole.log(sayHi(\"John\"));    // Hi, John!"
+  },
+  {
+    "id": 5,
+    "question": "How can closures be used for data privacy?",
+    "answer": "Closures can be used to create private variables by keeping them inside an outer function and exposing only selected operations through returned functions. Code outside the outer function cannot directly access the private variable, but the returned functions can access it through the closure.",
+    "code": "function createBankAccount(initialBalance) {\n  let balance = initialBalance;\n\n  return {\n    deposit(amount) {\n      balance += amount;\n    },\n\n    getBalance() {\n      return balance;\n    }\n  };\n}\n\nconst account = createBankAccount(1000);\n\naccount.deposit(500);\nconsole.log(account.getBalance()); // 1500\n\n// balance cannot be accessed directly:\n// console.log(account.balance); // undefined"
+  },
+  {
+    "id": 6,
+    "question": "What is the relationship between closures and lexical scope?",
+    "answer": "Closures are a result of JavaScript's lexical scoping behavior. Lexical scope determines which variables a function can access based on where the function is written. A closure allows a function to retain access to those outer-scope variables even when the function is executed outside that original scope.",
+    "code": "function outer() {\n  const name = \"Jeet\";\n\n  function inner() {\n    console.log(name);\n  }\n\n  return inner;\n}\n\nconst fn = outer();\nfn(); // Jeet\n\n// Lexical scope gives inner() access to name.\n// The closure preserves that access after outer() finishes."
+  },
+  {
+    "id": 7,
+    "question": "Can a closure access variables after the outer function has finished executing?",
+    "answer": "Yes. This is one of the main characteristics of closures. Normally, local variables of a function become inaccessible after the function finishes. However, if a nested function still references those variables, JavaScript keeps the required lexical environment alive so the nested function can continue to access them.",
+    "code": "function createCounter() {\n  let count = 0;\n\n  return function () {\n    count++;\n    return count;\n  };\n}\n\nconst counter = createCounter();\n\n// createCounter() has already finished.\n\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n\n// count is still accessible through the closure."
+  },
+  {
+    "id": 8,
+    "question": "What are the disadvantages of closures?",
+    "answer": "Closures are powerful, but they can make code harder to understand when used excessively. They can also keep variables alive longer than necessary, which may increase memory usage. Complex nested closures can make debugging and understanding data flow more difficult. Poorly managed closures can also contribute to memory leaks.",
+    "code": "function createLargeData() {\n  const largeData = new Array(1000000).fill(\"data\");\n\n  return function () {\n    console.log(largeData.length);\n  };\n}\n\nconst showData = createLargeData();\n\n// largeData remains available because\n// showData closes over it."
+  },
+  {
+    "id": 9,
+    "question": "How can closures cause memory leaks?",
+    "answer": "A closure itself is not a memory leak. The problem occurs when a long-lived object, event listener, timer, or other reference keeps a closure alive unnecessarily. If that closure references large objects or other resources, those objects may remain reachable and cannot be garbage collected. Removing unnecessary listeners, timers, and references helps prevent this problem.",
+    "code": "function setup() {\n  const largeData = new Array(1000000).fill(\"data\");\n\n  function handleClick() {\n    console.log(largeData.length);\n  }\n\n  window.addEventListener(\"click\", handleClick);\n\n  // If the listener is no longer needed,\n  // remove it to release the reference.\n  return () => {\n    window.removeEventListener(\"click\", handleClick);\n  };\n}\n\nconst cleanup = setup();\n\n// Later, when no longer needed:\ncleanup();"
+  },
+  {
+    "id": 10,
+    "question": "What is a practical example of a closure?",
+    "answer": "A practical example of a closure is a counter. The counter value is kept inside a function and cannot be directly accessed from outside. The returned function can update and read that value because it closes over the variable. This pattern is useful whenever you need private, persistent state.",
+    "code": "function createCounter() {\n  let count = 0;\n\n  return {\n    increment() {\n      count++;\n    },\n\n    decrement() {\n      count--;\n    },\n\n    getCount() {\n      return count;\n    }\n  };\n}\n\nconst counter = createCounter();\n\ncounter.increment();\ncounter.increment();\nconsole.log(counter.getCount()); // 2\n\ncounter.decrement();\nconsole.log(counter.getCount()); // 1\n\n// count is private and preserved by the closure."
+  }
+]

@@ -94,11 +94,11 @@ const topicGroups: TopicGroup[] = [
       { name: "Arrow Functions", href: "/concepts/javascript/arrow-functions" },
       { name: "This Keyword", href: "/concepts/javascript/this-keyword" },
       { name: "Call, Apply, Bind", href: "/concepts/javascript/call-apply-bind" },
-
+      { name: "Closures", href: "/concepts/javascript/closures" },
 
       // { name: "Arrays", href: "/concepts/javascript/arrays" },
       // { name: "Objects", href: "/concepts/javascript/objects" },
-      // { name: "Closures", href: "/concepts/javascript/closures" },
+      // 
       // { name: "DOM", href: "/concepts/javascript/dom" },
       // { name: "Events", href: "/concepts/javascript/events" },
       // { name: "Promises", href: "/concepts/javascript/promises" },
