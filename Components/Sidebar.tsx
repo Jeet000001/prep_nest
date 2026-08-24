@@ -69,10 +69,7 @@ const topicGroups: TopicGroup[] = [
       { name: "CSS Variables", href: "/concepts/css/css-variables" },
       { name: "Preprocessors", href: "/concepts/css/preprocessors" },
       { name: "Performance", href: "/concepts/css/performance" },
-      {
-        name: "Browser Compatibility",
-        href: "/concepts/css/browser-compatibility",
-      },
+      { name: "Browser Compatibility", href: "/concepts/css/browser-compatibility" },
     ],
   },
 
@@ -80,13 +77,11 @@ const topicGroups: TopicGroup[] = [
     name: "JavaScript",
     icon: Braces,
     topics: [
-      {
-        name: "JavaScript Introduction",
-        href: "/concepts/javascript/introduction",
-      },
+      { name: "JavaScript Introduction", href: "/concepts/javascript/introduction" },
       { name: "Variables", href: "/concepts/javascript/variables" },
       { name: "Data Types", href: "/concepts/javascript/data-types" },
       { name: "Type Coercion", href: "/concepts/javascript/type-coercion" },
+      { name: "Operators", href: "/concepts/javascript/operators" },
       { name: "Functions", href: "/concepts/javascript/functions" },
       { name: "Arrays", href: "/concepts/javascript/arrays" },
       { name: "Objects", href: "/concepts/javascript/objects" },

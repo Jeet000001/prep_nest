@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What are the different types of operators in JavaScript?",
+    "answer": "JavaScript provides several types of operators: arithmetic operators (+, -, *, /, %, **), assignment operators (=, +=, -=, *=, etc.), comparison operators (==, ===, !=, !==, >, <, >=, <=), logical operators (&&, ||, !, ??), unary operators (++ , --, typeof, delete, void), bitwise operators (&, |, ^, ~, <<, >>), ternary operator (?:), relational operators such as in and instanceof, and optional chaining (?.).",
+    "code": "// Arithmetic\nconst sum = 10 + 5;\n\n// Assignment\nlet age = 20;\nage += 5;\n\n// Comparison\nconsole.log(age === 25);\n\n// Logical\nconsole.log(age > 18 && age < 30);\n\n// Ternary\nconst status = age >= 18 ? \"Adult\" : \"Minor\";\n\n// typeof\nconsole.log(typeof age);"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between && and ||?",
+    "answer": "Both && and || are logical operators, but they are used for different conditions. The && operator returns the first falsy value it finds, or the last value if all values are truthy. The || operator returns the first truthy value it finds, or the last value if all values are falsy. In simple terms, && is commonly used when all conditions need to be satisfied, while || is commonly used when at least one condition or fallback should be accepted.",
+    "code": "console.log(true && \"Hello\");  // \"Hello\"\nconsole.log(false && \"Hello\"); // false\n\nconsole.log(false || \"Hello\"); // \"Hello\"\nconsole.log(true || \"Hello\");  // true\n\nconst isLoggedIn = true;\nconst isAdmin = true;\n\nif (isLoggedIn && isAdmin) {\n  console.log(\"Access granted\");\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is the nullish coalescing operator (??)?",
+    "answer": "The nullish coalescing operator (??) returns the right-hand value only when the left-hand value is null or undefined. It is commonly used to provide a default value when a value is missing. Unlike ||, it does not treat values such as 0, false, or an empty string as missing.",
+    "code": "const username = null;\nconst name = username ?? \"Guest\";\n\nconsole.log(name); // \"Guest\"\n\nconst score = 0;\nconst finalScore = score ?? 100;\n\nconsole.log(finalScore); // 0"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between || and ???",
+    "answer": "The main difference is how they decide whether the left-hand value is missing. The || operator uses truthiness, so it treats all falsy values such as 0, false, an empty string, null, undefined, and NaN as needing a fallback. The ?? operator only treats null and undefined as missing. Therefore, ?? is usually better when 0, false, or an empty string are valid values.",
+    "code": "const score = 0;\n\nconsole.log(score || 100); // 100\nconsole.log(score ?? 100); // 0\n\nconst isActive = false;\n\nconsole.log(isActive || true); // true\nconsole.log(isActive ?? true); // false\n\nconst name = \"\";\n\nconsole.log(name || \"Guest\"); // \"Guest\"\nconsole.log(name ?? \"Guest\"); // \"\""
+  },
+  {
+    "id": 5,
+    "question": "What is the optional chaining operator (?.)?",
+    "answer": "The optional chaining operator (?.) allows you to safely access a property, method, or element of a value without throwing an error when the value before ?. is null or undefined. Instead of throwing a TypeError, the expression returns undefined. It is especially useful when working with nested objects or API responses where some properties may be missing.",
+    "code": "const user = {\n  profile: {\n    name: \"Jeet\"\n  }\n};\n\nconsole.log(user.profile?.name); // \"Jeet\"\nconsole.log(user.address?.city);  // undefined\n\n// Without optional chaining:\n// console.log(user.address.city); // TypeError"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between ++x and x++?",
+    "answer": "Both ++x and x++ increase the value of x by 1, but they differ in when the increment happens relative to the expression. ++x is the prefix increment operator, so x is increased first and the new value is returned. x++ is the postfix increment operator, so the current value is returned first and x is increased afterward.",
+    "code": "let x = 5;\nlet a = ++x;\n\nconsole.log(a); // 6\nconsole.log(x); // 6\n\nlet y = 5;\nlet b = y++;\n\nconsole.log(b); // 5\nconsole.log(y); // 6"
+  },
+  {
+    "id": 7,
+    "question": "What is the ternary operator?",
+    "answer": "The ternary operator is a shorthand way to write a simple if-else condition. It uses three parts: a condition, a value if the condition is true, and a value if the condition is false. The syntax is: condition ? valueIfTrue : valueIfFalse. It is useful for short conditional expressions.",
+    "code": "const age = 20;\n\nconst status = age >= 18 ? \"Adult\" : \"Minor\";\n\nconsole.log(status); // \"Adult\"\n\n// Equivalent if-else:\nlet result;\n\nif (age >= 18) {\n  result = \"Adult\";\n} else {\n  result = \"Minor\";\n}"
+  },
+  {
+    "id": 8,
+    "question": "What is operator precedence?",
+    "answer": "Operator precedence determines the order in which JavaScript evaluates operators in an expression. Operators with higher precedence are evaluated before operators with lower precedence. Parentheses can be used to explicitly control the order of evaluation. For example, multiplication has higher precedence than addition.",
+    "code": "const result = 10 + 5 * 2;\n\nconsole.log(result); // 20\n\n// Multiplication happens first:\n// 5 * 2 = 10\n// 10 + 10 = 20\n\nconst result2 = (10 + 5) * 2;\nconsole.log(result2); // 30"
+  },
+  {
+    "id": 9,
+    "question": "What is short-circuit evaluation?",
+    "answer": "Short-circuit evaluation means JavaScript stops evaluating an expression as soon as the final result is already known. With &&, JavaScript stops at the first falsy value. With ||, it stops at the first truthy value. This behavior is commonly used for conditional execution and default values.",
+    "code": "const isLoggedIn = false;\n\nisLoggedIn && console.log(\"Welcome\");\n// console.log() is not executed\n\nconst username = \"Jeet\";\n\nconst name = username || \"Guest\";\nconsole.log(name); // \"Jeet\"\n// JavaScript stops at username because it is truthy."
+  },
+  {
+    "id": 10,
+    "question": "What is the difference between ... spread syntax and rest syntax?",
+    "answer": "The same ... syntax is used for both spread and rest, but their purpose is different. Spread syntax expands or unpacks values from an iterable or object into individual elements or properties. Rest syntax collects multiple values into a single array or object. Spread is commonly used when copying or combining arrays and objects, while rest is commonly used in function parameters or destructuring.",
+    "code": "// Spread - expands values\nconst numbers = [1, 2, 3];\nconst newNumbers = [...numbers, 4, 5];\n\nconsole.log(newNumbers); // [1, 2, 3, 4, 5]\n\n// Rest - collects values\nfunction sum(...numbers) {\n  return numbers.reduce((total, number) => total + number, 0);\n}\n\nconsole.log(sum(10, 20, 30)); // 60"
+  }
+]
