@@ -96,6 +96,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Call, Apply, Bind", href: "/concepts/javascript/call-apply-bind" },
       { name: "Closures", href: "/concepts/javascript/closures" },
       { name: "Execution Context", href: "/concepts/javascript/execution-context" },
+      { name: "Call Stack", href: "/concepts/javascript/call-stack" },
 
       // { name: "Arrays", href: "/concepts/javascript/arrays" },
       // { name: "Objects", href: "/concepts/javascript/objects" },

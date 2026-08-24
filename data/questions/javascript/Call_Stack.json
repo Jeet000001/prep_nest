@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What is the call stack?",
+    "answer": "The call stack is a data structure used by the JavaScript engine to keep track of currently executing functions. It follows the Last In, First Out (LIFO) principle. When a function is called, its execution context is added to the top of the stack. When the function finishes, it is removed from the stack.",
+    "code": "function greet() {\n  console.log(\"Hello\");\n}\n\ngreet();\n\n// Call stack while greet() is executing:\n// ┌─────────────┐\n// │ greet()     │ ← Top\n// ├─────────────┤\n// │ Global      │\n// └─────────────┘"
+  },
+  {
+    "id": 2,
+    "question": "How does the call stack work?",
+    "answer": "The call stack works using the LIFO (Last In, First Out) principle. JavaScript starts with the global execution context. When a function is called, its execution context is pushed onto the stack. If that function calls another function, the new function is pushed on top. When the top function finishes, it is popped from the stack and execution continues from the previous function.",
+    "code": "function first() {\n  second();\n}\n\nfunction second() {\n  third();\n}\n\nfunction third() {\n  console.log(\"Hello\");\n}\n\nfirst();\n\n// Stack progression:\n// Global\n// Global → first()\n// Global → first() → second()\n// Global → first() → second() → third()\n// Global → first() → second()\n// Global → first()\n// Global"
+  },
+  {
+    "id": 3,
+    "question": "What happens when a function is called?",
+    "answer": "When a function is called, JavaScript creates an execution context for that function call and pushes it onto the call stack. The function's parameters, local variables, and other execution information are set up, and the function body starts executing. If the function calls another function, another execution context is pushed onto the stack.",
+    "code": "function add(a, b) {\n  const result = a + b;\n  return result;\n}\n\nconst total = add(10, 20);\n\n// 1. add() is called.\n// 2. Execution context for add() is created.\n// 3. Context is pushed onto the call stack.\n// 4. a = 10, b = 20.\n// 5. Function body executes.\n// 6. Function returns 30."
+  },
+  {
+    "id": 4,
+    "question": "What happens when a function returns?",
+    "answer": "When a function returns, its execution is completed and its execution context is removed from the call stack. The returned value is passed back to the code that called the function, and JavaScript continues execution from where the function call occurred.",
+    "code": "function add(a, b) {\n  return a + b;\n}\n\nconsole.log(\"Before\");\n\nconst result = add(10, 20);\n\nconsole.log(result);\nconsole.log(\"After\");\n\n// Output:\n// Before\n// 30\n// After\n\n// After add() returns, its context is removed\n// from the call stack."
+  },
+  {
+    "id": 5,
+    "question": "What causes a stack overflow?",
+    "answer": "A stack overflow occurs when the call stack becomes too large and exceeds the maximum stack size allowed by the JavaScript engine. A common cause is infinite or excessively deep recursion, where functions continue calling themselves without reaching a condition that stops the recursion.",
+    "code": "function infinite() {\n  infinite();\n}\n\ninfinite();\n\n// Each call adds another execution context:\n// infinite()\n// infinite() → infinite()\n// infinite() → infinite() → infinite()\n// ...\n// Eventually the call stack becomes full.\n// Result: RangeError: Maximum call stack size exceeded"
+  },
+  {
+    "id": 6,
+    "question": "How does recursion affect the call stack?",
+    "answer": "Recursion occurs when a function calls itself. Every recursive call creates a new execution context and pushes it onto the call stack. A proper base condition eventually stops the recursion, allowing the contexts to be removed one by one. If the base condition is missing or never reached, the call stack keeps growing and can cause a stack overflow.",
+    "code": "function countdown(number) {\n  if (number === 0) {\n    return;\n  }\n\n  console.log(number);\n  countdown(number - 1);\n}\n\ncountdown(3);\n\n// Stack grows:\n// countdown(3)\n// countdown(3) → countdown(2)\n// countdown(3) → countdown(2) → countdown(1)\n// countdown(3) → countdown(2) → countdown(1) → countdown(0)\n//\n// countdown(0) returns, then previous calls return."
+  },
+  {
+    "id": 7,
+    "question": "How is the call stack related to synchronous JavaScript execution?",
+    "answer": "Synchronous JavaScript executes one operation at a time, and the call stack keeps track of the currently executing code. JavaScript generally cannot start executing the next synchronous operation until the current function has finished and its execution context has been removed from the stack. This is why a long-running synchronous function can block other JavaScript work and make the page or application unresponsive.",
+    "code": "function first() {\n  console.log(\"First\");\n}\n\nfunction second() {\n  console.log(\"Second\");\n}\n\nfirst();\nsecond();\n\nconsole.log(\"Third\");\n\n// Output:\n// First\n// Second\n// Third\n\n// JavaScript executes the synchronous calls\n// one at a time through the call stack."
+  }
+]
