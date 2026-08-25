@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "question": "What is a shallow copy?",
+    "answer": "A shallow copy creates a new outer object or array, but nested objects and arrays are still shared by reference with the original. This means changing a nested object in the copy can also affect the original.",
+    "code": "const original = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst copy = { ...original };\n\ncopy.name = \"John\";\nconsole.log(original.name); // Jeet\n\ncopy.address.city = \"Delhi\";\nconsole.log(original.address.city); // Delhi\n// The nested address object is shared."
+  },
+  {
+    "id": 2,
+    "question": "What is a deep copy?",
+    "answer": "A deep copy creates a completely independent copy of an object or array, including its nested objects and arrays. Changes made to the copied data do not affect the original data.",
+    "code": "const original = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst copy = structuredClone(original);\n\ncopy.address.city = \"Delhi\";\n\nconsole.log(original.address.city); // Kolkata\nconsole.log(copy.address.city);     // Delhi"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between shallow copy and deep copy?",
+    "answer": "The main difference is how nested data is handled. A shallow copy creates a new outer object but keeps references to nested objects and arrays. A deep copy creates independent copies of the nested data as well. Therefore, modifying nested data in a shallow copy can affect the original, while modifying nested data in a deep copy does not affect the original.",
+    "code": "const original = {\n  user: {\n    name: \"Jeet\"\n  }\n};\n\n// Shallow copy\nconst shallow = { ...original };\nshallow.user.name = \"John\";\n\nconsole.log(original.user.name); // John\n\nconst original2 = {\n  user: {\n    name: \"Jeet\"\n  }\n};\n\n// Deep copy\nconst deep = structuredClone(original2);\ndeep.user.name = \"John\";\n\nconsole.log(original2.user.name); // Jeet"
+  },
+  {
+    "id": 4,
+    "question": "How can you create a shallow copy of an object?",
+    "answer": "You can create a shallow copy of an object using object spread syntax or Object.assign(). Both create a new outer object, but nested objects and arrays are still shared references.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 25,\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\n// Using spread syntax\nconst copy1 = { ...user };\n\n// Using Object.assign()\nconst copy2 = Object.assign({}, user);\n\nconsole.log(copy1 === user); // false\nconsole.log(copy2 === user); // false\n\nconsole.log(copy1.address === user.address); // true"
+  },
+  {
+    "id": 5,
+    "question": "How can you create a deep copy of an object?",
+    "answer": "A modern way to create a deep copy is to use structuredClone(). It recursively copies supported nested data so that the copied object does not share those nested references with the original. JSON.parse(JSON.stringify()) can also create a deep copy for some simple JSON-compatible data, but it has important limitations and should not be treated as a general-purpose deep-copy solution.",
+    "code": "const user = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  },\n  skills: [\"JavaScript\", \"React\"]\n};\n\nconst copy = structuredClone(user);\n\ncopy.address.city = \"Delhi\";\ncopy.skills.push(\"Next.js\");\n\nconsole.log(user.address.city); // Kolkata\nconsole.log(user.skills);       // [\"JavaScript\", \"React\"]"
+  },
+  {
+    "id": 6,
+    "question": "What are the limitations of JSON.parse(JSON.stringify())?",
+    "answer": "JSON.parse(JSON.stringify()) only works reliably for data that can be represented as JSON. It can lose or change certain JavaScript values. For example, undefined, functions, and symbols are not preserved as object properties, Date objects become strings, Map and Set are not preserved as their original types, and circular references cause an error. It can also lose information about special numeric values such as NaN and Infinity. Therefore, it is not a general-purpose deep-copy solution.",
+    "code": "const data = {\n  name: \"Jeet\",\n  value: undefined,\n  createdAt: new Date(),\n  score: NaN\n};\n\nconst copy = JSON.parse(JSON.stringify(data));\n\nconsole.log(copy.value);     // undefined property is removed\nconsole.log(copy.createdAt); // String, not Date\nconsole.log(copy.score);     // null\n\n// Functions, Symbols, Map, Set, and circular references\n// also have important limitations with JSON serialization."
+  },
+  {
+    "id": 7,
+    "question": "What is structuredClone()?",
+    "answer": "structuredClone() is a built-in JavaScript function that creates a deep clone of many JavaScript values using the structured clone algorithm. It can handle many data types that JSON serialization cannot correctly preserve, including nested objects, arrays, Date, Map, Set, and circular references. It does not clone every possible JavaScript value; for example, functions cannot be cloned.",
+    "code": "const original = {\n  name: \"Jeet\",\n  date: new Date(),\n  skills: new Set([\"JavaScript\", \"React\"]),\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst copy = structuredClone(original);\n\ncopy.address.city = \"Delhi\";\n\nconsole.log(original.address.city); // Kolkata\nconsole.log(copy.address.city);     // Delhi\nconsole.log(copy.date instanceof Date); // true\nconsole.log(copy.skills instanceof Set); // true"
+  },
+  {
+    "id": 8,
+    "question": "When should you use a deep copy?",
+    "answer": "Use a deep copy when you need a completely independent version of data and the data contains nested objects or arrays that should not share references with the original. However, deep copying can be more expensive than a shallow copy, so it should not be used unnecessarily. In frontend applications, it is usually better to copy only the parts of the state that actually need to change rather than deep-copying the entire state.",
+    "code": "const state = {\n  user: {\n    name: \"Jeet\",\n    preferences: {\n      theme: \"dark\"\n    }\n  }\n};\n\n// If you need a completely independent copy:\nconst backup = structuredClone(state);\n\nbackup.user.preferences.theme = \"light\";\n\nconsole.log(state.user.preferences.theme);  // dark\nconsole.log(backup.user.preferences.theme); // light\n\n// In many frontend updates, a targeted immutable update\n// is preferable to cloning the entire state:\nconst updatedState = {\n  ...state,\n  user: {\n    ...state.user,\n    preferences: {\n      ...state.user.preferences,\n      theme: \"light\"\n    }\n  }\n};"
+  }
+]
