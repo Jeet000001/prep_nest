@@ -104,6 +104,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Classes and OOP", href: "/concepts/javascript/classes-OOP" },
       { name: "Immutability", href: "/concepts/javascript/immutability" },
       { name: "Deep Copy & Shallow Copy", href: "/concepts/javascript/deep-copy-shallow-copy" },
+      { name: "Strings", href: "/concepts/javascript/strings" },
 
       // { name: "DOM", href: "/concepts/javascript/dom" },
       // { name: "Events", href: "/concepts/javascript/events" },

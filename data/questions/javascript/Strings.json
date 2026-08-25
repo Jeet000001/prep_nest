@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What are template literals?",
+    "answer": "Template literals are a way to create strings using backticks (`) instead of single or double quotes. They allow string interpolation using ${}, support multiline strings, and make it easier to build dynamic strings.",
+    "code": "const name = \"Jeet\";\n\nconst message = `Hello, ${name}!`;\n\nconsole.log(message);\n// Hello, Jeet!\n\n// Multiline string\nconst text = `Line 1\nLine 2\nLine 3`;\n\nconsole.log(text);"
+  },
+  {
+    "id": 2,
+    "question": "What is string interpolation?",
+    "answer": "String interpolation is the process of inserting variables or expressions directly into a string. In JavaScript, it is commonly done using ${} inside a template literal.",
+    "code": "const name = \"Jeet\";\nconst age = 25;\n\nconst message = `My name is ${name} and I am ${age} years old.`;\n\nconsole.log(message);\n// My name is Jeet and I am 25 years old.\n\n// Expressions can also be used\nconsole.log(`10 + 20 = ${10 + 20}`);\n// 10 + 20 = 30"
+  },
+  {
+    "id": 3,
+    "question": "Are strings mutable in JavaScript?",
+    "answer": "No. Strings are immutable in JavaScript, which means their individual characters cannot be changed after the string is created. String methods that appear to modify a string actually return a new string instead of changing the original string.",
+    "code": "let text = \"Hello\";\n\n// This does not change the string\ntext[0] = \"Y\";\n\nconsole.log(text); // Hello\n\n// A new string is created instead\ntext = \"Y\" + text.slice(1);\n\nconsole.log(text); // Yello"
+  },
+  {
+    "id": 4,
+    "question": "What are the commonly used string methods?",
+    "answer": "Commonly used string methods include length, toUpperCase(), toLowerCase(), trim(), trimStart(), trimEnd(), includes(), startsWith(), endsWith(), indexOf(), lastIndexOf(), slice(), substring(), replace(), replaceAll(), split(), charAt(), at(), concat(), and repeat(). These methods are commonly used to search, extract, transform, and manipulate strings.",
+    "code": "const text = \"  Hello JavaScript  \";\n\nconsole.log(text.length);\nconsole.log(text.toUpperCase());\nconsole.log(text.toLowerCase());\nconsole.log(text.trim());\nconsole.log(text.includes(\"JavaScript\"));\nconsole.log(text.startsWith(\"  Hello\"));\nconsole.log(text.endsWith(\"  \"));\nconsole.log(text.slice(2, 7));\nconsole.log(text.replace(\"JavaScript\", \"World\"));\nconsole.log(text.split(\" \"));"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between substring(), substr(), and slice()?",
+    "answer": "slice() extracts part of a string using a start index and an optional end index. It supports negative indexes. substring() also extracts part of a string using start and end indexes, but negative values are treated as 0 and if start is greater than end, the two values are swapped. substr() uses a start index and a length, but it is deprecated and should generally not be used in new code. For modern JavaScript, prefer slice() or substring() depending on the requirement.",
+    "code": "const text = \"JavaScript\";\n\n// slice(start, end)\nconsole.log(text.slice(0, 4));\n// Java\n\nconsole.log(text.slice(-6));\n// cript\n\n// substring(start, end)\nconsole.log(text.substring(0, 4));\n// Java\n\n// Negative values are treated as 0\nconsole.log(text.substring(-4, 4));\n// Java\n\n// substr(start, length) - deprecated\nconsole.log(text.substr(0, 4));\n// Java"
+  },
+  {
+    "id": 6,
+    "question": "What does includes() do?",
+    "answer": "The includes() method checks whether a string contains a specified substring. It returns true if the substring is found and false otherwise. It is case-sensitive.",
+    "code": "const message = \"Hello JavaScript\";\n\nconsole.log(message.includes(\"JavaScript\"));\n// true\n\nconsole.log(message.includes(\"javascript\"));\n// false\n\nconsole.log(message.includes(\"React\"));\n// false"
+  },
+  {
+    "id": 7,
+    "question": "What does startsWith() do?",
+    "answer": "The startsWith() method checks whether a string begins with a specified substring. It returns true if the string starts with that value and false otherwise. The comparison is case-sensitive.",
+    "code": "const message = \"Hello JavaScript\";\n\nconsole.log(message.startsWith(\"Hello\"));\n// true\n\nconsole.log(message.startsWith(\"JavaScript\"));\n// false\n\nconsole.log(message.startsWith(\"hello\"));\n// false"
+  },
+  {
+    "id": 8,
+    "question": "What does endsWith() do?",
+    "answer": "The endsWith() method checks whether a string ends with a specified substring. It returns true if the string ends with that value and false otherwise. The comparison is case-sensitive.",
+    "code": "const fileName = \"profile.jpg\";\n\nconsole.log(fileName.endsWith(\".jpg\"));\n// true\n\nconsole.log(fileName.endsWith(\".png\"));\n// false\n\nconsole.log(fileName.endsWith(\".JPG\"));\n// false"
+  },
+  {
+    "id": 9,
+    "question": "How can you reverse a string?",
+    "answer": "JavaScript does not have a built-in reverse() method for strings. A common approach is to convert the string into an array using split(), reverse the array, and join it back into a string. For strings containing Unicode characters such as certain emoji or combining characters, this simple approach may not handle user-perceived characters correctly.",
+    "code": "const text = \"Hello\";\n\nconst reversed = text\n  .split(\"\")\n  .reverse()\n  .join(\"\");\n\nconsole.log(reversed);\n// olleH"
+  },
+  {
+    "id": 10,
+    "question": "How can you check whether a string is a palindrome?",
+    "answer": "A palindrome is a string that reads the same forward and backward. A common approach is to reverse the string and compare it with the original string. If both are equal, the string is a palindrome. If the check should ignore spaces, punctuation, or letter case, normalize the string before comparing.",
+    "code": "function isPalindrome(str) {\n  const normalized = str\n    .toLowerCase()\n    .replace(/[^a-z0-9]/g, \"\");\n\n  const reversed = normalized\n    .split(\"\")\n    .reverse()\n    .join(\"\");\n\n  return normalized === reversed;\n}\n\nconsole.log(isPalindrome(\"madam\"));\n// true\n\nconsole.log(isPalindrome(\"hello\"));\n// false\n\nconsole.log(isPalindrome(\"A man, a plan, a canal: Panama\"));\n// true"
+  }
+]
