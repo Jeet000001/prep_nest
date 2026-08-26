@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "question": "What is event handling in JavaScript?",
+    "answer": "Event handling is the process of detecting and responding to events that happen in a web page. Events can be caused by user actions such as clicks, typing, submitting a form, moving the mouse, or pressing a key. JavaScript uses event handlers or event listeners to execute code when these events occur.",
+    "code": "const button = document.querySelector(\"button\");\n\nbutton.addEventListener(\"click\", () => {\n  console.log(\"Button clicked!\");\n});"
+  },
+  {
+    "id": 2,
+    "question": "What is an event listener?",
+    "answer": "An event listener is a function registered to wait for a specific event on an element. When that event occurs, the browser executes the listener function. Event listeners allow JavaScript to respond to user interactions and browser events.",
+    "code": "const button = document.querySelector(\"button\");\n\nfunction handleClick() {\n  console.log(\"Button was clicked\");\n}\n\nbutton.addEventListener(\"click\", handleClick);"
+  },
+  {
+    "id": 3,
+    "question": "What does addEventListener() do?",
+    "answer": "addEventListener() registers a function to be executed when a specific event occurs on an element. It allows multiple listeners to be attached to the same element and provides options for controlling event behavior, such as whether the listener participates during the capturing phase.",
+    "code": "const button = document.querySelector(\"button\");\n\nbutton.addEventListener(\"click\", () => {\n  console.log(\"First listener\");\n});\n\nbutton.addEventListener(\"click\", () => {\n  console.log(\"Second listener\");\n});\n\n// Clicking the button runs both listeners."
+  },
+  {
+    "id": 4,
+    "question": "What is event bubbling?",
+    "answer": "Event bubbling is the process in which an event starts at the element where it occurred and then propagates upward through its parent elements toward the document. For example, if you click a button inside a div, the click event can be handled by the button first and then by the div.",
+    "code": "<div id=\"parent\">\n  <button id=\"child\">Click Me</button>\n</div>\n\n<script>\n  const parent = document.querySelector(\"#parent\");\n  const child = document.querySelector(\"#child\");\n\n  child.addEventListener(\"click\", () => {\n    console.log(\"Button clicked\");\n  });\n\n  parent.addEventListener(\"click\", () => {\n    console.log(\"Parent clicked\");\n  });\n\n  // Output after clicking button:\n  // Button clicked\n  // Parent clicked\n</script>"
+  },
+  {
+    "id": 5,
+    "question": "What is event capturing?",
+    "answer": "Event capturing is the phase where an event travels from the top of the DOM tree down toward the element where the event occurred. It happens before the bubbling phase. You can register an event listener for the capturing phase by passing { capture: true } to addEventListener().",
+    "code": "const parent = document.querySelector(\"#parent\");\nconst child = document.querySelector(\"#child\");\n\nparent.addEventListener(\"click\", () => {\n  console.log(\"Parent - capture\");\n}, { capture: true });\n\nchild.addEventListener(\"click\", () => {\n  console.log(\"Button\");\n});\n\n// Clicking the button:\n// Parent - capture\n// Button"
+  },
+  {
+    "id": 6,
+    "question": "What is event propagation?",
+    "answer": "Event propagation is the complete process through which an event travels through the DOM. It generally consists of three phases: capturing phase, target phase, and bubbling phase. The event moves from the document toward the target during capturing, reaches the target, and then moves back upward during bubbling.",
+    "code": "document\n   ↓\nCapturing phase\n   ↓\nParent\n   ↓\nTarget element\n   ↑\nBubbling phase\n   ↑\nParent\n   ↑\ndocument\n\n// Event propagation describes this complete journey."
+  },
+  {
+    "id": 7,
+    "question": "What is event delegation?",
+    "answer": "Event delegation is a technique where you attach one event listener to a parent element instead of adding separate listeners to many child elements. Because events bubble from child elements to their parents, the parent can determine which child triggered the event using event.target.",
+    "code": "<ul id=\"list\">\n  <li>Apple</li>\n  <li>Banana</li>\n  <li>Orange</li>\n</ul>\n\n<script>\n  const list = document.querySelector(\"#list\");\n\n  list.addEventListener(\"click\", (event) => {\n    if (event.target.tagName === \"LI\") {\n      console.log(\"Clicked:\", event.target.textContent);\n    }\n  });\n</script>"
+  },
+  {
+    "id": 8,
+    "question": "Why is event delegation useful?",
+    "answer": "Event delegation is useful because it reduces the number of event listeners, which can simplify code and reduce memory usage. It also works well for dynamically added elements because the parent listener can handle events from children that are added later without attaching a new listener to every child.",
+    "code": "const list = document.querySelector(\"#list\");\n\n// One listener handles all current and future <li> elements.\nlist.addEventListener(\"click\", (event) => {\n  if (event.target.matches(\"li\")) {\n    console.log(\"Clicked:\", event.target.textContent);\n  }\n});\n\n// Add a new item later\nconst newItem = document.createElement(\"li\");\nnewItem.textContent = \"Mango\";\nlist.appendChild(newItem);\n\n// The existing listener also handles the new item."
+  },
+  {
+    "id": 9,
+    "question": "What is the difference between event.target and event.currentTarget?",
+    "answer": "event.target refers to the actual element where the event originally occurred. event.currentTarget refers to the element whose event listener is currently running. They can be different when event bubbling or event delegation is involved.",
+    "code": "const parent = document.querySelector(\"#parent\");\n\nparent.addEventListener(\"click\", (event) => {\n  console.log(\"target:\", event.target);\n  console.log(\"currentTarget:\", event.currentTarget);\n});\n\n// If a button inside #parent is clicked:\n// event.target = the button\n// event.currentTarget = #parent"
+  },
+  {
+    "id": 10,
+    "question": "What does stopPropagation() do?",
+    "answer": "stopPropagation() prevents an event from continuing to propagate through the DOM. It can stop the event from moving to other ancestors during capturing or bubbling. It does not prevent the default browser action and does not stop other listeners on the same element from running.",
+    "code": "const child = document.querySelector(\"#child\");\nconst parent = document.querySelector(\"#parent\");\n\nchild.addEventListener(\"click\", (event) => {\n  event.stopPropagation();\n  console.log(\"Button clicked\");\n});\n\nparent.addEventListener(\"click\", () => {\n  console.log(\"Parent clicked\");\n});\n\n// Clicking the button:\n// Button clicked\n// Parent listener does not run."
+  },
+  {
+    "id": 11,
+    "question": "What does preventDefault() do?",
+    "answer": "preventDefault() prevents the browser's default action for an event when that action is cancelable. For example, it can prevent a link from navigating to another page or prevent a form from being submitted normally.",
+    "code": "const link = document.querySelector(\"a\");\n\nlink.addEventListener(\"click\", (event) => {\n  event.preventDefault();\n  console.log(\"Navigation prevented\");\n});\n\n// The link's normal navigation is prevented."
+  },
+  {
+    "id": 12,
+    "question": "What is the difference between stopPropagation() and preventDefault()?",
+    "answer": "stopPropagation() controls event propagation through the DOM, while preventDefault() controls the browser's default action for an event. stopPropagation() does not stop actions such as link navigation or form submission, and preventDefault() does not stop the event from bubbling or capturing.",
+    "code": "const link = document.querySelector(\"a\");\n\nlink.addEventListener(\"click\", (event) => {\n  // Stops the event from reaching parent elements\n  event.stopPropagation();\n\n  // Stops the browser's default navigation\n  event.preventDefault();\n});\n\n// stopPropagation() -> controls event propagation\n// preventDefault()  -> controls default browser behavior"
+  }
+]

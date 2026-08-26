@@ -68,7 +68,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "promise-methods": "Promise_Methods.json",
     "asynchronous-javaScript": "Asynchronous_javaScript.json",
     "async-await": "Async_Await.json",
-    callbacks: "Callbacks.json"
+    callbacks: "Callbacks.json",
+    "event_handling": "Event_Handling.json",
   },
 };
 
