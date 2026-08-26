@@ -112,6 +112,7 @@ const topicGroups: TopicGroup[] = [
        { name: "Async Await", href: "/concepts/javascript/async-await" },
        { name: "Callbacks", href: "/concepts/javascript/callbacks" },
        { name: "Event Handling", href: "/concepts/javascript/event_handling" },
+       { name: "DOM", href: "/concepts/javascript/dom" },
 
       // { name: "DOM", href: "/concepts/javascript/dom" },
       // { name: "Events", href: "/concepts/javascript/events" },

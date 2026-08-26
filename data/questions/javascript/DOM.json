@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is the DOM?",
+    "answer": "DOM stands for Document Object Model. It is a programming interface that represents an HTML document as a tree of objects. Each HTML element becomes a node in this tree, allowing JavaScript to read, modify, add, or remove elements and their content.",
+    "code": "<!DOCTYPE html>\n<html>\n  <body>\n    <h1>Hello</h1>\n    <p>Welcome</p>\n  </body>\n</html>\n\n// Simplified DOM tree:\n// document\n//   └── html\n//       └── body\n//           ├── h1\n//           └── p"
+  },
+  {
+    "id": 2,
+    "question": "How does JavaScript interact with the DOM?",
+    "answer": "JavaScript interacts with the DOM through browser-provided DOM APIs. It can select elements, read or change their content and attributes, modify styles, create or remove elements, and attach event listeners. This allows webpages to become dynamic and interactive.",
+    "code": "const heading = document.querySelector(\"h1\");\n\n// Read content\nconsole.log(heading.textContent);\n\n// Change content\nheading.textContent = \"Hello JavaScript!\";\n\n// Change style\nheading.style.color = \"blue\";\n\n// Add an event listener\nheading.addEventListener(\"click\", () => {\n  console.log(\"Heading clicked\");\n});"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between querySelector() and getElementById()?",
+    "answer": "getElementById() finds an element using its id and returns the matching element or null. querySelector() accepts any valid CSS selector and returns the first matching element or null. getElementById() is specialized for IDs, while querySelector() is more flexible because it supports CSS selectors.",
+    "code": "// Using getElementById()\nconst heading1 = document.getElementById(\"title\");\n\n// Using querySelector()\nconst heading2 = document.querySelector(\"#title\");\n\n// querySelector() can also use other CSS selectors\nconst paragraph = document.querySelector(\".description\");\nconst button = document.querySelector(\"button\");"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between querySelector() and querySelectorAll()?",
+    "answer": "querySelector() returns only the first element that matches a CSS selector. querySelectorAll() returns all matching elements as a static NodeList. If no element matches, querySelector() returns null, while querySelectorAll() returns an empty NodeList.",
+    "code": "const firstItem = document.querySelector(\".item\");\n\nconsole.log(firstItem);\n// First matching .item element\n\nconst allItems = document.querySelectorAll(\".item\");\n\nconsole.log(allItems);\n// NodeList containing all matching elements\n\nallItems.forEach(item => {\n  console.log(item.textContent);\n});"
+  },
+  {
+    "id": 5,
+    "question": "How can you create a DOM element dynamically?",
+    "answer": "You can create a new DOM element using document.createElement(). After creating it, you can set its text, attributes, classes, styles, or event listeners before adding it to the document.",
+    "code": "const button = document.createElement(\"button\");\n\nbutton.textContent = \"Click Me\";\nbutton.className = \"primary-button\";\nbutton.setAttribute(\"type\", \"button\");\n\nbutton.addEventListener(\"click\", () => {\n  console.log(\"Button clicked\");\n});\n\nconsole.log(button);"
+  },
+  {
+    "id": 6,
+    "question": "How can you add an element to the DOM?",
+    "answer": "You can add a created element to the DOM using methods such as append(), appendChild(), prepend(), before(), or after(). append() is commonly used because it can add one or more nodes or strings.",
+    "code": "const container = document.querySelector(\"#container\");\nconst paragraph = document.createElement(\"p\");\n\nparagraph.textContent = \"Hello from JavaScript\";\n\n// Add at the end\ncontainer.append(paragraph);\n\n// Other common methods:\n// container.appendChild(paragraph);\n// container.prepend(paragraph);\n// container.before(paragraph);\n// container.after(paragraph);"
+  },
+  {
+    "id": 7,
+    "question": "How can you remove an element from the DOM?",
+    "answer": "You can remove an element using its remove() method. You can also remove a child using the parent element's removeChild() method. The remove() method is generally simpler when you already have a reference to the element.",
+    "code": "const paragraph = document.querySelector(\"p\");\n\n// Modern approach\nparagraph.remove();\n\n// Alternative approach\nconst container = document.querySelector(\"#container\");\nconst item = container.querySelector(\".item\");\n\ncontainer.removeChild(item);"
+  },
+  {
+    "id": 8,
+    "question": "What is the difference between innerHTML, innerText, and textContent?",
+    "answer": "innerHTML gets or sets the HTML markup inside an element, so HTML tags are interpreted when assigned. textContent gets or sets the text content and treats HTML as plain text. innerText represents the rendered, visible text and is affected by CSS and layout. For plain text, textContent is generally preferred because it does not parse HTML.",
+    "code": "const element = document.querySelector(\"#content\");\n\n// innerHTML - parses HTML\n element.innerHTML = \"<strong>Hello</strong>\";\n\n// textContent - treats HTML as text\n element.textContent = \"<strong>Hello</strong>\";\n\n// innerText - works with rendered/visible text\n element.innerText = \"Hello\";\n\n// Reading values:\nconsole.log(element.innerHTML);\nconsole.log(element.textContent);\nconsole.log(element.innerText);"
+  },
+  {
+    "id": 9,
+    "question": "What is DOM manipulation?",
+    "answer": "DOM manipulation means using JavaScript and DOM APIs to change the structure, content, attributes, styles, or behavior of a webpage. Common operations include selecting elements, changing text, adding or removing elements, modifying classes, updating attributes, and attaching event listeners.",
+    "code": "const title = document.querySelector(\"h1\");\nconst container = document.querySelector(\"#container\");\n\n// Change content\ntitle.textContent = \"New Title\";\n\n// Change class\ntitle.classList.add(\"active\");\n\n// Change attribute\ntitle.setAttribute(\"data-type\", \"heading\");\n\n// Create and add an element\nconst item = document.createElement(\"p\");\nitem.textContent = \"New paragraph\";\ncontainer.append(item);\n\n// Remove an element\nitem.remove();"
+  },
+  {
+    "id": 10,
+    "question": "What is the performance impact of excessive DOM manipulation?",
+    "answer": "Excessive DOM manipulation can hurt performance because changing the DOM may cause the browser to recalculate styles, perform layout (reflow), and repaint parts of the page. Repeated DOM updates, especially inside loops, can cause unnecessary work and make the UI slow or unresponsive. Performance can be improved by batching updates, minimizing DOM changes, using document fragments when appropriate, and avoiding unnecessary layout reads and writes.",
+    "code": "// Less efficient: repeatedly modifying the DOM\nconst list = document.querySelector(\"#list\");\n\nfor (let i = 0; i < 1000; i++) {\n  const item = document.createElement(\"li\");\n  item.textContent = `Item ${i}`;\n  list.append(item);\n}\n\n// Better for many elements: build first, then append once\nconst fragment = document.createDocumentFragment();\n\nfor (let i = 0; i < 1000; i++) {\n  const item = document.createElement(\"li\");\n  item.textContent = `Item ${i}`;\n  fragment.append(item);\n}\n\nlist.append(fragment);\n\n// Fewer DOM insertions can reduce rendering work."
+  }
+]

@@ -70,6 +70,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     "async-await": "Async_Await.json",
     callbacks: "Callbacks.json",
     "event_handling": "Event_Handling.json",
+    "dom": "DOM.json",
   },
 };
 
