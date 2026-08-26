@@ -105,6 +105,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Immutability", href: "/concepts/javascript/immutability" },
       { name: "Deep Copy & Shallow Copy", href: "/concepts/javascript/deep-copy-shallow-copy" },
       { name: "Strings", href: "/concepts/javascript/strings" },
+      { name: "Numbers & Math()", href: "/concepts/javascript/number-math" },
 
       // { name: "DOM", href: "/concepts/javascript/dom" },
       // { name: "Events", href: "/concepts/javascript/events" },

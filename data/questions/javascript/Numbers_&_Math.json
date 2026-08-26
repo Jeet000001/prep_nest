@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "question": "What is the difference between Number and BigInt?",
+    "answer": "Number is JavaScript's standard numeric type and uses 64-bit floating-point representation. It can safely represent integers only up to Number.MAX_SAFE_INTEGER (2^53 - 1). BigInt is used for integers larger than this safe range and can represent arbitrarily large integers. BigInt values are written with an n suffix. Number and BigInt should not be mixed directly in arithmetic operations.",
+    "code": "const num = 100;\nconst bigNum = 100000000000000000000n;\n\nconsole.log(typeof num);     // \"number\"\nconsole.log(typeof bigNum);  // \"bigint\"\n\n// BigInt is useful for very large integers\nconst largeNumber = 9007199254740993n;\nconsole.log(largeNumber);\n\n// Cannot mix Number and BigInt directly\n// console.log(10 + 10n); // TypeError\n\n// Convert explicitly if needed\nconsole.log(10n + BigInt(10)); // 20n"
+  },
+  {
+    "id": 2,
+    "question": "What is NaN?",
+    "answer": "NaN stands for Not-a-Number. It is a special numeric value that represents an invalid or unsuccessful numeric operation. Interestingly, its type is still number. NaN is also the only JavaScript value that is not equal to itself.",
+    "code": "const result = \"hello\" * 10;\n\nconsole.log(result);        // NaN\nconsole.log(typeof result); // \"number\"\n\nconsole.log(NaN === NaN);   // false\n\nconsole.log(Number.isNaN(result)); // true"
+  },
+  {
+    "id": 3,
+    "question": "What is Infinity?",
+    "answer": "Infinity is a special numeric value that represents a value greater than any finite JavaScript number. It can occur when a number is divided by zero or when a calculation produces a value outside the finite range of JavaScript numbers. JavaScript also has -Infinity for negative infinity.",
+    "code": "console.log(10 / 0);\n// Infinity\n\nconsole.log(-10 / 0);\n// -Infinity\n\nconsole.log(typeof Infinity);\n// \"number\"\n\nconsole.log(Number.isFinite(Infinity));\n// false"
+  },
+  {
+    "id": 4,
+    "question": "What is Number.isNaN()?",
+    "answer": "Number.isNaN() checks whether a value is actually the special NaN value. It returns true only when the value is NaN. Unlike the global isNaN() function, it does not perform type coercion.",
+    "code": "console.log(Number.isNaN(NaN));\n// true\n\nconsole.log(Number.isNaN(\"hello\"));\n// false\n\nconsole.log(Number.isNaN(\"123\"));\n// false\n\nconsole.log(Number.isNaN(123));\n// false"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between isNaN() and Number.isNaN()?",
+    "answer": "The main difference is type coercion. The global isNaN() function converts the value to a number before checking whether the result is NaN. Number.isNaN() does not perform type coercion and returns true only when the value is actually the number NaN. In most cases, Number.isNaN() is safer and more predictable.",
+    "code": "console.log(isNaN(\"hello\"));\n// true\n// \"hello\" is converted to a number, producing NaN.\n\nconsole.log(isNaN(\"123\"));\n// false\n// \"123\" is converted to 123.\n\nconsole.log(Number.isNaN(\"hello\"));\n// false\n// It is a string, not the NaN value.\n\nconsole.log(Number.isNaN(NaN));\n// true"
+  },
+  {
+    "id": 6,
+    "question": "What is floating-point precision in JavaScript?",
+    "answer": "Floating-point precision refers to the fact that JavaScript Number values use the IEEE 754 double-precision floating-point format. Many decimal fractions cannot be represented exactly in binary, so calculations involving decimal numbers can sometimes produce small rounding errors.",
+    "code": "console.log(0.1 + 0.2);\n// 0.30000000000000004\n\nconsole.log(0.1 + 0.2 === 0.3);\n// false"
+  },
+  {
+    "id": 7,
+    "question": "Why does 0.1 + 0.2 !== 0.3?",
+    "answer": "Because JavaScript stores Number values using binary floating-point representation, and values such as 0.1 and 0.2 cannot be represented exactly in binary. Their stored approximations are added together, producing a result that is extremely close to 0.3 but not exactly equal to it. This is a floating-point precision issue, not a JavaScript arithmetic bug.",
+    "code": "console.log(0.1 + 0.2);\n// 0.30000000000000004\n\nconsole.log(0.1 + 0.2 === 0.3);\n// false\n\n// One common solution for comparisons:\nconst result = 0.1 + 0.2;\nconst expected = 0.3;\n\nconsole.log(Math.abs(result - expected) < Number.EPSILON);\n// true"
+  },
+  {
+    "id": 8,
+    "question": "When should you use BigInt?",
+    "answer": "Use BigInt when you need to work with integers larger than Number.MAX_SAFE_INTEGER and exact integer arithmetic is important. Common examples include very large IDs, counters, cryptographic or financial calculations involving large integers, and other domains where integer precision beyond the safe Number range is required. BigInt should not be used when you need decimal or floating-point values.",
+    "code": "const maxSafe = Number.MAX_SAFE_INTEGER;\nconsole.log(maxSafe);\n// 9007199254740991\n\nconst hugeValue = 900719925474099100000n;\nconsole.log(hugeValue);\n\n// BigInt supports exact integer arithmetic\nconst a = 1000000000000000000n;\nconst b = 2000000000000000000n;\n\nconsole.log(a + b);\n// 3000000000000000000n"
+  },
+  {
+    "id": 9,
+    "question": "What are the commonly used Math methods?",
+    "answer": "The Math object provides commonly used mathematical constants and methods. Frequently used methods include Math.round() for rounding to the nearest integer, Math.floor() for rounding down, Math.ceil() for rounding up, Math.trunc() for removing the decimal part, Math.abs() for absolute values, Math.max() and Math.min() for finding maximum and minimum values, Math.pow() for powers, Math.sqrt() for square roots, and Math.random() for generating a pseudo-random number between 0 (inclusive) and 1 (exclusive).",
+    "code": "console.log(Math.round(4.6));   // 5\nconsole.log(Math.floor(4.9));   // 4\nconsole.log(Math.ceil(4.1));    // 5\nconsole.log(Math.trunc(4.9));   // 4\n\nconsole.log(Math.abs(-10));     // 10\nconsole.log(Math.max(10, 20, 5)); // 20\nconsole.log(Math.min(10, 20, 5)); // 5\n\nconsole.log(Math.pow(2, 3));    // 8\nconsole.log(Math.sqrt(25));     // 5\n\nconsole.log(Math.random());\n// Random number from 0 (inclusive) to 1 (exclusive)"
+  }
+]

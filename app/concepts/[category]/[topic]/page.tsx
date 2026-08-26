@@ -62,7 +62,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "classes-OOP": "Classes_&_OOP.json",
     immutability: "Immutability.json",
     "deep-copy-shallow-copy": "Deep_Copy_&_Shallow_Copy.json",
-    strings: "Strings.json"
+    strings: "Strings.json",
+    "number-math": "Numbers_&_Math.json"
   },
 };
 
