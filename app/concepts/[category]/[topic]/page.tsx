@@ -75,7 +75,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "fetch-api": "Fetch_Api.json",
     modules: "Modules.json",
     "error-handling": "Error_Handling.json",
-    "regular-expressions": "Regular_Expressions.json"
+    "regular-expressions": "Regular_Expressions.json",
+    "memory-management": "Memory_Management.json"
   },
 };
 

@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "question": "How does memory management work in JavaScript?",
+    "answer": "JavaScript automatically manages memory using a combination of memory allocation and garbage collection. When you create variables, objects, arrays, functions, or other values, JavaScript allocates memory for them. When a value is no longer reachable by the program, the JavaScript engine can reclaim that memory through garbage collection. Developers generally do not need to manually allocate or free memory.",
+    "code": "function createUser() {\n  const user = {\n    name: \"Jeet\",\n    age: 22\n  };\n\n  return user;\n}\n\nconst user = createUser();\n\n// The object is still reachable through `user`.\n// If we remove the reference:\n// user = null;\n// the object may become eligible for garbage collection."
+  },
+  {
+    "id": 2,
+    "question": "What is garbage collection?",
+    "answer": "Garbage collection is the automatic process of finding objects that are no longer reachable by the program and reclaiming the memory they occupy. JavaScript engines perform garbage collection automatically, so developers usually do not have to manually release memory.",
+    "code": "let user = {\n  name: \"Jeet\"\n};\n\nconsole.log(user.name);\n\nuser = null;\n\n// The object no longer has a reference from `user`.\n// If there are no other references to it,\n// it becomes eligible for garbage collection."
+  },
+  {
+    "id": 3,
+    "question": "How does JavaScript determine whether an object can be garbage collected?",
+    "answer": "JavaScript primarily determines this using reachability. An object can be garbage collected when it is no longer reachable from a set of runtime roots, such as active variables, the current call stack, or other live references. A commonly used garbage collection approach is mark-and-sweep: the engine marks reachable objects and then removes objects that are not reachable.",
+    "code": "let user = {\n  name: \"Jeet\"\n};\n\nlet anotherReference = user;\n\nuser = null;\n\n// The object is still reachable through anotherReference.\n// Therefore, it cannot be garbage collected yet.\n\nanotherReference = null;\n\n// Now there may be no references to the object.\n// It becomes eligible for garbage collection."
+  },
+  {
+    "id": 4,
+    "question": "What is a memory leak?",
+    "answer": "A memory leak occurs when a program keeps references to data that it no longer needs, preventing the JavaScript engine from reclaiming that memory. Over time, repeated leaks can cause memory usage to increase and may eventually make an application slow or unstable.",
+    "code": "const users = [];\n\nfunction addUser(user) {\n  users.push(user);\n}\n\naddUser({ name: \"Jeet\" });\n\n// If the application no longer needs these users\n// but keeps adding objects to the array without removing them,\n// memory usage can continue to grow."
+  },
+  {
+    "id": 5,
+    "question": "What are common causes of memory leaks in JavaScript?",
+    "answer": "Common causes include accidentally keeping unnecessary references, event listeners that are never removed, timers or intervals that continue running, closures that keep large objects alive, growing global variables or caches, detached DOM elements that are still referenced, and subscriptions or observers that are never cleaned up.",
+    "code": "// Example: an interval that is never cleared\nconst data = new Array(1000000).fill(\"data\");\n\nsetInterval(() => {\n  console.log(data.length);\n}, 1000);\n\n// The interval keeps running and keeps its callback alive.\n// The callback references `data`, so `data` cannot be collected\n// while that interval remains active."
+  },
+  {
+    "id": 6,
+    "question": "How can event listeners cause memory leaks?",
+    "answer": "Event listeners can contribute to memory leaks when listeners remain attached to elements or long-lived objects even though the application no longer needs them. The listener keeps its callback alive, and the callback may keep references to other objects alive as well. This is especially important for dynamically created elements, components, or long-running pages where listeners are repeatedly added.",
+    "code": "const button = document.querySelector(\"button\");\n\nfunction handleClick() {\n  console.log(\"Clicked\");\n}\n\nbutton.addEventListener(\"click\", handleClick);\n\n// Later, when the listener is no longer needed:\nbutton.removeEventListener(\"click\", handleClick);\n\n// Removing listeners when they are no longer needed\n// helps release unnecessary references."
+  },
+  {
+    "id": 7,
+    "question": "How can closures cause memory leaks?",
+    "answer": "A closure keeps access to variables from its surrounding lexical scope. This is useful, but if a long-lived callback or object keeps a closure alive, the variables captured by that closure can also remain in memory. A closure itself is not a memory leak; the problem occurs when unnecessary references keep the closure and its captured data alive for longer than needed.",
+    "code": "function createHandler() {\n  const largeData = new Array(1000000).fill(\"data\");\n\n  return function () {\n    console.log(largeData.length);\n  };\n}\n\nconst handler = createHandler();\n\n// `handler` keeps the closure alive.\n// The closure keeps access to `largeData`.\n\n// When the handler is no longer needed:\n// handler = null;\n// If no other references exist, the closure and captured data\n// can eventually become eligible for garbage collection."
+  },
+  {
+    "id": 8,
+    "question": "How can you prevent memory leaks in JavaScript?",
+    "answer": "You can prevent memory leaks by removing event listeners when they are no longer needed, clearing timers and intervals, cleaning up subscriptions and observers, avoiding unnecessary global references, limiting unbounded caches or arrays, releasing references to unused objects, and properly cleaning up resources when components or pages are removed. In frontend frameworks such as React, cleanup functions are commonly used for this purpose.",
+    "code": "const button = document.querySelector(\"button\");\n\nfunction handleClick() {\n  console.log(\"Clicked\");\n}\n\nbutton.addEventListener(\"click\", handleClick);\n\nconst intervalId = setInterval(() => {\n  console.log(\"Running...\");\n}, 1000);\n\n// Cleanup when these resources are no longer needed\nbutton.removeEventListener(\"click\", handleClick);\nclearInterval(intervalId);\n\n// Good cleanup prevents unnecessary resources and references\n// from staying alive."
+  }
+]
