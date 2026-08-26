@@ -64,7 +64,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "deep-copy-shallow-copy": "Deep_Copy_&_Shallow_Copy.json",
     strings: "Strings.json",
     "number-math": "Numbers_&_Math.json",
-    promises: "Promises.json"
+    promises: "Promises.json",
+    "async-await": "Async_Await.json"
   },
 };
 

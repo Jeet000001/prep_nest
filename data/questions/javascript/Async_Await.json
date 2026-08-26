@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is async/await?",
+    "answer": "async/await is a modern syntax for working with Promises in JavaScript. An async function always returns a Promise, and the await keyword pauses the execution of that async function until the Promise settles. It makes asynchronous code easier to read because it looks similar to synchronous code.",
+    "code": "async function getUser() {\n  const response = await fetch(\"/api/user\");\n  const user = await response.json();\n\n  console.log(user);\n}\n\ngetUser();"
+  },
+  {
+    "id": 2,
+    "question": "How does async/await work internally?",
+    "answer": "async/await is built on top of Promises. An async function returns a Promise. When JavaScript reaches await, it pauses the execution of that async function until the awaited Promise settles. The JavaScript thread is not blocked during this time. Once the Promise settles, the remaining code in the async function is scheduled to continue.",
+    "code": "async function example() {\n  console.log(\"1\");\n\n  const result = await Promise.resolve(\"Done\");\n\n  console.log(\"2\", result);\n}\n\nconsole.log(\"Start\");\nexample();\nconsole.log(\"End\");\n\n// Output:\n// Start\n// 1\n// End\n// 2 Done\n\n// await pauses example(), not the entire JavaScript thread."
+  },
+  {
+    "id": 3,
+    "question": "What does an async function return?",
+    "answer": "An async function always returns a Promise. If the function returns a normal value, JavaScript automatically wraps that value in a fulfilled Promise. If the function throws an error, the returned Promise becomes rejected.",
+    "code": "async function getNumber() {\n  return 10;\n}\n\nconst result = getNumber();\n\nconsole.log(result);\n// Promise { 10 }\n\nresult.then(value => {\n  console.log(value);\n});\n// 10\n\nasync function fail() {\n  throw new Error(\"Something went wrong\");\n}\n\nfail().catch(error => {\n  console.log(error.message);\n});"
+  },
+  {
+    "id": 4,
+    "question": "What does the await keyword do?",
+    "answer": "The await keyword waits for a Promise to settle and gives you its fulfilled value. If the Promise is rejected, await throws the rejection reason, which can be handled using try...catch. await can only be used inside an async function, except in environments that support top-level await, such as JavaScript modules.",
+    "code": "async function getData() {\n  const promise = Promise.resolve(\"Hello\");\n\n  const result = await promise;\n\n  console.log(result);\n}\n\ngetData();\n// Hello\n\n// If the Promise rejects:\nasync function example() {\n  try {\n    const result = await Promise.reject(\n      new Error(\"Request failed\")\n    );\n  } catch (error) {\n    console.log(error.message);\n  }\n}\n\nexample();\n// Request failed"
+  },
+  {
+    "id": 5,
+    "question": "Can await be used outside an async function?",
+    "answer": "Normally, await can only be used inside an async function. However, modern JavaScript also supports top-level await inside ES modules. This allows a module to wait for a Promise without wrapping the code inside an async function.",
+    "code": "// Inside an async function\nasync function loadData() {\n  const response = await fetch(\"/api/data\");\n  return response.json();\n}\n\n// Top-level await is also allowed in ES modules\nconst response = await fetch(\"/api/data\");\nconst data = await response.json();\n\nconsole.log(data);"
+  },
+  {
+    "id": 6,
+    "question": "How do you handle errors with async/await?",
+    "answer": "The most common way to handle errors with async/await is using try...catch. If an awaited Promise rejects, await throws the rejection reason, and the catch block can handle it. You can also use a .catch() on the Promise returned by the async function.",
+    "code": "async function getUser() {\n  try {\n    const response = await fetch(\"/api/user\");\n    const user = await response.json();\n\n    console.log(user);\n  } catch (error) {\n    console.error(\"Failed to fetch user:\", error);\n  }\n}\n\ngetUser();\n\n// You can also handle the async function's rejected Promise:\ngetUser().catch(error => {\n  console.error(error);\n});"
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between Promises and async/await?",
+    "answer": "Promises are the underlying mechanism used to represent asynchronous results. async/await is syntax built on top of Promises that makes Promise-based code easier to read and write. Promises commonly use .then(), .catch(), and .finally(), while async/await commonly uses try...catch...finally. They are not separate asynchronous systems; async/await works with Promises.",
+    "code": "// Using Promises\nfetch(\"/api/user\")\n  .then(response => response.json())\n  .then(user => {\n    console.log(user);\n  })\n  .catch(error => {\n    console.error(error);\n  });\n\n// Using async/await\nasync function getUser() {\n  try {\n    const response = await fetch(\"/api/user\");\n    const user = await response.json();\n\n    console.log(user);\n  } catch (error) {\n    console.error(error);\n  }\n}"
+  },
+  {
+    "id": 8,
+    "question": "Does await block the JavaScript thread?",
+    "answer": "No. await does not block the JavaScript thread. It pauses only the execution of the current async function while the awaited Promise is pending. The JavaScript runtime can continue executing other work, such as handling events and running other functions. Once the Promise settles, the async function resumes.",
+    "code": "async function example() {\n  console.log(\"A\");\n\n  await new Promise(resolve => {\n    setTimeout(resolve, 2000);\n  });\n\n  console.log(\"B\");\n}\n\nexample();\n\nconsole.log(\"C\");\n\n// Output:\n// A\n// C\n// B\n\n// The async function waits for 2 seconds,\n// but JavaScript can continue executing other code."
+  },
+  {
+    "id": 9,
+    "question": "How can you execute multiple asynchronous operations in parallel?",
+    "answer": "You can start multiple asynchronous operations first and then use Promise.all() to wait for all of them. This allows independent operations to run concurrently instead of waiting for each operation to finish before starting the next one.",
+    "code": "async function getData() {\n  const userPromise = fetch(\"/api/user\");\n  const postsPromise = fetch(\"/api/posts\");\n  const commentsPromise = fetch(\"/api/comments\");\n\n  const [user, posts, comments] = await Promise.all([\n    userPromise,\n    postsPromise,\n    commentsPromise\n  ]);\n\n  console.log(user);\n  console.log(posts);\n  console.log(comments);\n}\n\ngetData();"
+  },
+  {
+    "id": 10,
+    "question": "What is the difference between sequential and parallel await?",
+    "answer": "Sequential await means each asynchronous operation is started and awaited one after another, so the next operation starts only after the previous one finishes. Parallel await means independent operations are started first and then awaited together, usually with Promise.all(). Parallel execution can be faster when the operations do not depend on each other.",
+    "code": "// Sequential\nasync function sequential() {\n  const user = await fetch(\"/api/user\");\n  const posts = await fetch(\"/api/posts\");\n\n  // posts request starts only after user request finishes\n}\n\n// Parallel\nasync function parallel() {\n  const userPromise = fetch(\"/api/user\");\n  const postsPromise = fetch(\"/api/posts\");\n\n  const [user, posts] = await Promise.all([\n    userPromise,\n    postsPromise\n  ]);\n\n  // Both requests can run concurrently\n}"
+  }
+]
