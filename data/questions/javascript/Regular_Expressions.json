@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What is a Regular Expression?",
+    "answer": "A Regular Expression (regex) is a pattern used to search, match, validate, or replace text. In JavaScript, regex is commonly used for tasks such as checking email formats, finding specific words, validating input, and replacing parts of a string.",
+    "code": "const pattern = /hello/;\n\nconsole.log(pattern.test(\"Hello world\"));\n// false\n\nconsole.log(pattern.test(\"hello world\"));\n// true"
+  },
+  {
+    "id": 2,
+    "question": "How do you create a Regular Expression in JavaScript?",
+    "answer": "There are two common ways to create a Regular Expression in JavaScript. The first is using a regular expression literal, which is the most common approach. The second is using the RegExp constructor, which is useful when the pattern needs to be created dynamically.",
+    "code": "// 1. Regular expression literal\nconst regex1 = /hello/i;\n\n// 2. RegExp constructor\nconst regex2 = new RegExp(\"hello\", \"i\");\n\nconsole.log(regex1.test(\"Hello\"));\n// true\n\nconsole.log(regex2.test(\"HELLO\"));\n// true"
+  },
+  {
+    "id": 3,
+    "question": "What are regex flags?",
+    "answer": "Regex flags modify how a regular expression behaves. Common JavaScript flags include g for global matching, i for case-insensitive matching, m for multiline matching, s for allowing . to match line terminators, u for Unicode-aware matching, and y for sticky matching. The d flag can provide match indices in environments that support it.",
+    "code": "const regex = /hello/gi;\n\n// g = find all matches\n// i = ignore case\n\nconst text = \"Hello hello HELLO\";\n\nconsole.log(text.match(regex));\n// [\"Hello\", \"hello\", \"HELLO\"]"
+  },
+  {
+    "id": 4,
+    "question": "What are test() and match() used for?",
+    "answer": "test() is a RegExp method that checks whether a pattern exists in a string and returns true or false. match() is a String method that searches a string using a regular expression and returns information about the matches. With the g flag, match() returns an array containing all matched substrings.",
+    "code": "const regex = /javascript/i;\nconst text = \"I am learning JavaScript\";\n\n// test() -> boolean\nconsole.log(regex.test(text));\n// true\n\n// match() -> match information\nconsole.log(text.match(regex));\n// [\"JavaScript\"]"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between match() and matchAll()?",
+    "answer": "match() returns matches directly, while matchAll() returns an iterator containing detailed match information for each match. matchAll() is especially useful when you need capturing groups for every occurrence. When using matchAll(), the regular expression must have the global (g) flag.",
+    "code": "const text = \"I have 10 apples and 20 oranges\";\nconst regex = /(\\d+) (\\w+)/g;\n\n// match()\nconsole.log(text.match(regex));\n// [\"10 apples\", \"20 oranges\"]\n\n// matchAll()\nconst matches = [...text.matchAll(regex)];\n\nconsole.log(matches[0][1]);\n// \"10\"\n\nconsole.log(matches[0][2]);\n// \"apples\"\n\nconsole.log(matches[1][1]);\n// \"20\"\n\nconsole.log(matches[1][2]);\n// \"oranges\""
+  },
+  {
+    "id": 6,
+    "question": "How would you validate an email using Regular Expressions?",
+    "answer": "You can use a regular expression to check whether an email follows a basic expected structure, such as text before @, a domain name, and a domain extension. However, regex validation should usually be treated as basic format validation rather than proof that an email address actually exists. For real applications, email verification is more reliable.",
+    "code": "function isValidEmail(email) {\n  const regex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n  return regex.test(email);\n}\n\nconsole.log(isValidEmail(\"jeet@example.com\"));\n// true\n\nconsole.log(isValidEmail(\"invalid-email\"));\n// false"
+  },
+  {
+    "id": 7,
+    "question": "How would you find all occurrences of a pattern in a string?",
+    "answer": "To find all occurrences of a pattern, you can use the global (g) flag with methods such as match() or matchAll(). The g flag tells the regular expression to search beyond the first match.",
+    "code": "const text = \"cat, dog, cat, bird, cat\";\nconst regex = /cat/g;\n\nconst matches = text.match(regex);\n\nconsole.log(matches);\n// [\"cat\", \"cat\", \"cat\"]\n\nconsole.log(matches.length);\n// 3"
+  }
+]

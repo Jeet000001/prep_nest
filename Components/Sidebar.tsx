@@ -132,6 +132,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Fetch API", href: "/concepts/javascript/fetch-api" },
       { name: "Modules", href: "/concepts/javascript/modules" },
       { name: "Error Handling", href: "/concepts/javascript/error-handling" },
+      { name: "Regular Expressions", href: "/concepts/javascript/regular-expressions" },
     ],
   },
 
