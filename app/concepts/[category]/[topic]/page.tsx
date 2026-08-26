@@ -2,6 +2,8 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { notFound } from "next/navigation";
 import { codeToHtml } from "shiki";
+import QuestionList from "@/Components/concepts/QuestionList";
+import AnimatedHeader from "@/Components/concepts/Header";
 
 type Question = {
   id: number;
@@ -69,8 +71,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "asynchronous-javaScript": "Asynchronous_javaScript.json",
     "async-await": "Async_Await.json",
     callbacks: "Callbacks.json",
-    "event_handling": "Event_Handling.json",
-    "dom": "DOM.json",
+    event_handling: "Event_Handling.json",
+    dom: "DOM.json",
     "web-storage": "Web_Storage.json",
     "fetch-api": "Fetch_Api.json",
     modules: "Modules.json",
@@ -131,36 +133,13 @@ export default async function TopicPage({
 
   return (
     <div className="flex h-full min-h-0 w-full flex-col rounded-2xl border border-white/10 p-4 sm:p-6">
-      <header className="border-b border-white/10 pb-4">
-        <p className="font-mono text-xs uppercase tracking-[0.18em] text-amber-400">
-          {category}
-        </p>
-        <h1 className="mt-2 text-2xl font-semibold capitalize text-white">
-          {topic.replaceAll("-", " ")}
-        </h1>
-      </header>
+      <AnimatedHeader category={category} topic={topic} />
 
       <div
         data-concepts-scroll
-        className="hide-scrollbar min-h-0 flex-1 space-y-4 overflow-y-auto pt-4"
+        className="hide-scrollbar min-h-0 flex-1 overflow-y-auto pt-4"
       >
-        {highlightedQuestions.map((item) => (
-          <article
-            key={item.id}
-            className="rounded-xl border border-white/10 bg-white/3 p-4"
-          >
-            <h2 className="text-lg font-medium text-white">{item.question}</h2>
-            <p className="mt-3 whitespace-pre-line text-sm leading-7 text-neutral-400">
-              {item.answer}
-            </p>
-            {item.highlightedCode && (
-              <div
-                className="shiki-code mt-4 min-w-0 max-w-full overflow-hidden rounded-lg text-sm leading-6"
-                dangerouslySetInnerHTML={{ __html: item.highlightedCode }}
-              />
-            )}
-          </article>
-        ))}
+        <QuestionList questions={highlightedQuestions} />
       </div>
     </div>
   );
