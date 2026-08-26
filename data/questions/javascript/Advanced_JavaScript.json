@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "question": "What are generators in JavaScript?",
+    "answer": "Generators are special functions that can pause their execution and resume it later. They are created using the function* syntax and use the yield keyword to pause and return values. Calling a generator function does not immediately execute its body; it returns a generator object that can be controlled using next().",
+    "code": "function* numbers() {\n  yield 1;\n  yield 2;\n  yield 3;\n}\n\nconst generator = numbers();\n\nconsole.log(generator.next());\n// { value: 1, done: false }\n\nconsole.log(generator.next());\n// { value: 2, done: false }\n\nconsole.log(generator.next());\n// { value: 3, done: false }\n\nconsole.log(generator.next());\n// { value: undefined, done: true }"
+  },
+  {
+    "id": 2,
+    "question": "What is the yield keyword?",
+    "answer": "The yield keyword is used inside a generator function to pause its execution and return a value to the caller. When next() is called again, the generator resumes execution from where it was paused.",
+    "code": "function* greet() {\n  console.log(\"Start\");\n\n  yield \"Hello\";\n\n  console.log(\"Middle\");\n\n  yield \"World\";\n\n  console.log(\"End\");\n}\n\nconst generator = greet();\n\nconsole.log(generator.next().value);\n// Start\n// Hello\n\nconsole.log(generator.next().value);\n// Middle\n// World\n\nconsole.log(generator.next().value);\n// End\n// undefined"
+  },
+  {
+    "id": 3,
+    "question": "What are iterators?",
+    "answer": "An iterator is an object that provides a way to access values one at a time. It must have a next() method that returns an object containing a value and a done property. done indicates whether the iteration has finished.",
+    "code": "const iterator = {\n  count: 1,\n\n  next() {\n    if (this.count <= 3) {\n      return {\n        value: this.count++,\n        done: false\n      };\n    }\n\n    return {\n      value: undefined,\n      done: true\n    };\n  }\n};\n\nconsole.log(iterator.next());\n// { value: 1, done: false }\n\nconsole.log(iterator.next());\n// { value: 2, done: false }\n\nconsole.log(iterator.next());\n// { value: 3, done: false }\n\nconsole.log(iterator.next());\n// { value: undefined, done: true }"
+  },
+  {
+    "id": 4,
+    "question": "What is the iterable protocol?",
+    "answer": "The iterable protocol defines how an object can provide an iterator. An iterable object must have a [Symbol.iterator]() method that returns an iterator. Objects such as Array, String, Map, and Set are built-in iterables. This is why they can be used with for...of, spread syntax, and other iteration features.",
+    "code": "const numbers = [10, 20, 30];\n\n// Array is iterable\nfor (const number of numbers) {\n  console.log(number);\n}\n\n// The iterable provides an iterator\nconst iterator = numbers[Symbol.iterator]();\n\nconsole.log(iterator.next());\n// { value: 10, done: false }\n\nconsole.log(iterator.next());\n// { value: 20, done: false }"
+  },
+  {
+    "id": 5,
+    "question": "What are Map and Set?",
+    "answer": "Map and Set are built-in JavaScript collection types. A Map stores key-value pairs and allows keys of any type. A Set stores unique values and automatically removes duplicates. Both are iterable and are useful when their collection behavior is more suitable than a normal object or array.",
+    "code": "// Map\nconst users = new Map();\n\nusers.set(\"id\", 101);\nusers.set(\"name\", \"Jeet\");\n\nconsole.log(users.get(\"name\"));\n// Jeet\n\n\n// Set\nconst numbers = new Set([1, 2, 2, 3, 3]);\n\nconsole.log(numbers);\n// Set(3) { 1, 2, 3 }\n\nconsole.log(numbers.has(2));\n// true"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between Map and Object?",
+    "answer": "Both Map and Object can store key-value data, but they have different features. Map allows keys of any type, while Object property keys are strings or Symbols. Map has built-in methods such as set(), get(), has(), and delete(), and provides a size property. Objects are often better suited for structured records with known properties, while Map is useful for dynamic key-value collections.",
+    "code": "// Object\nconst user = {\n  name: \"Jeet\",\n  age: 22\n};\n\nconsole.log(user.name);\n\n\n// Map\nconst data = new Map();\n\nconst key = { id: 1 };\n\ndata.set(key, \"User data\");\n\ndata.set(\"name\", \"Jeet\");\n\nconsole.log(data.get(key));\n// User data\n\nconsole.log(data.size);\n// 2"
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between Set and Array?",
+    "answer": "An Array is an ordered collection that can contain duplicate values and provides index-based access. A Set is a collection of unique values and does not provide normal index-based access. Arrays are commonly used when order and indexes matter, while Sets are useful when uniqueness is important.",
+    "code": "// Array allows duplicates\nconst numbers = [1, 2, 2, 3];\n\nconsole.log(numbers[1]);\n// 2\n\n\n// Set removes duplicates\nconst uniqueNumbers = new Set([1, 2, 2, 3]);\n\nconsole.log(uniqueNumbers);\n// Set(3) { 1, 2, 3 }\n\nconsole.log(uniqueNumbers.has(2));\n// true"
+  },
+  {
+    "id": 8,
+    "question": "What are WeakMap and WeakSet?",
+    "answer": "WeakMap and WeakSet are collection types that hold weak references to objects. WeakMap stores key-value pairs where keys must be objects, while WeakSet stores objects as unique values. Because these references are weak, an object can still be garbage collected when there are no other strong references to it. WeakMap and WeakSet are not enumerable, so you cannot directly iterate over all their entries.",
+    "code": "const weakMap = new WeakMap();\n\nlet user = {\n  name: \"Jeet\"\n};\n\nweakMap.set(user, \"Private data\");\n\nconsole.log(weakMap.get(user));\n// Private data\n\nuser = null;\n\n// If there are no other strong references to the object,\n// it can become eligible for garbage collection."
+  },
+  {
+    "id": 9,
+    "question": "What are Symbols in JavaScript?",
+    "answer": "Symbol is a primitive data type used to create unique identifiers. Every Symbol value is unique, even when created with the same description. Symbols are commonly used as object property keys when you want to avoid accidental property-name conflicts. JavaScript also uses well-known Symbols, such as Symbol.iterator, to define built-in language behaviors.",
+    "code": "const id1 = Symbol(\"id\");\nconst id2 = Symbol(\"id\");\n\nconsole.log(id1 === id2);\n// false\n\nconst user = {\n  name: \"Jeet\",\n  [id1]: 101\n};\n\nconsole.log(user[id1]);\n// 101"
+  },
+  {
+    "id": 10,
+    "question": "What are Proxies in JavaScript?",
+    "answer": "A Proxy is an object that allows you to intercept and customize operations performed on another object, such as reading properties, setting properties, deleting properties, or checking whether a property exists. Proxies are useful for validation, logging, access control, reactive systems, and custom object behavior.",
+    "code": "const user = {\n  name: \"Jeet\"\n};\n\nconst proxy = new Proxy(user, {\n  get(target, property) {\n    console.log(`Reading: ${String(property)}`);\n    return target[property];\n  },\n\n  set(target, property, value) {\n    if (property === \"age\" && typeof value !== \"number\") {\n      throw new TypeError(\"Age must be a number\");\n    }\n\n    target[property] = value;\n    return true;\n  }\n});\n\nconsole.log(proxy.name);\n// Reading: name\n// Jeet\n\nproxy.age = 22;"
+  },
+  {
+    "id": 11,
+    "question": "What are Reflect APIs?",
+    "answer": "Reflect is a built-in JavaScript object that provides methods for performing common object operations in a standardized way. Examples include Reflect.get(), Reflect.set(), Reflect.has(), Reflect.deleteProperty(), and Reflect.construct(). Reflect methods are commonly used together with Proxies because they provide default behavior for intercepted operations.",
+    "code": "const user = {\n  name: \"Jeet\"\n};\n\nconsole.log(Reflect.get(user, \"name\"));\n// Jeet\n\nReflect.set(user, \"age\", 22);\n\nconsole.log(user.age);\n// 22\n\nconsole.log(Reflect.has(user, \"name\"));\n// true\n\nReflect.deleteProperty(user, \"age\");\n\nconsole.log(user.age);\n// undefined"
+  },
+  {
+    "id": 12,
+    "question": "What are tagged template literals?",
+    "answer": "Tagged template literals allow a function to process a template literal before the final string is created. The tag function receives the static string parts and the interpolated values as arguments. They are useful for custom formatting, sanitization, localization, styling systems, and building domain-specific template behavior.",
+    "code": "function highlight(strings, ...values) {\n  return strings.reduce((result, string, index) => {\n    const value = values[index - 1] ?? \"\";\n    return result + value + string;\n  });\n}\n\nconst name = \"Jeet\";\nconst age = 22;\n\nconst result = highlight`Name: ${name}, Age: ${age}`;\n\nconsole.log(result);\n// Name: Jeet, Age: 22"
+  },
+  {
+    "id": 13,
+    "question": "What are JavaScript decorators?",
+    "answer": "Decorators are a language feature that allows behavior or metadata to be attached to classes and their elements, such as methods or fields. Modern JavaScript decorators are standardized and can be used to customize or wrap class definitions and members. They are useful for concerns such as logging, validation, registration, and other reusable behavior.",
+    "code": "function logged(originalMethod, context) {\n  return function (...args) {\n    console.log(`Calling ${String(context.name)}`);\n    return originalMethod.call(this, ...args);\n  };\n}\n\nclass User {\n  @logged\n  greet() {\n    return \"Hello\";\n  }\n}\n\nconst user = new User();\nconsole.log(user.greet());\n\n// Decorator syntax requires a JavaScript environment\n// or build configuration that supports the standardized\n// decorators proposal."
+  },
+  {
+    "id": 14,
+    "question": "What are private class fields?",
+    "answer": "Private class fields are class fields that can only be accessed from inside the class that declares them. They are declared using the # prefix. Code outside the class cannot directly access a private field, which provides true language-level private state and supports encapsulation.",
+    "code": "class BankAccount {\n  #balance = 0;\n\n  deposit(amount) {\n    this.#balance += amount;\n  }\n\n  getBalance() {\n    return this.#balance;\n  }\n}\n\nconst account = new BankAccount();\n\naccount.deposit(100);\n\nconsole.log(account.getBalance());\n// 100\n\n// This would cause a SyntaxError:\n// console.log(account.#balance);"
+  },
+  {
+    "id": 15,
+    "question": "What is tail recursion?",
+    "answer": "Tail recursion is a form of recursion where the recursive function call is the final operation performed by the function. In languages or JavaScript engines that support proper tail-call optimization, tail recursion can reuse stack space. However, JavaScript does not generally provide reliable proper tail-call optimization across common engines, so tail-recursive code can still cause a stack overflow for sufficiently deep recursion.",
+    "code": "function factorial(n, result = 1) {\n  if (n === 0) {\n    return result;\n  }\n\n  return factorial(n - 1, result * n);\n}\n\nconsole.log(factorial(5));\n// 120\n\n// The recursive call is the final operation:\n// return factorial(...);\n// This is called tail recursion."
+  }
+]

@@ -79,7 +79,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "memory-management": "Memory_Management.json",
     "debouncing-throttling": "Debouncing_&_Throttling.json",
     JSON: "JSON.json",
-    "browser-concepts": "Browser_Concepts.json"
+    "browser-concepts": "Browser_Concepts.json",
+    "advanced-javaScript": "Advanced_JavaScript.json",
   },
 };
 
