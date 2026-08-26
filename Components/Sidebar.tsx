@@ -156,6 +156,10 @@ const topicGroups: TopicGroup[] = [
         name: "Advanced JavaScript",
         href: "/concepts/javascript/advanced-javaScript",
       },
+      {
+        name: "Output Based Questions",
+        href: "/concepts/javascript/output-based-questions",
+      },
     ],
   },
 

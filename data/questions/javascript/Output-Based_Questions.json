@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "question": "What will be the output of this code and why?",
+    "answer": "This is a common output-based interview question. The interviewer usually provides a short JavaScript snippet and asks you to predict the output. You should carefully check variable scope, hoisting, type coercion, execution order, and function behavior before answering. The important skill is not just knowing the output, but explaining why JavaScript produces that output.",
+    "code": "console.log(a);\nvar a = 10;\n\nconsole.log(a);\n\n// Output:\n// undefined\n// 10\n\n// Why?\n// var declarations are hoisted, but the assignment is not.\n// Internally, it behaves approximately like:\n// var a;\n// console.log(a); // undefined\n// a = 10;\n// console.log(a); // 10"
+  },
+  {
+    "id": 2,
+    "question": "What will be the output when using var, let, and const inside a loop?",
+    "answer": "The output differs because var is function-scoped, while let and const are block-scoped. In a loop, let creates a new binding for each iteration, so asynchronous callbacks can remember the correct iteration value. With var, all callbacks share the same variable, so they usually see the final value after the loop finishes.",
+    "code": "for (var i = 0; i < 3; i++) {\n  setTimeout(() => console.log(\"var:\", i), 0);\n}\n\nfor (let j = 0; j < 3; j++) {\n  setTimeout(() => console.log(\"let:\", j), 0);\n}\n\n// Output:\n// var: 3\n// var: 3\n// var: 3\n// let: 0\n// let: 1\n// let: 2\n\n// Why?\n// var creates one shared binding.\n// let creates a separate binding for each loop iteration."
+  },
+  {
+    "id": 3,
+    "question": "What will be the output involving closures inside a loop?",
+    "answer": "A closure remembers variables from its surrounding lexical scope. When var is used in a loop, callbacks usually share the same variable, so they see its final value. With let, each iteration gets its own binding, so each closure remembers the value from its own iteration.",
+    "code": "var functions = [];\n\nfor (var i = 0; i < 3; i++) {\n  functions.push(() => console.log(i));\n}\n\nfunctions[0]();\nfunctions[1]();\nfunctions[2]();\n\n// Output:\n// 3\n// 3\n// 3\n\n\nvar functions2 = [];\n\nfor (let i = 0; i < 3; i++) {\n  functions2.push(() => console.log(i));\n}\n\nfunctions2[0]();\nfunctions2[1]();\nfunctions2[2]();\n\n// Output:\n// 0\n// 1\n// 2"
+  },
+  {
+    "id": 4,
+    "question": "What will be the output involving setTimeout() and Promises?",
+    "answer": "Promise callbacks run in the microtask queue, while setTimeout() callbacks run in the task (macrotask) queue. After the current synchronous code finishes, JavaScript processes available microtasks before moving to the next task. Therefore, a resolved Promise callback normally runs before a setTimeout callback with a zero-millisecond delay.",
+    "code": "console.log(\"Start\");\n\nsetTimeout(() => {\n  console.log(\"setTimeout\");\n}, 0);\n\nPromise.resolve().then(() => {\n  console.log(\"Promise\");\n});\n\nconsole.log(\"End\");\n\n// Output:\n// Start\n// End\n// Promise\n// setTimeout\n\n// Why?\n// 1. Synchronous code runs first.\n// 2. Promise callback runs as a microtask.\n// 3. setTimeout callback runs as a task."
+  },
+  {
+    "id": 5,
+    "question": "What will be the output involving this?",
+    "answer": "The value of this depends on how a function is called. In an object method, this normally refers to the object before the dot. In an arrow function, this is inherited lexically from the surrounding scope and does not get its own this.",
+    "code": "const user = {\n  name: \"Jeet\",\n\n  regular() {\n    console.log(this.name);\n  },\n\n  arrow: () => {\n    console.log(this.name);\n  }\n};\n\nuser.regular();\nuser.arrow();\n\n// Output:\n// Jeet\n// undefined\n\n// regular() gets this from the call: user.regular()\n// arrow() does not create its own this."
+  },
+  {
+    "id": 6,
+    "question": "What will be the output involving == and ===?",
+    "answer": "The == operator performs type coercion when comparing different types, while === compares both value and type without performing type coercion. Therefore, values that are considered equal after coercion can produce true with == but false with ===.",
+    "code": "console.log(5 == \"5\");\nconsole.log(5 === \"5\");\n\nconsole.log(false == 0);\nconsole.log(false === 0);\n\n// Output:\n// true\n// false\n// true\n// false\n\n// ==  -> allows type coercion\n// === -> strict comparison"
+  },
+  {
+    "id": 7,
+    "question": "What will be the output involving type coercion?",
+    "answer": "JavaScript can automatically convert values from one type to another during certain operations. This is called implicit type coercion. A common example is the + operator: if one operand is a string, JavaScript may convert the other operand to a string and perform concatenation.",
+    "code": "console.log(10 + \"5\");\nconsole.log(10 - \"5\");\nconsole.log(\"10\" * \"2\");\n\n// Output:\n// \"105\"\n// 5\n// 20\n\n// + with a string -> string concatenation\n// - and * -> convert strings to numbers when possible"
+  },
+  {
+    "id": 8,
+    "question": "What will be the output involving hoisting?",
+    "answer": "Hoisting describes how JavaScript makes certain declarations available before their position in the source code is reached. var declarations are initialized with undefined, while let and const declarations remain inaccessible in the Temporal Dead Zone until their declaration is evaluated.",
+    "code": "console.log(a);\nvar a = 10;\n\n// Output:\n// undefined\n\n\nconsole.log(b);\nlet b = 20;\n\n// Output:\n// ReferenceError\n\n// let is hoisted but remains in the Temporal Dead Zone\n// until its declaration is evaluated."
+  },
+  {
+    "id": 9,
+    "question": "What will be the output involving function declarations and expressions?",
+    "answer": "Function declarations are hoisted with their function definition, so they can normally be called before their declaration. Function expressions follow the behavior of the variable used to store them. For example, a function expression assigned to a var variable is initially undefined, so calling it before assignment causes a TypeError.",
+    "code": "greet();\n\nfunction greet() {\n  console.log(\"Hello\");\n}\n\n// Output:\n// Hello\n\n\nsayHello();\n\nvar sayHello = function () {\n  console.log(\"Hi\");\n};\n\n// Output:\n// TypeError: sayHello is not a function\n\n// Function declaration -> function definition is hoisted\n// Function expression -> assignment happens during execution"
+  },
+  {
+    "id": 10,
+    "question": "What will be the output involving async/await?",
+    "answer": "An async function always returns a Promise. The await keyword pauses the execution of that async function until the awaited Promise settles, but it does not block the JavaScript thread. Code outside the async function can continue running.",
+    "code": "async function test() {\n  console.log(\"A\");\n\n  await Promise.resolve();\n\n  console.log(\"B\");\n}\n\nconsole.log(\"Start\");\ntest();\nconsole.log(\"End\");\n\n// Output:\n// Start\n// A\n// End\n// B\n\n// await suspends the async function and allows\n// other JavaScript work to continue."
+  },
+  {
+    "id": 11,
+    "question": "What will be the output involving Promise.all()?",
+    "answer": "Promise.all() waits for all supplied Promises to fulfill and returns their results in the same order as the input Promises. If any Promise rejects, Promise.all() rejects with that rejection and does not wait for the other Promises to fulfill before settling its own result.",
+    "code": "const p1 = Promise.resolve(\"First\");\nconst p2 = Promise.resolve(\"Second\");\nconst p3 = Promise.resolve(\"Third\");\n\nPromise.all([p1, p2, p3]).then(result => {\n  console.log(result);\n});\n\n// Output:\n// [\"First\", \"Second\", \"Third\"]\n\n// The result order follows the input order,\n// not necessarily the order in which Promises finish."
+  },
+  {
+    "id": 12,
+    "question": "What will be the output involving map(), filter(), and reduce()?",
+    "answer": "map() creates a new array by transforming every element. filter() creates a new array containing elements that satisfy a condition. reduce() processes all elements and produces a single accumulated result. These methods are commonly tested in output-based JavaScript interviews.",
+    "code": "const numbers = [1, 2, 3, 4];\n\nconst doubled = numbers.map(num => num * 2);\nconst even = numbers.filter(num => num % 2 === 0);\nconst sum = numbers.reduce((total, num) => total + num, 0);\n\nconsole.log(doubled);\nconsole.log(even);\nconsole.log(sum);\n\n// Output:\n// [2, 4, 6, 8]\n// [2, 4]\n// 10\n\n// map    -> transforms each element\n// filter -> selects elements\n// reduce -> produces one accumulated value"
+  },
+  {
+    "id": 13,
+    "question": "What will be the output involving closures and asynchronous callbacks?",
+    "answer": "Closures allow asynchronous callbacks to remember variables from their surrounding scope. When let is used inside a loop, each iteration has its own binding, so each callback can access the expected value. When var is used, callbacks generally share the same binding.",
+    "code": "for (let i = 0; i < 3; i++) {\n  setTimeout(() => {\n    console.log(i);\n  }, 100);\n}\n\n// Output after approximately 100ms:\n// 0\n// 1\n// 2\n\n// Each callback closes over its iteration's let binding."
+  },
+  {
+    "id": 14,
+    "question": "What will be the output involving object references?",
+    "answer": "Objects are reference values. When you assign one object variable to another, both variables refer to the same object rather than creating a new object. Therefore, modifying the object through one variable can be observed through the other variable.",
+    "code": "const user1 = {\n  name: \"Jeet\"\n};\n\nconst user2 = user1;\n\nuser2.name = \"Rahul\";\n\nconsole.log(user1.name);\nconsole.log(user2.name);\nconsole.log(user1 === user2);\n\n// Output:\n// Rahul\n// Rahul\n// true\n\n// Both variables point to the same object."
+  },
+  {
+    "id": 15,
+    "question": "What will be the output involving shallow and deep copies?",
+    "answer": "A shallow copy creates a new outer object but keeps references to nested objects. A deep copy creates independent copies of nested data as well. Therefore, changing a nested property in a shallow copy can also change the original object, while a proper deep copy keeps the nested data independent.",
+    "code": "const original = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst shallowCopy = { ...original };\nshallowCopy.address.city = \"Delhi\";\n\nconsole.log(original.address.city);\n// Delhi\n\n\nconst original2 = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst deepCopy = structuredClone(original2);\ndeepCopy.address.city = \"Delhi\";\n\nconsole.log(original2.address.city);\n// Kolkata\n\n// Shallow copy -> nested references are shared\n// Deep copy    -> nested objects are copied independently"
+  }
+]

@@ -81,6 +81,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     JSON: "JSON.json",
     "browser-concepts": "Browser_Concepts.json",
     "advanced-javaScript": "Advanced_JavaScript.json",
+    "output-based-questions": "Output-Based_Questions.json",
   },
 };
 
