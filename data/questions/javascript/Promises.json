@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "question": "What is a Promise?",
+    "answer": "A Promise is an object that represents the eventual result of an asynchronous operation. It can either be fulfilled with a value or rejected with an error. Promises make asynchronous code easier to manage and avoid deeply nested callback structures.",
+    "code": "const promise = new Promise((resolve, reject) => {\n  setTimeout(() => {\n    resolve(\"Data received\");\n  }, 1000);\n});\n\npromise.then((result) => {\n  console.log(result);\n});\n\n// Data received"
+  },
+  {
+    "id": 2,
+    "question": "Why were Promises introduced?",
+    "answer": "Promises were introduced to provide a cleaner and more structured way to handle asynchronous operations. Before Promises, callbacks were commonly used, which could lead to deeply nested code known as callback hell. Promises make it easier to chain asynchronous operations and handle errors in a consistent way.",
+    "code": "// Callback-style code can become deeply nested\ngetUser((user) => {\n  getPosts(user.id, (posts) => {\n    getComments(posts[0].id, (comments) => {\n      console.log(comments);\n    });\n  });\n});\n\n// Promise-based code is easier to chain\ngetUser()\n  .then(user => getPosts(user.id))\n  .then(posts => getComments(posts[0].id))\n  .then(comments => console.log(comments))\n  .catch(error => console.error(error));"
+  },
+  {
+    "id": 3,
+    "question": "What are the states of a Promise?",
+    "answer": "A Promise has three states: pending, fulfilled, and rejected. When a Promise is created, it starts in the pending state. It becomes fulfilled when the asynchronous operation succeeds or rejected when it fails.",
+    "code": "const promise = new Promise((resolve, reject) => {\n  // Initially: pending\n\n  setTimeout(() => {\n    resolve(\"Success\");\n    // Now: fulfilled\n  }, 1000);\n});\n\n// If reject() were called instead:\n// The Promise would become rejected."
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between pending, fulfilled, and rejected states?",
+    "answer": "Pending means the Promise is still waiting for its asynchronous operation to finish. Fulfilled means the operation completed successfully and the Promise has a resulting value. Rejected means the operation failed and the Promise has a rejection reason, usually an Error. A Promise can move from pending to either fulfilled or rejected, but it cannot move back or change again after it settles.",
+    "code": "const success = new Promise((resolve, reject) => {\n  resolve(\"Success\");\n});\n\nconst failure = new Promise((resolve, reject) => {\n  reject(new Error(\"Something went wrong\"));\n});\n\nsuccess.then(value => console.log(value));\n// Success\n\nfailure.catch(error => console.log(error.message));\n// Something went wrong"
+  },
+  {
+    "id": 5,
+    "question": "What is promise chaining?",
+    "answer": "Promise chaining means connecting multiple .then(), .catch(), or related Promise operations so that the result of one asynchronous step can be passed to the next step. Each .then() returns a new Promise, which allows another .then() to be attached.",
+    "code": "Promise.resolve(10)\n  .then(value => {\n    return value * 2;\n  })\n  .then(value => {\n    return value + 5;\n  })\n  .then(value => {\n    console.log(value);\n  });\n\n// 25"
+  },
+  {
+    "id": 6,
+    "question": "What is .then()?",
+    "answer": "The .then() method is used to handle the fulfilled value of a Promise. It can also receive a rejection handler as its second argument, although using .catch() for error handling is usually clearer. .then() always returns a new Promise, which enables promise chaining.",
+    "code": "const promise = Promise.resolve(\"Hello\");\n\npromise.then((value) => {\n  console.log(value);\n});\n\n// Hello\n\n// .then() can transform the result\nPromise.resolve(10)\n  .then(value => value * 2)\n  .then(value => console.log(value));\n\n// 20"
+  },
+  {
+    "id": 7,
+    "question": "What is .catch()?",
+    "answer": "The .catch() method is used to handle a rejected Promise. It is also commonly used to catch errors thrown inside previous .then() handlers in the same Promise chain.",
+    "code": "Promise.reject(new Error(\"Network error\"))\n  .catch(error => {\n    console.error(error.message);\n  });\n\n// Network error\n\n// It can also catch errors thrown in .then()\nPromise.resolve()\n  .then(() => {\n    throw new Error(\"Something went wrong\");\n  })\n  .catch(error => {\n    console.error(error.message);\n  });"
+  },
+  {
+    "id": 8,
+    "question": "What is .finally()?",
+    "answer": "The .finally() method runs after a Promise settles, regardless of whether it was fulfilled or rejected. It is commonly used for cleanup tasks such as hiding a loading indicator, closing a resource, or resetting UI state.",
+    "code": "fetch(\"/api/users\")\n  .then(response => response.json())\n  .then(data => {\n    console.log(data);\n  })\n  .catch(error => {\n    console.error(error);\n  })\n  .finally(() => {\n    console.log(\"Request completed\");\n  });"
+  },
+  {
+    "id": 9,
+    "question": "How do you handle errors in Promises?",
+    "answer": "You can handle Promise errors using .catch(), or by providing a rejection handler as the second argument to .then(). In modern JavaScript, async/await with try...catch is another common way to handle Promise errors. Using .catch() at the end of a Promise chain is usually the clearest approach.",
+    "code": "fetch(\"/api/users\")\n  .then(response => response.json())\n  .then(data => {\n    console.log(data);\n  })\n  .catch(error => {\n    console.error(\"Request failed:\", error);\n  });\n\n// Using async/await\nasync function getUsers() {\n  try {\n    const response = await fetch(\"/api/users\");\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error(\"Request failed:\", error);\n  }\n}"
+  },
+  {
+    "id": 10,
+    "question": "What happens if a Promise is rejected and there is no .catch()?",
+    "answer": "If a Promise is rejected and the rejection is not handled, it becomes an unhandled Promise rejection. The JavaScript environment can report the rejection as an error. In browsers this is typically reported as an unhandledrejection event, while Node.js can report it as an unhandled rejection and may terminate the process depending on the situation and Node.js behavior.",
+    "code": "const promise = Promise.reject(\n  new Error(\"Something went wrong\")\n);\n\n// No .catch() is attached.\n// This results in an unhandled Promise rejection.\n\n// Handle it instead:\nPromise.reject(new Error(\"Something went wrong\"))\n  .catch(error => {\n    console.error(error.message);\n  });"
+  },
+  {
+    "id": 11,
+    "question": "What is Promise resolution?",
+    "answer": "Promise resolution is the process of determining the final outcome of a Promise. Calling resolve() does not always mean the Promise immediately becomes fulfilled with the exact value passed to it. If the value is another Promise or thenable, the Promise adopts that value's eventual state. This is why Promise resolution can involve following another Promise.",
+    "code": "const innerPromise = new Promise(resolve => {\n  setTimeout(() => {\n    resolve(\"Final value\");\n  }, 1000);\n});\n\nconst outerPromise = new Promise(resolve => {\n  resolve(innerPromise);\n});\n\nouterPromise.then(value => {\n  console.log(value);\n});\n\n// Final value\n// outerPromise adopts the state of innerPromise."
+  },
+  {
+    "id": 12,
+    "question": "Can a Promise change its state more than once?",
+    "answer": "No. A Promise can settle only once. It starts as pending and can transition to either fulfilled or rejected. Once it is fulfilled or rejected, its state and result are settled permanently. Any later calls to resolve() or reject() are ignored.",
+    "code": "const promise = new Promise((resolve, reject) => {\n  resolve(\"First value\");\n  reject(new Error(\"Error\"));\n  resolve(\"Second value\");\n});\n\npromise.then(value => {\n  console.log(value);\n});\n\n// First value\n// The later reject() and resolve() calls are ignored."
+  }
+]

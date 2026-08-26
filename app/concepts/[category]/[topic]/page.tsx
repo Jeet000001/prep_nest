@@ -63,7 +63,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     immutability: "Immutability.json",
     "deep-copy-shallow-copy": "Deep_Copy_&_Shallow_Copy.json",
     strings: "Strings.json",
-    "number-math": "Numbers_&_Math.json"
+    "number-math": "Numbers_&_Math.json",
+    promises: "Promises.json"
   },
 };
 
