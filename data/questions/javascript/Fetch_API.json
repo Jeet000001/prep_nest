@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is the Fetch API?",
+    "answer": "The Fetch API is a modern browser API used to make HTTP requests and communicate with servers. It is commonly used to fetch data from APIs and supports methods such as GET, POST, PUT, PATCH, and DELETE. fetch() returns a Promise that resolves to a Response object when the server responds.",
+    "code": "fetch(\"https://api.example.com/users\")\n  .then(response => response.json())\n  .then(data => {\n    console.log(data);\n  })\n  .catch(error => {\n    console.error(error);\n  });"
+  },
+  {
+    "id": 2,
+    "question": "How does fetch() work?",
+    "answer": "fetch() starts an HTTP request and immediately returns a Promise. When the server responds, the Promise fulfills with a Response object. You can then use methods such as response.json(), response.text(), or response.blob() to read the response body. If a network error occurs or the request is aborted, the fetch Promise rejects.",
+    "code": "async function getUsers() {\n  const response = await fetch(\"https://api.example.com/users\");\n\n  const data = await response.json();\n\n  console.log(data);\n}\n\ngetUsers();\n\n// Flow:\n// fetch() -> HTTP request -> Promise -> Response -> response.json() -> data"
+  },
+  {
+    "id": 3,
+    "question": "Does fetch() reject the Promise when the server returns a 404 or 500 response?",
+    "answer": "No. fetch() normally does not reject its Promise just because the server returns an HTTP error status such as 404 or 500. The Promise still fulfills with a Response object. You need to check response.ok or response.status yourself and handle HTTP errors.",
+    "code": "fetch(\"https://api.example.com/users/999\")\n  .then(response => {\n    console.log(response.status);\n    // 404\n\n    console.log(response.ok);\n    // false\n  })\n  .catch(error => {\n    console.error(error);\n  });\n\n// A 404 does not automatically enter .catch()."
+  },
+  {
+    "id": 4,
+    "question": "How do you handle HTTP errors with fetch()?",
+    "answer": "You should check the Response object's ok property or status property after fetch() resolves. If response.ok is false, you can throw an Error and handle it using catch or a try/catch block. This is necessary because fetch() does not automatically reject for HTTP error status codes such as 404 or 500.",
+    "code": "async function getUsers() {\n  try {\n    const response = await fetch(\"https://api.example.com/users\");\n\n    if (!response.ok) {\n      throw new Error(`HTTP Error: ${response.status}`);\n    }\n\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error(\"Request failed:\", error);\n  }\n}\n\ngetUsers();"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between fetch() and XMLHttpRequest?",
+    "answer": "Both fetch() and XMLHttpRequest (XHR) can make HTTP requests, but fetch() provides a more modern Promise-based API that works naturally with async/await. XMLHttpRequest uses an older event- and callback-based API. fetch() generally results in cleaner asynchronous code, while XHR provides some older capabilities and behaviors that are not directly available through fetch(), such as its traditional upload/download progress events.",
+    "code": "// fetch()\nfetch(\"/api/users\")\n  .then(response => response.json())\n  .then(data => console.log(data));\n\n// XMLHttpRequest\nconst xhr = new XMLHttpRequest();\n\nxhr.open(\"GET\", \"/api/users\");\n\nxhr.onload = () => {\n  const data = JSON.parse(xhr.responseText);\n  console.log(data);\n};\n\nxhr.send();"
+  },
+  {
+    "id": 6,
+    "question": "How do you send a POST request using fetch()?",
+    "answer": "To send a POST request with fetch(), pass an options object as the second argument. Set method to POST and provide the request body using the body property. When sending JSON, the body should usually be created with JSON.stringify().",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 22\n};\n\nfetch(\"https://api.example.com/users\", {\n  method: \"POST\",\n  headers: {\n    \"Content-Type\": \"application/json\"\n  },\n  body: JSON.stringify(user)\n})\n  .then(response => response.json())\n  .then(data => console.log(data))\n  .catch(error => console.error(error));"
+  },
+  {
+    "id": 7,
+    "question": "How do you send headers using fetch()?",
+    "answer": "You can send HTTP headers using the headers property in the fetch() options object. Headers are commonly used to specify the content type, authorization information, or other metadata required by the server.",
+    "code": "fetch(\"https://api.example.com/users\", {\n  method: \"GET\",\n  headers: {\n    \"Content-Type\": \"application/json\",\n    \"Authorization\": \"Bearer YOUR_TOKEN\"\n  }\n})\n  .then(response => response.json())\n  .then(data => console.log(data));"
+  },
+  {
+    "id": 8,
+    "question": "How do you send JSON data using fetch()?",
+    "answer": "To send JSON data, convert the JavaScript object into a JSON string using JSON.stringify() and put it in the body property. You should also set the Content-Type header to application/json so the server knows that the request body contains JSON.",
+    "code": "const data = {\n  username: \"Jeet\",\n  email: \"jeet@example.com\"\n};\n\nfetch(\"https://api.example.com/users\", {\n  method: \"POST\",\n  headers: {\n    \"Content-Type\": \"application/json\"\n  },\n  body: JSON.stringify(data)\n});"
+  },
+  {
+    "id": 9,
+    "question": "How can you cancel a fetch request?",
+    "answer": "You can cancel a fetch request using AbortController. Create an AbortController, pass its signal to fetch(), and call controller.abort() when you want to cancel the request. The fetch Promise will reject with an AbortError.",
+    "code": "const controller = new AbortController();\n\nfetch(\"https://api.example.com/users\", {\n  signal: controller.signal\n})\n  .then(response => response.json())\n  .then(data => console.log(data))\n  .catch(error => {\n    if (error.name === \"AbortError\") {\n      console.log(\"Request was cancelled\");\n    } else {\n      console.error(error);\n    }\n  });\n\n// Cancel the request\ncontroller.abort();"
+  },
+  {
+    "id": 10,
+    "question": "What is AbortController?",
+    "answer": "AbortController is a Web API that allows you to abort certain asynchronous operations, including fetch requests. It provides an abort() method to trigger cancellation and a signal property that can be passed to APIs such as fetch().",
+    "code": "const controller = new AbortController();\n\nasync function getData() {\n  try {\n    const response = await fetch(\"https://api.example.com/data\", {\n      signal: controller.signal\n    });\n\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    if (error.name === \"AbortError\") {\n      console.log(\"Fetch request cancelled\");\n    } else {\n      console.error(error);\n    }\n  }\n}\n\ngetData();\n\n// Cancel the request whenever needed\ncontroller.abort();"
+  }
+]
