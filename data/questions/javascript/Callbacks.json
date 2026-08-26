@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What is a callback function?",
+    "answer": "A callback function is a function that is passed as an argument to another function and is called later when a particular operation is completed. Callbacks are commonly used for asynchronous operations such as timers, API requests, and event handling.",
+    "code": "function greet(name, callback) {\n  console.log(`Hello, ${name}`);\n  callback();\n}\n\nfunction sayBye() {\n  console.log(\"Goodbye!\");\n}\n\ngreet(\"Jeet\", sayBye);\n\n// Output:\n// Hello, Jeet\n// Goodbye!"
+  },
+  {
+    "id": 2,
+    "question": "Why are callbacks used?",
+    "answer": "Callbacks are used to tell JavaScript what to do after a particular operation is completed. They are especially useful for asynchronous operations because JavaScript can start the operation, continue executing other code, and then call the callback when the result is ready.",
+    "code": "console.log(\"Start\");\n\nsetTimeout(() => {\n  console.log(\"Timer finished\");\n}, 2000);\n\nconsole.log(\"End\");\n\n// Output:\n// Start\n// End\n// Timer finished\n\n// The callback runs after the timer completes."
+  },
+  {
+    "id": 3,
+    "question": "What is callback hell?",
+    "answer": "Callback hell is a situation where multiple callbacks become deeply nested, usually because several asynchronous operations depend on the results of previous operations. This makes the code difficult to read, maintain, debug, and handle errors in. It is also commonly called the pyramid of doom.",
+    "code": "getUser(userId, user => {\n  getPosts(user.id, posts => {\n    getComments(posts[0].id, comments => {\n      getAuthor(comments[0].authorId, author => {\n        console.log(author);\n      });\n    });\n  });\n});\n\n// Too much nesting makes the code difficult to maintain."
+  },
+  {
+    "id": 4,
+    "question": "How can callback hell be avoided?",
+    "answer": "Callback hell can be avoided by keeping callbacks small, using named functions, separating logic into reusable functions, and using Promises or async/await for complex asynchronous operations. In modern JavaScript, Promises and async/await are generally preferred for handling multiple dependent asynchronous operations.",
+    "code": "// Promise approach\ngetUser(userId)\n  .then(user => getPosts(user.id))\n  .then(posts => getComments(posts[0].id))\n  .then(comments => getAuthor(comments[0].authorId))\n  .then(author => console.log(author))\n  .catch(error => console.error(error));\n\n// async/await approach\nasync function getData() {\n  try {\n    const user = await getUser(userId);\n    const posts = await getPosts(user.id);\n    const comments = await getComments(posts[0].id);\n    const author = await getAuthor(comments[0].authorId);\n\n    console.log(author);\n  } catch (error) {\n    console.error(error);\n  }\n}"
+  },
+  {
+    "id": 5,
+    "question": "What is callback-based asynchronous programming?",
+    "answer": "Callback-based asynchronous programming is a programming style where an asynchronous operation receives a callback function that is executed after the operation completes. The callback can receive either the successful result or an error, depending on how the API is designed. A common Node.js convention is the error-first callback pattern, where the first argument represents an error and the second represents the result.",
+    "code": "function getUser(callback) {\n  setTimeout(() => {\n    const user = { id: 1, name: \"Jeet\" };\n    callback(null, user);\n  }, 1000);\n}\n\ngetUser((error, user) => {\n  if (error) {\n    console.error(error);\n    return;\n  }\n\n  console.log(user);\n});\n\n// { id: 1, name: \"Jeet\" }"
+  },
+  {
+    "id": 6,
+    "question": "What are the advantages and disadvantages of callbacks?",
+    "answer": "Advantages of callbacks include simplicity for small asynchronous operations, support for event-driven programming, and flexibility because a function can decide what should happen after an operation completes. Disadvantages include callback hell when callbacks become deeply nested, more difficult error handling, harder code composition, and reduced readability when many asynchronous operations depend on each other.",
+    "code": "// Simple callback - easy to understand\nsetTimeout(() => {\n  console.log(\"Done\");\n}, 1000);\n\n// Multiple dependent callbacks can become difficult to read\nstep1(result1 => {\n  step2(result1, result2 => {\n    step3(result2, result3 => {\n      step4(result3, result4 => {\n        console.log(result4);\n      });\n    });\n  });\n});"
+  },
+  {
+    "id": 7,
+    "question": "How are callbacks different from Promises?",
+    "answer": "Callbacks pass a function to an asynchronous operation and rely on that function being called when the operation finishes. Promises represent the eventual result of an asynchronous operation and provide methods such as .then(), .catch(), and .finally(). Promises make chaining multiple asynchronous operations and centralized error handling easier. async/await is built on top of Promises and provides an even more readable syntax.",
+    "code": "// Callback\ngetUser(userId, user => {\n  console.log(user);\n});\n\n// Promise\ngetUser(userId)\n  .then(user => {\n    console.log(user);\n  })\n  .catch(error => {\n    console.error(error);\n  });\n\n// async/await\nasync function loadUser() {\n  try {\n    const user = await getUser(userId);\n    console.log(user);\n  } catch (error) {\n    console.error(error);\n  }\n}"
+  }
+]

@@ -110,6 +110,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Promises Methods", href: "/concepts/javascript/promise-methods" },
       { name: "Asynchronous JavaScript", href: "/concepts/javascript/asynchronous-javaScript" },
        { name: "Async Await", href: "/concepts/javascript/async-await" },
+       { name: "Callbacks", href: "/concepts/javascript/callbacks" },
 
       // { name: "DOM", href: "/concepts/javascript/dom" },
       // { name: "Events", href: "/concepts/javascript/events" },
