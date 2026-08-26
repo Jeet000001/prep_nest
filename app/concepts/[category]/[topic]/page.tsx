@@ -78,7 +78,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "regular-expressions": "Regular_Expressions.json",
     "memory-management": "Memory_Management.json",
     "debouncing-throttling": "Debouncing_&_Throttling.json",
-    JSON: "JSON.json"
+    JSON: "JSON.json",
+    "browser-concepts": "Browser_Concepts.json"
   },
 };
 

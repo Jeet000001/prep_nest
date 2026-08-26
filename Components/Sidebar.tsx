@@ -148,6 +148,10 @@ const topicGroups: TopicGroup[] = [
         name: "JSON",
         href: "/concepts/javascript/JSON",
       },
+      {
+        name: "Browser Concepts",
+        href: "/concepts/javascript/browser-concepts",
+      },
     ],
   },
 

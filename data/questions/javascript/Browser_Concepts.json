@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is the difference between JavaScript running in the browser and Node.js?",
+    "answer": "JavaScript is the same core language in both environments, but the runtime environment is different. In a browser, JavaScript runs inside a browser and has access to Web APIs such as the DOM, window, document, localStorage, and fetch. Node.js runs JavaScript outside the browser and provides server-side APIs such as the file system, HTTP server, and process information. Node.js does not have browser-specific objects like window and document by default.",
+    "code": "// Browser\nconsole.log(window.innerWidth);\nconsole.log(document.title);\n\n// Node.js\nconsole.log(process.version);\n// Node.js provides process, fs, http, etc.\n\n// Note:\n// window and document are browser APIs.\n// process and fs are Node.js APIs."
+  },
+  {
+    "id": 2,
+    "question": "What are Web APIs?",
+    "answer": "Web APIs are browser-provided interfaces that allow JavaScript to interact with browser features and the web platform. They are not part of the core JavaScript language itself. Examples include the DOM API, Fetch API, Web Storage API, Timer APIs such as setTimeout(), and Geolocation API.",
+    "code": "// Fetch API\nfetch(\"https://api.example.com/users\");\n\n// Web Storage API\nlocalStorage.setItem(\"theme\", \"dark\");\n\n// Timer API\nsetTimeout(() => {\n  console.log(\"Hello\");\n}, 1000);\n\n// DOM API\ndocument.querySelector(\"button\");"
+  },
+  {
+    "id": 3,
+    "question": "What is the window object?",
+    "answer": "The window object represents the browser window or browsing context in which a web page is running. It is the global object in a typical browser page and provides access to browser-related features such as timers, the location, storage, and the document. Many global browser functions and variables are properties of window.",
+    "code": "console.log(window.innerWidth);\nconsole.log(window.location.href);\n\n// These are commonly accessible without writing window:\nconsole.log(innerWidth);\nconsole.log(location.href);\n\n// window is the global object in a browser page."
+  },
+  {
+    "id": 4,
+    "question": "What is the document object?",
+    "answer": "The document object represents the HTML document loaded in the browser. It is part of the DOM and allows JavaScript to find, create, modify, and remove HTML elements. For example, you can use document.querySelector() to select an element and change its content or styles.",
+    "code": "const heading = document.querySelector(\"h1\");\n\nif (heading) {\n  heading.textContent = \"Hello JavaScript\";\n}\n\n// document represents the current HTML document."
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between window, document, and navigator?",
+    "answer": "window represents the browser's global browsing context and provides access to many browser features. document represents the current HTML page and is used to interact with the DOM. navigator provides information about the browser and the user's environment, such as browser-related capabilities, language, and online status.",
+    "code": "// window -> browser window / global context\nconsole.log(window.innerWidth);\n\n// document -> current HTML document\nconsole.log(document.title);\n\n// navigator -> browser/environment information\nconsole.log(navigator.language);\nconsole.log(navigator.onLine);"
+  },
+  {
+    "id": 6,
+    "question": "What is CORS?",
+    "answer": "CORS stands for Cross-Origin Resource Sharing. It is a browser security mechanism that controls whether a web page from one origin is allowed to make certain requests to a different origin. A server can use HTTP response headers to tell the browser which origins, methods, and headers are allowed.",
+    "code": "// Frontend running on:\n// https://myapp.com\n\n// API running on:\n// https://api.example.com\n\nfetch(\"https://api.example.com/users\")\n  .then(response => response.json())\n  .then(data => console.log(data));\n\n// The API server must provide appropriate CORS headers\n// if the browser is going to allow the frontend to read\n// the cross-origin response."
+  },
+  {
+    "id": 7,
+    "question": "Why does CORS exist?",
+    "answer": "CORS exists to provide a controlled way for websites to make cross-origin requests while protecting users from potentially unsafe cross-origin access. Browsers enforce the same-origin policy by default, and CORS allows servers to explicitly grant permission for specific cross-origin requests.",
+    "code": "// Example:\n// A malicious website should not automatically be able\n// to read sensitive data from another website in the user's browser.\n\n// CORS allows the target server to explicitly say:\n// \"Requests from this origin are allowed.\"\n\n// Example response header:\n// Access-Control-Allow-Origin: https://myapp.com"
+  },
+  {
+    "id": 8,
+    "question": "What is the same-origin policy?",
+    "answer": "The same-origin policy is a browser security rule that restricts scripts from freely accessing resources from a different origin. Two URLs have the same origin only when their scheme, host, and port are the same. This policy helps prevent malicious websites from reading sensitive information from other websites.",
+    "code": "// Same origin\nhttps://example.com/page1\nhttps://example.com/page2\n\n// Different origin - different host\nhttps://example.com\nhttps://api.example.com\n\n// Different origin - different scheme\nhttp://example.com\nhttps://example.com\n\n// Different origin - different port\nhttps://example.com:3000\nhttps://example.com:4000"
+  },
+  {
+    "id": 9,
+    "question": "What is the difference between cookies, localStorage, and sessionStorage?",
+    "answer": "Cookies, localStorage, and sessionStorage are all browser storage mechanisms, but they are designed for different purposes. Cookies can be sent automatically with matching HTTP requests and are commonly used for sessions and authentication. localStorage stores string data that persists until it is explicitly removed. sessionStorage also stores string data, but it is associated with a browser tab or page session and is normally cleared when that tab is closed. Unlike localStorage and sessionStorage, cookies are automatically included in relevant HTTP requests.",
+    "code": "// localStorage\nlocalStorage.setItem(\"theme\", \"dark\");\nconsole.log(localStorage.getItem(\"theme\"));\n\n// sessionStorage\nsessionStorage.setItem(\"step\", \"2\");\nconsole.log(sessionStorage.getItem(\"step\"));\n\n// Cookie\ndocument.cookie = \"theme=dark; Max-Age=3600; Path=/\";\nconsole.log(document.cookie);\n\n// Important differences:\n// localStorage   -> persists until removed\n// sessionStorage -> usually lasts for the page session/tab\n// cookies        -> can be sent automatically with HTTP requests"
+  },
+  {
+    "id": 10,
+    "question": "What is a cookie?",
+    "answer": "A cookie is a small piece of data associated with a website that a browser stores and can send with matching HTTP requests. Cookies are commonly used for sessions, authentication, preferences, and tracking. Cookies can have attributes such as Expires or Max-Age, Path, Domain, Secure, HttpOnly, and SameSite. An HttpOnly cookie cannot be read through JavaScript, which is useful for reducing exposure of certain session credentials to client-side scripts.",
+    "code": "// Setting a cookie from JavaScript\ndocument.cookie = \"theme=dark; Max-Age=3600; Path=/\";\n\n// Reading cookies accessible to JavaScript\nconsole.log(document.cookie);\n\n// A server can also set a cookie using Set-Cookie:\n// Set-Cookie: sessionId=abc123; HttpOnly; Secure; SameSite=Lax\n\n// HttpOnly cookies cannot be accessed using document.cookie."
+  }
+]
