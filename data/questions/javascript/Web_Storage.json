@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "question": "What is localStorage?",
+    "answer": "localStorage is a Web Storage API that allows a website to store data as key-value pairs in the user's browser. The data remains available even after the browser or tab is closed and reopened, until it is explicitly removed or the site's stored data is cleared. Both keys and values are stored as strings.",
+    "code": "localStorage.setItem(\"username\", \"Jeet\");\n\nconst username = localStorage.getItem(\"username\");\n\nconsole.log(username);\n// Jeet"
+  },
+  {
+    "id": 2,
+    "question": "What is sessionStorage?",
+    "answer": "sessionStorage is a Web Storage API used to store data for the lifetime of a particular page session. The data is associated with a browser tab or window and is normally removed when that tab or window is closed. Like localStorage, it stores data as string key-value pairs.",
+    "code": "sessionStorage.setItem(\"theme\", \"dark\");\n\nconst theme = sessionStorage.getItem(\"theme\");\n\nconsole.log(theme);\n// dark"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between localStorage and sessionStorage?",
+    "answer": "The main difference is how long the data is stored. localStorage persists until it is explicitly removed or the site's stored data is cleared, while sessionStorage is tied to a particular page session and is normally cleared when that tab or window is closed. Both provide synchronous key-value storage and have similar storage APIs.",
+    "code": "// localStorage - persists\nlocalStorage.setItem(\"username\", \"Jeet\");\n\n// sessionStorage - lasts for the page session\nsessionStorage.setItem(\"temporaryData\", \"123\");\n\n// Remove data manually\nlocalStorage.removeItem(\"username\");\nsessionStorage.removeItem(\"temporaryData\");"
+  },
+  {
+    "id": 4,
+    "question": "How do you store an object in localStorage?",
+    "answer": "localStorage can only store strings, so an object must first be converted into a JSON string using JSON.stringify(). The resulting string can then be stored using localStorage.setItem().",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 22\n};\n\nlocalStorage.setItem(\"user\", JSON.stringify(user));"
+  },
+  {
+    "id": 5,
+    "question": "How do you retrieve an object from localStorage?",
+    "answer": "First, retrieve the stored JSON string using localStorage.getItem(). Then use JSON.parse() to convert the string back into a JavaScript object. If the key does not exist, getItem() returns null, so the code should handle that case when necessary.",
+    "code": "const storedUser = localStorage.getItem(\"user\");\n\nconst user = storedUser ? JSON.parse(storedUser) : null;\n\nconsole.log(user);\n// { name: \"Jeet\", age: 22 }"
+  },
+  {
+    "id": 6,
+    "question": "What are the limitations of localStorage?",
+    "answer": "The main limitations of localStorage are that it stores only strings, has limited storage capacity compared with databases, is synchronous and can block the main thread, and is available only within the same origin. It is also not suitable for storing sensitive information such as passwords or authentication secrets because JavaScript running on the page can access it.",
+    "code": "localStorage.setItem(\"data\", JSON.stringify({\n  name: \"Jeet\"\n}));\n\n// Everything is stored as a string\nconsole.log(typeof localStorage.getItem(\"data\"));\n// \"string\""
+  },
+  {
+    "id": 7,
+    "question": "Is localStorage synchronous or asynchronous?",
+    "answer": "localStorage is synchronous. Methods such as setItem(), getItem(), removeItem(), and clear() complete synchronously. This means JavaScript waits for the storage operation to finish before continuing. Because of this, frequent or large localStorage operations can affect performance and should be avoided in performance-sensitive code.",
+    "code": "console.log(\"Start\");\n\nlocalStorage.setItem(\"name\", \"Jeet\");\n\nconst name = localStorage.getItem(\"name\");\n\nconsole.log(name);\nconsole.log(\"End\");\n\n// Output:\n// Start\n// Jeet\n// End"
+  },
+  {
+    "id": 8,
+    "question": "Can localStorage store functions?",
+    "answer": "No, localStorage cannot directly store JavaScript functions. It stores string values. If you try to store a function using JSON.stringify(), the function is omitted because JSON does not represent functions. If you manually convert a function to a string, you only store its source code as text, not an executable function.",
+    "code": "const greet = () => {\n  console.log(\"Hello\");\n};\n\nlocalStorage.setItem(\"greet\", JSON.stringify(greet));\n\nconsole.log(localStorage.getItem(\"greet\"));\n// undefined\n\n// JSON.stringify() does not serialize functions."
+  },
+  {
+    "id": 9,
+    "question": "What happens to sessionStorage when a browser tab is closed?",
+    "answer": "When a browser tab or window is closed, its sessionStorage data is normally removed and is not available when a new tab is opened later. The storage belongs to that particular page session. However, normal page reloads or navigation within the same tab do not normally clear sessionStorage.",
+    "code": "sessionStorage.setItem(\"step\", \"2\");\n\nconsole.log(sessionStorage.getItem(\"step\"));\n// \"2\"\n\n// Reloading the same tab:\n// \"2\" is still available.\n\n// Closing the tab:\n// The sessionStorage data is normally cleared."
+  }
+]

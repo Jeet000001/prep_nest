@@ -71,6 +71,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     callbacks: "Callbacks.json",
     "event_handling": "Event_Handling.json",
     "dom": "DOM.json",
+    "web-storage": "Web_Storage.json"
   },
 };
 
