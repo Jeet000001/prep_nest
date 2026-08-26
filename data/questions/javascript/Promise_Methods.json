@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "question": "What is Promise.all()?",
+    "answer": "Promise.all() is used when you want to run multiple Promises concurrently and wait until all of them are fulfilled. It returns a new Promise that fulfills with an array of results in the same order as the input Promises. If any one of the Promises rejects, Promise.all() immediately rejects with that rejection reason.",
+    "code": "const userPromise = Promise.resolve(\"User\");\nconst postsPromise = Promise.resolve(\"Posts\");\nconst commentsPromise = Promise.resolve(\"Comments\");\n\nPromise.all([\n  userPromise,\n  postsPromise,\n  commentsPromise\n]).then(results => {\n  console.log(results);\n});\n\n// [\"User\", \"Posts\", \"Comments\"]"
+  },
+  {
+    "id": 2,
+    "question": "What is Promise.allSettled()?",
+    "answer": "Promise.allSettled() waits for all the provided Promises to settle, regardless of whether they are fulfilled or rejected. It returns an array containing the status and result of each Promise. It is useful when you need to know the outcome of every operation, even if some operations fail.",
+    "code": "const promises = [\n  Promise.resolve(\"Success\"),\n  Promise.reject(\"Failed\"),\n  Promise.resolve(\"Another success\")\n];\n\nPromise.allSettled(promises).then(results => {\n  console.log(results);\n});\n\n// [\n//   { status: \"fulfilled\", value: \"Success\" },\n//   { status: \"rejected\", reason: \"Failed\" },\n//   { status: \"fulfilled\", value: \"Another success\" }\n// ]"
+  },
+  {
+    "id": 3,
+    "question": "What is Promise.race()?",
+    "answer": "Promise.race() returns a Promise that settles as soon as the first input Promise settles. The first Promise can either fulfill or reject, and the result of Promise.race() will have the same outcome.",
+    "code": "const fast = new Promise(resolve => {\n  setTimeout(() => resolve(\"Fast\"), 1000);\n});\n\nconst slow = new Promise(resolve => {\n  setTimeout(() => resolve(\"Slow\"), 3000);\n});\n\nPromise.race([fast, slow]).then(result => {\n  console.log(result);\n});\n\n// Fast"
+  },
+  {
+    "id": 4,
+    "question": "What is Promise.any()?",
+    "answer": "Promise.any() returns a Promise that fulfills as soon as the first input Promise fulfills. It ignores rejected Promises unless all input Promises reject. If every Promise rejects, Promise.any() rejects with an AggregateError containing the rejection reasons.",
+    "code": "const first = Promise.reject(\"Failed\");\nconst second = new Promise(resolve => {\n  setTimeout(() => resolve(\"Success\"), 1000);\n});\nconst third = Promise.resolve(\"Another success\");\n\nPromise.any([first, second, third]).then(result => {\n  console.log(result);\n});\n\n// Another success\n// It is the first Promise to fulfill."
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between Promise.all() and Promise.allSettled()?",
+    "answer": "Promise.all() requires every Promise to fulfill. If even one Promise rejects, the returned Promise rejects. Promise.allSettled() waits for every Promise to finish and reports whether each one fulfilled or rejected. Use Promise.all() when all operations are required for success, and Promise.allSettled() when you want the result of every operation regardless of failures.",
+    "code": "const promises = [\n  Promise.resolve(\"A\"),\n  Promise.reject(\"B failed\"),\n  Promise.resolve(\"C\")\n];\n\nPromise.all(promises)\n  .then(results => console.log(results))\n  .catch(error => console.log(error));\n\n// B failed\n\nPromise.allSettled(promises).then(results => {\n  console.log(results);\n});\n\n// [\n//   { status: \"fulfilled\", value: \"A\" },\n//   { status: \"rejected\", reason: \"B failed\" },\n//   { status: \"fulfilled\", value: \"C\" }\n// ]"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between Promise.race() and Promise.any()?",
+    "answer": "Promise.race() settles as soon as the first Promise settles, whether it fulfills or rejects. Promise.any() waits for the first Promise to fulfill and ignores rejections unless every Promise rejects. In simple terms, race() cares about the first settled Promise, while any() cares about the first successful Promise.",
+    "code": "const failedFast = new Promise((resolve, reject) => {\n  setTimeout(() => reject(\"Failed\"), 500);\n});\n\nconst successSlow = new Promise(resolve => {\n  setTimeout(() => resolve(\"Success\"), 1000);\n});\n\nPromise.race([failedFast, successSlow])\n  .then(result => console.log(result))\n  .catch(error => console.log(error));\n\n// Failed\n\nPromise.any([failedFast, successSlow])\n  .then(result => console.log(result));\n\n// Success\n// race() reacts to the first settled Promise.\n// any() waits for the first fulfilled Promise."
+  },
+  {
+    "id": 7,
+    "question": "What happens when one Promise rejects inside Promise.all()?",
+    "answer": "If any input Promise rejects, Promise.all() immediately rejects with that rejection reason. It does not wait for the other input Promises to settle before rejecting its returned Promise. However, the other asynchronous operations that were already started are not automatically cancelled; they may continue running in the background.",
+    "code": "const promise1 = Promise.resolve(\"Success\");\n\nconst promise2 = new Promise((resolve, reject) => {\n  setTimeout(() => reject(new Error(\"Failed\")), 1000);\n});\n\nconst promise3 = new Promise(resolve => {\n  setTimeout(() => resolve(\"Finished later\"), 3000);\n});\n\nPromise.all([promise1, promise2, promise3])\n  .then(results => console.log(results))\n  .catch(error => console.log(error.message));\n\n// Failed\n// Promise.all() rejects as soon as promise2 rejects.\n// promise3 may still continue running."
+  },
+  {
+    "id": 8,
+    "question": "When would you use Promise.allSettled()?",
+    "answer": "Use Promise.allSettled() when multiple independent operations should all be allowed to finish and you need to know the outcome of each one, even if some fail. For example, it can be useful when sending multiple independent requests, processing multiple files, or running several background tasks where one failure should not prevent you from seeing the results of the others.",
+    "code": "const requests = [\n  fetch(\"/api/users\"),\n  fetch(\"/api/products\"),\n  fetch(\"/api/orders\")\n];\n\nconst results = await Promise.allSettled(requests);\n\nresults.forEach(result => {\n  if (result.status === \"fulfilled\") {\n    console.log(\"Success:\", result.value);\n  } else {\n    console.log(\"Failed:\", result.reason);\n  }\n});"
+  },
+  {
+    "id": 9,
+    "question": "When would you use Promise.any()?",
+    "answer": "Use Promise.any() when you have multiple alternative operations and only need the first successful result. It is useful when several equivalent sources can provide the same data and you want to use whichever one succeeds first. Rejections from individual Promises are ignored until all Promises have rejected.",
+    "code": "const server1 = fetch(\"https://server1.example.com/data\");\nconst server2 = fetch(\"https://server2.example.com/data\");\nconst server3 = fetch(\"https://server3.example.com/data\");\n\ntry {\n  const response = await Promise.any([\n    server1,\n    server2,\n    server3\n  ]);\n\n  console.log(\"First successful response:\", response);\n} catch (error) {\n  console.log(\"All servers failed\");\n}\n\n// Promise.any() succeeds as soon as one server responds successfully."
+  }
+]

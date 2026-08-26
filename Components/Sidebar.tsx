@@ -107,8 +107,9 @@ const topicGroups: TopicGroup[] = [
       { name: "Strings", href: "/concepts/javascript/strings" },
       { name: "Numbers & Math()", href: "/concepts/javascript/number-math" },
       { name: "Promises", href: "/concepts/javascript/promises" },
+      { name: "Promises Methods", href: "/concepts/javascript/promise-methods" },
        { name: "Async Await", href: "/concepts/javascript/async-await" },
-       
+
       // { name: "DOM", href: "/concepts/javascript/dom" },
       // { name: "Events", href: "/concepts/javascript/events" },
       //
