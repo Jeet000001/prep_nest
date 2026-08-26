@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "question": "What is synchronous JavaScript?",
+    "answer": "Synchronous JavaScript executes code one statement at a time, in the order it appears. Each operation must finish before the next operation starts. If one operation takes a long time, it can block the execution of the code that comes after it.",
+    "code": "console.log(\"Start\");\n\nconsole.log(\"Processing...\");\n\nconsole.log(\"End\");\n\n// Output:\n// Start\n// Processing...\n// End"
+  },
+  {
+    "id": 2,
+    "question": "What is asynchronous JavaScript?",
+    "answer": "Asynchronous JavaScript allows certain operations to start without making the JavaScript code wait for them to finish. While an asynchronous operation such as a timer, network request, or file operation is waiting, JavaScript can continue executing other code. When the operation finishes, its result can be handled using a callback, Promise, or async/await.",
+    "code": "console.log(\"Start\");\n\nsetTimeout(() => {\n  console.log(\"Async operation finished\");\n}, 2000);\n\nconsole.log(\"End\");\n\n// Output:\n// Start\n// End\n// Async operation finished"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between synchronous and asynchronous execution?",
+    "answer": "Synchronous execution waits for each operation to finish before moving to the next operation. Asynchronous execution allows certain operations to continue in the background while JavaScript continues executing other code. Synchronous code can block later work, while asynchronous operations can allow the main JavaScript execution to remain responsive.",
+    "code": "// Synchronous\nconsole.log(\"A\");\nconsole.log(\"B\");\nconsole.log(\"C\");\n\n// Output:\n// A\n// B\n// C\n\n// Asynchronous\nconsole.log(\"A\");\n\nsetTimeout(() => {\n  console.log(\"B\");\n}, 1000);\n\nconsole.log(\"C\");\n\n// Output:\n// A\n// C\n// B"
+  },
+  {
+    "id": 4,
+    "question": "What are callbacks, Promises, and async/await?",
+    "answer": "Callbacks, Promises, and async/await are different ways to handle asynchronous operations in JavaScript. A callback is a function passed to another function and executed when an operation finishes. A Promise represents the eventual success or failure of an asynchronous operation. async/await is syntax built on top of Promises that makes asynchronous code easier to read and write.",
+    "code": "// 1. Callback\nsetTimeout(() => {\n  console.log(\"Callback finished\");\n}, 1000);\n\n// 2. Promise\nconst promise = new Promise(resolve => {\n  setTimeout(() => resolve(\"Promise finished\"), 1000);\n});\n\npromise.then(result => {\n  console.log(result);\n});\n\n// 3. async/await\nasync function example() {\n  const result = await promise;\n  console.log(result);\n}\n\nexample();"
+  },
+  {
+    "id": 5,
+    "question": "How does JavaScript handle asynchronous operations despite being single-threaded?",
+    "answer": "JavaScript itself executes JavaScript code on a single main thread, but the JavaScript runtime provides mechanisms such as Web APIs in browsers and Node.js APIs in Node.js. These runtime features can handle operations such as timers, network requests, and I/O outside the JavaScript call stack. When an operation is ready, its callback or Promise continuation is placed into the appropriate task or microtask queue, and the event loop allows it to run when the call stack is available.",
+    "code": "console.log(\"Start\");\n\nsetTimeout(() => {\n  console.log(\"Timer callback\");\n}, 0);\n\nconsole.log(\"End\");\n\n// Output:\n// Start\n// End\n// Timer callback\n\n// The timer is handled by the runtime.\n// Its callback runs later when the call stack is available."
+  },
+  {
+    "id": 6,
+    "question": "What are Web APIs?",
+    "answer": "Web APIs are browser-provided APIs that allow JavaScript to interact with browser features and perform tasks outside the core JavaScript language. Examples include setTimeout(), fetch(), DOM APIs, localStorage, Geolocation, and WebSockets. These APIs are provided by the browser environment, not by the JavaScript language itself.",
+    "code": "// Timer Web API\nsetTimeout(() => {\n  console.log(\"Timer finished\");\n}, 1000);\n\n// Fetch Web API\nfetch(\"/api/users\")\n  .then(response => response.json())\n  .then(data => console.log(data));\n\n// DOM Web API\ndocument.querySelector(\"button\");"
+  },
+  {
+    "id": 7,
+    "question": "What is callback hell?",
+    "answer": "Callback hell refers to deeply nested callbacks that make asynchronous code difficult to read, maintain, debug, and handle errors in. It often happens when multiple asynchronous operations depend on the results of previous operations.",
+    "code": "getUser(userId, user => {\n  getPosts(user.id, posts => {\n    getComments(posts[0].id, comments => {\n      getAuthor(comments[0].authorId, author => {\n        console.log(author);\n      });\n    });\n  });\n});\n\n// The deeply nested structure makes the code harder to maintain."
+  },
+  {
+    "id": 8,
+    "question": "How can callback hell be avoided?",
+    "answer": "Callback hell can be avoided by keeping callbacks small, using named functions, separating responsibilities, and using Promises or async/await for complex asynchronous workflows. Modern JavaScript commonly uses Promises and async/await because they make chaining and error handling easier to understand.",
+    "code": "// Promise-based approach\ngetUser(userId)\n  .then(user => getPosts(user.id))\n  .then(posts => getComments(posts[0].id))\n  .then(comments => getAuthor(comments[0].authorId))\n  .then(author => console.log(author))\n  .catch(error => console.error(error));\n\n// async/await approach\nasync function getData() {\n  try {\n    const user = await getUser(userId);\n    const posts = await getPosts(user.id);\n    const comments = await getComments(posts[0].id);\n    const author = await getAuthor(comments[0].authorId);\n\n    console.log(author);\n  } catch (error) {\n    console.error(error);\n  }\n}"
+  },
+  {
+    "id": 9,
+    "question": "What is non-blocking JavaScript?",
+    "answer": "Non-blocking JavaScript means that a long-running asynchronous operation does not prevent other JavaScript code from continuing to execute. Instead of waiting for the operation to finish, JavaScript can continue with other work and handle the result later through a callback, Promise, or async/await. This helps applications remain responsive.",
+    "code": "console.log(\"Start\");\n\nfetch(\"/api/data\")\n  .then(response => response.json())\n  .then(data => {\n    console.log(\"Data received:\", data);\n  });\n\nconsole.log(\"This runs immediately\");\n\n// Output will be similar to:\n// Start\n// This runs immediately\n// Data received: ...\n\n// The network request does not block the JavaScript\n// execution while it is waiting for a response."
+  }
+]

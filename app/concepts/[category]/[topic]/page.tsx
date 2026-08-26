@@ -66,6 +66,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     "number-math": "Numbers_&_Math.json",
     promises: "Promises.json",
     "promise-methods": "Promise_Methods.json",
+    "asynchronous-javaScript": "Asynchronous_javaScript.json",
     "async-await": "Async_Await.json"
   },
 };
