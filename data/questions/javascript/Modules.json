@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "question": "What are JavaScript modules?",
+    "answer": "JavaScript modules are separate files that contain reusable code such as variables, functions, classes, or objects. A module can export code so that other files can import and use it. Modules help organize large applications into smaller, maintainable, and reusable pieces.",
+    "code": "// math.js\nexport const add = (a, b) => a + b;\n\n// app.js\nimport { add } from \"./math.js\";\n\nconsole.log(add(10, 20));\n// 30"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between named export and default export?",
+    "answer": "A named export allows a module to export multiple values, and the importing file must use the exported name. A default export allows a module to have one main exported value, and the importer can choose any name for it. A module can have multiple named exports but only one default export.",
+    "code": "// math.js\nexport const add = (a, b) => a + b;\nexport const subtract = (a, b) => a - b;\n\n// Named import\nimport { add, subtract } from \"./math.js\";\n\n\n// user.js\nconst user = {\n  name: \"Jeet\"\n};\n\nexport default user;\n\n// Default import - name can be changed\nimport userData from \"./user.js\";"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between import and require()?",
+    "answer": "import is part of the standard ES Modules system and is commonly used in modern JavaScript applications. require() is the CommonJS module syntax traditionally used in Node.js. import supports static analysis and features such as tree shaking, while require() is a function call and can be used dynamically.",
+    "code": "// ES Modules\nimport { add } from \"./math.js\";\n\nexport const result = add(10, 20);\n\n// CommonJS\nconst { add } = require(\"./math.js\");\n\nconst result = add(10, 20);"
+  },
+  {
+    "id": 4,
+    "question": "What is CommonJS?",
+    "answer": "CommonJS is a module system originally designed for JavaScript environments outside the browser and is widely associated with Node.js. It uses require() to import modules and module.exports or exports to export values. CommonJS modules are commonly loaded synchronously.",
+    "code": "// math.js\nfunction add(a, b) {\n  return a + b;\n}\n\nmodule.exports = { add };\n\n// app.js\nconst { add } = require(\"./math.js\");\n\nconsole.log(add(5, 3));\n// 8"
+  },
+  {
+    "id": 5,
+    "question": "What is ES Modules?",
+    "answer": "ES Modules (ESM) is the official JavaScript module system standardized by ECMAScript. It uses export and import to share code between modules. ESM is supported by modern browsers and Node.js and provides features such as static module structure, live bindings, and better support for bundler optimizations such as tree shaking.",
+    "code": "// math.js\nexport function add(a, b) {\n  return a + b;\n}\n\n// app.js\nimport { add } from \"./math.js\";\n\nconsole.log(add(2, 3));\n// 5"
+  },
+  {
+    "id": 6,
+    "question": "What is dynamic import?",
+    "answer": "Dynamic import allows a JavaScript module to be loaded at runtime instead of being imported statically at the top of the file. It uses import() and returns a Promise. Dynamic imports are useful for lazy loading code only when it is needed, which can improve the initial loading performance of an application.",
+    "code": "async function loadDashboard() {\n  const module = await import(\"./dashboard.js\");\n\n  module.showDashboard();\n}\n\n// The dashboard module is loaded only when needed.\nloadDashboard();"
+  },
+  {
+    "id": 7,
+    "question": "What are the advantages of JavaScript modules?",
+    "answer": "JavaScript modules provide better code organization, reusability, maintainability, and separation of responsibilities. They also help avoid global variable pollution, make dependencies explicit, allow code to be shared between files, and enable build tools to perform optimizations such as tree shaking and code splitting.",
+    "code": "// user.js\nexport function getUser() {\n  return { name: \"Jeet\" };\n}\n\n// api.js\nexport function fetchData() {\n  // API logic\n}\n\n// app.js\nimport { getUser } from \"./user.js\";\nimport { fetchData } from \"./api.js\";\n\nconsole.log(getUser());\nfetchData();"
+  },
+  {
+    "id": 8,
+    "question": "What is tree shaking?",
+    "answer": "Tree shaking is a build optimization technique that removes unused code from the final JavaScript bundle. It works especially well with ES Modules because their import and export structure can be analyzed statically by bundlers. This can reduce bundle size and improve application loading performance.",
+    "code": "// math.js\nexport function add(a, b) {\n  return a + b;\n}\n\nexport function subtract(a, b) {\n  return a - b;\n}\n\n// app.js\nimport { add } from \"./math.js\";\n\nconsole.log(add(2, 3));\n\n// If subtract() is never used, a bundler may remove it\n// from the production bundle through tree shaking."
+  },
+  {
+    "id": 9,
+    "question": "What is module bundling?",
+    "answer": "Module bundling is the process of combining multiple JavaScript modules and their dependencies into optimized files called bundles. A bundler analyzes the dependency graph, processes the modules, and can perform optimizations such as minification, tree shaking, and code splitting. Tools such as Webpack, Vite, Rollup, and esbuild can perform module bundling.",
+    "code": "// app.js\nimport { add } from \"./math.js\";\nimport { getUser } from \"./user.js\";\n\nconsole.log(add(10, 20));\nconsole.log(getUser());\n\n// Dependency graph:\n// app.js\n//   ├── math.js\n//   └── user.js\n//\n// A bundler can process these modules and produce\n// optimized JavaScript files for the browser."
+  }
+]

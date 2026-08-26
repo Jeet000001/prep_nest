@@ -130,6 +130,7 @@ const topicGroups: TopicGroup[] = [
       { name: "DOM", href: "/concepts/javascript/dom" },
       { name: "Web Storage", href: "/concepts/javascript/web-storage" },
       { name: "Fetch API", href: "/concepts/javascript/fetch-api" },
+      { name: "Modules", href: "/concepts/javascript/modules" },
 
       // { name: "DOM", href: "/concepts/javascript/dom" },
       // { name: "Events", href: "/concepts/javascript/events" },
