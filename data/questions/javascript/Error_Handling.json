@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is error handling in JavaScript?",
+    "answer": "Error handling is the process of detecting, catching, and responding to errors in a JavaScript program so that the application can handle unexpected situations gracefully instead of crashing. JavaScript provides mechanisms such as try...catch, finally, and throw for handling errors.",
+    "code": "try {\n  const result = JSON.parse(\"invalid json\");\n  console.log(result);\n} catch (error) {\n  console.log(\"Something went wrong:\", error.message);\n}"
+  },
+  {
+    "id": 2,
+    "question": "What is the purpose of try...catch?",
+    "answer": "try...catch is used to handle runtime errors. The code that might throw an error is placed inside the try block. If an error occurs, JavaScript stops executing the try block and transfers control to the catch block, where the error can be handled.",
+    "code": "try {\n  const user = JSON.parse(\"invalid json\");\n  console.log(user);\n} catch (error) {\n  console.log(\"Failed to parse JSON\");\n  console.log(error.message);\n}\n\n// The error is caught instead of stopping the entire program."
+  },
+  {
+    "id": 3,
+    "question": "What is the purpose of finally?",
+    "answer": "The finally block contains code that should run after the try and catch blocks, whether an error occurred or not. It is commonly used for cleanup tasks such as hiding a loading indicator, closing a resource, or resetting a state.",
+    "code": "try {\n  console.log(\"Trying...\");\n} catch (error) {\n  console.log(\"An error occurred\");\n} finally {\n  console.log(\"Cleanup completed\");\n}\n\n// finally runs whether an error occurs or not."
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between syntax errors and runtime errors?",
+    "answer": "A syntax error occurs when JavaScript code does not follow the language's syntax rules, so the code cannot be parsed correctly. A runtime error occurs while valid JavaScript code is executing, usually because an invalid operation is performed. Syntax errors are detected before that code can execute, while runtime errors happen during execution.",
+    "code": "// SyntaxError\n// const name = ;\n// Invalid syntax, so JavaScript cannot parse it.\n\n// Runtime error\nconst user = null;\n\n// This is valid syntax but fails during execution.\n// console.log(user.name);\n// TypeError: Cannot read properties of null"
+  },
+  {
+    "id": 5,
+    "question": "What is a ReferenceError?",
+    "answer": "A ReferenceError occurs when JavaScript tries to access a variable or identifier that cannot be resolved in the current scope. A common example is trying to use a variable that has not been declared.",
+    "code": "console.log(username);\n\n// ReferenceError: username is not defined"
+  },
+  {
+    "id": 6,
+    "question": "What is a TypeError?",
+    "answer": "A TypeError occurs when a value is used in a way that is not allowed for its type. For example, trying to call a non-function as a function or trying to access a property of null or undefined can cause a TypeError.",
+    "code": "const number = 10;\n\nnumber();\n\n// TypeError: number is not a function\n\nconst user = null;\n\nuser.name;\n\n// TypeError: Cannot read properties of null"
+  },
+  {
+    "id": 7,
+    "question": "What is a SyntaxError?",
+    "answer": "A SyntaxError occurs when JavaScript code does not follow the correct syntax rules and therefore cannot be parsed. It is usually detected before the invalid code is executed.",
+    "code": "// SyntaxError\nconst user = {\n  name: \"Jeet\",\n  age: 22\n};\n\n// Example of invalid syntax:\n// const user = { name: \"Jeet\" age: 22 };\n// SyntaxError because a comma is missing."
+  },
+  {
+    "id": 8,
+    "question": "How can you create a custom error?",
+    "answer": "You can create a custom error by using the Error constructor or by creating a custom class that extends the built-in Error class. Custom errors make application-specific failures easier to identify and handle.",
+    "code": "class ValidationError extends Error {\n  constructor(message) {\n    super(message);\n    this.name = \"ValidationError\";\n  }\n}\n\ntry {\n  throw new ValidationError(\"Email is required\");\n} catch (error) {\n  console.log(error.name);\n  console.log(error.message);\n}\n\n// ValidationError\n// Email is required"
+  },
+  {
+    "id": 9,
+    "question": "What does the throw statement do?",
+    "answer": "The throw statement is used to manually create and raise an error. When JavaScript executes throw, normal execution stops and control moves to the nearest matching catch block. You can throw an Error object or another JavaScript value, although throwing Error objects is recommended.",
+    "code": "function withdraw(balance, amount) {\n  if (amount > balance) {\n    throw new Error(\"Insufficient balance\");\n  }\n\n  return balance - amount;\n}\n\ntry {\n  console.log(withdraw(100, 200));\n} catch (error) {\n  console.log(error.message);\n}\n\n// Insufficient balance"
+  },
+  {
+    "id": 10,
+    "question": "How do you handle errors in asynchronous JavaScript?",
+    "answer": "For asynchronous JavaScript, errors can be handled differently depending on the approach. With Promises, use .catch(). With async/await, use try...catch. For callback-based APIs, errors are commonly passed to the callback, often using the error-first callback pattern.",
+    "code": "// Using Promise and catch()\nfetch(\"/api/users\")\n  .then(response => {\n    if (!response.ok) {\n      throw new Error(\"Request failed\");\n    }\n\n    return response.json();\n  })\n  .then(data => console.log(data))\n  .catch(error => console.error(error));\n\n// Using async/await and try...catch\nasync function getUsers() {\n  try {\n    const response = await fetch(\"/api/users\");\n\n    if (!response.ok) {\n      throw new Error(\"Request failed\");\n    }\n\n    const data = await response.json();\n    console.log(data);\n  } catch (error) {\n    console.error(\"Error:\", error.message);\n  }\n}"
+  }
+]
