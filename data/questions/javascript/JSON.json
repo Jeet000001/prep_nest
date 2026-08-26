@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What is JSON?",
+    "answer": "JSON stands for JavaScript Object Notation. It is a lightweight text-based format used to store and exchange data between applications, especially between a frontend and a backend. JSON is easy for humans to read and easy for programming languages to parse.",
+    "code": "const user = {\n  \"name\": \"Jeet\",\n  \"age\": 22,\n  \"isStudent\": true\n};\n\n// JSON representation\nconst jsonData = '{\"name\":\"Jeet\",\"age\":22,\"isStudent\":true}';"
+  },
+  {
+    "id": 2,
+    "question": "What is the difference between JSON and a JavaScript object?",
+    "answer": "A JavaScript object is an actual data structure that exists in JavaScript and can contain functions, undefined values, methods, and other JavaScript-specific values. JSON is a text format used for data exchange and supports only a limited set of data types. JSON property names must be written using double quotes, while JavaScript object property names usually do not require quotes.",
+    "code": "// JavaScript object\nconst user = {\n  name: \"Jeet\",\n  age: 22,\n  greet() {\n    console.log(\"Hello\");\n  }\n};\n\n// JSON string\nconst json = '{\"name\":\"Jeet\",\"age\":22}';\n\n// Object -> actual JavaScript value\n// JSON -> text/string format"
+  },
+  {
+    "id": 3,
+    "question": "What does JSON.stringify() do?",
+    "answer": "JSON.stringify() converts a JavaScript value, usually an object or array, into a JSON-formatted string. It is commonly used when sending data to a server or storing structured data as a string, such as in localStorage.",
+    "code": "const user = {\n  name: \"Jeet\",\n  age: 22\n};\n\nconst jsonString = JSON.stringify(user);\n\nconsole.log(jsonString);\n// '{\"name\":\"Jeet\",\"age\":22}'\n\nconsole.log(typeof jsonString);\n// \"string\""
+  },
+  {
+    "id": 4,
+    "question": "What does JSON.parse() do?",
+    "answer": "JSON.parse() converts a valid JSON string into the corresponding JavaScript value. It is commonly used when receiving JSON data from a server or retrieving JSON data stored as a string.",
+    "code": "const jsonString = '{\"name\":\"Jeet\",\"age\":22}';\n\nconst user = JSON.parse(jsonString);\n\nconsole.log(user.name);\n// Jeet\n\nconsole.log(typeof user);\n// \"object\""
+  },
+  {
+    "id": 5,
+    "question": "What data types are supported by JSON?",
+    "answer": "JSON supports six main types of values: string, number, boolean, null, object, and array. JSON does not support JavaScript-specific values such as undefined, functions, Symbol, or BigInt.",
+    "code": "const data = {\n  \"name\": \"Jeet\",\n  \"age\": 22,\n  \"isStudent\": true,\n  \"address\": null,\n  \"skills\": [\"JavaScript\", \"React\"],\n  \"profile\": {\n    \"city\": \"Kolkata\"\n  }\n};\n\n// Supported JSON values:\n// String  -> \"Jeet\"\n// Number  -> 22\n// Boolean -> true\n// Null    -> null\n// Array   -> [\"JavaScript\", \"React\"]\n// Object  -> { \"city\": \"Kolkata\" }"
+  },
+  {
+    "id": 6,
+    "question": "What happens to functions when using JSON.stringify()?",
+    "answer": "Functions are not valid JSON values. When a function is used as an object property, JSON.stringify() omits that property. When a function appears inside an array, it is converted to null. Therefore, functions cannot be preserved through JSON.stringify() and JSON.parse().",
+    "code": "const user = {\n  name: \"Jeet\",\n  greet: function () {\n    console.log(\"Hello\");\n  }\n};\n\nconst json = JSON.stringify(user);\n\nconsole.log(json);\n// '{\"name\":\"Jeet\"}'\n\n// The greet function is removed."
+  },
+  {
+    "id": 7,
+    "question": "What are the limitations of using JSON for deep cloning?",
+    "answer": "JSON.parse(JSON.stringify(object)) can create a deep copy for some simple data, but it has important limitations. It removes functions and undefined values, converts some special values such as Date into strings, does not preserve Map and Set objects correctly, cannot handle BigInt, and fails when the object contains circular references. Therefore, it should not be treated as a general-purpose deep cloning solution.",
+    "code": "const original = {\n  name: \"Jeet\",\n  date: new Date(),\n  value: undefined,\n  greet: () => console.log(\"Hello\"),\n  numbers: new Set([1, 2, 3])\n};\n\nconst clone = JSON.parse(JSON.stringify(original));\n\nconsole.log(clone);\n\n// Problems:\n// undefined -> removed\n// function  -> removed\n// Date      -> converted to a string\n// Set       -> not preserved as a Set\n// Circular references -> JSON.stringify() throws an error\n// BigInt    -> JSON.stringify() throws an error"
+  }
+]

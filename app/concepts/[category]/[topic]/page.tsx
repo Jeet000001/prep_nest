@@ -76,7 +76,9 @@ const topicFiles: Record<string, Record<string, string>> = {
     modules: "Modules.json",
     "error-handling": "Error_Handling.json",
     "regular-expressions": "Regular_Expressions.json",
-    "memory-management": "Memory_Management.json"
+    "memory-management": "Memory_Management.json",
+    "debouncing-throttling": "Debouncing_&_Throttling.json",
+    JSON: "JSON.json"
   },
 };
 

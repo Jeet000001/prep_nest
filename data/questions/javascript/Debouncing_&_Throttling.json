@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "question": "What is debouncing?",
+    "answer": "Debouncing is a technique that delays the execution of a function until a certain amount of time has passed without the event happening again. If the event happens again before the delay ends, the timer is reset. In simple words, debounce means: 'Wait until the user stops doing something, then run the function.'",
+    "code": "function debounce(callback, delay) {\n  let timer;\n\n  return function (...args) {\n    clearTimeout(timer);\n\n    timer = setTimeout(() => {\n      callback(...args);\n    }, delay);\n  };\n}\n\nconst handleSearch = debounce((event) => {\n  console.log(\"Searching for:\", event.target.value);\n}, 500);\n\ndocument.querySelector(\"input\").addEventListener(\"input\", handleSearch);\n\n// If the user keeps typing, the timer keeps resetting.\n// The search runs only 500ms after the user stops typing."
+  },
+  {
+    "id": 2,
+    "question": "What is throttling?",
+    "answer": "Throttling is a technique that limits how frequently a function can execute. Even if an event happens many times, the function runs at most once during a specified time interval. In simple words, throttle means: 'Run the function at a controlled rate while the event keeps happening.'",
+    "code": "function throttle(callback, delay) {\n  let lastCall = 0;\n\n  return function (...args) {\n    const now = Date.now();\n\n    if (now - lastCall >= delay) {\n      lastCall = now;\n      callback(...args);\n    }\n  };\n}\n\nconst handleScroll = throttle(() => {\n  console.log(\"Scroll position:\", window.scrollY);\n}, 200);\n\nwindow.addEventListener(\"scroll\", handleScroll);\n\n// The scroll event may fire many times,\n// but handleScroll runs at most once every 200ms."
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between debouncing and throttling?",
+    "answer": "The main difference is when the function executes. Debouncing waits until the events stop occurring and then executes the function once. Throttling executes the function at regular intervals while the events continue. Debouncing is useful when you care about the final action, while throttling is useful when you need continuous but controlled updates.",
+    "code": "// Debounce\n// User types: a -> ab -> abc -> abcd\n// Function runs only after the user stops typing.\n\n\n// Throttle\n// User scrolls continuously.\n// Function can run approximately once every 200ms.\n\n// Debounce -> Wait for inactivity\n// Throttle -> Limit execution frequency"
+  },
+  {
+    "id": 4,
+    "question": "When would you use debouncing?",
+    "answer": "Debouncing is useful when you do not want to execute a function for every event and only need the result after the user stops performing an action. Common examples include search inputs, autocomplete, form validation, filtering, and resize events.",
+    "code": "const searchInput = document.querySelector(\"input\");\n\nconst search = debounce((event) => {\n  console.log(\"API request:\", event.target.value);\n}, 500);\n\nsearchInput.addEventListener(\"input\", search);\n\n// Instead of sending an API request for every keystroke,\n// the request is made after the user stops typing."
+  },
+  {
+    "id": 5,
+    "question": "When would you use throttling?",
+    "answer": "Throttling is useful when an event happens continuously or very frequently, but you still need to respond while the event is happening. Common examples include scroll events, mouse movement, window resizing, dragging, touch events, and continuously updating UI elements.",
+    "code": "const handleScroll = throttle(() => {\n  console.log(\"User is scrolling\");\n}, 200);\n\nwindow.addEventListener(\"scroll\", handleScroll);\n\n// Even if scroll fires hundreds of times,\n// the function is limited to approximately once every 200ms."
+  },
+  {
+    "id": 6,
+    "question": "How would you implement debounce in JavaScript?",
+    "answer": "A basic debounce implementation uses setTimeout() to delay the function execution and clearTimeout() to cancel the previous timer whenever a new event occurs. The timer is restarted after every event, so the callback executes only when no new event occurs during the specified delay.",
+    "code": "function debounce(callback, delay) {\n  let timer;\n\n  return function (...args) {\n    clearTimeout(timer);\n\n    timer = setTimeout(() => {\n      callback.apply(this, args);\n    }, delay);\n  };\n}\n\nconst handleInput = debounce(function (event) {\n  console.log(event.target.value);\n}, 500);\n\ndocument\n  .querySelector(\"input\")\n  .addEventListener(\"input\", handleInput);"
+  },
+  {
+    "id": 7,
+    "question": "How would you implement throttle in JavaScript?",
+    "answer": "A basic throttle implementation keeps track of when the function was last executed. When a new event occurs, it checks whether the specified delay has passed. If enough time has passed, the callback is executed; otherwise, the event is ignored until the next allowed execution.",
+    "code": "function throttle(callback, delay) {\n  let lastCall = 0;\n\n  return function (...args) {\n    const now = Date.now();\n\n    if (now - lastCall >= delay) {\n      lastCall = now;\n      callback.apply(this, args);\n    }\n  };\n}\n\nconst handleScroll = throttle(function () {\n  console.log(window.scrollY);\n}, 200);\n\nwindow.addEventListener(\"scroll\", handleScroll);"
+  },
+  {
+    "id": 8,
+    "question": "Where are debouncing and throttling commonly used in frontend applications?",
+    "answer": "Debouncing and throttling are commonly used to improve frontend performance when events occur frequently. Debouncing is commonly used for search inputs, autocomplete, API requests, form validation, and resize handling. Throttling is commonly used for scrolling, mouse movement, dragging, touch events, window resizing, and animations or UI updates that need controlled frequency.",
+    "code": "// Debounce: Search API\nconst search = debounce((query) => {\n  fetch(`/api/search?q=${query}`);\n}, 500);\n\n\n// Throttle: Scroll handling\nconst updateScroll = throttle(() => {\n  console.log(window.scrollY);\n}, 100);\n\nwindow.addEventListener(\"scroll\", updateScroll);\n\n// Quick rule:\n// Debounce -> User stops -> Run once\n// Throttle -> User continues -> Run periodically"
+  }
+]

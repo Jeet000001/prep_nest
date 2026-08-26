@@ -132,8 +132,22 @@ const topicGroups: TopicGroup[] = [
       { name: "Fetch API", href: "/concepts/javascript/fetch-api" },
       { name: "Modules", href: "/concepts/javascript/modules" },
       { name: "Error Handling", href: "/concepts/javascript/error-handling" },
-      { name: "Regular Expressions", href: "/concepts/javascript/regular-expressions" },
-      { name: "Memory Management", href: "/concepts/javascript/memory-management" },
+      {
+        name: "Regular Expressions",
+        href: "/concepts/javascript/regular-expressions",
+      },
+      {
+        name: "Memory Management",
+        href: "/concepts/javascript/memory-management",
+      },
+      {
+        name: "Debouncing & Throttling",
+        href: "/concepts/javascript/debouncing-throttling",
+      },
+      {
+        name: "JSON",
+        href: "/concepts/javascript/JSON",
+      },
     ],
   },
 
