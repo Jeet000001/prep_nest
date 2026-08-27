@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "question": "How does event handling work in React?",
+    "answer": "Event handling in React is similar to event handling in HTML, but React uses JavaScript functions as event handlers. You pass a function to an event prop such as onClick, onChange, or onSubmit. When the event occurs, React calls that function.",
+    "code": "function App() {\n  function handleClick() {\n    console.log(\"Button clicked\");\n  }\n\n  return (\n    <button onClick={handleClick}>\n      Click Me\n    </button>\n  );\n}"
+  },
+  {
+    "id": 2,
+    "question": "What is a Synthetic Event?",
+    "answer": "A Synthetic Event is React's cross-browser wrapper around the browser's native event. React provides a consistent event interface so that event handling behaves similarly across supported browsers. Synthetic Events provide familiar properties and methods such as target, currentTarget, preventDefault(), and stopPropagation().",
+    "code": "function App() {\n  function handleClick(event) {\n    console.log(event.target);\n    console.log(event.type);\n  }\n\n  return <button onClick={handleClick}>Click</button>;\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between React events and native DOM events?",
+    "answer": "Native DOM events are events provided directly by the browser, while React event handlers receive React's Synthetic Event wrapper. React uses camelCase event prop names such as onClick instead of lowercase HTML attributes such as onclick. React also handles event delegation internally and provides a consistent API across browsers.",
+    "code": "// React event\n<button onClick={handleClick}>Click</button>\n\n// Native DOM event\nbutton.addEventListener(\"click\", handleClick);"
+  },
+  {
+    "id": 4,
+    "question": "How do you handle a click event in React?",
+    "answer": "You handle a click event by passing a function to the onClick prop. React calls the function when the user clicks the element.",
+    "code": "function App() {\n  function handleClick() {\n    alert(\"Button clicked!\");\n  }\n\n  return (\n    <button onClick={handleClick}>\n      Click Me\n    </button>\n  );\n}"
+  },
+  {
+    "id": 5,
+    "question": "Why should you pass a function instead of calling it directly in an event handler?",
+    "answer": "You should pass a function reference so React can call it later when the event actually occurs. If you call the function directly during rendering, it executes immediately instead of waiting for the event. This can also cause unwanted state updates or repeated renders.",
+    "code": "function App() {\n  function handleClick() {\n    console.log(\"Clicked\");\n  }\n\n  // Correct: function is passed\n  return <button onClick={handleClick}>Click</button>;\n\n  // Incorrect:\n  // return <button onClick={handleClick()}>Click</button>;\n}"
+  },
+  {
+    "id": 6,
+    "question": "What is event propagation?",
+    "answer": "Event propagation is the process by which an event travels through the DOM tree. It generally involves three phases: capturing, target, and bubbling. This means an event on a child element can also be handled by its parent elements unless propagation is stopped.",
+    "code": "function App() {\n  return (\n    <div onClick={() => console.log(\"Parent clicked\")}>\n      <button onClick={() => console.log(\"Button clicked\")}>\n        Click Me\n      </button>\n    </div>\n  );\n}\n\n// Clicking the button can also trigger the parent handler."
+  },
+  {
+    "id": 7,
+    "question": "What is event bubbling?",
+    "answer": "Event bubbling is the phase where an event starts at the target element and then travels upward through its parent elements. For example, clicking a button inside a div can trigger the button's onClick handler first and then the div's onClick handler.",
+    "code": "function App() {\n  return (\n    <div onClick={() => console.log(\"Parent clicked\")}>\n      <button onClick={() => console.log(\"Button clicked\")}>\n        Click Me\n      </button>\n    </div>\n  );\n}\n\n// Output when clicking the button:\n// Button clicked\n// Parent clicked"
+  },
+  {
+    "id": 8,
+    "question": "What is event capturing?",
+    "answer": "Event capturing is the phase where an event travels from the outer elements down toward the target element. In React, you can listen during the capturing phase by adding the Capture suffix to an event prop, such as onClickCapture.",
+    "code": "function App() {\n  return (\n    <div onClickCapture={() => console.log(\"Parent capturing\")}>\n      <button onClick={() => console.log(\"Button clicked\")}>\n        Click Me\n      </button>\n    </div>\n  );\n}\n\n// The capture handler runs during the capturing phase."
+  },
+  {
+    "id": 9,
+    "question": "How do you prevent event propagation in React?",
+    "answer": "You can prevent an event from propagating to parent elements by calling event.stopPropagation() inside the event handler. This stops the event from continuing through the propagation path.",
+    "code": "function App() {\n  function handleButtonClick(event) {\n    event.stopPropagation();\n    console.log(\"Button clicked\");\n  }\n\n  return (\n    <div onClick={() => console.log(\"Parent clicked\")}>\n      <button onClick={handleButtonClick}>\n        Click Me\n      </button>\n    </div>\n  );\n}\n\n// Clicking the button will not trigger the parent's handler."
+  },
+  {
+    "id": 10,
+    "question": "What is preventDefault()?",
+    "answer": "preventDefault() prevents the browser's default action for an event. For example, submitting a form normally reloads the page. Calling event.preventDefault() prevents that default form submission behavior.",
+    "code": "function App() {\n  function handleSubmit(event) {\n    event.preventDefault();\n    console.log(\"Form submitted without page reload\");\n  }\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n}"
+  },
+  {
+    "id": 11,
+    "question": "What is the difference between preventDefault() and stopPropagation()?",
+    "answer": "preventDefault() stops the browser's default behavior, while stopPropagation() stops the event from continuing to other elements in the propagation path. For example, preventDefault() can stop a form from reloading the page, while stopPropagation() can stop a parent's click handler from running.",
+    "code": "function handleClick(event) {\n  event.preventDefault();\n  event.stopPropagation();\n}\n\n// preventDefault() -> stops default browser behavior\n// stopPropagation() -> stops event propagation"
+  },
+  {
+    "id": 12,
+    "question": "How do you pass arguments to an event handler?",
+    "answer": "To pass arguments to an event handler, wrap the function call inside another function, usually an arrow function. The wrapper function is called when the event occurs, and it then calls your handler with the required arguments.",
+    "code": "function App() {\n  function handleUserClick(name) {\n    console.log(name);\n  }\n\n  return (\n    <button onClick={() => handleUserClick(\"Jeet\")}>\n      Click Me\n    </button>\n  );\n}"
+  },
+  {
+    "id": 13,
+    "question": "How do you handle form events in React?",
+    "answer": "Form events in React are commonly handled using onChange to respond to input changes and onSubmit to handle form submission. Controlled components store form values in React state, making React state the source of truth for the input values.",
+    "code": "import { useState } from \"react\";\n\nfunction LoginForm() {\n  const [email, setEmail] = useState(\"\");\n\n  function handleChange(event) {\n    setEmail(event.target.value);\n  }\n\n  function handleSubmit(event) {\n    event.preventDefault();\n    console.log(\"Email:\", email);\n  }\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input\n        type=\"email\"\n        value={email}\n        onChange={handleChange}\n        placeholder=\"Enter email\"\n      />\n\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n}"
+  }
+]

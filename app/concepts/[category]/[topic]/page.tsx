@@ -91,6 +91,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     jsx: "JSX.json",
     props: "Props.json",
     state: "State.json",
+    events: "Events.json"
   }
 };
 
