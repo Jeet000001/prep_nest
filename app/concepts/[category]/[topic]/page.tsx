@@ -92,7 +92,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     props: "Props.json",
     state: "State.json",
     events: "Events.json",
-    "conditional-rendering": "Conditional_Rendering.json"
+    "conditional-rendering": "Conditional_Rendering.json",
+    "lists-keys": "Lists-Keys.json"
   }
 };
 

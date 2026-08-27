@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "How do you render a list in React?",
+    "answer": "You can render a list in React by using JavaScript's map() method to transform each item in an array into a React element. Each rendered item should have a unique and stable key.",
+    "code": "function App() {\n  const users = [\"Jeet\", \"Rahul\", \"Amit\"];\n\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user}>{user}</li>\n      ))}\n    </ul>\n  );\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why is the `map()` method commonly used in React?",
+    "answer": "The map() method is commonly used because it creates a new array by transforming every item in an existing array. In React, this makes it easy to convert data into JSX elements and render dynamic lists.",
+    "code": "const numbers = [1, 2, 3];\n\nconst elements = numbers.map((number) => (\n  <p key={number}>{number}</p>\n));\n\nfunction App() {\n  return <div>{elements}</div>;\n}"
+  },
+  {
+    "id": 3,
+    "question": "What are keys in React?",
+    "answer": "Keys are special attributes used by React to uniquely identify elements in a list among their siblings. They help React track which items were added, removed, updated, or reordered.",
+    "code": "function App() {\n  const users = [\n    { id: 1, name: \"Jeet\" },\n    { id: 2, name: \"Rahul\" }\n  ];\n\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>{user.name}</li>\n      ))}\n    </ul>\n  );\n}"
+  },
+  {
+    "id": 4,
+    "question": "Why are keys required when rendering lists?",
+    "answer": "Keys help React identify which list item corresponds to which piece of data between renders. This makes reconciliation more accurate and efficient, especially when items are added, removed, or reordered.",
+    "code": "const todos = [\n  { id: \"a1\", text: \"Learn React\" },\n  { id: \"b2\", text: \"Build a project\" }\n];\n\nfunction TodoList() {\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.text}</li>\n      ))}\n    </ul>\n  );\n}"
+  },
+  {
+    "id": 5,
+    "question": "Why should array indexes generally not be used as keys?",
+    "answer": "Array indexes can cause problems when list items are added, removed, filtered, or reordered. Because an item's index can change, React may associate the wrong component instance or local state with a different item. Stable unique IDs are usually a better choice.",
+    "code": "// Avoid for dynamic lists\n{users.map((user, index) => (\n  <User key={index} user={user} />\n))}\n\n// Better\n{users.map((user) => (\n  <User key={user.id} user={user} />\n))}"
+  },
+  {
+    "id": 6,
+    "question": "What happens when you use an incorrect key?",
+    "answer": "An incorrect or unstable key can cause React to match the wrong elements during reconciliation. This may lead to incorrect UI updates, lost input values, unexpected component state, or unnecessary mounting and unmounting.",
+    "code": "// Problematic: random key changes on every render\n{users.map((user) => (\n  <User key={Math.random()} user={user} />\n))}\n\n// Better: stable key\n{users.map((user) => (\n  <User key={user.id} user={user} />\n))}"
+  },
+  {
+    "id": 7,
+    "question": "What happens if two elements have the same key?",
+    "answer": "Keys should be unique among sibling elements. If two elements have the same key, React may show a warning and cannot reliably identify those elements during reconciliation. This can result in incorrect updates or unexpected behavior.",
+    "code": "const users = [\n  { id: 1, name: \"Jeet\" },\n  { id: 1, name: \"Rahul\" }\n];\n\n// Incorrect because both siblings have the same key\n{users.map((user) => (\n  <p key={user.id}>{user.name}</p>\n))}"
+  },
+  {
+    "id": 8,
+    "question": "How does React use keys during reconciliation?",
+    "answer": "During reconciliation, React compares the previous and next lists of elements. Keys help React match each element with its corresponding element from the previous render. With stable keys, React can preserve the correct component identity and efficiently determine which items need to be added, removed, moved, or updated.",
+    "code": "// Before\n// [{ id: 1, name: \"A\" }, { id: 2, name: \"B\" }]\n\n// After adding a new item at the beginning\n// [{ id: 3, name: \"C\" }, { id: 1, name: \"A\" }, { id: 2, name: \"B\" }]\n\n// React uses the stable IDs to identify A and B."
+  },
+  {
+    "id": 9,
+    "question": "When is using the array index as a key acceptable?",
+    "answer": "Using the array index as a key can be acceptable when the list is completely static, items are never added, removed, filtered, or reordered, and the items do not have their own stable IDs. Even then, a stable unique ID is preferred whenever available.",
+    "code": "const colors = [\"Red\", \"Green\", \"Blue\"];\n\nfunction ColorList() {\n  return (\n    <ul>\n      {colors.map((color, index) => (\n        <li key={index}>{color}</li>\n      ))}\n    </ul>\n  );\n}\n\n// Acceptable only if this list never changes order or length."
+  },
+  {
+    "id": 10,
+    "question": "What makes a good key?",
+    "answer": "A good key should be unique among siblings, stable across renders, and directly associated with the data item being rendered. Database IDs, UUIDs created when the data is created, or other persistent unique identifiers are good choices. Keys should not be generated randomly during rendering.",
+    "code": "const users = [\n  { id: \"user-101\", name: \"Jeet\" },\n  { id: \"user-102\", name: \"Rahul\" }\n];\n\nfunction UserList() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>{user.name}</li>\n      ))}\n    </ul>\n  );\n}"
+  }
+]
