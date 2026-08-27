@@ -93,7 +93,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     state: "State.json",
     events: "Events.json",
     "conditional-rendering": "Conditional_Rendering.json",
-    "lists-keys": "Lists-Keys.json"
+    "lists-keys": "Lists-Keys.json",
+    forms: "Forms.json"
   }
 };
 

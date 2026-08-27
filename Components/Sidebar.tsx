@@ -179,6 +179,7 @@ const topicGroups: TopicGroup[] = [
         href: "/concepts/react/conditional-rendering",
       },
       { name: "Lists & Keys", href: "/concepts/react/lists-keys" },
+      { name: "Forms", href: "/concepts/react/forms" },
       { name: "useState", href: "/concepts/react/use-state" },
       { name: "useEffect", href: "/concepts/react/use-effect" },
       { name: "useRef", href: "/concepts/react/use-ref" },

@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "question": "How do forms work in React?",
+    "answer": "Forms in React work by handling user input through event handlers such as onChange and handling form submission with onSubmit. React can manage form values using component state, which is called a controlled form, or the browser DOM can manage the values, which is called an uncontrolled form.",
+    "code": "import { useState } from \"react\";\n\nfunction App() {\n  const [name, setName] = useState(\"\");\n\n  function handleSubmit(event) {\n    event.preventDefault();\n    console.log(name);\n  }\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input\n        value={name}\n        onChange={(event) => setName(event.target.value)}\n      />\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n}"
+  },
+  {
+    "id": 2,
+    "question": "What is a controlled component?",
+    "answer": "A controlled component is a form element whose value is controlled by React state. The input value comes from state, and user changes are handled through an event handler that updates the state. React state becomes the single source of truth for the form value.",
+    "code": "function App() {\n  const [email, setEmail] = useState(\"\");\n\n  return (\n    <input\n      value={email}\n      onChange={(event) => setEmail(event.target.value)}\n      placeholder=\"Enter email\"\n    />\n  );\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is an uncontrolled component?",
+    "answer": "An uncontrolled component is a form element where the DOM manages the current input value instead of React state. React can access the value when needed, commonly by using useRef.",
+    "code": "import { useRef } from \"react\";\n\nfunction App() {\n  const inputRef = useRef(null);\n\n  function handleSubmit(event) {\n    event.preventDefault();\n    console.log(inputRef.current.value);\n  }\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input ref={inputRef} defaultValue=\"\" />\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between controlled and uncontrolled components?",
+    "answer": "In a controlled component, React state manages the form value, while in an uncontrolled component, the DOM manages the value. Controlled components make validation and dynamic UI behavior easier because React always knows the current value. Uncontrolled components can be simpler for basic forms and are commonly accessed using refs.",
+    "code": "// Controlled\n<input\n  value={name}\n  onChange={(event) => setName(event.target.value)}\n/>\n\n// Uncontrolled\n<input\n  ref={inputRef}\n  defaultValue=\"\"\n/>"
+  },
+  {
+    "id": 5,
+    "question": "When should you use controlled components?",
+    "answer": "Controlled components are useful when you need real-time validation, conditional UI changes, instant access to form values, formatting, or when multiple parts of the UI depend on the input value. They are commonly used in React applications because the form data is managed by React.",
+    "code": "function App() {\n  const [email, setEmail] = useState(\"\");\n\n  const isValid = email.includes(\"@\");\n\n  return (\n    <>\n      <input\n        value={email}\n        onChange={(event) => setEmail(event.target.value)}\n      />\n\n      {!isValid && <p>Enter a valid email.</p>}\n    </>\n  );\n}"
+  },
+  {
+    "id": 6,
+    "question": "What is onChange in React forms?",
+    "answer": "onChange is an event prop used to respond when a form control's value changes. For text inputs, React commonly uses onChange to update component state with event.target.value.",
+    "code": "function App() {\n  const [name, setName] = useState(\"\");\n\n  function handleChange(event) {\n    setName(event.target.value);\n  }\n\n  return (\n    <input\n      value={name}\n      onChange={handleChange}\n    />\n  );\n}"
+  },
+  {
+    "id": 7,
+    "question": "How do you handle multiple form fields with one state?",
+    "answer": "You can store multiple form fields inside one object state. Give each input a name attribute and use that name to update the correct property with a single change handler.",
+    "code": "function App() {\n  const [formData, setFormData] = useState({\n    name: \"\",\n    email: \"\"\n  });\n\n  function handleChange(event) {\n    const { name, value } = event.target;\n\n    setFormData((prev) => ({\n      ...prev,\n      [name]: value\n    }));\n  }\n\n  return (\n    <>\n      <input\n        name=\"name\"\n        value={formData.name}\n        onChange={handleChange}\n      />\n\n      <input\n        name=\"email\"\n        value={formData.email}\n        onChange={handleChange}\n      />\n    </>\n  );\n}"
+  },
+  {
+    "id": 8,
+    "question": "How do you handle checkbox values?",
+    "answer": "For a controlled checkbox, use the checked prop instead of value. The current boolean value is available through event.target.checked.",
+    "code": "function App() {\n  const [isAccepted, setIsAccepted] = useState(false);\n\n  return (\n    <label>\n      <input\n        type=\"checkbox\"\n        checked={isAccepted}\n        onChange={(event) => {\n          setIsAccepted(event.target.checked);\n        }}\n      />\n      Accept Terms\n    </label>\n  );\n}"
+  },
+  {
+    "id": 9,
+    "question": "How do you handle radio buttons?",
+    "answer": "Radio buttons are controlled using the checked prop and a shared state value. Each radio button checks whether its value matches the current state. All radio buttons in the same group should use the same name.",
+    "code": "function App() {\n  const [gender, setGender] = useState(\"\");\n\n  return (\n    <>\n      <label>\n        <input\n          type=\"radio\"\n          name=\"gender\"\n          value=\"male\"\n          checked={gender === \"male\"}\n          onChange={(event) => setGender(event.target.value)}\n        />\n        Male\n      </label>\n\n      <label>\n        <input\n          type=\"radio\"\n          name=\"gender\"\n          value=\"female\"\n          checked={gender === \"female\"}\n          onChange={(event) => setGender(event.target.value)}\n        />\n        Female\n      </label>\n    </>\n  );\n}"
+  },
+  {
+    "id": 10,
+    "question": "How do you handle <select> elements?",
+    "answer": "A select element can be controlled using the value prop and onChange handler, just like a text input. The selected option value is available through event.target.value.",
+    "code": "function App() {\n  const [country, setCountry] = useState(\"\");\n\n  return (\n    <select\n      value={country}\n      onChange={(event) => setCountry(event.target.value)}\n    >\n      <option value=\"\">Select a country</option>\n      <option value=\"india\">India</option>\n      <option value=\"usa\">USA</option>\n      <option value=\"japan\">Japan</option>\n    </select>\n  );\n}"
+  },
+  {
+    "id": 11,
+    "question": "How do you prevent the default form submission?",
+    "answer": "You prevent the browser's default form submission behavior by calling event.preventDefault() inside the onSubmit handler. This prevents the page from reloading and allows React to handle the form submission with JavaScript.",
+    "code": "function App() {\n  function handleSubmit(event) {\n    event.preventDefault();\n    console.log(\"Form submitted\");\n  }\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input placeholder=\"Enter name\" />\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n}"
+  },
+  {
+    "id": 12,
+    "question": "How do you validate forms in React?",
+    "answer": "Forms in React can be validated using HTML validation attributes, custom validation logic, or form libraries. For controlled forms, you can validate state values when the user changes an input or when the form is submitted and store validation errors in state.",
+    "code": "function App() {\n  const [email, setEmail] = useState(\"\");\n  const [error, setError] = useState(\"\");\n\n  function handleSubmit(event) {\n    event.preventDefault();\n\n    if (!email.includes(\"@\")) {\n      setError(\"Please enter a valid email.\");\n      return;\n    }\n\n    setError(\"\");\n    console.log(\"Form submitted\");\n  }\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input\n        type=\"email\"\n        value={email}\n        onChange={(event) => setEmail(event.target.value)}\n      />\n\n      {error && <p>{error}</p>}\n\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n}"
+  },
+  {
+    "id": 13,
+    "question": "How can you reset a form?",
+    "answer": "For a controlled form, reset the state values to their initial values. For an uncontrolled form, you can use the form element's reset() method through a ref or the native reset behavior.",
+    "code": "function App() {\n  const [formData, setFormData] = useState({\n    name: \"\",\n    email: \"\"\n  });\n\n  function handleReset() {\n    setFormData({\n      name: \"\",\n      email: \"\"\n    });\n  }\n\n  return (\n    <>\n      <input\n        value={formData.name}\n        onChange={(event) =>\n          setFormData({\n            ...formData,\n            name: event.target.value\n          })\n        }\n      />\n\n      <button onClick={handleReset}>Reset</button>\n    </>\n  );\n}"
+  },
+  {
+    "id": 14,
+    "question": "What is the role of useRef in uncontrolled forms?",
+    "answer": "In uncontrolled forms, useRef provides a reference to a DOM element so you can access its current value directly without storing that value in React state. It is useful when you only need to read the form value at a specific time, such as when the form is submitted.",
+    "code": "import { useRef } from \"react\";\n\nfunction App() {\n  const nameRef = useRef(null);\n\n  function handleSubmit(event) {\n    event.preventDefault();\n\n    console.log(nameRef.current.value);\n  }\n\n  return (\n    <form onSubmit={handleSubmit}>\n      <input\n        ref={nameRef}\n        placeholder=\"Enter your name\"\n      />\n\n      <button type=\"submit\">Submit</button>\n    </form>\n  );\n}"
+  }
+]
