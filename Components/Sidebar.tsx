@@ -168,7 +168,7 @@ const topicGroups: TopicGroup[] = [
     name: "React",
     icon: Atom,
     topics: [
-      { name: "React Basics", href: "/concepts/react/basics" },
+      { name: "React Introduction", href: "/concepts/react/introduction" },
       { name: "Components", href: "/concepts/react/components" },
       { name: "JSX", href: "/concepts/react/jsx" },
       { name: "Props", href: "/concepts/react/props" },

@@ -85,6 +85,9 @@ const topicFiles: Record<string, Record<string, string>> = {
     "advanced-javaScript": "Advanced_JavaScript.json",
     "output-based-questions": "Output-Based_Questions.json",
   },
+  react: {
+    introduction: "Introduction.json",
+  }
 };
 
 export default async function TopicPage({

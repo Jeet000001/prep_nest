@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "What is React?",
+    "answer": "React is a popular open-source JavaScript library used for building user interfaces, especially single-page applications. It allows developers to build UI using reusable components and efficiently update the screen when data changes.",
+    "code": "function App() {\n  return <h1>Hello, React!</h1>;\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why is React used?",
+    "answer": "React is used to build interactive, dynamic, and reusable user interfaces. It helps developers organize applications into components, manage changing UI state, and update the DOM efficiently. React is especially useful for applications where the UI changes frequently based on user actions or data.",
+    "code": "function Counter() {\n  const [count, setCount] = React.useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      Count: {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 3,
+    "question": "What are the main features of React?",
+    "answer": "The main features of React include component-based architecture, declarative UI, JSX, state and props, one-way data flow, efficient UI updates through reconciliation, Hooks for managing state and side effects in function components, and a large ecosystem. React also supports building web interfaces and can be used with other libraries and frameworks.",
+    "code": "function Welcome({ name }) {\n  return <h1>Hello, {name}</h1>;\n}\n\nfunction App() {\n  return <Welcome name=\"Jeet\" />;\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is a component in React?",
+    "answer": "A component is a reusable and independent piece of UI in a React application. A component can accept data through props and return React elements that describe what should appear on the screen. Modern React applications primarily use function components.",
+    "code": "function Button() {\n  return <button>Click Me</button>;\n}\n\nfunction App() {\n  return (\n    <div>\n      <Button />\n      <Button />\n    </div>\n  );\n}"
+  },
+  {
+    "id": 5,
+    "question": "What is the difference between a functional component and a class component?",
+    "answer": "A functional component is a JavaScript function that returns React elements. Modern React primarily uses functional components with Hooks for state and side effects. A class component is an older component style that extends React.Component and uses lifecycle methods and this.state. Functional components are generally simpler and are preferred in modern React development.",
+    "code": "// Functional component\nfunction Welcome() {\n  return <h1>Hello</h1>;\n}\n\n// Class component\nclass Welcome extends React.Component {\n  render() {\n    return <h1>Hello</h1>;\n  }\n}"
+  },
+  {
+    "id": 6,
+    "question": "What is JSX?",
+    "answer": "JSX stands for JavaScript XML. It is a syntax extension that allows developers to write UI structures using HTML-like syntax inside JavaScript. JSX makes React components easier to read and write, but browsers do not directly understand JSX, so it must be transformed into JavaScript.",
+    "code": "const element = <h1>Hello, React!</h1>;\n\nconst name = \"Jeet\";\nconst greeting = <h1>Hello, {name}</h1>;"
+  },
+  {
+    "id": 7,
+    "question": "Why does React use JSX?",
+    "answer": "React uses JSX because it provides a convenient and readable way to describe the UI next to the JavaScript logic that controls it. JSX allows developers to combine JavaScript expressions and UI structure in the same component. However, JSX is optional because React can also be written without JSX.",
+    "code": "// With JSX\nconst element = <h1>Hello</h1>;\n\n// Without JSX\nconst elementWithoutJSX = React.createElement(\n  \"h1\",\n  null,\n  \"Hello\"\n);"
+  },
+  {
+    "id": 8,
+    "question": "Is JSX HTML?",
+    "answer": "No, JSX is not HTML. JSX looks similar to HTML, but it is JavaScript syntax that is transformed into React element creation code. JSX also has some differences from HTML, such as using className instead of class and camelCase event names like onClick.",
+    "code": "const element = (\n  <button className=\"btn\" onClick={handleClick}>\n    Click Me\n  </button>\n);\n\n// JSX uses:\n// className instead of class\n// onClick instead of onclick"
+  },
+  {
+    "id": 9,
+    "question": "What happens when JSX is compiled?",
+    "answer": "JSX is transformed by a compiler or build tool into JavaScript instructions that React can use to create React elements. In the modern JSX transform, JSX is typically compiled into calls to functions provided by the React JSX runtime. The result is JavaScript that describes the UI structure.",
+    "code": "// JSX\nconst element = <h1>Hello</h1>;\n\n// Conceptually transformed into JavaScript\n// that creates a React element describing:\n// type: \"h1\"\n// children: \"Hello\"\n\n// Older transforms commonly used:\n// React.createElement(\"h1\", null, \"Hello\");"
+  },
+  {
+    "id": 10,
+    "question": "What is the Virtual DOM?",
+    "answer": "The Virtual DOM is a lightweight JavaScript representation of the UI that React uses internally. When state or props change, React creates a new representation of the UI, compares it with the previous representation, and determines what changes are needed before updating the actual DOM.",
+    "code": "function App() {\n  const [name, setName] = React.useState(\"Jeet\");\n\n  return (\n    <div>\n      <h1>{name}</h1>\n      <button onClick={() => setName(\"Rahul\")}>\n        Change Name\n      </button>\n    </div>\n  );\n}"
+  },
+  {
+    "id": 11,
+    "question": "How does the Virtual DOM work?",
+    "answer": "When React state or props change, React renders a new tree of React elements representing the updated UI. React compares the new tree with the previous tree during reconciliation and calculates the necessary changes. React then commits the required updates to the actual DOM. This approach helps React manage UI updates efficiently.",
+    "code": "function Counter() {\n  const [count, setCount] = React.useState(0);\n\n  return (\n    <div>\n      <h1>{count}</h1>\n      <button onClick={() => setCount(count + 1)}>\n        Increment\n      </button>\n    </div>\n  );\n}\n\n// State changes\n//      ↓\n// React renders a new UI description\n//      ↓\n// React reconciles old and new trees\n//      ↓\n// Required DOM updates are committed"
+  },
+  {
+    "id": 12,
+    "question": "What is reconciliation in React?",
+    "answer": "Reconciliation is the process React uses to compare the previous UI tree with the new UI tree after a render. React uses this comparison to determine which parts of the actual DOM need to be updated, added, or removed. Keys are important during reconciliation when rendering lists because they help React identify items between renders.",
+    "code": "function TodoList({ todos }) {\n  return (\n    <ul>\n      {todos.map((todo) => (\n        <li key={todo.id}>{todo.title}</li>\n      ))}\n    </ul>\n  );\n}\n\n// Keys help React identify list items\n// during reconciliation."
+  },
+  {
+    "id": 13,
+    "question": "What is React Fiber?",
+    "answer": "React Fiber is React's internal rendering architecture. It represents work in a way that allows React to break rendering work into smaller units and prioritize different updates. This helps React support features such as scheduling, prioritizing urgent updates, and interruptible rendering. Developers usually do not work with Fiber directly.",
+    "code": "// Example concept:\n\n// High-priority update\n// User types in an input\n\n// Lower-priority update\n// Rendering a large part of the UI\n\n// React's rendering architecture can schedule\n// different types of work appropriately."
+  },
+  {
+    "id": 14,
+    "question": "What is the difference between the DOM and Virtual DOM?",
+    "answer": "The DOM is the actual browser representation of an HTML document. The Virtual DOM is an in-memory JavaScript representation used by React to describe and compare UI changes. React uses reconciliation to determine the required changes and then updates the actual DOM during the commit phase.",
+    "code": "// Actual DOM\nconst heading = document.querySelector(\"h1\");\nheading.textContent = \"Hello\";\n\n// React approach\nfunction App() {\n  return <h1>Hello</h1>;\n}\n\n// React describes the UI, compares changes,\n// and updates the actual DOM when needed."
+  },
+  {
+    "id": 15,
+    "question": "Why is React considered a library rather than a framework?",
+    "answer": "React is primarily considered a library because its main focus is building user interfaces. React does not require one complete application structure or include every feature needed for an application. Developers can choose additional tools for routing, data fetching, state management, and other concerns. Frameworks generally provide a more complete and opinionated application structure.",
+    "code": "// React focuses mainly on the UI layer.\n\nfunction App() {\n  return <h1>My Application</h1>;\n}\n\n// Developers can choose other tools for:\n// - Routing\n// - Data fetching\n// - State management\n// - Form handling"
+  },
+  {
+    "id": 16,
+    "question": "What is declarative UI?",
+    "answer": "Declarative UI means describing what the UI should look like for a given state instead of manually describing every step required to update the DOM. In React, you define the relationship between data and UI, and React handles updating the DOM when the data changes.",
+    "code": "function Counter() {\n  const [count, setCount] = React.useState(0);\n\n  return (\n    <div>\n      <p>Count: {count}</p>\n      <button onClick={() => setCount(count + 1)}>\n        Increment\n      </button>\n    </div>\n  );\n}\n\n// We describe what the UI should look like\n// for the current count."
+  },
+  {
+    "id": 17,
+    "question": "What is component-based architecture?",
+    "answer": "Component-based architecture is an approach where an application UI is divided into small, reusable, and independent components. Each component is responsible for a specific part of the interface. Components can be combined to build larger features and complete applications, which improves code reuse, organization, and maintainability.",
+    "code": "function Navbar() {\n  return <nav>Navbar</nav>;\n}\n\nfunction Sidebar() {\n  return <aside>Sidebar</aside>;\n}\n\nfunction Content() {\n  return <main>Content</main>;\n}\n\nfunction App() {\n  return (\n    <>\n      <Navbar />\n      <Sidebar />\n      <Content />\n    </>\n  );\n}"
+  },
+  {
+    "id": 18,
+    "question": "What is the difference between imperative and declarative programming?",
+    "answer": "Imperative programming focuses on describing step-by-step instructions for how to perform an operation. Declarative programming focuses on describing the desired result, while the underlying system handles many implementation details. Direct DOM manipulation is often imperative, while React components are generally declarative.",
+    "code": "// Imperative\nconst button = document.querySelector(\"button\");\nconst text = document.querySelector(\"p\");\nlet count = 0;\n\nbutton.addEventListener(\"click\", () => {\n  count++;\n  text.textContent = `Count: ${count}`;\n});\n\n\n// Declarative React\nfunction Counter() {\n  const [count, setCount] = React.useState(0);\n\n  return (\n    <>\n      <p>Count: {count}</p>\n      <button onClick={() => setCount(count + 1)}>\n        Increment\n      </button>\n    </>\n  );\n}"
+  },
+  {
+    "id": 19,
+    "question": "What is createRoot() in React?",
+    "answer": "createRoot() is the modern React client API used to create a root where a React application can be rendered. It is typically imported from react-dom/client and replaces the older ReactDOM.render() API. The root's render() method is then used to render the top-level React component.",
+    "code": "import { createRoot } from \"react-dom/client\";\nimport App from \"./App\";\n\nconst rootElement = document.getElementById(\"root\");\nconst root = createRoot(rootElement);\n\nroot.render(<App />);"
+  },
+  {
+    "id": 20,
+    "question": "What is the purpose of StrictMode?",
+    "answer": "StrictMode is a development-only tool that helps identify potential problems in a React application. It can enable additional development checks and intentionally re-run certain logic in development to help detect side effects and unsafe patterns. StrictMode does not affect the production build in the same way and does not add visible UI elements.",
+    "code": "import { StrictMode } from \"react\";\nimport { createRoot } from \"react-dom/client\";\nimport App from \"./App\";\n\ncreateRoot(document.getElementById(\"root\")).render(\n  <StrictMode>\n    <App />\n  </StrictMode>\n);\n\n// StrictMode helps detect potential issues\n// during development."
+  }
+]
