@@ -90,6 +90,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     components: "Components.json",
     jsx: "JSX.json",
     props: "Props.json",
+    state: "State.json",
   }
 };
 

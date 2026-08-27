@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "What is state in React?",
+    "answer": "State is data managed by a React component that can change over time. When state changes, React schedules a re-render so the UI can update based on the latest state. State is commonly used for dynamic data such as form inputs, counters, toggles, and fetched data.",
+    "code": "function Counter() {\n  const [count, setCount] = React.useState(0);\n\n  return <h1>Count: {count}</h1>;\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why is state needed in React?",
+    "answer": "State is needed to store data that can change and affect the UI. Normal JavaScript variables can change, but React does not track those changes for rendering. State allows React to know when the UI needs to be updated.",
+    "code": "function Counter() {\n  const [count, setCount] = React.useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      Count: {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is useState?",
+    "answer": "useState is a React Hook used to add state to functional components. It returns an array containing the current state value and a setter function used to request a state update.",
+    "code": "import { useState } from \"react\";\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 4,
+    "question": "How does useState work internally?",
+    "answer": "Conceptually, React stores state values outside the component function and associates them with a specific component instance. React keeps track of Hooks based on the order in which they are called. When a state setter is called, React queues an update and schedules the component to render again with the updated state. This is why Hooks must be called consistently at the top level of a component.",
+    "code": "function Counter() {\n  // React remembers this state value\n  // between component renders.\n  const [count, setCount] = React.useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 5,
+    "question": "Why should you not modify state directly?",
+    "answer": "You should not modify state directly because React expects state to be treated as immutable. Direct mutation can lead to unexpected behavior and may prevent React from correctly detecting changes. Instead, create a new value and pass it to the state setter.",
+    "code": "const [user, setUser] = React.useState({\n  name: \"Jeet\",\n  age: 22\n});\n\n// Incorrect: direct mutation\n// user.age = 23;\n\n// Correct\nsetUser({\n  ...user,\n  age: 23\n});"
+  },
+  {
+    "id": 6,
+    "question": "What happens when you call a state setter?",
+    "answer": "When you call a state setter, React requests a state update. React queues the update and schedules a re-render. During the next render, the component receives the updated state value. React may batch multiple state updates together for better performance.",
+    "code": "function Counter() {\n  const [count, setCount] = React.useState(0);\n\n  function handleClick() {\n    setCount(count + 1);\n  }\n\n  return <button onClick={handleClick}>{count}</button>;\n}"
+  },
+  {
+    "id": 7,
+    "question": "Does calling a state setter immediately update the state?",
+    "answer": "No, calling a state setter does not immediately change the state value inside the currently running event handler. State values behave like a snapshot for a particular render. React processes the update and provides the new value during a later render.",
+    "code": "function Counter() {\n  const [count, setCount] = React.useState(0);\n\n  function handleClick() {\n    setCount(count + 1);\n    console.log(count); // Still the old value\n  }\n\n  return <button onClick={handleClick}>{count}</button>;\n}"
+  },
+  {
+    "id": 8,
+    "question": "Why does React batch state updates?",
+    "answer": "React batches state updates to reduce unnecessary rendering work and improve performance. Instead of immediately rendering after every individual state update, React can process multiple updates together and perform a more efficient render.",
+    "code": "function App() {\n  const [count, setCount] = React.useState(0);\n  const [name, setName] = React.useState(\"Jeet\");\n\n  function handleClick() {\n    setCount(count + 1);\n    setName(\"Rahul\");\n  }\n\n  return <button onClick={handleClick}>Update</button>;\n}"
+  },
+  {
+    "id": 9,
+    "question": "What is state batching?",
+    "answer": "State batching is the process of grouping multiple state updates together so React can process them efficiently and avoid unnecessary intermediate renders. In modern React, automatic batching can group updates in more situations than earlier versions.",
+    "code": "function App() {\n  const [count, setCount] = React.useState(0);\n  const [message, setMessage] = React.useState(\"\");\n\n  function handleClick() {\n    setCount((prev) => prev + 1);\n    setMessage(\"Updated\");\n  }\n\n  return <button onClick={handleClick}>Update</button>;\n}"
+  },
+  {
+    "id": 10,
+    "question": "What is a functional state update?",
+    "answer": "A functional state update is a state update where you pass a function to the setter instead of directly passing the next value. The function receives the previous state and returns the next state. This is useful when the new state depends on the previous state.",
+    "code": "function Counter() {\n  const [count, setCount] = React.useState(0);\n\n  function increment() {\n    setCount((previousCount) => previousCount + 1);\n  }\n\n  return <button onClick={increment}>{count}</button>;\n}"
+  },
+  {
+    "id": 11,
+    "question": "When should you use a functional state update?",
+    "answer": "You should use a functional state update when the next state depends on the previous state. This is especially important when multiple updates may be queued or when you want to avoid relying on a state value captured from an earlier render.",
+    "code": "function Counter() {\n  const [count, setCount] = React.useState(0);\n\n  function incrementThreeTimes() {\n    setCount((prev) => prev + 1);\n    setCount((prev) => prev + 1);\n    setCount((prev) => prev + 1);\n  }\n\n  return (\n    <button onClick={incrementThreeTimes}>\n      Count: {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 12,
+    "question": "What happens when you call a state setter multiple times?",
+    "answer": "Multiple state setter calls can be queued and processed together. If you repeatedly use the same state value from the current render, the updates may not produce the result you expect. When each update depends on the previous result, use functional updates so React can process them in sequence.",
+    "code": "function Counter() {\n  const [count, setCount] = React.useState(0);\n\n  function handleClick() {\n    // Correct when updates depend on previous state\n    setCount((prev) => prev + 1);\n    setCount((prev) => prev + 1);\n    setCount((prev) => prev + 1);\n  }\n\n  return <button onClick={handleClick}>{count}</button>;\n}"
+  },
+  {
+    "id": 13,
+    "question": "What is derived state?",
+    "answer": "Derived state is a value that can be calculated from existing props or state. For example, the total price can be derived from an array of cart items. If a value can be calculated during rendering, it usually does not need to be stored as separate state.",
+    "code": "function Cart({ items }) {\n  const total = items.reduce(\n    (sum, item) => sum + item.price,\n    0\n  );\n\n  return <h2>Total: ${total}</h2>;\n}\n\n// total is derived from items."
+  },
+  {
+    "id": 14,
+    "question": "Why should unnecessary derived state be avoided?",
+    "answer": "Unnecessary derived state should be avoided because it duplicates information that already exists. Duplicate state can become out of sync and make the component more difficult to maintain. When possible, calculate the derived value directly during rendering.",
+    "code": "function Cart({ items }) {\n  // No need to store total separately in state\n  const total = items.reduce(\n    (sum, item) => sum + item.price,\n    0\n  );\n\n  return <p>Total: ${total}</p>;\n}"
+  },
+  {
+    "id": 15,
+    "question": "Can state be an object or array?",
+    "answer": "Yes. State can store any JavaScript value, including strings, numbers, booleans, objects, arrays, and other values. However, objects and arrays should be updated immutably by creating new objects or arrays instead of mutating the existing state.",
+    "code": "function App() {\n  const [user, setUser] = React.useState({\n    name: \"Jeet\",\n    age: 22\n  });\n\n  const [todos, setTodos] = React.useState([\n    \"Learn React\",\n    \"Build a project\"\n  ]);\n\n  return <h1>{user.name}</h1>;\n}"
+  },
+  {
+    "id": 16,
+    "question": "How do you update an object in state?",
+    "answer": "To update an object in state, create a new object and copy the existing properties using the spread syntax. Then override only the property that needs to change. This keeps the original state object unchanged.",
+    "code": "function Profile() {\n  const [user, setUser] = React.useState({\n    name: \"Jeet\",\n    age: 22\n  });\n\n  function updateAge() {\n    setUser((prevUser) => ({\n      ...prevUser,\n      age: 23\n    }));\n  }\n\n  return (\n    <button onClick={updateAge}>\n      Age: {user.age}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 17,
+    "question": "How do you update an array in state?",
+    "answer": "To update an array in state, create a new array instead of mutating the existing one. Common methods include spread syntax, map(), filter(), and concat(). The method you use depends on whether you are adding, updating, or removing items.",
+    "code": "function TodoList() {\n  const [todos, setTodos] = React.useState([\n    \"Learn React\"\n  ]);\n\n  function addTodo() {\n    setTodos((prevTodos) => [\n      ...prevTodos,\n      \"Build a project\"\n    ]);\n  }\n\n  return (\n    <>\n      <button onClick={addTodo}>Add Todo</button>\n      {todos.map((todo) => (\n        <p key={todo}>{todo}</p>\n      ))}\n    </>\n  );\n}"
+  },
+  {
+    "id": 18,
+    "question": "What is lazy initialization in useState?",
+    "answer": "Lazy initialization allows you to pass a function to useState when calculating the initial state is expensive. React calls the initializer function to get the initial value during initialization, rather than running an expensive calculation on every render.",
+    "code": "function App() {\n  const [data] = React.useState(() => {\n    console.log(\"Expensive calculation runs initially\");\n    return calculateInitialData();\n  });\n\n  return <p>{data}</p>;\n}\n\nfunction calculateInitialData() {\n  return \"Initial Data\";\n}"
+  },
+  {
+    "id": 19,
+    "question": "What is the difference between state and normal variables?",
+    "answer": "A normal variable is recreated when a component function runs and changing it does not tell React to update the UI. State is managed by React and preserved between renders. When state is updated using its setter, React schedules a re-render so the UI can reflect the new value.",
+    "code": "function Counter() {\n  let normalCount = 0;\n  const [count, setCount] = React.useState(0);\n\n  function updateNormalVariable() {\n    normalCount++;\n    console.log(normalCount);\n  }\n\n  return (\n    <>\n      <button onClick={updateNormalVariable}>\n        Normal: {normalCount}\n      </button>\n\n      <button onClick={() => setCount(count + 1)}>\n        State: {count}\n      </button>\n    </>\n  );\n}"
+  },
+  {
+    "id": 20,
+    "question": "What happens when you update state with the same value?",
+    "answer": "If React determines that the new state value is the same as the current state value using Object.is comparison, React can skip scheduling unnecessary work for that state update. For objects and arrays, two different objects with identical contents are still different references, so React treats them as different values.",
+    "code": "function App() {\n  const [count, setCount] = React.useState(0);\n\n  function handleClick() {\n    setCount(0);\n  }\n\n  return (\n    <button onClick={handleClick}>\n      Count: {count}\n    </button>\n  );\n}\n\n// For objects:\n// {} !== {}\n// Different references are treated as different values."
+  }
+]
