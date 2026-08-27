@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What is conditional rendering in React?",
+    "answer": "Conditional rendering means displaying different UI elements based on a condition. React uses normal JavaScript conditions to decide what should be rendered. Common techniques include if statements, ternary operators, logical &&, and returning null.",
+    "code": "function App() {\n  const isLoggedIn = true;\n\n  if (isLoggedIn) {\n    return <h1>Welcome back!</h1>;\n  }\n\n  return <h1>Please log in.</h1>;\n}"
+  },
+  {
+    "id": 2,
+    "question": "How do you conditionally render a component?",
+    "answer": "You can conditionally render a component using an if statement, ternary operator, logical && operator, or by returning null. The best approach depends on whether you need to render one of two options or simply show or hide a component.",
+    "code": "function App() {\n  const isLoggedIn = true;\n\n  return (\n    <div>\n      {isLoggedIn ? <Dashboard /> : <Login />}\n    </div>\n  );\n}\n\nfunction Dashboard() {\n  return <h1>Dashboard</h1>;\n}\n\nfunction Login() {\n  return <h1>Login</h1>;\n}"
+  },
+  {
+    "id": 3,
+    "question": "How does the ternary operator work in JSX?",
+    "answer": "The ternary operator allows you to choose between two values or UI elements based on a condition. Its syntax is condition ? valueIfTrue : valueIfFalse. It is commonly used in JSX when you need to render one of two different UI elements.",
+    "code": "function App() {\n  const isLoggedIn = true;\n\n  return (\n    <div>\n      {isLoggedIn ? (\n        <h1>Welcome!</h1>\n      ) : (\n        <h1>Please log in.</h1>\n      )}\n    </div>\n  );\n}"
+  },
+  {
+    "id": 4,
+    "question": "How does the `&&` operator work for conditional rendering?",
+    "answer": "The && operator is commonly used when you want to render something only when a condition is truthy. If the condition is truthy, React evaluates and renders the expression on the right side. If the condition is falsy, the right side is not evaluated in the normal JavaScript short-circuit behavior.",
+    "code": "function App() {\n  const isAdmin = true;\n\n  return (\n    <div>\n      <h1>Dashboard</h1>\n\n      {isAdmin && <button>Delete User</button>}\n    </div>\n  );\n}"
+  },
+  {
+    "id": 5,
+    "question": "What problem can occur when using `&&` with `0`?",
+    "answer": "The value 0 is falsy, but React can render the number 0. Therefore, an expression such as count && <Message /> can display 0 when count is 0 instead of rendering nothing. To avoid this, use an explicit boolean condition such as count > 0.",
+    "code": "function App() {\n  const count = 0;\n\n  return (\n    <div>\n      {/* Problem: may render 0 */}\n      {count && <p>You have messages.</p>}\n\n      {/* Correct */}\n      {count > 0 && <p>You have messages.</p>}\n    </div>\n  );\n}"
+  },
+  {
+    "id": 6,
+    "question": "How do you render different components based on state?",
+    "answer": "You can store a value in state and use conditional rendering to choose which component should be displayed. When the state changes, React re-renders the component and displays the appropriate UI based on the new state.",
+    "code": "import { useState } from \"react\";\n\nfunction App() {\n  const [isLoggedIn, setIsLoggedIn] = useState(false);\n\n  return (\n    <div>\n      {isLoggedIn ? <Dashboard /> : <Login />}\n\n      <button onClick={() => setIsLoggedIn(!isLoggedIn)}>\n        Toggle Login\n      </button>\n    </div>\n  );\n}\n\nfunction Dashboard() {\n  return <h1>Welcome to Dashboard</h1>;\n}\n\nfunction Login() {\n  return <h1>Please Login</h1>;\n}"
+  },
+  {
+    "id": 7,
+    "question": "How do you conditionally apply CSS classes in React?",
+    "answer": "You can conditionally apply CSS classes by using JavaScript expressions inside the className prop. A ternary operator is useful for choosing between two classes, while template literals or arrays can be used when combining multiple classes.",
+    "code": "function Button({ isActive }) {\n  return (\n    <button\n      className={isActive ? \"btn active\" : \"btn\"}\n    >\n      Click Me\n    </button>\n  );\n}\n\n// Another example\nfunction App() {\n  const isActive = true;\n\n  return (\n    <div\n      className={`card ${isActive ? \"active\" : \"inactive\"}`}\n    >\n      Content\n    </div>\n  );\n}"
+  }
+]
