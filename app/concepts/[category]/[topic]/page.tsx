@@ -87,6 +87,8 @@ const topicFiles: Record<string, Record<string, string>> = {
   },
   react: {
     introduction: "Introduction.json",
+    components: "Components.json",
+    jsx: "JSX.json",
   }
 };
 

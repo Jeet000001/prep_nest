@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "question": "What is JSX?",
+    "answer": "JSX stands for JavaScript XML. It is a syntax extension used in React that allows developers to write HTML-like UI code inside JavaScript. JSX makes React components easier to read and write, but it is not HTML and browsers do not understand it directly.",
+    "code": "function App() {\n  return <h1>Hello, React!</h1>;\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why can't browsers directly understand JSX?",
+    "answer": "Browsers understand HTML, CSS, and JavaScript, but JSX is not standard JavaScript syntax that browsers can execute directly. JSX must first be transformed into regular JavaScript that creates React elements. Build tools and compilers such as Babel perform this transformation.",
+    "code": "// JSX\nconst element = <h1>Hello</h1>;\n\n// The browser cannot directly execute JSX.\n// It must first be transformed into JavaScript."
+  },
+  {
+    "id": 3,
+    "question": "How does JSX get converted into JavaScript?",
+    "answer": "JSX is converted into JavaScript during the build process by a compiler such as Babel or by the framework's build tool. The JSX syntax is transformed into JavaScript instructions that create React elements. Modern React commonly uses the automatic JSX runtime, while older transformations commonly used React.createElement().",
+    "code": "// JSX\nconst element = <h1>Hello</h1>;\n\n// Older JSX transformation conceptually produced:\nconst element2 = React.createElement(\n  \"h1\",\n  null,\n  \"Hello\"\n);\n\n// Modern React can use the automatic JSX runtime."
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between JSX and HTML?",
+    "answer": "JSX looks similar to HTML, but JSX is a JavaScript syntax extension used to describe React UI. JSX has some important differences from HTML: JSX uses className instead of class, uses camelCase for attributes and event handlers such as onClick, requires expressions to be placed inside curly braces, and follows stricter syntax rules such as properly closing elements.",
+    "code": "<!-- HTML -->\n<button class=\"btn\" onclick=\"handleClick()\">\n  Click\n</button>\n\n// JSX\n<button className=\"btn\" onClick={handleClick}>\n  Click\n</button>"
+  },
+  {
+    "id": 5,
+    "question": "Why do we use `className` instead of `class` in JSX?",
+    "answer": "We use className in JSX to specify CSS classes because JSX follows JavaScript conventions and class is a reserved keyword in JavaScript. React therefore uses className as the JSX attribute that maps to the HTML class attribute in the rendered DOM.",
+    "code": "// Incorrect in typical JSX usage\n// <div class=\"container\">Hello</div>\n\n// Correct\nfunction App() {\n  return <div className=\"container\">Hello</div>;\n}"
+  },
+  {
+    "id": 6,
+    "question": "Why must JSX return a single parent element?",
+    "answer": "A JSX expression must represent one JavaScript value. When a component returns multiple sibling elements, they need to be grouped into a single parent structure such as a div or a React Fragment. This allows React to treat the returned UI as one tree structure. A Fragment is useful when you do not want to add an extra DOM element.",
+    "code": "// Using a div\nfunction App() {\n  return (\n    <div>\n      <h1>Hello</h1>\n      <p>Welcome</p>\n    </div>\n  );\n}\n\n// Using a Fragment\nfunction AppWithFragment() {\n  return (\n    <>\n      <h1>Hello</h1>\n      <p>Welcome</p>\n    </>\n  );\n}"
+  },
+  {
+    "id": 7,
+    "question": "How do you write JavaScript expressions inside JSX?",
+    "answer": "JavaScript expressions are written inside curly braces, {}. You can use variables, calculations, function calls, ternary expressions, and other expressions inside curly braces. However, JavaScript statements such as if statements cannot be directly placed inside JSX expression braces.",
+    "code": "function App() {\n  const name = \"Jeet\";\n  const age = 22;\n\n  return (\n    <div>\n      <h1>Hello, {name}</h1>\n      <p>Next year: {age + 1}</p>\n    </div>\n  );\n}"
+  },
+  {
+    "id": 8,
+    "question": "Can you use `if...else` directly inside JSX?",
+    "answer": "No, you cannot place an if...else statement directly inside JSX curly braces because if...else is a statement, not an expression. Instead, you can use if...else before the return statement, use a ternary operator, or use logical && for simple conditional rendering.",
+    "code": "function App({ isLoggedIn }) {\n  if (isLoggedIn) {\n    return <h1>Welcome back!</h1>;\n  } else {\n    return <h1>Please log in.</h1>;\n  }\n}\n\n// Or use a ternary expression inside JSX."
+  },
+  {
+    "id": 9,
+    "question": "How do you conditionally render elements in JSX?",
+    "answer": "Conditional rendering in JSX can be done using if...else statements, the ternary operator, logical &&, or by returning null. The best approach depends on the condition. A ternary is useful when choosing between two UI elements, while && is useful when rendering something only when a condition is true.",
+    "code": "function App({ isLoggedIn, hasNotification }) {\n  return (\n    <div>\n      {isLoggedIn ? (\n        <h1>Welcome!</h1>\n      ) : (\n        <button>Login</button>\n      )}\n\n      {hasNotification && <p>New notification!</p>}\n    </div>\n  );\n}"
+  },
+  {
+    "id": 10,
+    "question": "What is the difference between `{}` and `()` in JSX?",
+    "answer": "In JSX, curly braces {} are used to embed a JavaScript expression inside JSX. Parentheses () are normal JavaScript syntax and are commonly used to group multi-line JSX or control expression precedence. Parentheses do not themselves insert JavaScript into JSX; curly braces are what allow expressions to be evaluated and rendered.",
+    "code": "function App() {\n  const name = \"Jeet\";\n\n  return (\n    <div>\n      {/* Curly braces evaluate JavaScript expressions */}\n      <h1>Hello, {name}</h1>\n\n      {/* Parentheses group multi-line JSX */}\n      {true && (\n        <p>This is visible</p>\n      )}\n    </div>\n  );\n}"
+  },
+  {
+    "id": 11,
+    "question": "Can JSX contain JavaScript functions?",
+    "answer": "Yes. JSX can use JavaScript functions and function calls through curly braces. You can define functions inside a component and use them in event handlers or call functions that return values to display. However, a function itself is not automatically rendered as text; you usually call it or pass it as a callback.",
+    "code": "function App() {\n  function getGreeting() {\n    return \"Hello, Jeet!\";\n  }\n\n  function handleClick() {\n    console.log(\"Button clicked\");\n  }\n\n  return (\n    <div>\n      <h1>{getGreeting()}</h1>\n      <button onClick={handleClick}>\n        Click Me\n      </button>\n    </div>\n  );\n}"
+  },
+  {
+    "id": 12,
+    "question": "What happens if you return multiple JSX elements without a wrapper?",
+    "answer": "If multiple sibling JSX elements are returned without being grouped, the code will produce a syntax or compilation error because the JSX return must form a single parent structure. You can fix this by wrapping the elements in a parent element such as a div or by using a React Fragment.",
+    "code": "// Incorrect\nfunction App() {\n  return (\n    <h1>Hello</h1>\n    <p>Welcome</p>\n  );\n}\n\n// Correct using a Fragment\nfunction CorrectApp() {\n  return (\n    <>\n      <h1>Hello</h1>\n      <p>Welcome</p>\n    </>\n  );\n}"
+  }
+]
