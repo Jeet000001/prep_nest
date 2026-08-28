@@ -1,0 +1,104 @@
+[
+  {
+    "id": 1,
+    "question": "What is Redux?",
+    "answer": "Redux is a predictable state management library used to manage shared application state in a centralized store. Components dispatch actions, reducers calculate the next state, and subscribed components receive the updated state.",
+    "code": "UI\n  ↓\ndispatch(action)\n  ↓\nReducer\n  ↓\nRedux Store\n  ↓\nUpdated State\n  ↓\nUI re-renders"
+  },
+  {
+    "id": 2,
+    "question": "Why is Redux used?",
+    "answer": "Redux is used when application state is shared across many components or when state transitions are complex and need to be predictable and traceable. It provides centralized state, predictable updates, middleware support, and useful debugging tools.",
+    "code": "// Multiple components can access shared state\n\nNavbar  ──┐\nProfile ──┼──> Redux Store\nCart    ──┤\nCheckout ┘\n\n// Useful for complex shared application state."
+  },
+  {
+    "id": 3,
+    "question": "What are the core principles of Redux?",
+    "answer": "Redux is based on three core principles: a single source of truth, state is read-only, and changes are made through pure reducer functions. The application state is kept in a store, components do not directly modify it, and actions describe what happened.",
+    "code": "// 1. Single source of truth\nconst store = configureStore({ ... });\n\n// 2. State is read-only\n// Don't directly modify the Redux state.\n\n// 3. Changes through reducers\nfunction reducer(state, action) {\n  // Return the next state\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is a Redux store?",
+    "answer": "A Redux store is the central object that holds the application's Redux state. It is created with configureStore() when using Redux Toolkit. The store provides mechanisms for reading state, dispatching actions, and subscribing to state changes.",
+    "code": "import { configureStore } from \"@reduxjs/toolkit\";\n\nconst store = configureStore({\n  reducer: {\n    counter: counterReducer,\n    user: userReducer\n  }\n});\n\n// The store contains the Redux state."
+  },
+  {
+    "id": 5,
+    "question": "What is an action?",
+    "answer": "An action is a plain JavaScript object that describes something that happened in the application. An action must have a type property and can optionally contain additional data, commonly stored in payload.",
+    "code": "const increment = {\n  type: \"counter/increment\",\n  payload: 1\n};\n\n// Dispatch the action\n// dispatch(increment);"
+  },
+  {
+    "id": 6,
+    "question": "What is a reducer?",
+    "answer": "A reducer is a function that receives the current state and an action and determines the next state. Reducers should be predictable and free of side effects. With Redux Toolkit, reducers created by createSlice() can use mutation-like syntax because Immer produces the immutable state update.",
+    "code": "const counterSlice = createSlice({\n  name: \"counter\",\n  initialState: { count: 0 },\n  reducers: {\n    increment(state) {\n      state.count += 1;\n    }\n  }\n});"
+  },
+  {
+    "id": 7,
+    "question": "What is dispatch()?",
+    "answer": "dispatch() is the function used to send an action to the Redux store. Redux processes the action through its reducer logic, calculates the next state, and notifies subscribers when the state changes.",
+    "code": "const dispatch = useDispatch();\n\nfunction handleClick() {\n  dispatch(increment());\n}\n\n// dispatch(action)\n//       ↓\n// Reducer processes action\n//       ↓\n// Store gets new state"
+  },
+  {
+    "id": 8,
+    "question": "What is useSelector()?",
+    "answer": "useSelector() is a React-Redux Hook used to read a selected value from the Redux store. The component subscribes to the selected result and normally re-renders when that selected value changes according to the selector result's equality comparison.",
+    "code": "import { useSelector } from \"react-redux\";\n\nfunction Counter() {\n  const count = useSelector(\n    (state) => state.counter.count\n  );\n\n  return \"<h1>\" + count + \"</h1>\";\n}"
+  },
+  {
+    "id": 9,
+    "question": "What is useDispatch()?",
+    "answer": "useDispatch() is a React-Redux Hook that gives a component access to the Redux store's dispatch function. It is used to dispatch actions from event handlers, effects, or other component logic.",
+    "code": "import { useDispatch } from \"react-redux\";\n\nfunction Counter() {\n  const dispatch = useDispatch();\n\n  return \"<button onClick={() => dispatch(increment())}>Increment</button>\";\n}"
+  },
+  {
+    "id": 10,
+    "question": "What is Redux middleware?",
+    "answer": "Redux middleware is a mechanism that sits between dispatching an action and the reducer processing it. Middleware can inspect, modify, delay, log, or handle actions and can be used for tasks such as asynchronous logic, logging, analytics, and error reporting.",
+    "code": "const logger = (store) => (next) => (action) => {\n  console.log(\"Dispatching:\", action);\n\n  const result = next(action);\n\n  console.log(\"New state:\", store.getState());\n\n  return result;\n};\n\n// dispatch\n//   ↓\n// middleware\n//   ↓\n// reducer"
+  },
+  {
+    "id": 11,
+    "question": "What is Redux Toolkit?",
+    "answer": "Redux Toolkit, or RTK, is the officially recommended way to write Redux logic. It provides utilities such as configureStore(), createSlice(), createAsyncThunk(), and RTK Query that simplify Redux setup, reduce boilerplate, and provide good default configurations.",
+    "code": "import { configureStore } from \"@reduxjs/toolkit\";\n\nconst store = configureStore({\n  reducer: {\n    counter: counterReducer\n  }\n});\n\n// Redux Toolkit simplifies Redux configuration."
+  },
+  {
+    "id": 12,
+    "question": "Why is Redux Toolkit preferred over traditional Redux?",
+    "answer": "Redux Toolkit is preferred because it significantly reduces boilerplate and provides recommended patterns for common Redux tasks. It simplifies store configuration, action and reducer creation, immutable updates, middleware setup, and asynchronous logic. It also uses Immer internally for reducers created with createSlice().",
+    "code": "// Traditional Redux often required\n// separate action types, action creators,\n// reducers, and manual immutable updates.\n\n// Redux Toolkit\nconst slice = createSlice({\n  name: \"counter\",\n  initialState: { count: 0 },\n  reducers: {\n    increment(state) {\n      state.count += 1;\n    }\n  }\n});\n\n// Less boilerplate + recommended patterns."
+  },
+  {
+    "id": 13,
+    "question": "What is createSlice()?",
+    "answer": "createSlice() is a Redux Toolkit function that generates a slice reducer, action creators, and action types from a single configuration object. It is one of the main ways to organize Redux state by feature.",
+    "code": "const counterSlice = createSlice({\n  name: \"counter\",\n  initialState: { count: 0 },\n  reducers: {\n    increment(state) {\n      state.count += 1;\n    },\n    decrement(state) {\n      state.count -= 1;\n    }\n  }\n});\n\nexport const { increment, decrement } = counterSlice.actions;\n\nexport default counterSlice.reducer;"
+  },
+  {
+    "id": 14,
+    "question": "What is createAsyncThunk()?",
+    "answer": "createAsyncThunk() is a Redux Toolkit utility for creating thunks that handle asynchronous operations. It automatically generates pending, fulfilled, and rejected action types for the asynchronous operation, which can then be handled in reducers such as extraReducers.",
+    "code": "const fetchUser = createAsyncThunk(\n  \"user/fetchUser\",\n  async (userId) => {\n    const response = await fetch(`/api/users/${userId}`);\n    return response.json();\n  }\n);\n\n// Lifecycle actions are generated:\n// fetchUser.pending\n// fetchUser.fulfilled\n// fetchUser.rejected"
+  },
+  {
+    "id": 15,
+    "question": "What is Redux middleware used for?",
+    "answer": "Redux middleware is used to handle logic that should run around action dispatching. Common uses include asynchronous operations, logging, analytics, error reporting, authentication-related workflows, and other side effects that should not be placed inside reducers.",
+    "code": "const middleware = (store) => (next) => (action) => {\n  if (action.type === \"user/login\") {\n    console.log(\"Login action dispatched\");\n  }\n\n  return next(action);\n};\n\n// Middleware can observe the action\n// before it reaches the reducer."
+  },
+  {
+    "id": 16,
+    "question": "What is the difference between Redux and Context API?",
+    "answer": "Context API is a built-in React mechanism for passing values through a component tree without manually passing props. Redux is a dedicated state-management solution with a centralized store, actions, reducers, middleware, and specialized tooling. Context can be sufficient for relatively simple shared values, while Redux Toolkit is often more appropriate for complex shared application state.",
+    "code": "// Context\nconst ThemeContext = createContext(null);\n\nfunction App() {\n  return (\n    <ThemeContext.Provider value=\"dark\">\n      <Dashboard />\n    </ThemeContext.Provider>\n  );\n}\n\n// Redux\nconst store = configureStore({\n  reducer: {\n    user: userReducer,\n    cart: cartReducer\n  }\n});"
+  },
+  {
+    "id": 17,
+    "question": "How does Redux handle asynchronous operations?",
+    "answer": "Redux reducers must remain synchronous and should not perform asynchronous side effects. Asynchronous work is handled outside reducers, commonly through middleware. Redux Toolkit provides createAsyncThunk() for common async workflows, while RTK Query provides a more specialized approach for data fetching and caching.",
+    "code": "const fetchUsers = createAsyncThunk(\n  \"users/fetch\",\n  async () => {\n    const response = await fetch(\"/api/users\");\n\n    if (!response.ok) {\n      throw new Error(\"Request failed\");\n    }\n\n    return response.json();\n  }\n);\n\n// Component\nconst dispatch = useDispatch();\n\ndispatch(fetchUsers());\n\n// Async operation\n//      ↓\n// pending action\n//      ↓\n// API request\n//      ↓\n// fulfilled / rejected action\n//      ↓\n// reducer updates state"
+  }
+]

@@ -111,7 +111,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "code-splitting": "Code_Splitting.json",
     suspense: "Suspense.json",
     portals: "Portals.json",
-    "state-management": "State_Management.json"
+    "state-management": "State_Management.json",
+    redux: "Redux.json",
   },
 };
 

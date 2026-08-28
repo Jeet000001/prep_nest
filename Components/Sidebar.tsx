@@ -197,6 +197,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Suspense", href: "/concepts/react/suspense" },
       { name: "Portals", href: "/concepts/react/portals" },
       { name: "State Management", href: "/concepts/react/state-management" },
+      { name: "Redux", href: "/concepts/react/redux" },
       { name: "Performance", href: "/concepts/react/performance" },
     ],
   },
