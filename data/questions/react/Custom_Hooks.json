@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is a custom Hook?",
+    "answer": "A custom Hook is a reusable JavaScript function that contains React Hook logic. It allows you to extract and reuse stateful logic between multiple components. By convention, a custom Hook must start with the word `use`.",
+    "code": "import { useState } from \"react\";\n\nfunction useCounter() {\n  const [count, setCount] = useState(0);\n\n  const increment = () => {\n    setCount((prev) => prev + 1);\n  };\n\n  return { count, increment };\n}\n\nfunction Counter() {\n  const { count, increment } = useCounter();\n\n  return (\n    <button onClick={increment}>\n      Count: {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why are custom Hooks used?",
+    "answer": "Custom Hooks are used to reuse stateful logic across multiple React components. They help reduce code duplication, keep components smaller, and separate complex logic from UI code. Common examples include API fetching, form handling, localStorage, authentication, and window event handling.",
+    "code": "// Instead of repeating the same logic\n// in multiple components:\n\nfunction useToggle() {\n  const [value, setValue] = useState(false);\n\n  const toggle = () => {\n    setValue((prev) => !prev);\n  };\n\n  return { value, toggle };\n}"
+  },
+  {
+    "id": 3,
+    "question": "What are the rules for creating custom Hooks?",
+    "answer": "Custom Hooks should follow the Rules of Hooks. They should only call Hooks at the top level and should not call Hooks inside loops, conditions, or nested functions. Custom Hooks should also only be called from React function components or other custom Hooks. By convention, their names must start with use.",
+    "code": "// Correct\nfunction useCounter() {\n  const [count, setCount] = useState(0);\n  return { count, setCount };\n}\n\n// Incorrect\nfunction useCounter(condition) {\n  if (condition) {\n    const [count, setCount] = useState(0);\n  }\n}"
+  },
+  {
+    "id": 4,
+    "question": "Why must custom Hooks start with use?",
+    "answer": "Custom Hooks should start with use because React and development tools use this naming convention to identify functions that follow the Rules of Hooks. The `use` prefix also makes it clear to other developers that the function contains reusable Hook logic.",
+    "code": "// Custom Hook\nfunction useAuth() {\n  const [user, setUser] = useState(null);\n  return { user, setUser };\n}\n\n// Regular utility function\nfunction formatDate(date) {\n  return date.toLocaleDateString();\n}"
+  },
+  {
+    "id": 5,
+    "question": "Can a custom Hook use other Hooks?",
+    "answer": "Yes. A custom Hook can use built-in React Hooks such as useState, useEffect, useRef, useMemo, and useCallback. It can also use other custom Hooks. This makes it possible to combine reusable pieces of stateful logic.",
+    "code": "function useCounter() {\n  const [count, setCount] = useState(0);\n\n  useEffect(() => {\n    console.log(\"Count changed:\", count);\n  }, [count]);\n\n  return { count, setCount };\n}"
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between a custom Hook and a utility function?",
+    "answer": "A custom Hook is designed to reuse React stateful logic and can call React Hooks such as useState and useEffect. A utility function is a regular JavaScript function used for general reusable logic and cannot call React Hooks. Custom Hooks usually start with use, while utility functions do not need to.",
+    "code": "// Custom Hook\nfunction useWindowWidth() {\n  const [width, setWidth] = useState(window.innerWidth);\n  return width;\n}\n\n// Utility function\nfunction formatName(firstName, lastName) {\n  return `${firstName} ${lastName}`;\n}"
+  },
+  {
+    "id": 7,
+    "question": "How can you create a custom Hook for API fetching?",
+    "answer": "You can create a reusable API fetching Hook by managing loading, data, and error state inside the custom Hook. The Hook can perform the request inside useEffect and return the required values to the component.",
+    "code": "import { useEffect, useState } from \"react\";\n\nfunction useFetch(url) {\n  const [data, setData] = useState(null);\n  const [loading, setLoading] = useState(true);\n  const [error, setError] = useState(null);\n\n  useEffect(() => {\n    async function fetchData() {\n      try {\n        setLoading(true);\n        setError(null);\n\n        const response = await fetch(url);\n\n        if (!response.ok) {\n          throw new Error(\"Failed to fetch data\");\n        }\n\n        const result = await response.json();\n        setData(result);\n      } catch (error) {\n        setError(error.message);\n      } finally {\n        setLoading(false);\n      }\n    }\n\n    fetchData();\n  }, [url]);\n\n  return { data, loading, error };\n}\n\nfunction Users() {\n  const { data, loading, error } = useFetch(\"/api/users\");\n\n  if (loading) return <p>Loading...</p>;\n  if (error) return <p>{error}</p>;\n\n  return <pre>{JSON.stringify(data, null, 2)}</pre>;\n}"
+  },
+  {
+    "id": 8,
+    "question": "How can custom Hooks help reduce code duplication?",
+    "answer": "Custom Hooks allow common stateful logic to be written once and reused in multiple components. For example, if several components need the same API fetching, form handling, timer, or localStorage logic, that logic can be placed inside a custom Hook instead of being copied into every component.",
+    "code": "function useToggle(initialValue = false) {\n  const [value, setValue] = useState(initialValue);\n\n  const toggle = () => {\n    setValue((prev) => !prev);\n  };\n\n  return { value, toggle };\n}\n\nfunction Modal() {\n  const { value: isOpen, toggle } = useToggle();\n}\n\nfunction Menu() {\n  const { value: isOpen, toggle } = useToggle();\n}"
+  },
+  {
+    "id": 9,
+    "question": "Does a custom Hook share state between components?",
+    "answer": "No. Calling the same custom Hook in multiple components does not automatically share state between them. Each component gets its own independent state instance. A custom Hook shares logic, not state. To share state, you can use Context, a state management library, or lift the state to a common parent.",
+    "code": "function useCounter() {\n  const [count, setCount] = useState(0);\n  return { count, setCount };\n}\n\nfunction ComponentA() {\n  const { count } = useCounter();\n  // Has its own count state\n}\n\nfunction ComponentB() {\n  const { count } = useCounter();\n  // Has a separate count state\n}"
+  },
+  {
+    "id": 10,
+    "question": "How would you design a reusable custom Hook?",
+    "answer": "A reusable custom Hook should have a clear single responsibility, accept configurable inputs when needed, hide unnecessary implementation details, and return only the values and functions required by the component. It should also follow the Rules of Hooks and avoid mixing unrelated responsibilities.",
+    "code": "function useToggle(initialValue = false) {\n  const [value, setValue] = useState(initialValue);\n\n  const toggle = () => {\n    setValue((prev) => !prev);\n  };\n\n  const setTrue = () => {\n    setValue(true);\n  };\n\n  const setFalse = () => {\n    setValue(false);\n  };\n\n  return {\n    value,\n    toggle,\n    setTrue,\n    setFalse\n  };\n}\n\nfunction App() {\n  const {\n    value,\n    toggle,\n    setTrue,\n    setFalse\n  } = useToggle();\n\n  return (\n    <>\n      <p>{value ? \"ON\" : \"OFF\"}</p>\n      <button onClick={toggle}>Toggle</button>\n      <button onClick={setTrue}>ON</button>\n      <button onClick={setFalse}>OFF</button>\n    </>\n  );\n}"
+  }
+]

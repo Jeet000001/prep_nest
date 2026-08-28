@@ -102,6 +102,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     useReducer: "useReducer.json",
     "react-memo": "ReactMemo.json",
     "context-api": "Context_Api.json",
+    "custom-hooks": "Custom_Hooks.json"
   },
 };
 
