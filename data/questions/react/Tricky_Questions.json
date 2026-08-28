@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "question": "What will happen if you call setState multiple times inside the same function?",
+    "answer": "React batches state updates. If you pass the current state value directly, multiple updates can use the same snapshot and may result in only one effective update. If you use functional updates, React queues each update and applies them in order using the latest pending state.",
+    "code": "const [count, setCount] = useState(0);\n\nfunction handleClick() {\n  setCount(count + 1);\n  setCount(count + 1);\n  setCount(count + 1);\n}\n\n// count becomes 1, not 3\n\nfunction handleClick() {\n  setCount((c) => c + 1);\n  setCount((c) => c + 1);\n  setCount((c) => c + 1);\n}\n\n// count becomes 3"
+  },
+  {
+    "id": 2,
+    "question": "Why doesn't state update immediately after calling its setter?",
+    "answer": "React treats state as a snapshot for a particular render. Calling the setter requests a new render rather than changing the state variable inside the currently executing render. React can also batch multiple updates before rendering again.",
+    "code": "const [count, setCount] = useState(0);\n\nfunction handleClick() {\n  setCount(1);\n\n  console.log(count);\n  // 0\n}\n\n// The current render still sees count = 0.\n// The next render sees count = 1."
+  },
+  {
+    "id": 3,
+    "question": "What happens when you use an object directly in a useEffect dependency array?",
+    "answer": "React compares dependencies by reference. If an object is created during every render, it gets a new reference every time, so the Effect can run after every render even when the object's contents are unchanged.",
+    "code": "function Component() {\n  const options = { theme: \"dark\" };\n\n  useEffect(() => {\n    console.log(\"Effect ran\");\n  }, [options]);\n\n  return <div>Hello</div>;\n}\n\n// options is a new object on every render.\n// Therefore the dependency is considered changed."
+  },
+  {
+    "id": 4,
+    "question": "What happens when you use a function directly in a useEffect dependency array?",
+    "answer": "A function declared inside a component normally gets a new reference on every render. Because Effect dependencies are compared by reference, React can consider the function changed on every render and rerun the Effect. useCallback can preserve the function reference when appropriate.",
+    "code": "function Component() {\n  const getData = () => {\n    return fetchData();\n  };\n\n  useEffect(() => {\n    getData();\n  }, [getData]);\n\n  return <div>Hello</div>;\n}\n\n// getData is recreated on every render.\n// The Effect can therefore rerun."
+  },
+  {
+    "id": 5,
+    "question": "Why does a component re-render when its parent re-renders?",
+    "answer": "By default, when a parent component renders, React also evaluates its child components because the child is part of the parent's rendered tree. This does not necessarily mean the browser DOM will change. React.memo can allow a child to skip rendering when its props are unchanged according to its comparison.",
+    "code": "function Parent() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <>\n      <button onClick={() => setCount(count + 1)}>\n        {count}\n      </button>\n      <Child />\n    </>\n  );\n}\n\nfunction Child() {\n  console.log(\"Child rendered\");\n  return <p>Child</p>;\n}\n\n// Parent re-renders → Child is normally evaluated too."
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between re-rendering and re-mounting?",
+    "answer": "Re-rendering means React runs a component again to calculate its next UI. Re-mounting means React removes a component instance and creates a new one. A re-render normally preserves state, while a re-mount resets the component's local state and runs its mount-related behavior again.",
+    "code": "function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      {count}\n    </button>\n  );\n}\n\n// Re-render:\n// state is preserved.\n\n// Re-mount:\n// Counter is treated as a new instance,\n// so count starts again from 0."
+  },
+  {
+    "id": 7,
+    "question": "Why does using array index as a key cause bugs?",
+    "answer": "An array index represents a position rather than the identity of an item. When items are inserted, removed, or reordered, the same index can refer to a different item. React may then reuse the wrong component instance and preserve state for the wrong item.",
+    "code": "items.map((item, index) => (\n  <Todo key={index} item={item} />\n));\n\n// Suppose:\n// [A, B, C]\n// becomes\n// [X, A, B, C]\n\n// Index 0 previously represented A\n// but now represents X.\n// React may reuse the existing component state."
+  },
+  {
+    "id": 8,
+    "question": "Why does useRef not cause re-renders?",
+    "answer": "useRef returns a stable ref object whose current property can be changed without notifying React. React does not use changes to ref.current as a signal to render the component again.",
+    "code": "const countRef = useRef(0);\n\nfunction handleClick() {\n  countRef.current += 1;\n\n  console.log(countRef.current);\n}\n\n// Updating current does not trigger a render."
+  },
+  {
+    "id": 9,
+    "question": "Why can useMemo sometimes hurt performance?",
+    "answer": "useMemo itself has a cost because React must store the memoized value and compare its dependencies. If the calculation is cheap or the value changes frequently, the overhead of memoization can be greater than simply recalculating the value.",
+    "code": "// Potentially unnecessary\nconst fullName = useMemo(() => {\n  return `${firstName} ${lastName}`;\n}, [firstName, lastName]);\n\n// This calculation is extremely cheap.\n// useMemo may add complexity without providing\n// a meaningful performance benefit."
+  },
+  {
+    "id": 10,
+    "question": "Why can useCallback sometimes hurt performance?",
+    "answer": "useCallback also has overhead because React stores the function and compares its dependencies. If the function is cheap, not passed to a memoized child, or its dependencies change frequently, useCallback may provide little or no benefit and can make the code more complex.",
+    "code": "const handleClick = useCallback(() => {\n  console.log(\"clicked\");\n}, [count]);\n\n// If count changes frequently, a new function\n// will still be created for the new dependency value.\n// In such a case, useCallback may not provide useful optimization."
+  },
+  {
+    "id": 11,
+    "question": "Why does React.memo not always prevent re-renders?",
+    "answer": "React.memo only performs a props comparison. A memoized component can still re-render when its own state changes, when a Context value it consumes changes, or when its props are different by reference. It also does not prevent its parent from rendering.",
+    "code": "const Child = React.memo(function Child({ options }) {\n  const theme = useContext(ThemeContext);\n\n  return <div>{theme}</div>;\n});\n\n// React.memo can skip rendering when props are equal.\n// But a consumed Context change can still cause Child\n// to re-render."
+  },
+  {
+    "id": 12,
+    "question": "What happens when a Context value changes?",
+    "answer": "Components that consume that Context are notified and can re-render with the new value. React does not use ordinary prop comparison through React.memo to ignore a Context change for a component that directly reads the changed Context.",
+    "code": "const ThemeContext = createContext(\"light\");\n\nfunction App() {\n  const [theme, setTheme] = useState(\"light\");\n\n  return (\n    <ThemeContext.Provider value={theme}>\n      <Button />\n    </ThemeContext.Provider>\n  );\n}\n\nfunction Button() {\n  const theme = useContext(ThemeContext);\n\n  return <button>{theme}</button>;\n}\n\n// theme changes → Button receives the new Context value."
+  },
+  {
+    "id": 13,
+    "question": "Why shouldn't state be mutated directly?",
+    "answer": "Direct mutation changes an existing object or array without creating a new reference or notifying React through the state setter. React relies heavily on state updates and reference identity to determine when work needs to happen. Direct mutation can therefore lead to stale UI, missed updates, and unpredictable behavior.",
+    "code": "const [user, setUser] = useState({\n  name: \"Jeet\"\n});\n\n// ❌ Direct mutation\nuser.name = \"John\";\n\n// ✅ Immutable update\nsetUser((prev) => ({\n  ...prev,\n  name: \"John\"\n}));"
+  },
+  {
+    "id": 14,
+    "question": "What happens when you mutate an array stored in state?",
+    "answer": "Mutating the array directly changes the existing array reference. If you then pass that same reference to the state setter, React may consider the state unchanged and skip the update. Even when another update causes a render, direct mutation can make state behavior difficult to reason about.",
+    "code": "const [items, setItems] = useState([1, 2, 3]);\n\n// ❌ Mutation\nitems.push(4);\nsetItems(items);\n\n// Same array reference is passed back.\n\n// ✅ Immutable update\nsetItems((prev) => [...prev, 4]);"
+  },
+  {
+    "id": 15,
+    "question": "Why should state updates be immutable?",
+    "answer": "Immutable updates create new object or array references instead of modifying existing state. This makes changes predictable, allows React to detect changed state through reference comparison, works well with memoization, and makes debugging and state history easier.",
+    "code": "const [user, setUser] = useState({\n  name: \"Jeet\",\n  age: 22\n});\n\nsetUser((prev) => ({\n  ...prev,\n  age: prev.age + 1\n}));\n\n// New object reference → clear state change."
+  },
+  {
+    "id": 16,
+    "question": "What happens if you forget the dependency array in useEffect?",
+    "answer": "If you omit the dependency array, the Effect runs after every completed render of the component. If the Effect performs a state update on every run, it can create an infinite render loop.",
+    "code": "useEffect(() => {\n  console.log(\"Runs after every render\");\n});\n\n// No dependency array\n// → runs after every render\n\nuseEffect(() => {\n  console.log(\"Runs after initial mount\");\n}, []);\n\n// Empty dependency array\n// → does not rerun because of dependency changes"
+  },
+  {
+    "id": 17,
+    "question": "What happens if you put an incorrect dependency in useEffect?",
+    "answer": "An incorrect dependency list can cause the Effect to use stale values, run too often, or fail to synchronize correctly with the values it depends on. Missing dependencies are especially dangerous because the Effect may capture values from an older render.",
+    "code": "function Search({ query }) {\n  useEffect(() => {\n    fetchResults(query);\n  }, []); // ❌ query is missing\n\n  return <div>{query}</div>;\n}\n\n// The Effect does not rerun when query changes.\n// It can therefore use a stale query value."
+  },
+  {
+    "id": 18,
+    "question": "Why can useEffect create an infinite loop?",
+    "answer": "An infinite loop can occur when an Effect updates state and that state update causes the Effect's dependency to change, causing the Effect to run again. The cycle continues until React or the browser reaches an error or resource limit.",
+    "code": "const [count, setCount] = useState(0);\n\nuseEffect(() => {\n  setCount(count + 1);\n}, [count]);\n\n// Effect runs\n// → count changes\n// → render\n// → dependency count changed\n// → Effect runs again\n// → repeat"
+  },
+  {
+    "id": 19,
+    "question": "What is a stale closure?",
+    "answer": "A stale closure occurs when a function created during an earlier render retains references to state or props from that render and later executes with those old values. It commonly appears in Effects, timers, subscriptions, and asynchronous callbacks when dependencies are missing or values are intentionally captured.",
+    "code": "function Counter() {\n  const [count, setCount] = useState(0);\n\n  useEffect(() => {\n    const id = setInterval(() => {\n      console.log(count);\n    }, 1000);\n\n    return () => clearInterval(id);\n  }, []);\n\n  return <button onClick={() => setCount((c) => c + 1)}>\n    {count}\n  </button>;\n}\n\n// The interval callback can keep seeing the\n// count value captured by the initial render."
+  },
+  {
+    "id": 20,
+    "question": "Why are Hooks required to be called in the same order?",
+    "answer": "React associates Hook state with a component's render based on the order in which Hooks are called. Keeping the order stable allows React to know which state, Effect, ref, or other Hook belongs to each call. Changing the order would cause React to associate the wrong internal data with a Hook.",
+    "code": "function Component({ loggedIn }) {\n  const [name, setName] = useState(\"\");\n\n  // ❌ Don't do this\n  if (loggedIn) {\n    const [count, setCount] = useState(0);\n  }\n\n  return <div>{name}</div>;\n}\n\n// The Hook order can change between renders."
+  },
+  {
+    "id": 21,
+    "question": "What happens if you conditionally call a Hook?",
+    "answer": "Conditionally calling a Hook violates the Rules of Hooks. If the condition changes between renders, the order of Hook calls can change, causing React to associate Hook state with the wrong call. React's Hooks lint rules are designed to catch this pattern.",
+    "code": "function Component({ isLoggedIn }) {\n  if (isLoggedIn) {\n    // ❌ Invalid\n    const [user, setUser] = useState(null);\n  }\n\n  return <div>Hello</div>;\n}\n\n// ✅ Call the Hook unconditionally\nfunction Component({ isLoggedIn }) {\n  const [user, setUser] = useState(null);\n\n  if (!isLoggedIn) {\n    return <div>Please log in</div>;\n  }\n\n  return <div>{user?.name}</div>;\n}"
+  },
+  {
+    "id": 22,
+    "question": "Why does React need keys?",
+    "answer": "Keys give React a stable identity for elements in a list. During reconciliation, React uses keys to determine which items were added, removed, moved, or updated. Stable keys help React preserve the correct component instances and their state.",
+    "code": "const users = [\n  { id: 1, name: \"A\" },\n  { id: 2, name: \"B\" }\n];\n\nreturn users.map((user) => (\n  <UserCard\n    key={user.id}\n    user={user}\n  />\n));\n\n// user.id identifies the item across renders."
+  },
+  {
+    "id": 23,
+    "question": "How does React decide whether to preserve or reset component state?",
+    "answer": "React preserves state when it sees the same component type in the same position with the same identity. State is reset when the component is replaced by a different type, removed, or given a different key. Keys can therefore intentionally control component identity.",
+    "code": "function App({ userId }) {\n  return <Chat key={userId} />;\n}\n\n// userId = 1 → Chat instance A\n// userId = 2 → different key\n// React treats it as a new Chat instance\n// and resets its local state."
+  },
+  {
+    "id": 24,
+    "question": "What happens when a component's key changes?",
+    "answer": "Changing a component's key changes its identity from React's perspective. React unmounts the old component and mounts a new instance. The new component therefore starts with its initial state instead of preserving the previous instance's state.",
+    "code": "function App({ userId }) {\n  return <Profile key={userId} />;\n}\n\n// key = 1 → Profile instance with its state\n// key = 2 → old Profile is removed\n//           new Profile is mounted\n//           state starts from initial values"
+  },
+  {
+    "id": 25,
+    "question": "What is the difference between useState, useReducer, and Context?",
+    "answer": "useState manages local component state with a simple setter. useReducer manages state using a reducer and dispatched actions, which is useful for more complex state transitions. Context provides a way to make values available to descendants without passing them through every intermediate component. Context itself is not primarily a state-management mechanism.",
+    "code": "// useState\nconst [count, setCount] = useState(0);\n\n// useReducer\nconst [state, dispatch] = useReducer(reducer, initialState);\ndispatch({ type: \"increment\" });\n\n// Context\nconst ThemeContext = createContext(null);\n\n<ThemeContext.Provider value={theme}>\n  <App />\n</ThemeContext.Provider>"
+  },
+  {
+    "id": 26,
+    "question": "What is the difference between useMemo and useCallback?",
+    "answer": "useMemo memoizes the result of a calculation and returns the cached value. useCallback memoizes a function reference and returns the function itself. Both use dependency arrays to determine when their cached result or function should be updated.",
+    "code": "const total = useMemo(() => {\n  return calculateTotal(items);\n}, [items]);\n\nconst handleClick = useCallback(() => {\n  console.log(\"clicked\");\n}, []);\n\n// useMemo → memoized value\n// useCallback → memoized function"
+  },
+  {
+    "id": 27,
+    "question": "What is the difference between useEffect and useLayoutEffect?",
+    "answer": "Both Hooks run after React commits an update, but useLayoutEffect runs synchronously before the browser repaints the screen, while useEffect generally runs after the browser has had a chance to paint. useLayoutEffect is useful for layout measurements or DOM changes that must happen before the user sees the result. It should not be overused because it can block painting.",
+    "code": "useLayoutEffect(() => {\n  const rect = elementRef.current.getBoundingClientRect();\n  console.log(rect.height);\n}, []);\n\nuseEffect(() => {\n  document.title = \"Dashboard\";\n}, []);\n\n// useLayoutEffect → layout-sensitive work\n// useEffect → general side effects"
+  },
+  {
+    "id": 28,
+    "question": "What is the difference between useRef and useState?",
+    "answer": "useState stores data that participates in rendering and causes a re-render when updated through its setter. useRef stores a mutable value that persists across renders without causing a re-render when ref.current changes. State is for UI-related data; refs are commonly used for DOM references or values that do not directly affect the rendered output.",
+    "code": "const [count, setCount] = useState(0);\nconst countRef = useRef(0);\n\nsetCount(1);\n// Causes a re-render\n\ncountRef.current = 1;\n// Does not cause a re-render"
+  },
+  {
+    "id": 29,
+    "question": "What is the difference between controlled and uncontrolled components?",
+    "answer": "A controlled form element gets its current value from React state and updates that state through events. An uncontrolled element keeps its current value in the DOM, and React can access it through a ref when needed. Controlled components provide more direct control and are commonly used when the UI needs to react to every input change.",
+    "code": "// Controlled\nfunction Form() {\n  const [name, setName] = useState(\"\");\n\n  return (\n    <input\n      value={name}\n      onChange={(e) => setName(e.target.value)}\n    />\n  );\n}\n\n// Uncontrolled\nfunction Form() {\n  const inputRef = useRef(null);\n\n  return <input ref={inputRef} defaultValue=\"Jeet\" />;\n}"
+  },
+  {
+    "id": 30,
+    "question": "What is the difference between props and state?",
+    "answer": "Props are read-only values passed into a component by its parent. State is data managed by the component itself and can be updated using a state setter or reducer dispatch. Changing state schedules a re-render, while receiving new props can cause a component to render again with the new values.",
+    "code": "function User({ name }) {\n  // name → prop\n  const [age, setAge] = useState(22);\n  // age → state\n\n  return (\n    <div>\n      <p>{name}</p>\n      <p>{age}</p>\n      <button onClick={() => setAge(age + 1)}>\n        Increase age\n      </button>\n    </div>\n  );\n}\n\n// Parent controls props.\n// Component controls its own state."
+  }
+]
