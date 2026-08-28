@@ -1,62 +1,116 @@
 [
   {
     "id": 1,
+    "question": "What are refs in React?",
+    "answer": "Refs are a way to store a value that persists between renders without causing a re-render when the value changes. They are commonly used to access DOM elements directly or store values such as timer IDs, previous values, and mutable data that does not need to be displayed in the UI. The most common way to create a ref is with useRef().",
+    "code": "function App() {\n  const inputRef = useRef(null);\n\n  return (\n    <input ref={inputRef} placeholder=\"Enter your name\" />\n  );\n}"
+  },
+  {
+    "id": 2,
     "question": "What is useRef?",
     "answer": "useRef is a React Hook that creates a mutable object with a current property. The value stored in ref.current persists between renders, and changing it does not cause the component to re-render. It is commonly used to access DOM elements or store mutable values.",
     "code": "import { useRef } from \"react\";\n\nfunction App() {\n  const countRef = useRef(0);\n\n  return <h1>{countRef.current}</h1>;\n}"
   },
   {
-    "id": 2,
+    "id": 3,
     "question": "What are the common use cases of useRef?",
     "answer": "Common use cases of useRef include accessing DOM elements, focusing an input, storing timer IDs, storing previous values, keeping mutable values between renders, and integrating React with external libraries. useRef is useful when a value needs to persist but updating it should not trigger a re-render.",
     "code": "const inputRef = useRef(null);\nconst timerRef = useRef(null);\nconst previousValueRef = useRef(null);"
   },
   {
-    "id": 3,
+    "id": 4,
     "question": "What is the difference between useRef and useState?",
     "answer": "useState stores data that affects the UI, and updating state causes a component to re-render. useRef stores mutable data that persists between renders, but changing ref.current does not trigger a re-render. Therefore, useState should be used for values displayed in the UI, while useRef is useful for values that do not need to update the UI.",
     "code": "const [count, setCount] = useState(0);\nconst countRef = useRef(0);\n\n// Causes a re-render\nsetCount(count + 1);\n\n// Does not cause a re-render\ncountRef.current += 1;"
   },
   {
-    "id": 4,
+    "id": 5,
     "question": "Does changing ref.current cause a re-render?",
     "answer": "No. Changing ref.current does not cause React to re-render the component. React does not track changes to ref.current for rendering purposes. If a changed value needs to appear in the UI, you should use state instead.",
     "code": "function App() {\n  const countRef = useRef(0);\n\n  function increase() {\n    countRef.current += 1;\n    console.log(countRef.current);\n  }\n\n  return <button onClick={increase}>Increase</button>;\n}"
   },
   {
-    "id": 5,
+    "id": 6,
     "question": "How can you access a DOM element using useRef?",
     "answer": "You can create a ref with useRef and pass it to an element using the ref prop. After React renders the element, the DOM element becomes available through ref.current.",
     "code": "import { useRef } from \"react\";\n\nfunction App() {\n  const inputRef = useRef(null);\n\n  function focusInput() {\n    inputRef.current.focus();\n  }\n\n  return (\n    <>\n      <input ref={inputRef} />\n      <button onClick={focusInput}>\n        Focus Input\n      </button>\n    </>\n  );\n}"
   },
   {
-    "id": 6,
+    "id": 7,
     "question": "How can useRef be used to store a previous value?",
     "answer": "You can use a ref to store the value from the previous render. After the component renders with a new value, an effect can update the ref. Since updating the ref does not cause another render, it is useful for comparing the current value with the previous value.",
     "code": "import { useEffect, useRef, useState } from \"react\";\n\nfunction App() {\n  const [count, setCount] = useState(0);\n  const previousCount = useRef(null);\n\n  useEffect(() => {\n    previousCount.current = count;\n  }, [count]);\n\n  return (\n    <>\n      <p>Current: {count}</p>\n      <p>Previous: {previousCount.current}</p>\n\n      <button onClick={() => setCount(count + 1)}>\n        Increase\n      </button>\n    </>\n  );\n}"
   },
   {
-    "id": 7,
+    "id": 8,
     "question": "How can useRef be used with timers?",
     "answer": "useRef can store a timer ID so that the timer can be accessed and cleared later. This is useful because the timer ID persists between renders and changing it does not cause unnecessary re-renders.",
     "code": "import { useRef } from \"react\";\n\nfunction App() {\n  const timerRef = useRef(null);\n\n  function startTimer() {\n    timerRef.current = setInterval(() => {\n      console.log(\"Timer running\");\n    }, 1000);\n  }\n\n  function stopTimer() {\n    clearInterval(timerRef.current);\n  }\n\n  return (\n    <>\n      <button onClick={startTimer}>Start</button>\n      <button onClick={stopTimer}>Stop</button>\n    </>\n  );\n}"
   },
   {
-    "id": 8,
+    "id": 9,
     "question": "What is the difference between useRef and a normal variable?",
     "answer": "A normal variable declared inside a component is created again on every render, so its value is reset during the next render. A value stored in useRef persists between renders. Also, changing either a normal variable or ref.current does not trigger a re-render, but useRef preserves its value across renders.",
     "code": "function App() {\n  let normalValue = 0;\n  const refValue = useRef(0);\n\n  function updateValues() {\n    normalValue += 1;\n    refValue.current += 1;\n\n    console.log(normalValue);\n    console.log(refValue.current);\n  }\n\n  return <button onClick={updateValues}>Update</button>;\n}"
   },
   {
-    "id": 9,
+    "id": 10,
     "question": "Can useRef store objects?",
     "answer": "Yes. useRef can store objects, arrays, functions, DOM elements, or other values. The stored value is available through the current property and persists between renders.",
     "code": "function App() {\n  const userRef = useRef({\n    name: \"John\",\n    age: 25\n  });\n\n  function updateUser() {\n    userRef.current.age = 26;\n    console.log(userRef.current);\n  }\n\n  return <button onClick={updateUser}>Update User</button>;\n}"
   },
   {
-    "id": 10,
+    "id": 11,
     "question": "When should you avoid using useRef?",
     "answer": "You should avoid using useRef for values that need to update the UI because changing ref.current does not cause a re-render. In such cases, useState is the better choice. You should also avoid using refs to bypass React's normal data flow when props or state can solve the problem more clearly.",
     "code": "// Avoid this when count is displayed in the UI\nconst countRef = useRef(0);\n\nfunction increase() {\n  countRef.current += 1;\n}\n\n// Better for UI updates\nconst [count, setCount] = useState(0);\n\nfunction increase() {\n  setCount((prev) => prev + 1);\n}"
+  },
+  {
+    "id": 12,
+    "question": "Why should direct DOM manipulation generally be avoided?",
+    "answer": "Direct DOM manipulation should generally be avoided because React uses a declarative approach and manages the DOM based on state and props. If you manually change the DOM, React may not know about those changes, which can lead to inconsistent UI or unexpected behavior. Using state and props keeps the UI predictable and easier to maintain.",
+    "code": "// Avoid unnecessary direct DOM manipulation\nconst element = document.querySelector(\"h1\");\nelement.textContent = \"Hello\";\n\n// Prefer React state\nfunction App() {\n  const [text, setText] = useState(\"Hello\");\n\n  return <h1>{text}</h1>;\n}"
+  },
+  {
+    "id": 13,
+    "question": "When is direct DOM manipulation acceptable?",
+    "answer": "Direct DOM manipulation can be acceptable when you need to interact with browser APIs or third-party libraries that require a real DOM element. Common examples include focusing an input, measuring an element's size or position, controlling media, integrating animation libraries, or working with non-React DOM APIs. In these cases, refs are usually the preferred way to access the element.",
+    "code": "function SearchBox() {\n  const inputRef = useRef(null);\n\n  function focusInput() {\n    inputRef.current?.focus();\n  }\n\n  return (\n    <>\n      <input ref={inputRef} />\n      <button onClick={focusInput}>\n        Focus\n      </button>\n    </>\n  );\n}"
+  },
+  {
+    "id": 14,
+    "question": "How do you focus an input using useRef?",
+    "answer": "Create a ref with useRef(), attach it to the input using the ref prop, and call the focus() method through ref.current. This allows React to give you access to the actual DOM element without manually searching for it.",
+    "code": "function Form() {\n  const inputRef = useRef(null);\n\n  const handleFocus = () => {\n    inputRef.current?.focus();\n  };\n\n  return (\n    <>\n      <input ref={inputRef} />\n      <button onClick={handleFocus}>\n        Focus Input\n      </button>\n    </>\n  );\n}"
+  },
+  {
+    "id": 15,
+    "question": "What is forwardRef?",
+    "answer": "forwardRef was a React API used to let a component receive a ref from its parent and pass that ref to a child DOM element or component. It was commonly used when a parent needed access to a DOM node inside a child component. In React 19 and newer, ref can be passed as a regular prop to function components, so forwardRef is no longer necessary for this common use case.",
+    "code": "// Traditional pattern used before React 19\nconst Input = forwardRef(function Input(props, ref) {\n  return <input ref={ref} {...props} />;\n});\n\nfunction App() {\n  const inputRef = useRef(null);\n\n  return <Input ref={inputRef} />;\n}"
+  },
+  {
+    "id": 16,
+    "question": "Why is forwardRef used?",
+    "answer": "forwardRef was used to forward a ref from a parent component to a DOM element or component inside a child. This was useful when a reusable component needed to expose access to an underlying input, button, or other DOM element. In React 19 and newer, a function component can receive ref as a prop directly, reducing the need for forwardRef.",
+    "code": "// React 19+ style\nfunction Input({ ref, ...props }) {\n  return <input ref={ref} {...props} />;\n}\n\nfunction App() {\n  const inputRef = useRef(null);\n\n  return <Input ref={inputRef} />;\n}"
+  },
+  {
+    "id": 17,
+    "question": "How do you expose methods from a child component to a parent?",
+    "answer": "A child component can expose selected methods to its parent by using a ref together with useImperativeHandle. The child defines which methods should be available, and the parent can then call those methods through the ref. This creates a controlled imperative API instead of exposing the entire child implementation.",
+    "code": "function Input({ ref }) {\n  useImperativeHandle(ref, () => ({\n    focus() {\n      console.log(\"Input focused\");\n    },\n    clear() {\n      console.log(\"Input cleared\");\n    }\n  }), []);\n\n  return <input />;\n}\n\nfunction App() {\n  const inputRef = useRef(null);\n\n  return (\n    <>\n      <Input ref={inputRef} />\n      <button onClick={() => inputRef.current?.focus()}>\n        Focus\n      </button>\n    </>\n  );\n}"
+  },
+  {
+    "id": 18,
+    "question": "What is useImperativeHandle?",
+    "answer": "useImperativeHandle is a React Hook that lets a component customize the value exposed through a ref. Instead of giving the parent direct access to the entire DOM element or child instance, you can expose only specific methods or values. This is useful for creating a small imperative API for a reusable component.",
+    "code": "function CustomInput({ ref }) {\n  const inputRef = useRef(null);\n\n  useImperativeHandle(ref, () => ({\n    focus() {\n      inputRef.current?.focus();\n    }\n  }), []);\n\n  return <input ref={inputRef} />;\n}"
+  },
+  {
+    "id": 19,
+    "question": "When should useImperativeHandle be used?",
+    "answer": "useImperativeHandle should be used when a parent genuinely needs to trigger an imperative action inside a child, such as focusing an input, scrolling to a specific element, playing or pausing media, or triggering a custom animation. It should not be used for normal data flow between components; props and state are preferred for that.",
+    "code": "function VideoPlayer({ ref }) {\n  const videoRef = useRef(null);\n\n  useImperativeHandle(ref, () => ({\n    play() {\n      videoRef.current?.play();\n    },\n    pause() {\n      videoRef.current?.pause();\n    }\n  }), []);\n\n  return <video ref={videoRef} controls />;\n}\n\nfunction App() {\n  const playerRef = useRef(null);\n\n  return (\n    <>\n      <VideoPlayer ref={playerRef} />\n      <button onClick={() => playerRef.current?.play()}>\n        Play\n      </button>\n      <button onClick={() => playerRef.current?.pause()}>\n        Pause\n      </button>\n    </>\n  );\n}"
   }
 ]
