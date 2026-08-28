@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is a Server Component?",
+    "answer": "A Server Component is a React component that is rendered on the server and whose component code does not need to be sent to the browser as client-side JavaScript. In Next.js App Router, components are Server Components by default. They are useful for fetching data, accessing server-side resources, and reducing the amount of JavaScript sent to the client.",
+    "code": "// app/page.tsx\n\nasync function Products() {\n  const response = await fetch(\"https://api.example.com/products\");\n  const products = await response.json();\n\n  return (\n    <div>\n      {products.map((product) => (\n        <p key={product.id}>{product.name}</p>\n      ))}\n    </div>\n  );\n}\n\nexport default Products;"
+  },
+  {
+    "id": 2,
+    "question": "What is a Client Component?",
+    "answer": "A Client Component is a React component that can use client-side React features such as state, Effects, event handlers, and browser APIs. In Next.js App Router, you mark a component as a Client Component by placing \"use client\" at the top of the file.",
+    "code": "\"use client\";\n\nimport { useState } from \"react\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      Count: {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between Server Components and Client Components?",
+    "answer": "Server Components execute on the server and are suitable for server-side data access and rendering without requiring their component code to become part of the browser's client JavaScript bundle. Client Components support interactivity, state, Effects, event handlers, and browser APIs. In Next.js, Server Components are the default, while Client Components are explicitly marked with \"use client\".",
+    "code": "// Server Component\nasync function UserProfile() {\n  const user = await getUser();\n\n  return <h1>{user.name}</h1>;\n}\n\n// Client Component\n\"use client\";\n\nfunction LikeButton() {\n  const [liked, setLiked] = useState(false);\n\n  return (\n    <button onClick={() => setLiked(!liked)}>\n      {liked ? \"Liked\" : \"Like\"}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 4,
+    "question": "Why do Client Components require \"use client\"?",
+    "answer": "\"use client\" is a boundary directive that tells Next.js that the module and its imports belong to the client side of the application. This allows the component to use client-only features such as useState, useEffect, event handlers, and browser APIs. Without the directive, a component in the Next.js App Router is treated as a Server Component by default.",
+    "code": "\"use client\";\n\nimport { useState } from \"react\";\n\nfunction SearchBox() {\n  const [query, setQuery] = useState(\"\");\n\n  return (\n    <input\n      value={query}\n      onChange={(e) => setQuery(e.target.value)}\n    />\n  );\n}\n\nexport default SearchBox;"
+  },
+  {
+    "id": 5,
+    "question": "Can Server Components use useState?",
+    "answer": "No. Server Components cannot use interactive client-side Hooks such as useState because Server Components do not maintain interactive state in the browser. If a component needs useState, it should be a Client Component.",
+    "code": "// ❌ Server Component\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return <button>{count}</button>;\n}\n\n// ✅ Client Component\n\"use client\";\n\nexport default function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 6,
+    "question": "Can Server Components use useEffect?",
+    "answer": "No. Server Components cannot use useEffect because Effects are a client-side mechanism that run after rendering in the browser. If a component needs useEffect, it must be a Client Component.",
+    "code": "// ❌ Server Component\nexport default function Component() {\n  useEffect(() => {\n    console.log(\"Effect\");\n  }, []);\n\n  return <div>Hello</div>;\n}\n\n// ✅ Client Component\n\"use client\";\n\nuseEffect(() => {\n  console.log(\"Effect\");\n}, []);"
+  },
+  {
+    "id": 7,
+    "question": "Can Client Components import Server Components?",
+    "answer": "A Client Component should not directly import a Server Component as a normal module. In Next.js, the recommended composition pattern is to have a Server Component render the Client Component and pass Server-rendered content into it through supported composition patterns such as children or props containing serializable data. Server Components can import Client Components.",
+    "code": "// Server Component\nimport ClientComponent from \"./ClientComponent\";\nimport ServerContent from \"./ServerContent\";\n\nexport default function Page() {\n  return (\n    <ClientComponent>\n      <ServerContent />\n    </ClientComponent>\n  );\n}\n\n// Server Component\n//        ↓\n// Client Component\n//        ↓\n// Server-rendered content via children"
+  },
+  {
+    "id": 8,
+    "question": "Why can't event handlers be passed to Server Components?",
+    "answer": "Event handlers such as onClick are functions that need to execute in the browser. Server Components are rendered on the server, and their props crossing the Server/Client boundary must be serializable. A normal JavaScript function cannot be serialized and sent to the browser as a Client Component event handler.",
+    "code": "// ❌ Invalid Server → Server Component boundary\nfunction Button() {\n  return <button onClick={() => console.log(\"click\")}>Click</button>;\n}\n\n// ✅ Make the interactive component a Client Component\n\"use client\";\n\nexport default function Button() {\n  return (\n    <button onClick={() => console.log(\"click\")}>\n      Click\n    </button>\n  );\n}"
+  },
+  {
+    "id": 9,
+    "question": "What are the benefits of Server Components?",
+    "answer": "Server Components can reduce the amount of client-side JavaScript, allow data fetching close to server-side resources, keep server-only logic and secrets on the server, and improve the initial loading experience for appropriate applications. They also let developers choose where interactivity is needed instead of making the entire UI client-side.",
+    "code": "async function ProductPage() {\n  const product = await db.product.findUnique({\n    where: { id: \"123\" }\n  });\n\n  return (\n    <main>\n      <h1>{product.name}</h1>\n      <p>{product.description}</p>\n      <AddToCartButton productId={product.id} />\n    </main>\n  );\n}\n\n// Database access stays on the server.\n// Only the interactive button needs to be a\n// Client Component."
+  },
+  {
+    "id": 10,
+    "question": "When should you use a Client Component?",
+    "answer": "Use a Client Component when the component needs browser-side interactivity or client-only features. Common cases include useState, useEffect, event handlers such as onClick and onChange, browser APIs such as localStorage and window, and interactive UI such as forms, dropdowns, modals, and animations that require client-side execution.",
+    "code": "\"use client\";\n\nimport { useState } from \"react\";\n\nexport default function Modal() {\n  const [open, setOpen] = useState(false);\n\n  return (\n    <>\n      <button onClick={() => setOpen(true)}>\n        Open Modal\n      </button>\n\n      {open && (\n        <div>\n          <button onClick={() => setOpen(false)}>\n            Close\n          </button>\n        </div>\n      )}\n    </>\n  );\n}\n\n// Interactive UI → Client Component"
+  }
+]

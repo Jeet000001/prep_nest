@@ -201,6 +201,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Data Fetching", href: "/concepts/react/data-fetching" },
       { name: "Performance", href: "/concepts/react/performance" },
       { name: "StrictMode", href: "/concepts/react/strictmode" },
+      { name: "Server & Client Components", href: "/concepts/react/server-client-components" },
     ],
   },
 ];
