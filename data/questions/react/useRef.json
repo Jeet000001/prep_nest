@@ -50,7 +50,7 @@
   {
     "id": 9,
     "question": "Can useRef store objects?",
-    "answer": "Yes. useRef can store objects, arrays, functions, DOM elements, or other values. The stored value is available through the `current` property and persists between renders.",
+    "answer": "Yes. useRef can store objects, arrays, functions, DOM elements, or other values. The stored value is available through the current property and persists between renders.",
     "code": "function App() {\n  const userRef = useRef({\n    name: \"John\",\n    age: 25\n  });\n\n  function updateUser() {\n    userRef.current.age = 26;\n    console.log(userRef.current);\n  }\n\n  return <button onClick={updateUser}>Update User</button>;\n}"
   },
   {

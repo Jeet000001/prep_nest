@@ -96,7 +96,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "lists-keys": "Lists-Keys.json",
     forms: "Forms.json",
     useEffect: "useEffect.json",
-    useRef:  "useRef.json"
+    useRef:  "useRef.json",
+    useMemo: "useMemo.json"
   }
 };
 
