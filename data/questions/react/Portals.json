@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "question": "What is a React Portal?",
+    "answer": "A React Portal allows you to render a component's DOM elements into a different DOM node outside its normal parent DOM hierarchy, while the component remains part of the same React tree. Portals are commonly used when an element needs to visually escape its parent's CSS constraints, such as overflow or stacking contexts.",
+    "code": "import { createPortal } from \"react-dom\";\n\nfunction Modal() {\n  return createPortal(\n    <div className=\"modal\">\n      <h2>Hello</h2>\n    </div>,\n    document.getElementById(\"modal-root\")\n  );\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why are Portals used?",
+    "answer": "Portals are used when a UI element needs to be rendered outside its parent's DOM container while still remaining connected to the same React component tree. This is especially useful for elements affected by overflow: hidden, z-index, positioning, or stacking contexts.",
+    "code": "function App() {\n  return (\n    <div style={{ overflow: \"hidden\" }}>\n      <button>Open Modal</button>\n      <Modal />\n    </div>\n  );\n}\n\n// Modal can be rendered directly under <body>\n// using a Portal, avoiding the parent's\n// overflow and stacking constraints."
+  },
+  {
+    "id": 3,
+    "question": "How do you create a Portal?",
+    "answer": "Use createPortal() from react-dom. Pass the JSX you want to render as the first argument and the target DOM element as the second argument.",
+    "code": "// index.html\n<div id=\"root\"></div>\n<div id=\"modal-root\"></div>\n\n// React\nimport { createPortal } from \"react-dom\";\n\nfunction Modal() {\n  const modalRoot = document.getElementById(\"modal-root\");\n\n  return createPortal(\n    <div className=\"modal\">\n      <h2>Modal Content</h2>\n    </div>,\n    modalRoot\n  );\n}"
+  },
+  {
+    "id": 4,
+    "question": "Where are Portals commonly used?",
+    "answer": "Portals are commonly used for UI elements that need to escape their parent's DOM layout or stacking context. Typical examples include modals, dialogs, tooltips, dropdown menus, popovers, notifications, and overlays.",
+    "code": "function App() {\n  return (\n    <>\n      <Modal />\n      <Tooltip />\n      <Dropdown />\n      <Toast />\n    </>\n  );\n}\n\n// These components can use Portals\n// when they need to render elsewhere in the DOM."
+  },
+  {
+    "id": 5,
+    "question": "How do events behave inside a Portal?",
+    "answer": "Events inside a Portal still participate in React's event propagation according to the React component tree, even though the DOM element is rendered somewhere else in the DOM. Therefore, an event can bubble to a React parent component that is not the DOM parent of the Portal content.",
+    "code": "function Parent() {\n  const handleClick = () => {\n    console.log(\"Parent clicked\");\n  };\n\n  return (\n    <div onClick={handleClick}>\n      <Modal />\n    </div>\n  );\n}\n\nfunction Modal() {\n  return createPortal(\n    <button>Click me</button>,\n    document.getElementById(\"modal-root\")\n  );\n}\n\n// Clicking the button can bubble through\n// the React tree to Parent, even though\n// the button is outside Parent's DOM node."
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between a Portal and rendering a normal component?",
+    "answer": "A normal component renders its DOM elements inside the DOM hierarchy where the component is placed. A Portal renders its DOM elements into a different DOM container, but it remains part of the same React tree. Because of this, props, context, and React event propagation still work through the React hierarchy.",
+    "code": "function App() {\n  return (\n    <div>\n      {/* Normal rendering */}\n      <NormalComponent />\n\n      {/* Portal rendering */}\n      <Modal />\n    </div>\n  );\n}\n\nfunction NormalComponent() {\n  return <div>Inside App's DOM</div>;\n}\n\nfunction Modal() {\n  return createPortal(\n    <div>Rendered elsewhere in the DOM</div>,\n    document.getElementById(\"modal-root\")\n  );\n}"
+  }
+]
