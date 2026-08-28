@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is React.memo?",
+    "answer": "React.memo is a higher-order API used to memoize a functional component. It helps React skip re-rendering the component when its props have not changed. React.memo is mainly used as a performance optimization.",
+    "code": "import { memo } from \"react\";\n\nconst Child = memo(function Child({ name }) {\n  console.log(\"Child rendered\");\n\n  return <h1>Hello, {name}</h1>;\n});\n\nexport default Child;"
+  },
+  {
+    "id": 2,
+    "question": "Why is React.memo used?",
+    "answer": "React.memo is used to avoid unnecessary re-renders of a component when the component receives the same props. It can improve performance, especially when a component is expensive to render or when its parent re-renders frequently without changing the child's props.",
+    "code": "const Child = memo(function Child({ name }) {\n  return <h1>{name}</h1>;\n});"
+  },
+  {
+    "id": 3,
+    "question": "How does React.memo prevent unnecessary re-renders?",
+    "answer": "When a parent component re-renders, React normally considers rendering its children again. React.memo compares the previous props with the new props. If the props are considered unchanged, React can skip re-rendering the memoized component. If the props change, the component re-renders.",
+    "code": "const Child = memo(function Child({ name }) {\n  console.log(\"Child rendered\");\n  return <h1>{name}</h1>;\n});\n\nfunction Parent() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <>\n      <button onClick={() => setCount((prev) => prev + 1)}>\n        Count: {count}\n      </button>\n\n      <Child name=\"John\" />\n    </>\n  );\n}"
+  },
+  {
+    "id": 4,
+    "question": "What type of comparison does React.memo perform?",
+    "answer": "By default, React.memo compares each prop using Object.is. This is often described as a shallow comparison because primitive values are compared by value, while objects, arrays, and functions are compared by reference.",
+    "code": "// Primitive value\nObject.is(10, 10); // true\n\n// Different object references\nObject.is({ name: \"John\" }, { name: \"John\" }); // false"
+  },
+  {
+    "id": 5,
+    "question": "What is shallow comparison?",
+    "answer": "Shallow comparison checks only the top-level values or references instead of deeply comparing nested data. For primitive values, the actual value is compared. For objects, arrays, and functions, their references are compared. Two different objects with identical contents are still considered different because their references are different.",
+    "code": "const user1 = { name: \"John\" };\nconst user2 = { name: \"John\" };\n\nconsole.log(user1 === user2); // false\n\nconst user3 = user1;\nconsole.log(user1 === user3); // true"
+  },
+  {
+    "id": 6,
+    "question": "Why can an object prop still cause a memoized component to re-render?",
+    "answer": "An object prop can cause a memoized component to re-render because a new object created during every parent render has a new reference. Even if the object's contents are identical, React.memo sees the new reference as a changed prop. useMemo can be used when a stable object reference provides a real optimization benefit.",
+    "code": "function Parent() {\n  const user = { name: \"John\" };\n\n  return <Child user={user} />;\n}\n\n// A new user object is created on every render."
+  },
+  {
+    "id": 7,
+    "question": "How does React.memo work with useCallback?",
+    "answer": "React.memo can skip a child re-render only when its props remain unchanged. Functions created inside a parent component usually get a new reference on every render. useCallback can preserve the function reference, which allows React.memo to skip the child re-render when the callback dependencies and other props have not changed.",
+    "code": "import { memo, useCallback } from \"react\";\n\nconst Child = memo(function Child({ onClick }) {\n  console.log(\"Child rendered\");\n  return <button onClick={onClick}>Click</button>;\n});\n\nfunction Parent() {\n  const handleClick = useCallback(() => {\n    console.log(\"Clicked\");\n  }, []);\n\n  return <Child onClick={handleClick} />;\n}"
+  },
+  {
+    "id": 8,
+    "question": "How does React.memo work with useMemo?",
+    "answer": "React.memo compares props by reference. If a parent creates a new object or array on every render, the memoized child may still re-render. useMemo can preserve the reference of a calculated object or array until its dependencies change, helping React.memo skip unnecessary renders when appropriate.",
+    "code": "import { memo, useMemo } from \"react\";\n\nconst Child = memo(function Child({ user }) {\n  console.log(\"Child rendered\");\n  return <h1>{user.name}</h1>;\n});\n\nfunction Parent({ name }) {\n  const user = useMemo(() => {\n    return { name };\n  }, [name]);\n\n  return <Child user={user} />;\n}"
+  },
+  {
+    "id": 9,
+    "question": "When should you avoid using React.memo?",
+    "answer": "You should avoid using React.memo when the component is cheap to render, when its props change frequently, or when there is no measurable performance problem. Using React.memo everywhere can add complexity and comparison overhead without providing a real benefit.",
+    "code": "// Simple component - memoization may be unnecessary\nfunction Greeting({ name }) {\n  return <h1>Hello, {name}</h1>;\n}"
+  },
+  {
+    "id": 10,
+    "question": "What is custom comparison in React.memo?",
+    "answer": "React.memo accepts an optional custom comparison function as its second argument. This function receives the previous props and next props and returns true when React should treat the props as equal and skip the re-render. It returns false when the component should re-render. Custom comparisons should be used carefully because they can become more expensive than rendering the component.",
+    "code": "const User = memo(\n  function User({ user }) {\n    return <h1>{user.name}</h1>;\n  },\n  (previousProps, nextProps) => {\n    return previousProps.user.id === nextProps.user.id &&\n      previousProps.user.name === nextProps.user.name;\n  }\n);"
+  }
+]
