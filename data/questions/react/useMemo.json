@@ -1,37 +1,37 @@
 [
   {
     "id": 1,
-    "question": "What is `useMemo`?",
+    "question": "What is useMemo?",
     "answer": "useMemo is a React Hook used to memoize a calculated value. It stores the result of a calculation and reuses that value on later renders until one of its dependencies changes. It is mainly used to avoid unnecessary expensive calculations.",
     "code": "import { useMemo } from \"react\";\n\nfunction App({ numbers }) {\n  const total = useMemo(() => {\n    return numbers.reduce((sum, number) => sum + number, 0);\n  }, [numbers]);\n\n  return <h1>Total: {total}</h1>;\n}"
   },
   {
     "id": 2,
-    "question": "Why is `useMemo` used?",
+    "question": "Why is useMemo used?",
     "answer": "useMemo is used to optimize performance by avoiding unnecessary recalculations. If a calculation is expensive and its required data has not changed, React can reuse the previously calculated value instead of calculating it again.",
     "code": "const expensiveValue = useMemo(() => {\n  console.log(\"Expensive calculation running...\");\n  return expensiveCalculation(data);\n}, [data]);"
   },
   {
     "id": 3,
-    "question": "What does `useMemo` return?",
+    "question": "What does useMemo return?",
     "answer": "useMemo returns the memoized result of the function passed to it. Unlike useCallback, which returns a function, useMemo returns the value produced by the calculation.",
     "code": "const value = useMemo(() => {\n  return 10 * 5;\n}, []);\n\nconsole.log(value); // 50"
   },
   {
     "id": 4,
-    "question": "When should you use `useMemo`?",
+    "question": "When should you use useMemo?",
     "answer": "You should use useMemo when you have a genuinely expensive calculation, when you need to preserve the reference of an object or array for an optimization, or when avoiding recalculation provides a measurable performance benefit. It should be used as an optimization, not by default.",
     "code": "const filteredUsers = useMemo(() => {\n  return users.filter((user) => {\n    return user.name.toLowerCase().includes(search.toLowerCase());\n  });\n}, [users, search]);"
   },
   {
     "id": 5,
-    "question": "When should you avoid `useMemo`?",
+    "question": "When should you avoid useMemo?",
     "answer": "You should avoid useMemo for simple and inexpensive calculations because useMemo itself adds complexity and has some overhead. Do not use it everywhere automatically. First write simple code and use memoization when there is a real performance problem or a clear need for stable references.",
     "code": "// No need for useMemo here\nconst fullName = `${firstName} ${lastName}`;\n\n// This calculation is simple and cheap."
   },
   {
     "id": 6,
-    "question": "Does `useMemo` guarantee that a value will never be recalculated?",
+    "question": "Does useMemo guarantee that a value will never be recalculated?",
     "answer": "No. useMemo is a performance optimization, not a semantic guarantee. React may discard cached values in certain situations. You should not rely on useMemo for program correctness or assume that the calculation will permanently run only once.",
     "code": "const value = useMemo(() => {\n  return calculateValue(data);\n}, [data]);\n\n// Use useMemo as an optimization,\n// not as a guarantee for application logic."
   },
@@ -43,19 +43,19 @@
   },
   {
     "id": 8,
-    "question": "What is the difference between `useMemo` and `useCallback`?",
+    "question": "What is the difference between useMemo and `useCallback`?",
     "answer": "useMemo memoizes a calculated value, while useCallback memoizes a function reference. You can think of useMemo as caching the result of a calculation and useCallback as caching the function itself.",
     "code": "// useMemo returns a value\nconst filteredUsers = useMemo(() => {\n  return users.filter((user) => user.active);\n}, [users]);\n\n// useCallback returns a function\nconst handleClick = useCallback(() => {\n  console.log(\"Clicked\");\n}, []);"
   },
   {
     "id": 9,
-    "question": "Can `useMemo` improve every React application?",
+    "question": "Can useMemo improve every React application?",
     "answer": "No. useMemo does not automatically improve every React application. Using it unnecessarily can make code harder to read and may add unnecessary overhead. It is most useful when there is an expensive calculation or a reference-stability requirement that provides a real performance benefit.",
     "code": "// Unnecessary for a simple calculation\nconst result = a + b;\n\n// Better to keep simple calculations simple."
   },
   {
     "id": 10,
-    "question": "What happens if the dependency array of `useMemo` is incorrect?",
+    "question": "What happens if the dependency array of useMemo is incorrect?",
     "answer": "If a required dependency is missing, useMemo may return a stale value because the calculation will not run when that value changes. If unnecessary dependencies are included, the calculation may run more often than needed. Therefore, all reactive values used inside the calculation should be handled correctly in the dependency array.",
     "code": "// Incorrect: search is missing\nconst filteredUsers = useMemo(() => {\n  return users.filter((user) =>\n    user.name.includes(search)\n  );\n}, [users]);\n\n// Correct\nconst filteredUsers = useMemo(() => {\n  return users.filter((user) =>\n    user.name.includes(search)\n  );\n}, [users, search]);"
   }

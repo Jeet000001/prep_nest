@@ -183,7 +183,7 @@ const topicGroups: TopicGroup[] = [
       { name: "useEffect", href: "/concepts/react/useEffect" },
       { name: "useRef", href: "/concepts/react/useRef" },
       { name: "useMemo", href: "/concepts/react/useMemo" },
-      { name: "useCallback", href: "/concepts/react/use-callback" },
+      { name: "useCallback", href: "/concepts/react/useCallback" },
       { name: "Context API", href: "/concepts/react/context-api" },
       { name: "Custom Hooks", href: "/concepts/react/custom-hooks" },
       { name: "Performance", href: "/concepts/react/performance" },

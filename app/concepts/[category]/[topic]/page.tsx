@@ -97,7 +97,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     forms: "Forms.json",
     useEffect: "useEffect.json",
     useRef:  "useRef.json",
-    useMemo: "useMemo.json"
+    useMemo: "useMemo.json",
+    useCallback: "useCallback.json"
   }
 };
 

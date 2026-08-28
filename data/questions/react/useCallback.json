@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "question": "What is useCallback?",
+    "answer": "useCallback is a React Hook that memoizes a function. It returns the same function reference between renders until one of its dependencies changes. It is mainly used to avoid creating a new function unnecessarily when a stable function reference is useful.",
+    "code": "import { useCallback } from \"react\";\n\nfunction App() {\n  const handleClick = useCallback(() => {\n    console.log(\"Button clicked\");\n  }, []);\n\n  return <button onClick={handleClick}>Click</button>;\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why is useCallback used?",
+    "answer": "useCallback is used to preserve a function reference between renders. This can be useful when passing functions to memoized child components, using a function as a dependency in another Hook, or when a stable function reference is required.",
+    "code": "const handleSubmit = useCallback(() => {\n  console.log(\"Form submitted\");\n}, []);"
+  },
+  {
+    "id": 3,
+    "question": "What does useCallback return?",
+    "answer": "useCallback returns the function itself, not the result of calling the function. React returns the same function reference on later renders as long as its dependencies have not changed.",
+    "code": "const handleClick = useCallback(() => {\n  return \"Hello\";\n}, []);\n\nconsole.log(handleClick()); // \"Hello\""
+  },
+  {
+    "id": 4,
+    "question": "What is the difference between useCallback and useMemo?",
+    "answer": "useCallback memoizes a function reference, while useMemo memoizes the result of a calculation. In simple terms, useCallback remembers a function, whereas useMemo remembers a value.",
+    "code": "// useCallback returns a function\nconst handleClick = useCallback(() => {\n  console.log(\"Clicked\");\n}, []);\n\n// useMemo returns a value\nconst total = useMemo(() => {\n  return items.reduce((sum, item) => sum + item.price, 0);\n}, [items]);"
+  },
+  {
+    "id": 5,
+    "question": "When should you use useCallback?",
+    "answer": "You should use useCallback when a stable function reference provides a real benefit. Common cases include passing a callback to a component wrapped with React.memo, using a function as a dependency in useEffect, or integrating with APIs that depend on function identity. It should not be used automatically for every function.",
+    "code": "const handleDelete = useCallback((id) => {\n  setItems((prev) =>\n    prev.filter((item) => item.id !== id)\n  );\n}, []);"
+  },
+  {
+    "id": 6,
+    "question": "Can useCallback improve performance?",
+    "answer": "Yes, useCallback can improve performance in specific situations by preventing unnecessary re-renders or repeated effects caused by changing function references. However, useCallback itself also has overhead, so it should be used when there is a measurable or meaningful benefit.",
+    "code": "const handleClick = useCallback(() => {\n  console.log(\"Clicked\");\n}, []);\n\n// Useful when the stable function reference\n// prevents unnecessary work."
+  },
+  {
+    "id": 7,
+    "question": "Why can passing an inline function cause unnecessary re-renders?",
+    "answer": "An inline function is usually created again every time the parent component renders. This means it has a new reference. If that function is passed as a prop to a memoized child component, React.memo may consider the prop changed and re-render the child even when other props have not changed.",
+    "code": "function Parent() {\n  return (\n    <Child\n      onClick={() => console.log(\"Clicked\")}\n    />\n  );\n}\n\n// A new function is created on every Parent render."
+  },
+  {
+    "id": 8,
+    "question": "How does useCallback work with React.memo?",
+    "answer": "React.memo skips re-rendering a component when its props have not changed according to a shallow comparison. If a parent passes a new function on every render, the function prop changes by reference and React.memo cannot skip the child render. useCallback can preserve the function reference, allowing React.memo to work effectively when the other props are also unchanged.",
+    "code": "import { memo, useCallback, useState } from \"react\";\n\nconst Child = memo(function Child({ onClick }) {\n  console.log(\"Child rendered\");\n  return <button onClick={onClick}>Click</button>;\n});\n\nfunction Parent() {\n  const [count, setCount] = useState(0);\n\n  const handleClick = useCallback(() => {\n    console.log(\"Child button clicked\");\n  }, []);\n\n  return (\n    <>\n      <p>{count}</p>\n      <button onClick={() => setCount((prev) => prev + 1)}>\n        Increase Parent Count\n      </button>\n\n      <Child onClick={handleClick} />\n    </>\n  );\n}"
+  },
+  {
+    "id": 9,
+    "question": "When can useCallback actually make performance worse?",
+    "answer": "useCallback can make performance worse when it is used unnecessarily throughout an application. React must store the callback and compare its dependencies on every render, which adds some overhead and complexity. For simple components or functions that are not causing unnecessary work, creating the function normally is often better.",
+    "code": "// Usually unnecessary\nconst add = useCallback(() => {\n  return 2 + 2;\n}, []);\n\n// Simpler\nconst add = () => {\n  return 2 + 2;\n};"
+  }
+]
