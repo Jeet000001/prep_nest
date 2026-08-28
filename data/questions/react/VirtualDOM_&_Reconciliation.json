@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "question": "What is the Virtual DOM?",
+    "answer": "The Virtual DOM is a lightweight JavaScript representation of the UI that React keeps in memory. When state or props change, React creates a new Virtual DOM representation and compares it with the previous one. React then updates only the necessary parts of the real DOM.",
+    "code": "function App() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      Count: {count}\n    </button>\n  );\n}\n\n// State changes\n// ↓\n// React creates a new UI representation\n// ↓\n// React compares old and new representations\n// ↓\n// React updates the required DOM nodes"
+  },
+  {
+    "id": 2,
+    "question": "How does React update the real DOM?",
+    "answer": "When a component's state or props change, React re-renders the component and creates a new element tree. React then compares the new tree with the previous one during reconciliation. After determining the required changes, React applies those changes to the real DOM during the commit phase.",
+    "code": "function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div>\n      <h1>{count}</h1>\n      <button onClick={() => setCount(count + 1)}>\n        Increase\n      </button>\n    </div>\n  );\n}\n\n// setCount()\n// ↓\n// Re-render\n// ↓\n// Reconciliation\n// ↓\n// Commit changes to the real DOM"
+  },
+  {
+    "id": 3,
+    "question": "What is reconciliation?",
+    "answer": "Reconciliation is React's process of comparing the previous UI tree with the new UI tree to determine what needs to change. React uses this process to efficiently update the real DOM instead of rebuilding the entire DOM tree.",
+    "code": "function App() {\n  const [name, setName] = useState(\"John\");\n\n  return <h1>Hello {name}</h1>;\n}\n\n// Before: Hello John\n// After:  Hello Alice\n//\n// React identifies that the text content changed\n// and updates only the necessary DOM part."
+  },
+  {
+    "id": 4,
+    "question": "What is diffing?",
+    "answer": "Diffing is the comparison process React uses during reconciliation to find differences between the previous and new element trees. React uses the differences to determine which parts of the UI need to be inserted, removed, or updated.",
+    "code": "const oldElement = <h1>Hello</h1>;\nconst newElement = <h1>Hello World</h1>;\n\n// React compares the old and new elements\n// and detects that the text content changed."
+  },
+  {
+    "id": 5,
+    "question": "How does React determine what needs to be updated?",
+    "answer": "React compares the previous element tree with the new one using reconciliation. It uses the element type, props, structure, and keys to determine whether an existing element can be reused or whether it needs to be created, updated, or removed. React then applies the required changes during the commit phase.",
+    "code": "function App({ isLoggedIn }) {\n  return isLoggedIn ? (\n    <Dashboard />\n  ) : (\n    <Login />\n  );\n}\n\n// If isLoggedIn changes:\n// Login → Dashboard\n// React detects the different component type\n// and replaces the previous component."
+  },
+  {
+    "id": 6,
+    "question": "What role do keys play in reconciliation?",
+    "answer": "Keys help React identify which items in a list correspond to the same component between renders. A stable and unique key allows React to correctly preserve, update, move, or remove list items. Without proper keys, React may make incorrect assumptions about which items changed.",
+    "code": "const users = [\n  { id: 1, name: \"John\" },\n  { id: 2, name: \"Alice\" }\n];\n\nfunction UserList() {\n  return (\n    <ul>\n      {users.map((user) => (\n        <li key={user.id}>\n          {user.name}\n        </li>\n      ))}\n    </ul>\n  );\n}\n\n// user.id gives each item a stable identity."
+  },
+  {
+    "id": 7,
+    "question": "What is React Fiber?",
+    "answer": "React Fiber is the internal reconciliation architecture used by React. It represents work as units called Fibers, allowing React to organize, prioritize, pause, resume, and discard rendering work when appropriate. Fiber is especially important for React's modern rendering capabilities.",
+    "code": "function App() {\n  return (\n    <div>\n      <Header />\n      <Main />\n      <Footer />\n    </div>\n  );\n}\n\n// Conceptually, React can represent work for\n// different parts of the component tree as Fibers.\n// Fiber is an internal React implementation detail."
+  },
+  {
+    "id": 8,
+    "question": "Why was Fiber introduced?",
+    "answer": "Fiber was introduced to make React's rendering work more flexible and controllable. The older reconciliation approach performed rendering work more continuously, while Fiber allows React to break rendering work into smaller units and prioritize important work. This helps React support features such as concurrent rendering and responsive user interfaces.",
+    "code": "function App() {\n  return (\n    <LargeComponentTree />\n  );\n}\n\n// Fiber allows React to conceptually process work:\n//\n// Work → Pause → Handle higher-priority work\n//      → Resume → Complete\n//\n// This helps keep the UI responsive."
+  },
+  {
+    "id": 9,
+    "question": "What is the difference between rendering and committing?",
+    "answer": "Rendering is the phase where React calculates what the UI should look like by rendering components and determining the required changes. Committing is the phase where React applies the necessary changes to the real DOM and performs related commit-time work. Rendering determines what should change; committing applies those changes.",
+    "code": "function App() {\n  const [count, setCount] = useState(0);\n\n  return <h1>{count}</h1>;\n}\n\n// Render phase:\n// React calculates the new UI.\n\n// Commit phase:\n// React applies the required DOM changes."
+  },
+  {
+    "id": 10,
+    "question": "What is the commit phase?",
+    "answer": "The commit phase is the part of React's update process where React applies the changes determined during the render phase to the host environment, such as the browser DOM. For a web application, this is when the necessary DOM mutations are performed. React also runs certain effects at the appropriate point around the commit process.",
+    "code": "function App() {\n  const [count, setCount] = useState(0);\n\n  return <h1>{count}</h1>;\n}\n\n// If count changes from 0 to 1:\n// Render phase → React calculates the change\n// Commit phase → React updates <h1> in the DOM"
+  },
+  {
+    "id": 11,
+    "question": "What is the render phase?",
+    "answer": "The render phase is the phase where React calls components to calculate the next UI and performs reconciliation to determine what needs to change. The render phase should be kept free of side effects because React may perform rendering work more than once or discard and restart it.",
+    "code": "function Counter() {\n  const [count, setCount] = useState(0);\n\n  console.log(\"Rendering Counter\");\n\n  return (\n    <h1>{count}</h1>\n  );\n}\n\n// During rendering, React calculates the UI.\n// Side effects such as API calls should not be\n// performed directly during render."
+  }
+]

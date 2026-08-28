@@ -190,6 +190,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Custom Hooks", href: "/concepts/react/custom-hooks" },
       { name: "Hooks Rules", href: "/concepts/react/hooks-rules" },
       { name: "Rerendering", href: "/concepts/react/rerendering" },
+      { name: "Virtual DOM & Reconciliation", href: "/concepts/react/virtual-dom-reconciliation" },
       { name: "Performance", href: "/concepts/react/performance" },
     ],
   },

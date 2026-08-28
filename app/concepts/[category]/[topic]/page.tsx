@@ -104,7 +104,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "context-api": "Context_Api.json",
     "custom-hooks": "Custom_Hooks.json",
     "hooks-rules": "Hooks_Rules.json",
-    rerendering: "Re_rendering.json"
+    rerendering: "Re_rendering.json",
+    "virtual-dom-reconciliation": "VirtualDOM_&_Reconciliation.json"
   },
 };
 
