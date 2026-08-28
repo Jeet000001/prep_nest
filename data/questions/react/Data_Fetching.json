@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "question": "How do you fetch API data in React?",
+    "answer": "You can fetch API data using the Fetch API or a data-fetching library. For simple cases, an asynchronous function can be called from useEffect, with state used to store the data, loading status, and error.",
+    "code": "import { useEffect, useState } from \"react\";\n\nfunction Users() {\n  const [users, setUsers] = useState([]);\n  const [loading, setLoading] = useState(true);\n  const [error, setError] = useState(null);\n\n  useEffect(() => {\n    async function fetchUsers() {\n      try {\n        const response = await fetch(\"/api/users\");\n\n        if (!response.ok) {\n          throw new Error(\"Failed to fetch users\");\n        }\n\n        const data = await response.json();\n        setUsers(data);\n      } catch (error) {\n        setError(error.message);\n      } finally {\n        setLoading(false);\n      }\n    }\n\n    fetchUsers();\n  }, []);\n\n  if (loading) return <p>Loading...</p>;\n  if (error) return <p>{error}</p>;\n\n  return users.map((user) => (\n    <p key={user.id}>{user.name}</p>\n  ));\n}"
+  },
+  {
+    "id": 2,
+    "question": "Where should API calls be performed in a React application?",
+    "answer": "API calls should generally be performed outside the render phase. In a simple client-side component, useEffect can trigger a request based on component state or props. In larger applications, a dedicated data-fetching solution such as TanStack Query or Redux Toolkit Query can manage server state. In frameworks such as Next.js, data can also be fetched on the server when appropriate.",
+    "code": "function UserList() {\n  useEffect(() => {\n    fetch(\"/api/users\")\n      .then((response) => response.json())\n      .then((data) => console.log(data));\n  }, []);\n\n  return <div>User List</div>;\n}\n\n// Avoid performing API calls directly during render."
+  },
+  {
+    "id": 3,
+    "question": "How do you handle loading states?",
+    "answer": "Use state to track whether the request is currently loading and conditionally render a loading indicator, skeleton, or placeholder while the request is in progress.",
+    "code": "const [loading, setLoading] = useState(false);\n\nasync function fetchData() {\n  setLoading(true);\n\n  try {\n    const response = await fetch(\"/api/data\");\n    const data = await response.json();\n    setData(data);\n  } finally {\n    setLoading(false);\n  }\n}\n\nreturn (\n  <div>\n    {loading ? <p>Loading...</p> : <Data />}\n  </div>\n);"
+  },
+  {
+    "id": 4,
+    "question": "How do you handle API errors?",
+    "answer": "Handle network or JavaScript errors with try...catch when using async/await, and explicitly check response.ok because fetch() does not reject merely because the server returns an HTTP error such as 404 or 500. Store the error state and display an appropriate error UI.",
+    "code": "try {\n  const response = await fetch(\"/api/users\");\n\n  if (!response.ok) {\n    throw new Error(`HTTP error: ${response.status}`);\n  }\n\n  const data = await response.json();\n  setData(data);\n} catch (error) {\n  setError(error.message);\n}"
+  },
+  {
+    "id": 5,
+    "question": "How do you handle empty API responses?",
+    "answer": "Check whether the returned data contains any items before rendering the list. An empty response is usually a valid application state, not necessarily an error, so it should have its own empty-state UI.",
+    "code": "if (loading) return <p>Loading...</p>;\nif (error) return <p>Something went wrong.</p>;\nif (users.length === 0) {\n  return <p>No users found.</p>;\n}\n\nreturn users.map((user) => (\n  <p key={user.id}>{user.name}</p>\n));"
+  },
+  {
+    "id": 6,
+    "question": "How do you cancel an API request?",
+    "answer": "With fetch(), you can cancel an in-progress request by creating an AbortController, passing its signal to fetch(), and calling controller.abort() when the request should be cancelled. In React, this is commonly done in the cleanup function of useEffect.",
+    "code": "useEffect(() => {\n  const controller = new AbortController();\n\n  fetch(\"/api/users\", {\n    signal: controller.signal\n  })\n    .then((response) => response.json())\n    .then(setUsers)\n    .catch((error) => {\n      if (error.name !== \"AbortError\") {\n        setError(error.message);\n      }\n    });\n\n  return () => {\n    controller.abort();\n  };\n}, []);"
+  },
+  {
+    "id": 7,
+    "question": "What is AbortController?",
+    "answer": "AbortController is a Web API that allows you to abort one or more asynchronous operations that support an AbortSignal. With fetch(), its signal can be passed to the request and abort() can later cancel that request.",
+    "code": "const controller = new AbortController();\n\nfetch(\"/api/users\", {\n  signal: controller.signal\n});\n\n// Cancel the request\ncontroller.abort();"
+  },
+  {
+    "id": 8,
+    "question": "How do you prevent race conditions during API calls?",
+    "answer": "A race condition can occur when multiple requests are started and an older request finishes after a newer request, causing stale data to overwrite the latest result. You can prevent this by cancelling previous requests with AbortController or by tracking whether the current effect/request is still active before updating state.",
+    "code": "useEffect(() => {\n  const controller = new AbortController();\n\n  async function search() {\n    try {\n      const response = await fetch(\n        `/api/search?q=${query}`,\n        { signal: controller.signal }\n      );\n\n      const data = await response.json();\n      setResults(data);\n    } catch (error) {\n      if (error.name !== \"AbortError\") {\n        setError(error.message);\n      }\n    }\n  }\n\n  search();\n\n  return () => controller.abort();\n}, [query]);\n\n// When query changes, the previous request is cancelled."
+  },
+  {
+    "id": 9,
+    "question": "How do you avoid unnecessary API requests?",
+    "answer": "Avoid unnecessary requests by using the correct effect dependencies, debouncing rapidly changing input, caching previously fetched data, avoiding duplicate requests, cancelling obsolete requests, and using a server-state library when appropriate.",
+    "code": "useEffect(() => {\n  const timer = setTimeout(() => {\n    fetch(`/api/search?q=${query}`);\n  }, 500);\n\n  return () => clearTimeout(timer);\n}, [query]);\n\n// Debouncing prevents a request for every\n// individual keystroke."
+  },
+  {
+    "id": 10,
+    "question": "What is React Query?",
+    "answer": "React Query, now commonly called TanStack Query, is a library for managing server state in React applications. It provides features such as fetching, caching, background refetching, request deduplication, retries, stale-state management, mutations, and synchronization with the server.",
+    "code": "import { useQuery } from \"@tanstack/react-query\";\n\nfunction Users() {\n  const { data, isLoading, isError } = useQuery({\n    queryKey: [\"users\"],\n    queryFn: async () => {\n      const response = await fetch(\"/api/users\");\n      return response.json();\n    }\n  });\n\n  if (isLoading) return <p>Loading...</p>;\n  if (isError) return <p>Failed to load users.</p>;\n\n  return data.map((user) => (\n    <p key={user.id}>{user.name}</p>\n  ));\n}"
+  },
+  {
+    "id": 11,
+    "question": "Why would you use React Query instead of manually using useEffect?",
+    "answer": "Manual useEffect-based fetching requires you to implement loading, error, caching, refetching, race-condition handling, retries, and synchronization yourself. TanStack Query provides these server-state features out of the box, making data-fetching code easier to manage as an application grows.",
+    "code": "// Manual approach often requires:\n// loading state\n// error state\n// data state\n// caching\n// refetching\n// cancellation\n// race-condition handling\n\n// TanStack Query provides many of these\n// capabilities through useQuery()."
+  },
+  {
+    "id": 12,
+    "question": "What is caching in data fetching?",
+    "answer": "Caching means storing previously fetched server data so it can be reused instead of making the same network request every time. A data-fetching library can use cached data to display information quickly and decide when the data should be considered stale and refetched.",
+    "code": "useQuery({\n  queryKey: [\"users\"],\n  queryFn: fetchUsers,\n  staleTime: 60_000\n});\n\n// Data can be reused from the cache\n// for the configured stale period."
+  },
+  {
+    "id": 13,
+    "question": "What is stale data?",
+    "answer": "Stale data is cached server data that is considered potentially outdated according to the application's freshness policy. Stale does not necessarily mean incorrect; it means the application may want to refetch the data to obtain a more recent version.",
+    "code": "useQuery({\n  queryKey: [\"users\"],\n  queryFn: fetchUsers,\n  staleTime: 30_000\n});\n\n// During staleTime, data is considered fresh.\n// After that period, it can be considered stale\n// and may be refetched according to the library's rules."
+  },
+  {
+    "id": 14,
+    "question": "What is optimistic updating?",
+    "answer": "Optimistic updating means updating the UI immediately as if a server operation has succeeded, before receiving the server response. If the request succeeds, the optimistic state is kept or synchronized with the server. If it fails, the previous state can be restored and an error can be shown.",
+    "code": "async function likePost() {\n  // 1. Update UI immediately\n  setLiked(true);\n\n  try {\n    // 2. Send request to server\n    await fetch(\"/api/posts/1/like\", {\n      method: \"POST\"\n    });\n  } catch (error) {\n    // 3. Roll back if request fails\n    setLiked(false);\n  }\n}\n\n// User sees the UI update immediately\n// instead of waiting for the network response."
+  }
+]

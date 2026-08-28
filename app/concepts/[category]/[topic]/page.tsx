@@ -113,6 +113,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     portals: "Portals.json",
     "state-management": "State_Management.json",
     redux: "Redux.json",
+    "data-fetching": "Data_Fetching.json",
+    performance: "Performance.json"
   },
 };
 
