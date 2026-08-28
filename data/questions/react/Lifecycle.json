@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What are the lifecycle phases of a React component?",
+    "answer": "A React component generally goes through three main lifecycle phases: mounting, updating, and unmounting. Mounting happens when the component is added to the UI, updating happens when its state or props change, and unmounting happens when the component is removed from the UI.",
+    "code": "Mounting\n   ↓\nUpdating\n   ↓\nUpdating\n   ↓\nUnmounting"
+  },
+  {
+    "id": 2,
+    "question": "What is the mounting phase?",
+    "answer": "The mounting phase occurs when a React component is created and added to the UI for the first time. During mounting, React renders the component and commits its output to the DOM. In class components, componentDidMount() runs after the component has been mounted.",
+    "code": "function App() {\n  useEffect(() => {\n    console.log(\"Component mounted\");\n  }, []);\n\n  return <h1>Hello React</h1>;\n}\n\n// [] means the effect runs after the initial mount."
+  },
+  {
+    "id": 3,
+    "question": "What is the updating phase?",
+    "answer": "The updating phase occurs when a component needs to render again because its state, props, or consumed context has changed. React calculates the new UI, compares it with the previous UI, and commits the necessary changes.",
+    "code": "function Counter() {\n  const [count, setCount] = useState(0);\n\n  useEffect(() => {\n    console.log(\"Component updated\");\n  }, [count]);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is the unmounting phase?",
+    "answer": "The unmounting phase occurs when a component is removed from the UI. Before the component is removed, React runs the cleanup functions of its effects. In class components, componentWillUnmount() is used for cleanup.",
+    "code": "function Timer() {\n  useEffect(() => {\n    const id = setInterval(() => {\n      console.log(\"Running...\");\n    }, 1000);\n\n    return () => {\n      clearInterval(id);\n      console.log(\"Timer cleaned up\");\n    };\n  }, []);\n\n  return <h1>Timer</h1>;\n}"
+  },
+  {
+    "id": 5,
+    "question": "How do functional components handle lifecycle behavior?",
+    "answer": "Functional components do not use class lifecycle methods. Instead, they use Hooks such as useEffect to perform side effects and cleanup. The dependency array of useEffect controls when the effect runs and when its cleanup function runs.",
+    "code": "function User() {\n  useEffect(() => {\n    console.log(\"Effect runs after render\");\n\n    return () => {\n      console.log(\"Cleanup runs\");\n    };\n  }, []);\n\n  return <h1>User</h1>;\n}"
+  },
+  {
+    "id": 6,
+    "question": "How does useEffect relate to component lifecycle?",
+    "answer": "useEffect is used to synchronize a component with external systems and can cover many use cases that were traditionally handled by lifecycle methods. An effect with an empty dependency array commonly handles work that should happen after mounting, dependencies allow it to re-run when specific values change, and its cleanup function handles cleanup when the effect is stopped or the component unmounts.",
+    "code": "useEffect(() => {\n  // Runs after the component mounts\n  // and when userId changes.\n  fetchUser(userId);\n\n  return () => {\n    // Cleanup before the effect runs again\n    // or when the component unmounts.\n    console.log(\"Cleanup\");\n  };\n}, [userId]);"
+  },
+  {
+    "id": 7,
+    "question": "What is componentDidMount()?",
+    "answer": "componentDidMount() is a class component lifecycle method that runs after the component has been mounted into the DOM. It is commonly used for tasks such as starting subscriptions, fetching data, or interacting with the DOM.",
+    "code": "class User extends React.Component {\n  componentDidMount() {\n    console.log(\"Component mounted\");\n  }\n\n  render() {\n    return <h1>User</h1>;\n  }\n}"
+  },
+  {
+    "id": 8,
+    "question": "What is componentDidUpdate()?",
+    "answer": "componentDidUpdate() is a class component lifecycle method that runs after a component has been updated because of changes to props or state. It can be used to perform side effects that should happen after an update. When comparing specific values, you should check the previous props or state to avoid unwanted loops.",
+    "code": "class Counter extends React.Component {\n  componentDidUpdate(prevProps) {\n    if (prevProps.id !== this.props.id) {\n      console.log(\"ID changed\");\n    }\n  }\n\n  render() {\n    return <h1>{this.props.id}</h1>;\n  }\n}"
+  },
+  {
+    "id": 9,
+    "question": "What is componentWillUnmount()?",
+    "answer": "componentWillUnmount() is a class component lifecycle method that runs immediately before a component is removed from the DOM. It is mainly used for cleanup, such as removing event listeners, clearing timers, or unsubscribing from external subscriptions.",
+    "code": "class Timer extends React.Component {\n  componentDidMount() {\n    this.timer = setInterval(() => {\n      console.log(\"Running\");\n    }, 1000);\n  }\n\n  componentWillUnmount() {\n    clearInterval(this.timer);\n  }\n\n  render() {\n    return <h1>Timer</h1>;\n  }\n}"
+  },
+  {
+    "id": 10,
+    "question": "How can lifecycle methods be replaced with Hooks?",
+    "answer": "In functional components, many common class lifecycle use cases can be handled with useEffect. componentDidMount can often be represented by an effect with an empty dependency array, componentDidUpdate can often be handled by an effect with dependencies, and componentWillUnmount cleanup can be handled by returning a cleanup function from useEffect. However, useEffect should not be viewed as a direct one-to-one lifecycle replacement because its main purpose is synchronizing with external systems.",
+    "code": "function Component({ userId }) {\n  useEffect(() => {\n    // Similar to mount/update behavior\n    console.log(\"Effect runs\", userId);\n\n    return () => {\n      // Similar to unmount/cleanup behavior\n      console.log(\"Cleanup\");\n    };\n  }, [userId]);\n\n  return <h1>User: {userId}</h1>;\n}"
+  }
+]

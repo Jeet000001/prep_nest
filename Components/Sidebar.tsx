@@ -191,6 +191,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Hooks Rules", href: "/concepts/react/hooks-rules" },
       { name: "Rerendering", href: "/concepts/react/rerendering" },
       { name: "Virtual DOM & Reconciliation", href: "/concepts/react/virtual-dom-reconciliation" },
+      { name: "Lifecycle", href: "/concepts/react/lifecycle" },
       { name: "Performance", href: "/concepts/react/performance" },
     ],
   },
