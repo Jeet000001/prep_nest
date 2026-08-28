@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "question": "What is the Context API?",
+    "answer": "The Context API is a built-in React feature that allows you to share data between multiple components without manually passing props through every intermediate component. It is commonly used for data such as themes, authentication information, language settings, and other globally shared values.",
+    "code": "import { createContext, useContext } from \"react\";\n\nconst ThemeContext = createContext();\n\nfunction App() {\n  return (\n    <ThemeContext.Provider value=\"dark\">\n      <Child />\n    </ThemeContext.Provider>\n  );\n}\n\nfunction Child() {\n  const theme = useContext(ThemeContext);\n\n  return <h1>Theme: {theme}</h1>;\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why is Context API used?",
+    "answer": "Context API is used to share common data across different parts of a React component tree without passing that data through every component as props. It helps reduce unnecessary prop passing and makes shared data easier to access.",
+    "code": "// Without Context\n<App user={user}>\n  <Layout user={user}>\n    <Navbar user={user} />\n  </Layout>\n</App>\n\n// With Context, components can access shared data directly."
+  },
+  {
+    "id": 3,
+    "question": "What problem does Context solve?",
+    "answer": "Context mainly solves the problem of prop drilling. Prop drilling happens when a prop must be passed through several intermediate components even though those components do not need the value themselves. Context allows a deeply nested component to access shared data directly.",
+    "code": "App\n └── Layout\n      └── Sidebar\n           └── UserProfile\n\n// Without Context:\n// user must be passed through every component.\n\n// With Context:\n// UserProfile can access user directly."
+  },
+  {
+    "id": 4,
+    "question": "How do you create a context?",
+    "answer": "You create a context using the createContext() function. The created context can then provide a value using a Provider, and descendant components can read that value using useContext().",
+    "code": "import { createContext } from \"react\";\n\nconst UserContext = createContext(null);\n\nexport default UserContext;"
+  },
+  {
+    "id": 5,
+    "question": "What is createContext()?",
+    "answer": "createContext() is a React function used to create a Context object. This Context object represents a shared data channel. You can provide a value to components using the Context Provider and read the value using useContext().",
+    "code": "import { createContext } from \"react\";\n\nconst UserContext = createContext(null);\n\n// UserContext can now be used to share data."
+  },
+  {
+    "id": 6,
+    "question": "What is useContext()?",
+    "answer": "useContext() is a React Hook that allows a component to read and subscribe to a Context value. The component receives the value from the closest matching Context Provider above it in the component tree.",
+    "code": "import { useContext } from \"react\";\nimport { ThemeContext } from \"./ThemeContext\";\n\nfunction Button() {\n  const theme = useContext(ThemeContext);\n\n  return <button>Current theme: {theme}</button>;\n}"
+  },
+  {
+    "id": 7,
+    "question": "What is a Context Provider?",
+    "answer": "A Context Provider is used to supply a Context value to all descendant components that consume that Context. Components inside the Provider can access the provided value without receiving it through props.",
+    "code": "function App() {\n  const user = {\n    name: \"John\"\n  };\n\n  return (\n    <UserContext.Provider value={user}>\n      <Dashboard />\n    </UserContext.Provider>\n  );\n}"
+  },
+  {
+    "id": 8,
+    "question": "What happens when a Context value changes?",
+    "answer": "When the value provided by a Context Provider changes, React updates the components that consume that Context so they can receive the new value. This means Context consumers can re-render when the provided value changes.",
+    "code": "function App() {\n  const [theme, setTheme] = useState(\"light\");\n\n  return (\n    <ThemeContext.Provider value={theme}>\n      <Child />\n      <button onClick={() => setTheme(\"dark\")}>\n        Change Theme\n      </button>\n    </ThemeContext.Provider>\n  );\n}"
+  },
+  {
+    "id": 9,
+    "question": "Can Context cause unnecessary re-renders?",
+    "answer": "Yes. Context can cause unnecessary re-renders if the Provider value changes frequently or if the value is a newly created object or function on every render. Components that consume the changed Context may update even if they only use part of the Context value.",
+    "code": "function App() {\n  const [count, setCount] = useState(0);\n\n  const value = {\n    count\n  };\n\n  return (\n    <AppContext.Provider value={value}>\n      <Child />\n    </AppContext.Provider>\n  );\n}\n\n// value is a new object whenever App renders."
+  },
+  {
+    "id": 10,
+    "question": "How can you optimize Context performance?",
+    "answer": "You can optimize Context performance by splitting large contexts into smaller contexts, keeping frequently changing data separate from rarely changing data, and memoizing the Provider value with useMemo when it helps maintain a stable reference. You should also avoid placing unrelated state in the same Context.",
+    "code": "const value = useMemo(() => {\n  return {\n    user,\n    login,\n    logout\n  };\n}, [user, login, logout]);\n\nreturn (\n  <AuthContext.Provider value={value}>\n    <App />\n  </AuthContext.Provider>\n);"
+  },
+  {
+    "id": 11,
+    "question": "What is the difference between Context API and prop drilling?",
+    "answer": "Prop drilling is the process of passing props through multiple intermediate components to reach a deeply nested component. Context API provides an alternative for shared data by allowing descendant components to access the value directly. Props are still useful for explicit parent-to-child communication, while Context is useful for data shared across many levels.",
+    "code": "// Prop drilling\n<App user={user}>\n  <Layout user={user}>\n    <Profile user={user} />\n  </Layout>\n</App>\n\n// Context\nconst user = useContext(UserContext);"
+  },
+  {
+    "id": 12,
+    "question": "When should you use Context?",
+    "answer": "You should use Context when the same data is needed by multiple components at different levels of the component tree. Common examples include theme, authenticated user information, language preferences, and application-wide configuration. Context is especially useful when passing props through many intermediate components becomes inconvenient.",
+    "code": "const ThemeContext = createContext(\"light\");\nconst AuthContext = createContext(null);\nconst LanguageContext = createContext(\"en\");"
+  },
+  {
+    "id": 13,
+    "question": "When should you avoid Context?",
+    "answer": "You should avoid Context for data that is only needed by a small number of closely related components, because regular props may be simpler and clearer. You should also be careful about putting large amounts of frequently changing state into one Context, as it can cause unnecessary updates and make state management harder.",
+    "code": "// Props may be simpler\nfunction Parent() {\n  const title = \"Welcome\";\n\n  return <Child title={title} />;\n}\n\nfunction Child({ title }) {\n  return <h1>{title}</h1>;\n}"
+  },
+  {
+    "id": 14,
+    "question": "Context API vs Redux — what is the difference?",
+    "answer": "Context API is a built-in React feature mainly used for sharing values across a component tree. Redux is a dedicated state management library that provides a structured approach for managing complex global state, including centralized stores, predictable updates, middleware, and developer tools. Context is often sufficient for simpler shared state, while Redux can be more suitable for large applications with complex state management requirements.",
+    "code": "// Context API\nconst UserContext = createContext(null);\n\nfunction App() {\n  return (\n    <UserContext.Provider value={user}>\n      <Dashboard />\n    </UserContext.Provider>\n  );\n}\n\n// Redux conceptually uses:\n// Store -> Actions -> Reducers -> Updated State"
+  }
+]
