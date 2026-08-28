@@ -96,12 +96,13 @@ const topicFiles: Record<string, Record<string, string>> = {
     "lists-keys": "Lists-Keys.json",
     forms: "Forms.json",
     useEffect: "useEffect.json",
-    useRef:  "useRef.json",
+    useRef: "useRef.json",
     useMemo: "useMemo.json",
     useCallback: "useCallback.json",
+    useReducer: "useReducer.json",
     "react-memo": "ReactMemo.json",
-    "context-api": "Context_Api.json"
-  }
+    "context-api": "Context_Api.json",
+  },
 };
 
 export default async function TopicPage({

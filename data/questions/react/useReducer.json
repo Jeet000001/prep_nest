@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is useReducer?",
+    "answer": "useReducer is a React Hook used to manage state through a reducer function. Instead of directly updating state like useState, you dispatch an action, and the reducer decides how the state should be updated. It is especially useful when state logic is complex or multiple state values are related.",
+    "code": "import { useReducer } from \"react\";\n\nfunction reducer(state, action) {\n  switch (action.type) {\n    case \"increment\":\n      return { count: state.count + 1 };\n\n    default:\n      return state;\n  }\n}\n\nfunction Counter() {\n  const [state, dispatch] = useReducer(reducer, {\n    count: 0\n  });\n\n  return (\n    <button onClick={() => dispatch({ type: \"increment\" })}>\n      Count: {state.count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why would you use useReducer instead of useState?",
+    "answer": "useReducer is useful when state logic is complex, when multiple state values are related, or when many different actions can update the same state. useState is usually simpler for independent and straightforward state updates, while useReducer makes complex update logic more organized and predictable.",
+    "code": "// useState is simple for small state\nconst [count, setCount] = useState(0);\n\n// useReducer is useful for complex state\nconst [state, dispatch] = useReducer(reducer, initialState);"
+  },
+  {
+    "id": 3,
+    "question": "What are state, action, and reducer?",
+    "answer": "State is the current data managed by useReducer. An action is an object that describes what should happen, usually containing a type property and sometimes additional data. A reducer is a function that receives the current state and an action and returns the next state.",
+    "code": "const initialState = {\n  count: 0\n};\n\nconst action = {\n  type: \"increment\"\n};\n\nfunction reducer(state, action) {\n  if (action.type === \"increment\") {\n    return {\n      count: state.count + 1\n    };\n  }\n\n  return state;\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is a reducer function?",
+    "answer": "A reducer function is a function that determines how state should change based on an action. It receives the current state and an action as arguments and returns a new state. A reducer should not directly modify the existing state.",
+    "code": "function reducer(state, action) {\n  switch (action.type) {\n    case \"increment\":\n      return {\n        ...state,\n        count: state.count + 1\n      };\n\n    case \"decrement\":\n      return {\n        ...state,\n        count: state.count - 1\n      };\n\n    default:\n      return state;\n  }\n}"
+  },
+  {
+    "id": 5,
+    "question": "What does dispatch() do?",
+    "answer": "dispatch() sends an action to the reducer. React then calls the reducer with the current state and that action, and uses the state returned by the reducer to schedule the next render.",
+    "code": "dispatch({ type: \"increment\" });\n\n// React conceptually does:\n// newState = reducer(currentState, action);"
+  },
+  {
+    "id": 6,
+    "question": "Should a reducer be pure?",
+    "answer": "Yes. A reducer should be a pure function. Given the same state and action, it should always return the same result. It should not modify existing state, make API calls, perform random operations, or cause other side effects.",
+    "code": "// Pure reducer\nfunction reducer(state, action) {\n  if (action.type === \"increment\") {\n    return { count: state.count + 1 };\n  }\n\n  return state;\n}\n\n// Avoid side effects inside reducers\n// fetch(...)\n// Math.random()\n// modifying existing state"
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between useReducer and Redux?",
+    "answer": "useReducer is a built-in React Hook for managing state inside a component or a related part of an application. Redux is a separate state management library designed for managing larger and more complex application state. Redux provides additional features such as a centralized store, middleware, developer tools, and a broader ecosystem. The reducer concept is similar in both.",
+    "code": "// useReducer\nconst [state, dispatch] = useReducer(reducer, initialState);\n\n// Redux conceptually\n// Store -> dispatch(action) -> reducer -> new state"
+  },
+  {
+    "id": 8,
+    "question": "Can useReducer handle asynchronous operations?",
+    "answer": "The reducer function itself should remain synchronous and pure, so asynchronous operations should not be performed inside it. However, you can perform asynchronous work outside the reducer, such as inside an event handler or useEffect, and dispatch actions before and after the asynchronous operation.",
+    "code": "async function fetchUsers() {\n  dispatch({ type: \"FETCH_START\" });\n\n  try {\n    const response = await fetch(\"/api/users\");\n    const users = await response.json();\n\n    dispatch({\n      type: \"FETCH_SUCCESS\",\n      payload: users\n    });\n  } catch (error) {\n    dispatch({\n      type: \"FETCH_ERROR\",\n      payload: error.message\n    });\n  }\n}"
+  },
+  {
+    "id": 9,
+    "question": "When is `seReducer a better choice than useState?",
+    "answer": "useReducer is often a better choice when state updates are complex, when several state values are related, when the next state depends on different action types, or when you want to keep state update logic centralized. For simple values such as a boolean, input field, or independent counter, useState is usually simpler.",
+    "code": "// Better suited for useState\nconst [isOpen, setIsOpen] = useState(false);\n\n// Better suited for useReducer\nconst [state, dispatch] = useReducer(reducer, {\n  loading: false,\n  data: [],\n  error: null\n});"
+  },
+  {
+    "id": 10,
+    "question": "How can useReducer be combined with Context API?",
+    "answer": "You can combine useReducer with Context API by storing the reducer state and dispatch function in a Context Provider. This allows multiple components to access shared state and dispatch actions without prop drilling. This pattern is useful for managing medium-sized global state.",
+    "code": "import {\n  createContext,\n  useContext,\n  useReducer\n} from \"react\";\n\nconst AppContext = createContext(null);\n\nconst initialState = {\n  count: 0\n};\n\nfunction reducer(state, action) {\n  switch (action.type) {\n    case \"increment\":\n      return {\n        ...state,\n        count: state.count + 1\n      };\n\n    default:\n      return state;\n  }\n}\n\nexport function AppProvider({ children }) {\n  const [state, dispatch] = useReducer(\n    reducer,\n    initialState\n  );\n\n  return (\n    <AppContext.Provider value={{ state, dispatch }}>\n      {children}\n    </AppContext.Provider>\n  );\n}\n\nfunction Counter() {\n  const { state, dispatch } = useContext(AppContext);\n\n  return (\n    <button onClick={() => dispatch({ type: \"increment\" })}>\n      Count: {state.count}\n    </button>\n  );\n}"
+  }
+]
