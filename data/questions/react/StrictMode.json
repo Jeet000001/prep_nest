@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "question": "What is React StrictMode?",
+    "answer": "React StrictMode is a development-only feature that helps identify potential problems in a React application. It enables additional checks and intentionally exercises certain component behavior so that unsafe patterns, missing cleanup, and other issues can be detected during development.",
+    "code": "import { StrictMode } from \"react\";\nimport { createRoot } from \"react-dom/client\";\n\ncreateRoot(document.getElementById(\"root\")).render(\n  <StrictMode>\n    <App />\n  </StrictMode>\n);"
+  },
+  {
+    "id": 2,
+    "question": "Why is StrictMode used?",
+    "answer": "StrictMode is used to find bugs and unsafe patterns early during development. It can help detect impure rendering, missing Effect cleanup, deprecated APIs, and code that may not behave correctly with modern React rendering behavior.",
+    "code": "function Component() {\n  useEffect(() => {\n    const timer = setInterval(() => {\n      console.log(\"Running\");\n    }, 1000);\n\n    return () => {\n      clearInterval(timer);\n    };\n  }, []);\n\n  return <div>Hello</div>;\n}\n\n// StrictMode helps expose missing cleanup\n// during development."
+  },
+  {
+    "id": 3,
+    "question": "Does StrictMode affect production?",
+    "answer": "No. StrictMode's additional development checks and development-only behaviors do not run in production builds. It is intended to help developers find problems before the application is deployed.",
+    "code": "const root = createRoot(document.getElementById(\"root\"));\n\nroot.render(\n  <StrictMode>\n    <App />\n  </StrictMode>\n);\n\n// StrictMode can remain in the codebase.\n// Its extra checks are development-only."
+  },
+  {
+    "id": 4,
+    "question": "Why does useEffect appear to run twice in development?",
+    "answer": "In React development StrictMode, React intentionally performs an extra setup-and-cleanup cycle for Effects to verify that the Effect is implemented correctly. This can make an Effect appear to run twice on initial mount. The purpose is to expose missing cleanup or other side-effect bugs, not to simulate normal production behavior.",
+    "code": "useEffect(() => {\n  console.log(\"Effect setup\");\n\n  return () => {\n    console.log(\"Effect cleanup\");\n  };\n}, []);\n\n// Development with StrictMode may show:\n// Effect setup\n// Effect cleanup\n// Effect setup\n\n// Production:\n// Effect setup"
+  },
+  {
+    "id": 5,
+    "question": "Does StrictMode actually mount a component twice?",
+    "answer": "In development, StrictMode intentionally simulates an additional mount-related cycle to stress-test the component's behavior. More precisely, React may invoke rendering logic more than once and perform an extra setup/cleanup cycle for Effects and ref callbacks. It should not be understood as two independent production mounts of the component.",
+    "code": "function App() {\n  console.log(\"Render\");\n\n  useEffect(() => {\n    console.log(\"Effect setup\");\n\n    return () => {\n      console.log(\"Effect cleanup\");\n    };\n  }, []);\n\n  return <div>Hello</div>;\n}\n\n// StrictMode development behavior is intentional\n// and is designed to expose code that is not\n// resilient to repeated setup/cleanup."
+  },
+  {
+    "id": 6,
+    "question": "What problems can StrictMode help identify?",
+    "answer": "StrictMode can help identify impure rendering, missing Effect cleanup, missing ref cleanup, deprecated APIs, unexpected side effects, and code that relies on components being rendered or Effects being executed only once. It encourages components and Effects to be written in a way that is safe under modern React rendering behavior.",
+    "code": "useEffect(() => {\n  const connection = connectToServer();\n\n  return () => {\n    connection.disconnect();\n  };\n}, []);\n\n// Without cleanup, development StrictMode\n// can expose that multiple connections are\n// accidentally being created.\n\n// General rule:\n// Setup something → return cleanup for it."
+  }
+]

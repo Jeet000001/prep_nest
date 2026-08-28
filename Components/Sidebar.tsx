@@ -200,6 +200,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Redux", href: "/concepts/react/redux" },
       { name: "Data Fetching", href: "/concepts/react/data-fetching" },
       { name: "Performance", href: "/concepts/react/performance" },
+      { name: "StrictMode", href: "/concepts/react/strictmode" },
     ],
   },
 ];

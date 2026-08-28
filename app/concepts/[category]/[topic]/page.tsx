@@ -114,7 +114,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "state-management": "State_Management.json",
     redux: "Redux.json",
     "data-fetching": "Data_Fetching.json",
-    performance: "Performance.json"
+    performance: "Performance.json",
+    "strictmode": "StrictMode.json"
   },
 };
 
