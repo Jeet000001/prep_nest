@@ -110,7 +110,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "error-handling": "Error_Handling.json",
     "code-splitting": "Code_Splitting.json",
     suspense: "Suspense.json",
-    portals: "Portals.json"
+    portals: "Portals.json",
+    "state-management": "State_Management.json"
   },
 };
 

@@ -196,6 +196,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Code Splitting", href: "/concepts/react/code-splitting" },
       { name: "Suspense", href: "/concepts/react/suspense" },
       { name: "Portals", href: "/concepts/react/portals" },
+      { name: "State Management", href: "/concepts/react/state-management" },
       { name: "Performance", href: "/concepts/react/performance" },
     ],
   },

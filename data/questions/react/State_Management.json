@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "question": "What is state management?",
+    "answer": "State management is the process of storing, updating, and sharing data that controls the behavior and UI of an application. In React, state can be managed locally within a component or shared across multiple components using tools such as Context API, Redux, Zustand, or other state-management libraries.",
+    "code": "function Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      {count}\n    </button>\n  );\n}\n\n// useState manages the component's local state."
+  },
+  {
+    "id": 2,
+    "question": "When is local state enough?",
+    "answer": "Local state is enough when the state is only needed by one component or a small part of the component tree. Examples include form input values, modal visibility, dropdown state, loading state, and UI toggles. Keeping such state local usually makes the application simpler and easier to maintain.",
+    "code": "function Modal() {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return (\n    <>\n      <button onClick={() => setIsOpen(true)}>\n        Open\n      </button>\n\n      {isOpen && <div>Modal</div>}\n    </>\n  );\n}\n\n// Only Modal needs this state,\n// so global state is unnecessary."
+  },
+  {
+    "id": 3,
+    "question": "When should you use global state?",
+    "answer": "Global state is useful when the same state needs to be accessed or updated by many unrelated components or by components that are far apart in the component tree. Common examples include authenticated user information, application-wide preferences, shopping cart data, or other shared client-side state.",
+    "code": "function Navbar() {\n  // Needs access to user state\n}\n\nfunction Profile() {\n  // Needs access to the same user state\n}\n\nfunction Settings() {\n  // Also needs access to the same user state\n}\n\n// Shared state can be managed centrally\n// instead of passing it through many layers."
+  },
+  {
+    "id": 4,
+    "question": "What are the common approaches to state management in React?",
+    "answer": "Common approaches include local state with useState, complex local state with useReducer, shared state with Context API, external state-management libraries such as Redux Toolkit and Zustand, and server-state libraries such as TanStack Query. The appropriate choice depends on how widely the state is shared and what kind of state it represents.",
+    "code": "// Local state\nconst [count, setCount] = useState(0);\n\n// Complex local state\nconst [state, dispatch] = useReducer(reducer, initialState);\n\n// Shared state\nconst value = useContext(MyContext);\n\n// External stores\n// Redux Toolkit\n// Zustand\n\n// Server state\n// TanStack Query"
+  },
+  {
+    "id": 5,
+    "question": "What is Redux?",
+    "answer": "Redux is a predictable state-management library that stores application state in a centralized store. State is updated by dispatching actions, and reducers calculate the next state from the current state and the action. Redux is commonly used when an application has complex shared state and needs predictable, centralized state updates.",
+    "code": "const initialState = {\n  count: 0\n};\n\nfunction counterReducer(state = initialState, action) {\n  switch (action.type) {\n    case \"increment\":\n      return {\n        ...state,\n        count: state.count + 1\n      };\n\n    default:\n      return state;\n  }\n}\n\n// UI dispatches an action\n// → reducer calculates new state\n// → store updates\n// → subscribed UI re-renders"
+  },
+  {
+    "id": 6,
+    "question": "What is Redux Toolkit?",
+    "answer": "Redux Toolkit is the officially recommended way to write Redux logic. It provides utilities such as createSlice(), configureStore(), createAsyncThunk(), and RTK Query that reduce boilerplate and make Redux easier to configure and use. It also uses Immer internally in reducers created with createSlice(), allowing convenient immutable update syntax.",
+    "code": "import { createSlice } from \"@reduxjs/toolkit\";\n\nconst counterSlice = createSlice({\n  name: \"counter\",\n  initialState: { count: 0 },\n  reducers: {\n    increment(state) {\n      state.count += 1;\n    }\n  }\n});\n\nexport const { increment } = counterSlice.actions;\nexport default counterSlice.reducer;"
+  },
+  {
+    "id": 7,
+    "question": "What is Zustand?",
+    "answer": "Zustand is a lightweight state-management library for React that provides a simple external store and a hook-based API. Components can subscribe to the specific state they need without requiring a Context Provider for the store.",
+    "code": "import { create } from \"zustand\";\n\nconst useCounterStore = create((set) => ({\n  count: 0,\n  increment: () =>\n    set((state) => ({\n      count: state.count + 1\n    }))\n}));\n\nfunction Counter() {\n  const count = useCounterStore((state) => state.count);\n  const increment = useCounterStore((state) => state.increment);\n\n  return (\n    <button onClick={increment}>\n      {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 8,
+    "question": "What is the difference between Context API and Redux?",
+    "answer": "Context API is a React feature primarily designed to make values available to components without manually passing props through every level. Redux is a dedicated state-management library that provides a centralized store, actions, reducers, middleware, and additional tooling. Context can be sufficient for simple shared state, while Redux Toolkit is often more suitable for complex application-wide state management.",
+    "code": "// Context API\nconst ThemeContext = createContext(null);\n\nfunction App() {\n  return (\n    <ThemeContext.Provider value=\"dark\">\n      <AppContent />\n    </ThemeContext.Provider>\n  );\n}\n\n// Redux Toolkit\nconst store = configureStore({\n  reducer: {\n    counter: counterReducer\n  }\n});\n\n// Context is built into React.\n// Redux is an external state-management library."
+  },
+  {
+    "id": 9,
+    "question": "What is the difference between local state and global state?",
+    "answer": "Local state belongs to a specific component or a small part of the component tree and is usually managed with useState or useReducer. Global state is shared across multiple parts of the application and is accessible from components that may not have a direct parent-child relationship.",
+    "code": "// Local state\nfunction SearchBox() {\n  const [query, setQuery] = useState(\"\");\n\n  return (\n    <input\n      value={query}\n      onChange={(e) => setQuery(e.target.value)}\n    />\n  );\n}\n\n// Global state example\n// Multiple components can access the same\n// authenticated user or shopping cart state."
+  },
+  {
+    "id": 10,
+    "question": "What problems can occur with excessive global state?",
+    "answer": "Excessive global state can make an application harder to understand, debug, test, and maintain. It can also create unnecessary coupling between components and cause more components to re-render when shared state changes. State should generally be kept as close as possible to where it is actually needed.",
+    "code": "// Avoid putting every UI detail in global state\n\n// ❌ Global state for a local dropdown\nconst globalState = {\n  isDropdownOpen: true\n};\n\n// ✅ Keep it local\nfunction Dropdown() {\n  const [isOpen, setIsOpen] = useState(false);\n\n  return <div>{/* dropdown UI */}</div>;\n}\n\n// Rule of thumb:\n// Keep state local unless multiple parts\n// of the application genuinely need it."
+  },
+  {
+    "id": 11,
+    "question": "How do you decide which state management approach to use in a React application?",
+    "answer": "Start with the simplest solution that satisfies the requirements. Use useState for component-local state, useReducer for complex state transitions within a component or feature, and Context when a value needs to be shared through a React subtree. For larger and more complex shared client state, consider Redux Toolkit or Zustand. For server state such as cached API data, a server-state solution such as TanStack Query or Redux Toolkit Query may be more appropriate than treating the data as ordinary client state.",
+    "code": "// Simple UI state\nconst [isOpen, setIsOpen] = useState(false);\n\n// Complex feature state\nconst [state, dispatch] = useReducer(reducer, initialState);\n\n// Shared React state\nconst theme = useContext(ThemeContext);\n\n// Complex global client state\n// Redux Toolkit / Zustand\n\n// Server state\n// TanStack Query / RTK Query"
+  }
+]
