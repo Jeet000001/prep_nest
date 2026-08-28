@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What is Suspense in React?",
+    "answer": "Suspense is a React feature that lets a component display fallback UI while its child component is waiting for something required to render. A common use case is showing loading UI while a component loaded with React.lazy() is being downloaded.",
+    "code": "import { Suspense, lazy } from \"react\";\n\nconst Dashboard = lazy(() => import(\"./Dashboard\"));\n\nfunction App() {\n  return (\n    <Suspense fallback={<p>Loading...</p>}>\n      <Dashboard />\n    </Suspense>\n  );\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why is Suspense used?",
+    "answer": "Suspense is used to coordinate loading states declaratively. Instead of manually tracking whether a lazy component has loaded, you provide fallback UI and let React show it while the component is suspended. It can also be used with other React features that support Suspense.",
+    "code": "function App() {\n  return (\n    <Suspense fallback={<LoadingSpinner />}>\n      <Dashboard />\n    </Suspense>\n  );\n}\n\n// React handles showing the fallback\n// while the child is suspended."
+  },
+  {
+    "id": 3,
+    "question": "How does Suspense work with React.lazy()?",
+    "answer": "React.lazy() uses a dynamic import() to load a component asynchronously. While the module is loading, the lazy component suspends. React then displays the fallback provided by the nearest Suspense boundary. Once the module loads, React renders the actual component.",
+    "code": "const Profile = lazy(() => import(\"./Profile\"));\n\nfunction App() {\n  return (\n    <Suspense fallback={<p>Loading profile...</p>}>\n      <Profile />\n    </Suspense>\n  );\n}\n\n// Flow:\n// Profile requested\n//      ↓\n// import() starts loading\n//      ↓\n// Component suspends\n//      ↓\n// Suspense shows fallback\n//      ↓\n// Module loads\n//      ↓\n// Profile renders"
+  },
+  {
+    "id": 4,
+    "question": "What is a fallback UI?",
+    "answer": "A fallback UI is temporary content displayed by a Suspense boundary while its children are suspended. It is commonly a loading spinner, skeleton screen, placeholder, or simple loading message.",
+    "code": "<Suspense fallback={<p>Loading...</p>}>\n  <Dashboard />\n</Suspense>\n\n// While Dashboard is loading:\n// <p>Loading...</p>\n// is displayed."
+  },
+  {
+    "id": 5,
+    "question": "Can multiple components use different Suspense boundaries?",
+    "answer": "Yes. You can place multiple Suspense boundaries around different parts of your UI, and each boundary can have its own fallback UI.",
+    "code": "function App() {\n  return (\n    <div>\n      <Suspense fallback={<p>Loading profile...</p>}>\n        <Profile />\n      </Suspense>\n\n      <Suspense fallback={<p>Loading posts...</p>}>\n        <Posts />\n      </Suspense>\n    </div>\n  );\n}"
+  },
+  {
+    "id": 6,
+    "question": "What is the benefit of using multiple Suspense boundaries?",
+    "answer": "Multiple Suspense boundaries allow different parts of the UI to load independently. A slow component does not necessarily need to hide the entire page behind one loading screen. This can provide a better user experience by allowing already-available content to remain visible while slower sections load.",
+    "code": "function Dashboard() {\n  return (\n    <>\n      <Header />\n\n      <Suspense fallback={<ProfileSkeleton />}>\n        <Profile />\n      </Suspense>\n\n      <Suspense fallback={<ChartSkeleton />}>\n        <AnalyticsChart />\n      </Suspense>\n    </>\n  );\n}\n\n// Profile and AnalyticsChart can have\n// independent loading states."
+  },
+  {
+    "id": 7,
+    "question": "How is Suspense related to concurrent rendering?",
+    "answer": "Suspense works closely with React's modern rendering architecture, including concurrent rendering. It allows React to coordinate rendering around parts of the UI that are not ready yet and choose when to show fallback content or reveal completed content. Suspense itself is not the same thing as concurrent rendering; rather, it is one of the React features that takes advantage of React's ability to schedule and coordinate rendering work.",
+    "code": "function App() {\n  return (\n    <Suspense fallback={<Loading />}>\n      <SlowComponent />\n    </Suspense>\n  );\n}\n\n// Conceptually:\n// Start rendering\n//      ↓\n// Child suspends\n//      ↓\n// React can show fallback\n//      ↓\n// Continue/coordinate other rendering work\n//      ↓\n// Child becomes ready\n//      ↓\n// React reveals the content"
+  }
+]

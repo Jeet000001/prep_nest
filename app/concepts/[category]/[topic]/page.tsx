@@ -108,7 +108,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "virtual-dom-reconciliation": "VirtualDOM_&_Reconciliation.json",
     lifecycle: "Lifecycle.json",
     "error-handling": "Error_Handling.json",
-    "code-splitting": "LazyLoading_&_CodeSplitting.json"
+    "code-splitting": "Code_Splitting.json",
+    "suspense": "Suspense.json"
   },
 };
 
