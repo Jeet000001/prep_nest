@@ -193,6 +193,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Virtual DOM & Reconciliation", href: "/concepts/react/virtual-dom-reconciliation" },
       { name: "Lifecycle", href: "/concepts/react/lifecycle" },
       { name: "Error Handling", href: "/concepts/react/error-handling" },
+      { name: "Code Splitting", href: "/concepts/react/code-splitting" },
       { name: "Performance", href: "/concepts/react/performance" },
     ],
   },

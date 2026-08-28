@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "question": "What is code splitting?",
+    "answer": "Code splitting is a technique that divides a JavaScript application bundle into smaller chunks that can be loaded when they are needed instead of loading the entire application at once. This reduces the initial JavaScript that the browser needs to download, parse, and execute.",
+    "code": "// Without code splitting\nimport Dashboard from \"./Dashboard\";\nimport Settings from \"./Settings\";\n\n// Both modules can become part of the initial bundle.\n\n// With code splitting\nconst Dashboard = lazy(() => import(\"./Dashboard\"));\nconst Settings = lazy(() => import(\"./Settings\"));"
+  },
+  {
+    "id": 2,
+    "question": "Why is code splitting important?",
+    "answer": "Code splitting improves initial page performance by reducing the amount of JavaScript loaded upfront. Smaller initial bundles can reduce download, parsing, compilation, and execution time, which can improve the user's initial loading experience, especially on slower devices or networks.",
+    "code": "// Large initial bundle\nApp\n ├── Home\n ├── Dashboard\n ├── Admin\n ├── Settings\n └── Reports\n\n// Code-split application\nInitial chunk\n └── Home\n\nLoaded when needed:\n ├── Dashboard chunk\n ├── Admin chunk\n ├── Settings chunk\n └── Reports chunk"
+  },
+  {
+    "id": 3,
+    "question": "What is React.lazy()?",
+    "answer": "React.lazy() lets you render a component that is loaded dynamically using a Promise returned by dynamic import(). React waits for the module to load before rendering the component. The lazy component is normally rendered inside a Suspense boundary.",
+    "code": "import { lazy } from \"react\";\n\nconst Dashboard = lazy(() => import(\"./Dashboard\"));\n\nfunction App() {\n  return <Dashboard />;\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is Suspense?",
+    "answer": "Suspense is a React component that lets you specify fallback UI while a child component is waiting for something required to render, such as a lazy-loaded component. With React.lazy(), Suspense commonly displays a loading indicator while the component's JavaScript chunk is being downloaded.",
+    "code": "import { lazy, Suspense } from \"react\";\n\nconst Dashboard = lazy(() => import(\"./Dashboard\"));\n\nfunction App() {\n  return (\n    <Suspense fallback={<p>Loading...</p>}>\n      <Dashboard />\n    </Suspense>\n  );\n}"
+  },
+  {
+    "id": 5,
+    "question": "How do you lazy-load a React component?",
+    "answer": "Use React.lazy() with a dynamic import(), then render the lazy component inside Suspense and provide fallback UI.",
+    "code": "import { lazy, Suspense } from \"react\";\n\nconst Profile = lazy(() => import(\"./Profile\"));\n\nfunction App() {\n  return (\n    <Suspense fallback={<p>Loading profile...</p>}>\n      <Profile />\n    </Suspense>\n  );\n}"
+  },
+  {
+    "id": 6,
+    "question": "What happens when a lazy component is loading?",
+    "answer": "When React reaches a lazy component whose module has not loaded yet, the component suspends. The nearest Suspense boundary displays its fallback UI. Once the JavaScript module finishes loading, React retries rendering the component and replaces the fallback with the loaded component.",
+    "code": "const Dashboard = lazy(() => import(\"./Dashboard\"));\n\n<Suspense fallback={<Loading />}> \n  <Dashboard />\n</Suspense>\n\n// Loading sequence:\n// 1. Render Dashboard\n// 2. Dashboard chunk starts loading\n// 3. Suspense shows <Loading />\n// 4. Chunk finishes loading\n// 5. Dashboard renders"
+  },
+  {
+    "id": 7,
+    "question": "What is dynamic import?",
+    "answer": "Dynamic import is the JavaScript import() function that loads a module asynchronously at runtime. Unlike a normal static import, it returns a Promise and allows bundlers to create a separate chunk for the imported module.",
+    "code": "async function loadDashboard() {\n  const module = await import(\"./Dashboard\");\n\n  console.log(module);\n}\n\n// import() returns a Promise."
+  },
+  {
+    "id": 8,
+    "question": "How does lazy loading improve performance?",
+    "answer": "Lazy loading can improve performance by delaying the download and execution of code that is not immediately required. This reduces the initial JavaScript payload and can improve startup performance. However, lazy loading is not automatically faster in every situation because the deferred chunk still has to be downloaded when the user needs it.",
+    "code": "// User initially visits Home\nHome\n ↓\nLoad only Home code\n ↓\nRender Home\n\n// User opens Dashboard later\nDashboard requested\n ↓\nDownload Dashboard chunk\n ↓\nRender Dashboard"
+  },
+  {
+    "id": 9,
+    "question": "What is route-based code splitting?",
+    "answer": "Route-based code splitting divides an application based on routes or pages so that the JavaScript for a route is loaded when the user navigates to that route. For example, the dashboard code does not need to be included in the initial JavaScript required to render the home page.",
+    "code": "const Home = lazy(() => import(\"./pages/Home\"));\nconst Dashboard = lazy(() => import(\"./pages/Dashboard\"));\nconst Settings = lazy(() => import(\"./pages/Settings\"));\n\nfunction App() {\n  return (\n    <Suspense fallback={<p>Loading...</p>}>\n      {/* Router decides which lazy page to render */}\n    </Suspense>\n  );\n}\n\n// /home      → Home chunk\n// /dashboard → Dashboard chunk\n// /settings  → Settings chunk"
+  },
+  {
+    "id": 10,
+    "question": "What is component-based code splitting?",
+    "answer": "Component-based code splitting means loading individual components or feature modules only when they are needed instead of loading them as part of the initial bundle. It is useful for large or rarely used components such as charts, editors, modals, maps, or admin panels.",
+    "code": "const AnalyticsChart = lazy(\n  () => import(\"./AnalyticsChart\")\n);\n\nfunction Dashboard({ showAnalytics }) {\n  return (\n    <div>\n      <h1>Dashboard</h1>\n\n      {showAnalytics && (\n        <Suspense fallback={<p>Loading chart...</p>}>\n          <AnalyticsChart />\n        </Suspense>\n      )}\n    </div>\n  );\n}\n\n// AnalyticsChart is loaded only when it is rendered."
+  }
+]
