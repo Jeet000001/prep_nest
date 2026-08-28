@@ -94,7 +94,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     events: "Events.json",
     "conditional-rendering": "Conditional_Rendering.json",
     "lists-keys": "Lists-Keys.json",
-    forms: "Forms.json"
+    forms: "Forms.json",
+    useEffect: "useEffect.json"
   }
 };
 

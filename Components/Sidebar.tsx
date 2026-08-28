@@ -172,7 +172,6 @@ const topicGroups: TopicGroup[] = [
       { name: "Components", href: "/concepts/react/components" },
       { name: "JSX", href: "/concepts/react/jsx" },
       { name: "Props", href: "/concepts/react/props" },
-      { name: "State", href: "/concepts/react/state" },
       { name: "Events", href: "/concepts/react/events" },
       {
         name: "Conditional Rendering",
@@ -180,8 +179,8 @@ const topicGroups: TopicGroup[] = [
       },
       { name: "Lists & Keys", href: "/concepts/react/lists-keys" },
       { name: "Forms", href: "/concepts/react/forms" },
-      { name: "useState", href: "/concepts/react/use-state" },
-      { name: "useEffect", href: "/concepts/react/use-effect" },
+      { name: "useState", href: "/concepts/react/state" },
+      { name: "useEffect", href: "/concepts/react/useEffect" },
       { name: "useRef", href: "/concepts/react/use-ref" },
       { name: "useMemo", href: "/concepts/react/use-memo" },
       { name: "useCallback", href: "/concepts/react/use-callback" },

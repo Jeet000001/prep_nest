@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "question": "What is useEffect?",
+    "answer": "useEffect is a React Hook that lets you run side effects in a functional component. Side effects are operations that interact with something outside the normal rendering process, such as API calls, timers, subscriptions, event listeners, or manually interacting with the DOM.",
+    "code": "import { useEffect } from \"react\";\n\nfunction App() {\n  useEffect(() => {\n    console.log(\"Effect executed\");\n  });\n\n  return <h1>Hello</h1>;\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why is useEffect used?",
+    "answer": "useEffect is used to synchronize a React component with external systems or perform side effects after React renders. Common use cases include fetching data, setting up event listeners, starting timers, subscribing to external services, and cleaning up those resources.",
+    "code": "useEffect(() => {\n  const timer = setInterval(() => {\n    console.log(\"Running...\");\n  }, 1000);\n\n  return () => clearInterval(timer);\n}, []);"
+  },
+  {
+    "id": 3,
+    "question": "When does useEffect run?",
+    "answer": "useEffect runs after React commits a render to the screen. Its dependency array determines when it runs again. Without a dependency array, it runs after every render. With an empty array, it runs after the initial mount. With dependencies, it runs after the initial mount and whenever a dependency changes.",
+    "code": "// After every render\nuseEffect(() => {\n  console.log(\"Runs after every render\");\n});\n\n// After initial mount\nuseEffect(() => {\n  console.log(\"Runs once after mount\");\n}, []);\n\n// When count changes\nuseEffect(() => {\n  console.log(\"Count changed\");\n}, [count]);"
+  },
+  {
+    "id": 4,
+    "question": "What is the dependency array in useEffect?",
+    "answer": "The dependency array is the second argument passed to useEffect. It tells React which reactive values the effect depends on. React compares these dependencies between renders and re-runs the effect when one of them changes.",
+    "code": "useEffect(() => {\n  console.log(\"User changed\");\n}, [user]);"
+  },
+  {
+    "id": 5,
+    "question": "What happens when the dependency array is empty?",
+    "answer": "When you provide an empty dependency array, the effect runs after the component is mounted. The cleanup function, if provided, runs when the component unmounts. In development, React StrictMode may intentionally run effects more than once to help detect side-effect problems.",
+    "code": "useEffect(() => {\n  console.log(\"Component mounted\");\n\n  return () => {\n    console.log(\"Component unmounted\");\n  };\n}, []);"
+  },
+  {
+    "id": 6,
+    "question": "What happens when you don't provide a dependency array?",
+    "answer": "When you do not provide a dependency array, useEffect runs after every render. If the effect updates state, it can cause another render and potentially create an infinite loop.",
+    "code": "useEffect(() => {\n  console.log(\"Runs after every render\");\n});"
+  },
+  {
+    "id": 7,
+    "question": "What happens when you provide dependencies?",
+    "answer": "When you provide dependencies, the effect runs after the initial render and runs again whenever one of those dependencies changes. Before running the effect again, React runs the previous cleanup function if one exists.",
+    "code": "useEffect(() => {\n  console.log(\"Count is:\", count);\n}, [count]);"
+  },
+  {
+    "id": 8,
+    "question": "What is the cleanup function in useEffect?",
+    "answer": "A cleanup function is a function returned from the useEffect callback. It is used to clean up resources created by the effect, such as event listeners, timers, subscriptions, or connections.",
+    "code": "useEffect(() => {\n  const timer = setInterval(() => {\n    console.log(\"Hello\");\n  }, 1000);\n\n  return () => {\n    clearInterval(timer);\n  };\n}, []);"
+  },
+  {
+    "id": 9,
+    "question": "When does the cleanup function execute?",
+    "answer": "The cleanup function executes before the effect runs again because of changed dependencies, and when the component unmounts. This helps prevent duplicate subscriptions, timers, event listeners, and other resource leaks.",
+    "code": "useEffect(() => {\n  console.log(\"Effect started for:\", userId);\n\n  return () => {\n    console.log(\"Cleaning up previous effect\");\n  };\n}, [userId]);"
+  },
+  {
+    "id": 10,
+    "question": "How do you use useEffect for API calls?",
+    "answer": "You usually define an asynchronous function inside useEffect and call it. The async function fetches the data and updates state with the result. You should also handle loading and error states in real applications.",
+    "code": "import { useEffect, useState } from \"react\";\n\nfunction App() {\n  const [users, setUsers] = useState([]);\n\n  useEffect(() => {\n    async function fetchUsers() {\n      const response = await fetch(\"/api/users\");\n      const data = await response.json();\n      setUsers(data);\n    }\n\n    fetchUsers();\n  }, []);\n\n  return <div>{users.length} users</div>;\n}"
+  },
+  {
+    "id": 11,
+    "question": "How do you prevent unnecessary API calls in useEffect?",
+    "answer": "You can prevent unnecessary API calls by providing the correct dependency array and only including values that should trigger a new request. You can also add conditions inside the effect, avoid unstable object or function dependencies, and cancel outdated requests when appropriate.",
+    "code": "useEffect(() => {\n  if (!userId) return;\n\n  async function fetchUser() {\n    const response = await fetch(`/api/users/${userId}`);\n    const data = await response.json();\n    setUser(data);\n  }\n\n  fetchUser();\n}, [userId]);"
+  },
+  {
+    "id": 12,
+    "question": "What is an infinite loop in useEffect?",
+    "answer": "An infinite loop happens when an effect continuously causes a state update, which triggers another render, causing the effect to run again repeatedly. This commonly happens when there is no dependency array or when a dependency changes on every render.",
+    "code": "// Problem: creates an infinite update loop\nuseEffect(() => {\n  setCount(count + 1);\n});\n\n// Runs only when needed\nuseEffect(() => {\n  console.log(\"Component mounted\");\n}, []);"
+  },
+  {
+    "id": 13,
+    "question": "Why can an object dependency cause repeated effects?",
+    "answer": "React compares dependencies using reference identity. If you create a new object during every render, that object has a new reference even if its contents are the same. React therefore treats it as changed and re-runs the effect.",
+    "code": "function App() {\n  const options = { active: true };\n\n  useEffect(() => {\n    console.log(\"Effect runs again\");\n  }, [options]);\n}\n\n// The options object gets a new reference on every render."
+  },
+  {
+    "id": 14,
+    "question": "Why can a function dependency cause repeated effects?",
+    "answer": "A function defined inside a component is usually created again on every render. Therefore, its reference changes, and an effect that depends on that function can run again. You can often move the function inside the effect, restructure the code, or use useCallback when appropriate.",
+    "code": "function App() {\n  const handleClick = () => {\n    console.log(\"Clicked\");\n  };\n\n  useEffect(() => {\n    console.log(\"Effect runs\");\n  }, [handleClick]);\n}\n\n// handleClick gets a new reference on each render."
+  },
+  {
+    "id": 15,
+    "question": "Can you make the useEffect callback itself async?",
+    "answer": "No, the function passed directly to useEffect should not be declared async. An async function always returns a Promise, but useEffect expects either nothing or a cleanup function. Instead, define an async function inside the effect and call it.",
+    "code": "// Incorrect\nuseEffect(async () => {\n  const response = await fetch(\"/api/users\");\n}, []);\n\n// Correct\nuseEffect(() => {\n  async function fetchUsers() {\n    const response = await fetch(\"/api/users\");\n    const data = await response.json();\n    console.log(data);\n  }\n\n  fetchUsers();\n}, []);"
+  },
+  {
+    "id": 16,
+    "question": "How do you correctly perform asynchronous operations inside useEffect?",
+    "answer": "Define an async function inside the effect and call it, or use Promise methods. The useEffect callback itself remains synchronous and can return a cleanup function. For requests that may become outdated, you should also consider using AbortController or another cancellation strategy.",
+    "code": "useEffect(() => {\n  async function loadData() {\n    try {\n      const response = await fetch(\"/api/data\");\n\n      if (!response.ok) {\n        throw new Error(\"Failed to fetch data\");\n      }\n\n      const data = await response.json();\n      setData(data);\n    } catch (error) {\n      setError(error.message);\n    }\n  }\n\n  loadData();\n}, []);"
+  },
+  {
+    "id": 17,
+    "question": "What is a stale closure in useEffect?",
+    "answer": "A stale closure happens when an effect or callback uses a value captured from an older render instead of the latest value. This often occurs when a value used inside useEffect is missing from the dependency array.",
+    "code": "function App() {\n  const [count, setCount] = useState(0);\n\n  useEffect(() => {\n    const timer = setInterval(() => {\n      console.log(count);\n    }, 1000);\n\n    return () => clearInterval(timer);\n  }, []);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      Count: {count}\n    </button>\n  );\n}\n\n// The effect captures the count from the render when it was created."
+  },
+  {
+    "id": 18,
+    "question": "What happens if you forget a dependency?",
+    "answer": "If you forget a reactive value that is used inside an effect, the effect may continue using an outdated value and fail to synchronize correctly when that value changes. This can cause stale data, bugs, or unexpected behavior. The React Hooks ESLint rule helps detect missing dependencies.",
+    "code": "// Problem: userId is used but missing\nuseEffect(() => {\n  fetch(`/api/users/${userId}`);\n}, []);\n\n// Correct\nuseEffect(() => {\n  fetch(`/api/users/${userId}`);\n}, [userId]);"
+  },
+  {
+    "id": 19,
+    "question": "What is the purpose of eslint-plugin-react-hooks?",
+    "answer": "eslint-plugin-react-hooks is an ESLint plugin that helps enforce the Rules of Hooks and checks dependency arrays for Hooks such as useEffect. It can detect missing or unnecessary dependencies and help prevent common bugs such as stale closures.",
+    "code": "// ESLint may warn about missing dependencies\nuseEffect(() => {\n  console.log(user.name);\n}, []);\n\n// The warning helps you review whether user\n// should be included as a dependency."
+  },
+  {
+    "id": 20,
+    "question": "When should you not use useEffect?",
+    "answer": "You should not use useEffect for calculations that can be done directly during rendering, for transforming existing props or state into derived values, or for handling user actions that can be handled directly in an event handler. useEffect should mainly be used to synchronize with external systems.",
+    "code": "// Unnecessary useEffect\nconst [fullName, setFullName] = useState(\"\");\n\nuseEffect(() => {\n  setFullName(`${firstName} ${lastName}`);\n}, [firstName, lastName]);\n\n// Better: calculate during rendering\nconst fullName = `${firstName} ${lastName}`;"
+  }
+]
