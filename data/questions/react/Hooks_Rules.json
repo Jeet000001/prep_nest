@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "What are the Rules of Hooks?",
+    "answer": "The Rules of Hooks are guidelines that ensure React Hooks work correctly. The two main rules are: 1. Call Hooks only at the top level, not inside loops, conditions, or nested functions. 2. Call Hooks only from React function components or custom Hooks. These rules help React correctly track and preserve state between renders.",
+    "code": "function Counter() {\n  // Correct: Hook is called at the top level\n  const [count, setCount] = useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 2,
+    "question": "Why can't Hooks be called inside loops?",
+    "answer": "Hooks cannot be called inside loops because the number or order of Hook calls could change between renders. React relies on Hooks being called in the exact same order on every render to associate each Hook call with the correct state. A loop can make that order unpredictable.",
+    "code": "// Incorrect\nfunction Component() {\n  for (let i = 0; i < 3; i++) {\n    const [count, setCount] = useState(0);\n  }\n}\n\n// Correct\nfunction Component() {\n  const [count, setCount] = useState(0);\n}"
+  },
+  {
+    "id": 3,
+    "question": "Why can't Hooks be called inside conditions?",
+    "answer": "Hooks cannot be called inside conditions because a condition may be true during one render and false during another. This would change the order in which Hooks are called. React depends on a consistent Hook call order to correctly match state and other Hook data.",
+    "code": "// Incorrect\nfunction Component({ isLoggedIn }) {\n  if (isLoggedIn) {\n    const [user, setUser] = useState(null);\n  }\n}\n\n// Correct\nfunction Component({ isLoggedIn }) {\n  const [user, setUser] = useState(null);\n\n  if (isLoggedIn) {\n    console.log(user);\n  }\n}"
+  },
+  {
+    "id": 4,
+    "question": "Why can't Hooks be called inside nested functions?",
+    "answer": "Hooks should not be called inside nested functions because React cannot guarantee that the nested function will be called during every render or in the same order. Hooks must be called directly at the top level of a React component or custom Hook so React can track them consistently.",
+    "code": "// Incorrect\nfunction Component() {\n  function handleClick() {\n    const [count, setCount] = useState(0);\n  }\n\n  return <button onClick={handleClick}>Click</button>;\n}\n\n// Correct\nfunction Component() {\n  const [count, setCount] = useState(0);\n\n  function handleClick() {\n    setCount((prev) => prev + 1);\n  }\n\n  return <button onClick={handleClick}>{count}</button>;\n}"
+  },
+  {
+    "id": 5,
+    "question": "Why must Hooks be called at the top level?",
+    "answer": "Hooks must be called at the top level so they execute in the same order every time the component renders. React does not identify Hook state by the variable name. Instead, it relies on the order of Hook calls. Calling Hooks consistently allows React to connect each Hook call with the correct stored state.",
+    "code": "function Component() {\n  // React expects this order on every render\n  const [name, setName] = useState(\"\");\n  const [count, setCount] = useState(0);\n  const [isOpen, setIsOpen] = useState(false);\n\n  return <div>{name}</div>;\n}"
+  },
+  {
+    "id": 6,
+    "question": "Why can Hooks only be called from React components or custom Hooks?",
+    "answer": "Hooks can only be called from React function components or custom Hooks because React needs a valid rendering context to manage Hook state and lifecycle behavior. Regular JavaScript functions are not part of React's component rendering system, so React cannot reliably manage Hook calls inside them.",
+    "code": "// Incorrect: regular JavaScript function\nfunction getData() {\n  const [data, setData] = useState(null);\n}\n\n// Correct: React component\nfunction Component() {\n  const [data, setData] = useState(null);\n  return <div>{data}</div>;\n}\n\n// Correct: custom Hook\nfunction useData() {\n  const [data, setData] = useState(null);\n  return { data, setData };\n}"
+  },
+  {
+    "id": 7,
+    "question": "What problem do the Rules of Hooks prevent?",
+    "answer": "The Rules of Hooks prevent bugs caused by changing the order or number of Hook calls between renders. Without these rules, React could associate state, effects, or other Hook data with the wrong Hook call. The rules ensure predictable state management and consistent component behavior.",
+    "code": "// First render\nuseState(); // Hook 1\nuseEffect(); // Hook 2\n\n// A later render must keep the same order\nuseState(); // Hook 1\nuseEffect(); // Hook 2\n\n// Changing the order can cause incorrect state behavior."
+  }
+]

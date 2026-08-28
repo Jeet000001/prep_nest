@@ -188,6 +188,7 @@ const topicGroups: TopicGroup[] = [
       { name: "React.memo", href: "/concepts/react/react-memo" },
       { name: "Context API", href: "/concepts/react/context-api" },
       { name: "Custom Hooks", href: "/concepts/react/custom-hooks" },
+      { name: "Hooks Rules", href: "/concepts/react/hooks-rules" },
       { name: "Performance", href: "/concepts/react/performance" },
     ],
   },
