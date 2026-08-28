@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "question": "How do you optimize the performance of a React application?",
+    "answer": "Optimize React applications by first measuring the actual bottlenecks and then reducing unnecessary rendering and work. Common techniques include keeping state local, using React.memo when appropriate, memoizing expensive calculations or stable callbacks, code splitting and lazy loading, virtualizing large lists, optimizing images and network requests, avoiding unnecessary effects, and using production builds.",
+    "code": "// Example: memoize an expensive calculation\nconst filteredUsers = useMemo(() => {\n  return users.filter((user) =>\n    user.name.toLowerCase().includes(search)\n  );\n}, [users, search]);\n\n// Also consider:\n// - React.memo\n// - useCallback\n// - code splitting\n// - list virtualization\n// - caching API data"
+  },
+  {
+    "id": 2,
+    "question": "What causes unnecessary re-renders?",
+    "answer": "Unnecessary re-renders can be caused by state updates that affect components that do not need the changed state, parent re-renders, changing object or array references, recreating functions passed as props, changing Context values, and poorly structured component trees. A re-render does not automatically mean the DOM is updated.",
+    "code": "function Parent() {\n  const [count, setCount] = useState(0);\n\n  const options = { theme: \"dark\" };\n\n  return (\n    <>\n      <button onClick={() => setCount(count + 1)}>\n        {count}\n      </button>\n\n      <Child options={options} />\n    </>\n  );\n}\n\n// options gets a new object reference\n// on every Parent render."
+  },
+  {
+    "id": 3,
+    "question": "How can you prevent unnecessary re-renders?",
+    "answer": "Keep state close to the components that need it, split large components into smaller ones, avoid unnecessary Context updates, maintain stable object and function references when needed, and use React.memo, useMemo, and useCallback only where profiling shows they provide value. Also avoid unnecessary state and effects.",
+    "code": "const Child = React.memo(function Child({ onClick }) {\n  return <button onClick={onClick}>Child</button>;\n});\n\nfunction Parent() {\n  const [count, setCount] = useState(0);\n\n  const handleClick = useCallback(() => {\n    console.log(\"clicked\");\n  }, []);\n\n  return (\n    <>\n      <button onClick={() => setCount(count + 1)}>\n        {count}\n      </button>\n      <Child onClick={handleClick} />\n    </>\n  );\n}"
+  },
+  {
+    "id": 4,
+    "question": "What is memoization?",
+    "answer": "Memoization is an optimization technique where the result of a computation or a value is cached so it can be reused when its inputs have not changed. In React, useMemo memoizes a calculated value, useCallback memoizes a function reference, and React.memo can skip rendering a component when its props have not changed according to its comparison.",
+    "code": "const result = useMemo(() => {\n  return expensiveCalculation(data);\n}, [data]);\n\n// If data has not changed according to\n// React's dependency comparison, React can\n// reuse the memoized result."
+  },
+  {
+    "id": 5,
+    "question": "How do React.memo, useMemo, and useCallback improve performance?",
+    "answer": "React.memo can skip a component render when its props are considered equal. useMemo can avoid recalculating an expensive value when its dependencies have not changed. useCallback can preserve a function reference between renders, which can help memoized children avoid re-rendering when they receive that function as a prop. These are performance optimizations, not guarantees that every application will become faster.",
+    "code": "const Child = React.memo(function Child({ data, onClick }) {\n  return <div onClick={onClick}>{data.total}</div>;\n});\n\nfunction Parent({ items }) {\n  const data = useMemo(() => {\n    return calculateTotal(items);\n  }, [items]);\n\n  const handleClick = useCallback(() => {\n    console.log(\"clicked\");\n  }, []);\n\n  return <Child data={data} onClick={handleClick} />;\n}"
+  },
+  {
+    "id": 6,
+    "question": "What is code splitting?",
+    "answer": "Code splitting is the process of dividing a JavaScript application's bundle into smaller chunks that can be loaded when they are needed instead of downloading the entire application JavaScript upfront. This can reduce the initial JavaScript that the browser needs to download and execute.",
+    "code": "import { lazy } from \"react\";\n\nconst Settings = lazy(() => import(\"./Settings\"));\n\n// Settings can be placed in a separate\n// JavaScript chunk and loaded when needed."
+  },
+  {
+    "id": 7,
+    "question": "What is lazy loading?",
+    "answer": "Lazy loading means delaying the loading or initialization of a resource until it is needed. In React, React.lazy() can lazy-load a component using a dynamic import. Suspense can display fallback UI while the component's code is being loaded.",
+    "code": "import { lazy, Suspense } from \"react\";\n\nconst Profile = lazy(() => import(\"./Profile\"));\n\nfunction App() {\n  return (\n    <Suspense fallback={<p>Loading...</p>}>\n      <Profile />\n    </Suspense>\n  );\n}"
+  },
+  {
+    "id": 8,
+    "question": "What is list virtualization?",
+    "answer": "List virtualization is a technique where only the items currently visible, plus a small overscan area, are rendered instead of rendering every item in a large list. Libraries such as TanStack Virtual can be used to implement virtualization.",
+    "code": "const items = Array.from(\n  { length: 100000 },\n  (_, index) => `Item ${index}`\n);\n\n// Without virtualization:\n// potentially thousands of DOM nodes\n\n// With virtualization:\n// only the visible range is rendered."
+  },
+  {
+    "id": 9,
+    "question": "Why is list virtualization useful?",
+    "answer": "Virtualization is useful for very large lists because creating and maintaining thousands of DOM nodes can increase rendering, layout, painting, memory, and scrolling costs. By rendering only a small visible portion, the browser has significantly less work to perform.",
+    "code": "// 100,000 records\nconst items = hugeDataset;\n\n// ❌ Render everything\nitems.map((item) => (\n  <Row key={item.id} item={item} />\n));\n\n// ✅ Virtualized list\n// Render only the rows currently\n// visible in the viewport."
+  },
+  {
+    "id": 10,
+    "question": "How would you optimize a large list in React?",
+    "answer": "For a large list, use stable and appropriate keys, keep each row lightweight, avoid unnecessary row re-renders, paginate or incrementally load data when appropriate, and use virtualization when the number of rendered items becomes large. Avoid creating unnecessary objects or functions for every row during rendering.",
+    "code": "const Row = React.memo(function Row({ item }) {\n  return <div>{item.name}</div>;\n});\n\nfunction List({ items }) {\n  return items.map((item) => (\n    <Row\n      key={item.id}\n      item={item}\n    />\n  ));\n}\n\n// For very large datasets, combine memoized rows\n// with virtualization."
+  },
+  {
+    "id": 11,
+    "question": "How can you optimize expensive calculations?",
+    "answer": "First determine whether the calculation is actually expensive. If it is and the inputs do not change frequently, useMemo can cache the result between renders. Other strategies include moving computation outside the render path, precomputing data, improving the algorithm, processing work incrementally, or moving heavy work to a Web Worker when appropriate.",
+    "code": "const sortedProducts = useMemo(() => {\n  return [...products].sort((a, b) =>\n    a.price - b.price\n  );\n}, [products]);\n\n// The calculation is rerun when products changes,\n// rather than on every render caused by unrelated state."
+  },
+  {
+    "id": 12,
+    "question": "How can you optimize Context API?",
+    "answer": "Avoid putting unrelated and frequently changing values into one Context. Split contexts by concern, keep the Provider value stable when appropriate, memoize expensive values, and move rapidly changing state to a more targeted state-management solution when necessary. Remember that consumers of a Context update when the provided value changes.",
+    "code": "const ThemeContext = createContext(null);\nconst AuthContext = createContext(null);\n\n// Instead of one huge Context:\n// AppContext = theme + auth + cart + search + ...\n\n// Split by concern so changes to one value\n// do not unnecessarily affect unrelated consumers."
+  },
+  {
+    "id": 13,
+    "question": "How can you identify performance bottlenecks in React?",
+    "answer": "Use measurement tools rather than guessing. React DevTools Profiler can show which components rendered, how long rendering took, and which commits were expensive. Browser DevTools Performance can reveal JavaScript execution, layout, paint, and other browser work. Network and Lighthouse tools can also identify loading and runtime bottlenecks.",
+    "code": "// Typical workflow:\n\n// 1. Reproduce the slow interaction\n// 2. Record it with React DevTools Profiler\n// 3. Find expensive components\n// 4. Inspect why they rendered\n// 5. Apply a targeted optimization\n// 6. Profile again\n\n// Optimize based on measured evidence."
+  },
+  {
+    "id": 14,
+    "question": "How do you use React DevTools Profiler?",
+    "answer": "Open React DevTools, select the Profiler, record an interaction, reproduce the slow behavior, and stop the recording. Inspect the commit timeline and component details to identify components that rendered and the time spent rendering. Then investigate why those components rendered and compare a new profile after optimization.",
+    "code": "// Profiling process:\n\n// Profiler\n//    ↓\n// Start recording\n//    ↓\n// Perform interaction\n//    ↓\n// Stop recording\n//    ↓\n// Inspect commits/components\n//    ↓\n// Optimize\n//    ↓\n// Profile again"
+  },
+  {
+    "id": 15,
+    "question": "What is the difference between re-render and DOM update?",
+    "answer": "A re-render means React runs a component again to calculate what its UI should look like. A DOM update happens only if React's reconciliation determines that the actual DOM needs to change. Therefore, a component can re-render without causing a corresponding DOM change.",
+    "code": "function Counter() {\n  const [count, setCount] = useState(0);\n\n  console.log(\"Component rendered\");\n\n  return <p>{count}</p>;\n}\n\n// React may run Counter again.\n// It then compares the result with the previous\n// rendered output and updates the DOM only when needed."
+  },
+  {
+    "id": 16,
+    "question": "What is referential equality and why does it matter for performance?",
+    "answer": "Referential equality means comparing whether two values refer to the exact same object, array, or function reference. Objects, arrays, and functions are compared by reference, not by their contents. This matters because React.memo and Hook dependency arrays use identity-based comparisons, so creating new references unnecessarily can cause effects, memoized calculations, or memoized components to run again.",
+    "code": "const a = { name: \"Jeet\" };\nconst b = { name: \"Jeet\" };\n\nconsole.log(a === b); // false\n\nconst c = a;\nconsole.log(a === c); // true\n\n// New reference on every render:\nfunction Parent() {\n  const options = { theme: \"dark\" };\n\n  return <Child options={options} />;\n}\n\n// Even though the contents are the same,\n// options is a new object reference each render."
+  }
+]
