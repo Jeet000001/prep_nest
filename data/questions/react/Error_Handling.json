@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "question": "How do you handle errors in React?",
+    "answer": "Errors in React can be handled in different ways depending on where the error occurs. Error Boundaries are used to catch errors during rendering and component lifecycle methods. For API or asynchronous errors, you normally handle them using try...catch, Promise.catch(), or error state. Form and user-input errors are usually handled with validation and conditional UI.",
+    "code": "function UserList() {\n  const [users, setUsers] = useState([]);\n  const [error, setError] = useState(null);\n\n  useEffect(() => {\n    async function fetchUsers() {\n      try {\n        const response = await fetch(\"/api/users\");\n\n        if (!response.ok) {\n          throw new Error(\"Failed to fetch users\");\n        }\n\n        const data = await response.json();\n        setUsers(data);\n      } catch (error) {\n        setError(error.message);\n      }\n    }\n\n    fetchUsers();\n  }, []);\n\n  if (error) return <p>Error: {error}</p>;\n\n  return <div>{users.length} users</div>;\n}"
+  },
+  {
+    "id": 2,
+    "question": "What is an Error Boundary?",
+    "answer": "An Error Boundary is a React component that catches JavaScript errors thrown during rendering, lifecycle methods, and constructors of its child component tree. It prevents the entire application UI from crashing and allows you to display a fallback UI instead. Error Boundaries are traditionally implemented using class components.",
+    "code": "class ErrorBoundary extends React.Component {\n  state = { hasError: false };\n\n  static getDerivedStateFromError() {\n    return { hasError: true };\n  }\n\n  render() {\n    if (this.state.hasError) {\n      return <h1>Something went wrong.</h1>;\n    }\n\n    return this.props.children;\n  }\n}\n\n// Usage:\n// <ErrorBoundary>\n//   <UserProfile />\n// </ErrorBoundary>"
+  },
+  {
+    "id": 3,
+    "question": "What types of errors can Error Boundaries catch?",
+    "answer": "Error Boundaries can catch errors that occur while rendering a child component, inside constructors of child components, and in lifecycle methods of class components. They catch errors in the component tree below the boundary and can display fallback UI instead of allowing the error to crash that part of the application.",
+    "code": "class BrokenComponent extends React.Component {\n  render() {\n    throw new Error(\"Rendering failed\");\n  }\n}\n\n// The Error Boundary above BrokenComponent\n// can catch this rendering error."
+  },
+  {
+    "id": 4,
+    "question": "What errors can Error Boundaries not catch?",
+    "answer": "Error Boundaries do not catch errors from event handlers, asynchronous callbacks such as setTimeout, server-side rendering errors, or errors thrown inside the Error Boundary itself. Event-handler errors should be handled with normal JavaScript error handling, while API and asynchronous errors should usually be handled explicitly with try...catch or Promise.catch().",
+    "code": "function Button() {\n  function handleClick() {\n    throw new Error(\"Click failed\");\n  }\n\n  return <button onClick={handleClick}>Click</button>;\n}\n\n// Error Boundary does not catch this event-handler error.\n// Handle it explicitly if necessary."
+  },
+  {
+    "id": 5,
+    "question": "How do Error Boundaries work?",
+    "answer": "An Error Boundary wraps part of the React component tree. If a supported error occurs in a descendant component, React stops rendering that failed subtree and gives the Error Boundary an opportunity to render fallback UI. A class Error Boundary commonly uses getDerivedStateFromError() to update its state and display fallback UI, and componentDidCatch() to log error information.",
+    "code": "class ErrorBoundary extends React.Component {\n  state = { hasError: false };\n\n  static getDerivedStateFromError(error) {\n    return { hasError: true };\n  }\n\n  componentDidCatch(error, info) {\n    console.error(\"Error:\", error);\n    console.error(\"Component stack:\", info.componentStack);\n  }\n\n  render() {\n    if (this.state.hasError) {\n      return <h1>Something went wrong.</h1>;\n    }\n\n    return this.props.children;\n  }\n}"
+  },
+  {
+    "id": 6,
+    "question": "Can functional components be Error Boundaries?",
+    "answer": "A function component cannot currently implement an Error Boundary by itself using a Hook. React's built-in Error Boundary mechanism is based on class components. In a functional-component application, you can still wrap parts of the UI with a class Error Boundary, or use a library that provides a convenient Error Boundary component.",
+    "code": "class ErrorBoundary extends React.Component {\n  state = { hasError: false };\n\n  static getDerivedStateFromError() {\n    return { hasError: true };\n  }\n\n  render() {\n    if (this.state.hasError) {\n      return <p>Something went wrong.</p>;\n    }\n\n    return this.props.children;\n  }\n}\n\nfunction App() {\n  return (\n    <ErrorBoundary>\n      <MyFunctionalComponent />\n    </ErrorBoundary>\n  );\n}"
+  },
+  {
+    "id": 7,
+    "question": "How do you handle errors from API requests?",
+    "answer": "API errors should usually be handled explicitly because Error Boundaries do not automatically catch errors from asynchronous API requests. A common approach is to use try...catch with async/await, check the response's ok property, store the error in state, and render an appropriate error message or retry option.",
+    "code": "function User() {\n  const [user, setUser] = useState(null);\n  const [error, setError] = useState(null);\n\n  useEffect(() => {\n    async function loadUser() {\n      try {\n        const response = await fetch(\"/api/user\");\n\n        if (!response.ok) {\n          throw new Error(`HTTP error: ${response.status}`);\n        }\n\n        const data = await response.json();\n        setUser(data);\n      } catch (error) {\n        setError(error.message);\n      }\n    }\n\n    loadUser();\n  }, []);\n\n  if (error) return <p>Failed: {error}</p>;\n  if (!user) return <p>Loading...</p>;\n\n  return <h1>{user.name}</h1>;\n}"
+  },
+  {
+    "id": 8,
+    "question": "What is the difference between JavaScript error handling and React Error Boundaries?",
+    "answer": "JavaScript error handling uses mechanisms such as try...catch, throw, and Promise.catch() to handle errors in general JavaScript code, including synchronous and asynchronous operations. React Error Boundaries are a React-specific mechanism for catching certain errors in a component tree during rendering and related component lifecycle work. They are complementary, not replacements for each other.",
+    "code": "// JavaScript error handling\ntry {\n  const result = JSON.parse(\"invalid JSON\");\n} catch (error) {\n  console.error(\"JavaScript error:\", error);\n}\n\n// React Error Boundary\nclass ErrorBoundary extends React.Component {\n  state = { hasError: false };\n\n  static getDerivedStateFromError() {\n    return { hasError: true };\n  }\n\n  render() {\n    if (this.state.hasError) {\n      return <h1>Something went wrong.</h1>;\n    }\n\n    return this.props.children;\n  }\n}"
+  }
+]
