@@ -90,12 +90,13 @@ const topicFiles: Record<string, Record<string, string>> = {
     components: "Components.json",
     jsx: "JSX.json",
     props: "Props.json",
-    state: "State.json",
+    useState: "State.json",
     events: "Events.json",
     "conditional-rendering": "Conditional_Rendering.json",
     "lists-keys": "Lists-Keys.json",
     forms: "Forms.json",
-    useEffect: "useEffect.json"
+    useEffect: "useEffect.json",
+    useRef:  "useRef.json"
   }
 };
 
