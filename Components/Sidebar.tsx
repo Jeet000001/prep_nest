@@ -202,6 +202,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Performance", href: "/concepts/react/performance" },
       { name: "StrictMode", href: "/concepts/react/strictmode" },
       { name: "Server & Client Components", href: "/concepts/react/server-client-components" },
+      { name: "React 18,19", href: "/concepts/react/react-18-19" },
     ],
   },
 ];

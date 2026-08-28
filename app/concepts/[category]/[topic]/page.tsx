@@ -116,7 +116,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "data-fetching": "Data_Fetching.json",
     performance: "Performance.json",
     strictmode: "StrictMode.json",
-    "server-client-components": "Server_&_Client_Components.json"
+    "server-client-components": "Server_&_Client_Components.json",
+    "react-18-19": "React_18_19.json"
   },
 };
 

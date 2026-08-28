@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "question": "What is concurrent rendering?",
+    "answer": "Concurrent rendering is a React rendering capability that allows React to work on rendering updates in an interruptible way. React can start rendering an update, pause it when necessary, work on something more urgent, and continue or discard the previous work later. This helps keep the UI responsive during expensive rendering.",
+    "code": "import { startTransition, useState } from \"react\";\n\nfunction Search() {\n  const [query, setQuery] = useState(\"\");\n  const [results, setResults] = useState([]);\n\n  function handleChange(e) {\n    const value = e.target.value;\n\n    // Urgent update\n    setQuery(value);\n\n    // Non-urgent update\n    startTransition(() => {\n      setResults(filterLargeList(value));\n    });\n  }\n\n  return (\n    <React.Fragment>\n      <input value={query} onChange={handleChange} />\n      <Results data={results} />\n    </React.Fragment>\n  );\n}"
+  },
+  {
+    "id": 2,
+    "question": "What is automatic batching?",
+    "answer": "Automatic batching means React groups multiple state updates into a single render when possible. In modern React, batching is not limited to React event handlers; updates inside Promises, timeouts, and other asynchronous callbacks are also batched. This reduces unnecessary renders and improves performance.",
+    "code": "function Example() {\n  const [count, setCount] = useState(0);\n  const [name, setName] = useState(\"\");\n\n  function handleClick() {\n    setCount((c) => c + 1);\n    setName(\"Jeet\");\n\n    // React can batch these updates\n    // into a single render.\n  }\n\n  return <button onClick={handleClick}>Update</button>;\n}"
+  },
+  {
+    "id": 3,
+    "question": "What is startTransition()?",
+    "answer": "startTransition() lets you mark state updates as non-urgent transitions. React can prioritize more urgent updates, such as typing or clicking, while rendering the transition in the background. The function does not itself perform asynchronous work; it marks the state updates inside its callback as non-urgent.",
+    "code": "import { startTransition } from \"react\";\n\nfunction handleSearch(value) {\n  setInput(value);\n\n  startTransition(() => {\n    setSearchResults(filterLargeList(value));\n  });\n}\n\n// input update -> urgent\n// search result update -> non-urgent"
+  },
+  {
+    "id": 4,
+    "question": "What is useTransition()?",
+    "answer": "useTransition() is a Hook that lets a component mark updates as transitions and provides an isPending value that indicates whether the transition is still pending. It is useful when you want to show pending UI while React works on a non-urgent update.",
+    "code": "import { useState, useTransition } from \"react\";\n\nfunction Tabs() {\n  const [isPending, startTransition] = useTransition();\n  const [tab, setTab] = useState(\"home\");\n\n  function selectTab(nextTab) {\n    startTransition(() => {\n      setTab(nextTab);\n    });\n  }\n\n  return (\n    <React.Fragment>\n      <button onClick={() => selectTab(\"profile\")}>\n        Profile\n      </button>\n\n      {isPending && <p>Loading...</p>}\n      <TabContent tab={tab} />\n    </React.Fragment>\n  );\n}"
+  },
+  {
+    "id": 5,
+    "question": "What is useDeferredValue()?",
+    "answer": "useDeferredValue() lets you use a deferred version of a value so that expensive UI depending on that value can lag behind urgent updates. The current value remains available immediately, while React can update the deferred value at lower priority.",
+    "code": "import { useDeferredValue, useState } from \"react\";\n\nfunction Search() {\n  const [query, setQuery] = useState(\"\");\n  const deferredQuery = useDeferredValue(query);\n\n  return (\n    <React.Fragment>\n      <input\n        value={query}\n        onChange={(e) => setQuery(e.target.value)}\n      />\n\n      <ExpensiveResults query={deferredQuery} />\n    </React.Fragment>\n  );\n}\n\n// query -> urgent/current value\n// deferredQuery -> lower-priority value"
+  },
+  {
+    "id": 6,
+    "question": "What is the purpose of transitions in React?",
+    "answer": "Transitions allow React to distinguish urgent updates from non-urgent UI updates. This helps keep interactions such as typing, clicking, and pressing buttons responsive while expensive UI updates are processed at a lower priority.",
+    "code": "function handleChange(value) {\n  // Urgent: keep input responsive\n  setInput(value);\n\n  // Non-urgent: update expensive results\n  startTransition(() => {\n    setResults(search(value));\n  });\n}"
+  },
+  {
+    "id": 7,
+    "question": "What is the difference between urgent and non-urgent updates?",
+    "answer": "Urgent updates are interactions where the user expects immediate feedback, such as typing into an input or clicking a button. Non-urgent updates can be allowed to wait, such as rendering a large search result list or switching expensive UI. React gives urgent work higher priority while transitions can mark non-urgent work.",
+    "code": "function handleInput(e) {\n  const value = e.target.value;\n\n  // Urgent\n  setQuery(value);\n\n  // Non-urgent\n  startTransition(() => {\n    setResults(expensiveSearch(value));\n  });\n}"
+  },
+  {
+    "id": 8,
+    "question": "What is hydration?",
+    "answer": "Hydration is the process where React takes HTML that was already generated on the server and attaches React behavior to it in the browser. After hydration, client-side React can handle interactions and update the UI.",
+    "code": "// Server renders a button with Count: 0\n\n// Browser receives HTML.\n\n// React hydrates it and attaches behavior:\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <button onClick={() => setCount(count + 1)}>\n      Count: {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 9,
+    "question": "What is selective hydration?",
+    "answer": "Selective hydration allows React to hydrate parts of a server-rendered application independently and prioritize hydration based on user interaction and application needs. Instead of requiring the entire page to become interactive at exactly the same time, React can prioritize the parts that need attention.",
+    "code": "// Conceptual example\n\n<Page>\n  <Header />\n  <MainContent />\n  <InteractiveChat />\n</Page>\n\n// React can prioritize hydration of an\n// interactive area when the user interacts\n// with it instead of treating the whole page\n// as one indivisible hydration task."
+  },
+  {
+    "id": 10,
+    "question": "What is the React Compiler?",
+    "answer": "The React Compiler is a build-time compiler that analyzes React code and automatically applies certain optimizations, including memoization of values and functions when it can prove that doing so is safe and beneficial. Its goal is to reduce the need for developers to manually optimize components with memoization.",
+    "code": "function ProductList({ products, filter }) {\n  const visibleProducts = products.filter(\n    (product) => product.category === filter\n  );\n\n  return (\n    <List products={visibleProducts} />\n  );\n}\n\n// With the React Compiler, React can analyze\n// this code and apply appropriate memoization\n// automatically where supported."
+  },
+  {
+    "id": 11,
+    "question": "How does the React Compiler affect memoization?",
+    "answer": "The React Compiler can automatically memoize values, functions, and component-related work when its analysis determines that doing so is appropriate. This can reduce the need for manually adding useMemo, useCallback, and sometimes React.memo purely for performance optimization. Developers may still use explicit memoization when there is a specific reason or when working with code that is not covered by the compiler.",
+    "code": "function Component({ items }) {\n  const filtered = items.filter(isActive);\n\n  const handleClick = () => {\n    console.log(\"clicked\");\n  };\n\n  return (\n    <Child\n      items={filtered}\n      onClick={handleClick}\n    />\n  );\n}\n\n// Traditionally, developers might write:\n// useMemo(...)\n// useCallback(...)\n// React.memo(...)\n//\n// The React Compiler can automatically apply\n// appropriate memoization in supported code."
+  },
+  {
+    "id": 12,
+    "question": "What are the important new concepts introduced in modern React?",
+    "answer": "Important modern React concepts include concurrent rendering, transitions with startTransition() and useTransition(), useDeferredValue(), automatic batching, Suspense, server rendering and hydration improvements, Server Components, Actions and async functions in supported React/Next.js environments, the React Compiler, and newer Hooks such as use() in supported React versions. Together, these features improve responsiveness, data handling, server/client composition, and developer ergonomics.",
+    "code": "// Modern React concepts\n\n// 1. Transitions\nstartTransition(() => {\n  setTab(\"profile\");\n});\n\n// 2. Deferred values\nconst deferredQuery = useDeferredValue(query);\n\n// 3. Suspense\n<Suspense fallback={<Loading />}>\n  <Content />\n</Suspense>\n\n// 4. Server Components\n// Server-rendered components can access\n// server-side resources directly.\n\n// 5. Automatic batching\nsetCount((c) => c + 1);\nsetName(\"Jeet\");\n\n// 6. React Compiler\n// Can automatically optimize supported React code."
+  }
+]
