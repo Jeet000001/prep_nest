@@ -103,7 +103,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "react-memo": "ReactMemo.json",
     "context-api": "Context_Api.json",
     "custom-hooks": "Custom_Hooks.json",
-    "hooks-rules": "Hooks_Rules.json"
+    "hooks-rules": "Hooks_Rules.json",
+    rerendering: "Re_rendering.json"
   },
 };
 

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "question": "What causes a React component to re-render?",
+    "answer": "A React component can re-render when its state changes, when its parent renders, or when a Context value that the component consumes changes. During a re-render, React calls the component again to calculate the next UI. A re-render does not always mean that the actual DOM will change.",
+    "code": "function Counter() {\n  const [count, setCount] = useState(0);\n\n  console.log(\"Component rendered\");\n\n  return (\n    <button onClick={() => setCount((prev) => prev + 1)}>\n      Count: {count}\n    </button>\n  );\n}"
+  },
+  {
+    "id": 2,
+    "question": "Does a parent re-render cause its children to re-render?",
+    "answer": "By default, when a parent component re-renders, React also renders its child components. However, React.memo can allow React to skip re-rendering a memoized child when its props have not changed. React may also optimize the actual work internally, but you should generally think of the parent render as causing its children to be considered for rendering.",
+    "code": "function Parent() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <>\n      <button onClick={() => setCount((prev) => prev + 1)}>\n        {count}\n      </button>\n\n      <Child />\n    </>\n  );\n}\n\nfunction Child() {\n  console.log(\"Child rendered\");\n  return <h1>Child</h1>;\n}"
+  },
+  {
+    "id": 3,
+    "question": "Does changing a ref cause a re-render?",
+    "answer": "No. Changing `ref.current` does not cause a component to re-render. React does not track changes to ref.current for rendering purposes. Refs are useful for storing values that need to persist between renders but should not update the UI.",
+    "code": "function Component() {\n  const countRef = useRef(0);\n\n  function increase() {\n    countRef.current += 1;\n    console.log(countRef.current);\n  }\n\n  return <button onClick={increase}>Increase</button>;\n}"
+  },
+  {
+    "id": 4,
+    "question": "Does changing a normal variable cause a re-render?",
+    "answer": "No. Changing a normal variable does not cause a React component to re-render. Also, normal variables declared inside a component are recreated whenever the component renders. If changing a value should update the UI, you should usually store it in state.",
+    "code": "function Counter() {\n  let count = 0;\n\n  function increase() {\n    count += 1;\n    console.log(count);\n  }\n\n  return <button onClick={increase}>Increase</button>;\n}\n\n// The UI will not update."
+  },
+  {
+    "id": 5,
+    "question": "Does changing Context cause a re-render?",
+    "answer": "Yes. When a Context Provider provides a new value, components that consume that Context are scheduled to update so they can receive the new value. This is why frequently changing or unnecessarily recreated Context values can affect performance.",
+    "code": "const ThemeContext = createContext(null);\n\nfunction App() {\n  const [theme, setTheme] = useState(\"light\");\n\n  return (\n    <ThemeContext.Provider value={theme}>\n      <Child />\n      <button onClick={() => setTheme(\"dark\")}>\n        Change Theme\n      </button>\n    </ThemeContext.Provider>\n  );\n}\n\nfunction Child() {\n  const theme = useContext(ThemeContext);\n  return <p>{theme}</p>;\n}"
+  },
+  {
+    "id": 6,
+    "question": "Does changing props cause a re-render?",
+    "answer": "When a parent renders with changed props for a child, React renders the child with the new props. For a component wrapped with React.memo, React can skip the re-render when its props are considered unchanged according to its comparison.",
+    "code": "function Parent() {\n  const [name, setName] = useState(\"John\");\n\n  return (\n    <>\n      <button onClick={() => setName(\"Alice\")}>\n        Change Name\n      </button>\n\n      <Child name={name} />\n    </>\n  );\n}\n\nfunction Child({ name }) {\n  return <h1>{name}</h1>;\n}"
+  },
+  {
+    "id": 7,
+    "question": "How can you prevent unnecessary re-renders?",
+    "answer": "You can reduce unnecessary re-renders by keeping state as local as possible, splitting components appropriately, using React.memo for expensive components when props are stable, and using useCallback or useMemo when stable function or object references provide a real benefit. Avoid memoizing everything automatically because memoization also adds complexity and overhead.",
+    "code": "const Child = memo(function Child({ onClick }) {\n  return <button onClick={onClick}>Click</button>;\n});\n\nfunction Parent() {\n  const handleClick = useCallback(() => {\n    console.log(\"Clicked\");\n  }, []);\n\n  return <Child onClick={handleClick} />;\n}"
+  },
+  {
+    "id": 8,
+    "question": "How can you identify unnecessary re-renders?",
+    "answer": "You can identify unnecessary re-renders by using React DevTools Profiler, adding temporary console logs, and checking which state, props, Context values, objects, arrays, or functions are changing between renders. The goal is not to eliminate every re-render, but to find expensive or unnecessary rendering work.",
+    "code": "function Child() {\n  console.log(\"Child rendered\");\n\n  return <h1>Child Component</h1>;\n}\n\n// Console logs can help during debugging.\n// React DevTools Profiler provides more detailed information."
+  },
+  {
+    "id": 9,
+    "question": "What is React DevTools Profiler?",
+    "answer": "React DevTools Profiler is a development tool that helps you measure and analyze component rendering performance. It can show which components rendered during an interaction, how long rendering took, and help identify components that may be performing unnecessary or expensive work.",
+    "code": "// Typical workflow:\n// 1. Open React DevTools.\n// 2. Open the Profiler tab.\n// 3. Record an interaction.\n// 4. Inspect which components rendered.\n// 5. Analyze expensive renders."
+  },
+  {
+    "id": 10,
+    "question": "What is referential equality?",
+    "answer": "Referential equality means comparing whether two variables refer to the exact same object, array, or function in memory. Objects, arrays, and functions are compared by reference rather than by their contents. Two separate objects with identical values are not referentially equal.",
+    "code": "const user1 = { name: \"John\" };\nconst user2 = { name: \"John\" };\n\nconsole.log(user1 === user2); // false\n\nconst user3 = user1;\n\nconsole.log(user1 === user3); // true"
+  },
+  {
+    "id": 11,
+    "question": "Why do objects and functions create unnecessary re-renders?",
+    "answer": "Objects, arrays, and functions created inside a component are usually new references on every render. When they are passed as props to a memoized child, React.memo can see them as changed even if their contents or behavior are the same. useMemo and useCallback can preserve references when doing so provides a real performance benefit.",
+    "code": "function Parent() {\n  const user = { name: \"John\" };\n\n  const handleClick = () => {\n    console.log(\"Clicked\");\n  };\n\n  return (\n    <Child\n      user={user}\n      onClick={handleClick}\n    />\n  );\n}\n\n// user and handleClick are new references\n// whenever Parent renders."
+  },
+  {
+    "id": 12,
+    "question": "What is the difference between re-rendering and re-mounting?",
+    "answer": "Re-rendering means React calls an existing component again to calculate an updated UI while preserving its state when the component remains in the same position and identity. Re-mounting means React removes the previous component instance and creates a new one, so its local state is reset and mount-related lifecycle behavior runs again. Changing a component's key is a common way to cause React to treat it as a new component instance.",
+    "code": "function App() {\n  const [key, setKey] = useState(1);\n\n  return (\n    <>\n      <button onClick={() => setKey((prev) => prev + 1)}>\n        Remount Component\n      </button>\n\n      <Counter key={key} />\n    </>\n  );\n}\n\nfunction Counter() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <button onClick={() => setCount((prev) => prev + 1)}>\n      Count: {count}\n    </button>\n  );\n}\n\n// Changing the key creates a new component instance."
+  }
+]
