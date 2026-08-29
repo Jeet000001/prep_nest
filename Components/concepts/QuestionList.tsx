@@ -5,8 +5,10 @@ import { motion } from "framer-motion";
 type HighlightedQuestion = {
   id: number;
   question: string;
-  answer: string;
-  code: string | null;
+  answer?: string;
+  explanation?: string;
+  code?: string | null;
+  solution?: string | null;
   highlightedCode: string | null;
 };
 
@@ -55,7 +57,7 @@ const QuestionList = ({ questions }: { questions: HighlightedQuestion[] }) => {
         >
           <h2 className="text-lg font-medium text-white">{item.question}</h2>
           <p className="mt-3 whitespace-pre-line text-sm leading-7 text-neutral-400">
-            {item.answer}
+            {item.answer || item.explanation}
           </p>
           {item.highlightedCode && (
             <div

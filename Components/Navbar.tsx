@@ -44,7 +44,7 @@ const Navbar = () => {
               Concepts
             </Link>
 
-            <Link href="/" className={navLinkClass}>
+            <Link href="/coding" className={navLinkClass}>
               Coding
             </Link>
 
@@ -105,7 +105,7 @@ const Navbar = () => {
               </Link>
 
               <Link
-                href="/"
+                href="/coding"
                 onClick={() => setOpen(false)}
                 className={mobileLinkClass}
               >
