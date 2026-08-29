@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "question": "How do you sort an array of objects by a property in JavaScript?",
+    "solution": "// Sort array of objects by property\nconst sortByKey = (arr, key) => {\n  const result = [...arr];\n\n  for (let i = 0; i < result.length - 1; i++) {\n    for (let j = 0; j < result.length - 1 - i; j++) {\n      // Swap if the current object's key value is greater than the next one\n      if (result[j][key] > result[j + 1][key]) {\n        [result[j], result[j + 1]] = [result[j + 1], result[j]];\n      }\n    }\n  }\n\n  return result;\n};\n\nconst users = [\n  { name: \"Jeet\", age: 23 },\n  { name: \"Rahul\", age: 20 },\n  { name: \"Amit\", age: 25 },\n  { name: \"Priya\", age: 21 }\n];\n\nconsole.log(sortByKey(users, \"age\"));\n// [Rahul(20), Priya(21), Jeet(23), Amit(25)]",
+    "explanation": "We copy the array first so the original isn't mutated. Then we use bubble sort: comparing the given key's value between adjacent objects and swapping them if they are out of order. This repeats until the whole array is sorted by that key."
+  },
+  {
+    "id": 2,
+    "question": "How do you count occurrences of a value in an array of objects in JavaScript?",
+    "solution": "// Count occurrences in array of objects\nconst countOccurrences = (arr, key) => {\n  const freq = {};\n\n  for (let obj of arr) {\n    const val = obj[key];\n    freq[val] = (freq[val] || 0) + 1;\n  }\n\n  return freq;\n};\n\nconst users2 = [\n  { name: \"Jeet\", age: 20 },\n  { name: \"Rahul\", age: 21 },\n  { name: \"Amit\", age: 20 },\n  { name: \"Priya\", age: 22 },\n  { name: \"Rohit\", age: 21 }\n];\n\nconsole.log(countOccurrences(users2, \"age\"));\n// { '20': 2, '21': 2, '22': 1 }",
+    "explanation": "We loop through the array and read the value of the given key from each object. That value becomes a key in the freq object, and we increase its count by one every time it appears."
+  },
+  {
+    "id": 3,
+    "question": "How do you convert an object's values into an array in JavaScript?",
+    "solution": "// Convert object values into array\nconst objValueIntoArr = (obj) => {\n  const res = [];\n\n  for (let key in obj) {\n    res.push(obj[key]);\n  }\n\n  return res;\n};\n\nconst obj = {\n  a: 10,\n  b: 20,\n  c: 30\n};\n\nconsole.log(objValueIntoArr(obj)); // [10, 20, 30]",
+    "explanation": "We loop through every key in the object using a for...in loop. For each key, we push its corresponding value into a result array. This collects all the values without the keys."
+  },
+  {
+    "id": 4,
+    "question": "How do you merge two objects in JavaScript (without using spread)?",
+    "solution": "// Merge two objects\nconst margeTwoobj = (obj1, obj2) => {\n  const res = {};\n\n  for (let key in obj1) {\n    res[key] = obj1[key];\n  }\n\n  for (let key in obj2) {\n    res[key] = obj2[key];\n  }\n\n  return res;\n};\n\nconst obj1 = {\n  name: \"Jeet\",\n  age: 20\n};\n\nconst obj2 = {\n  city: \"Kolkata\",\n  country: \"India\"\n};\n\nconsole.log(margeTwoobj(obj1, obj2));\n// { name: 'Jeet', age: 20, city: 'Kolkata', country: 'India' }",
+    "explanation": "We create an empty result object and copy every key-value pair from the first object into it. Then we copy every key-value pair from the second object. If both objects share a key, the second object's value overwrites the first."
+  },
+  {
+    "id": 5,
+    "question": "How do you check if an object is empty in JavaScript?",
+    "solution": "// Check if object is empty\nconst isEmptyObj = (obj) => {\n  for (let key in obj) {\n    // If even one key exists, the object is not empty\n    return false;\n  }\n  return true;\n};\n\nconsole.log(isEmptyObj({})); // true\nconsole.log(isEmptyObj({ name: \"Jeet\" })); // false\n\n// or, using Object.keys\nconst isEmptyObject = (obj) => {\n  return Object.keys(obj).length === 0;\n};\n\nconsole.log(isEmptyObject({})); // true",
+    "explanation": "The first approach loops through the object's keys with for...in. If the loop body runs even once, there is at least one key, so we return false immediately; otherwise the loop never runs and we return true. The shorter alternative uses Object.keys() to get an array of keys and checks whether its length is zero."
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between a shallow copy and a deep copy of an object in JavaScript?",
+    "solution": "// Shallow copy using the spread operator\nconst objjj = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst objx = { ...objjj };\n\nobjx.address.city = \"Delhi\";\n\nconsole.log(objjj.address.city); // \"Delhi\" (original also changed!)\n\n// Deep copy using structuredClone\nconst objz = {\n  name: \"Jeet\",\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst objy = structuredClone(objz);\n\nobjy.address.city = \"Delhi\";\n\nconsole.log(objz.address.city); // \"Kolkata\" (original stays unchanged)",
+    "explanation": "The spread operator only copies the top-level properties. Nested objects, like address, are still shared by reference, so changing objx.address also changes objjj.address. structuredClone(), on the other hand, creates a completely independent copy including all nested objects, so changing the clone never affects the original."
+  },
+  {
+    "id": 7,
+    "question": "How do you flatten a nested object into dot-notation keys in JavaScript?",
+    "solution": "// Flatten nested object (a.b.c)\nconst flattenObject = (obj, parent = \"\", result = {}) => {\n  for (const key in obj) {\n    const newKey = parent ? `${parent}.${key}` : key;\n\n    if (\n      typeof obj[key] === \"object\" &&\n      obj[key] !== null &&\n      !Array.isArray(obj[key])\n    ) {\n      // Recurse into nested objects\n      flattenObject(obj[key], newKey, result);\n    } else {\n      result[newKey] = obj[key];\n    }\n  }\n\n  return result;\n};\n\nconst objjjj = {\n  a: {\n    b: {\n      c: 10\n    }\n  },\n  d: 20\n};\n\nconsole.log(flattenObject(objjjj));\n// { 'a.b.c': 10, d: 20 }",
+    "explanation": "For every key, we build a new dot-separated key name using the parent path. If the value is itself a plain object (not null and not an array), we recursively flatten it using the new key as the parent. Otherwise, we assign the value directly to the result under the new key."
+  },
+  {
+    "id": 8,
+    "question": "How do you deep clone an object in JavaScript (without using structuredClone)?",
+    "solution": "// Deep clone an object\nconst deepClone = (obj) => {\n  if (obj === null || typeof obj !== \"object\") {\n    return obj;\n  }\n\n  const copy = Array.isArray(obj) ? [] : {};\n\n  for (let key in obj) {\n    // Recursively clone every nested value\n    copy[key] = deepClone(obj[key]);\n  }\n\n  return copy;\n};\n\nconst details = {\n  name: \"Jeet\",\n  age: 23,\n  address: {\n    city: \"Kolkata\",\n    state: {\n      pin: 700001\n    }\n  }\n};\n\nconst clone = deepClone(details);\n\nclone.address.city = \"Delhi\";\n\nconsole.log(details.address.city); // \"Kolkata\"\nconsole.log(clone.address.city);   // \"Delhi\"",
+    "explanation": "If the value is a primitive or null, we return it as is. Otherwise, we create a new array or object depending on the type, then recursively clone every property into it. This ensures every nested level gets its own independent copy instead of sharing references with the original."
+  },
+  {
+    "id": 9,
+    "question": "How do you check deep equality of two objects in JavaScript?",
+    "solution": "// Check deep equality of two objects\nconst deepEqual = (obj1, obj2) => {\n  // Same reference or same primitive value\n  if (obj1 === obj2) {\n    return true;\n  }\n\n  if (\n    typeof obj1 !== \"object\" ||\n    typeof obj2 !== \"object\" ||\n    obj1 === null ||\n    obj2 === null\n  ) {\n    return false;\n  }\n\n  const key1 = Object.keys(obj1);\n  const key2 = Object.keys(obj2);\n\n  if (key1.length !== key2.length) {\n    return false;\n  }\n\n  for (let key of key1) {\n    // Recursively compare the value of the current key\n    if (!deepEqual(obj1[key], obj2[key])) {\n      return false;\n    }\n  }\n\n  return true;\n};\n\nconst obj11 = {\n  name: \"Jeet\",\n  age: 23,\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconst obj22 = {\n  name: \"Jeet\",\n  age: 23,\n  address: {\n    city: \"Kolkata\"\n  }\n};\n\nconsole.log(deepEqual(obj11, obj22)); // true",
+    "explanation": "We first check if both values are the same reference or the same primitive. If either value is not an object (or is null), they can only be equal if the first check already matched. Otherwise, we compare the number of keys and then recursively compare the value of each key. If every key's value matches, the objects are deeply equal."
+  },
+  {
+    "id": 10,
+    "question": "How do you find unique objects in an array based on a property in JavaScript?",
+    "solution": "// Find unique objects in array\nconst uniqueObj = (arr, key) => {\n  const seen = {};\n  const result = [];\n\n  for (let obj of arr) {\n    if (!seen[obj[key]]) {\n      seen[obj[key]] = true;\n      result.push(obj);\n    }\n  }\n\n  return result;\n};\n\nconst usersx = [\n  { id: 1, name: \"Jeet\" },\n  { id: 2, name: \"Rahul\" },\n  { id: 1, name: \"Jeet\" },\n  { id: 3, name: \"Amit\" },\n  { id: 2, name: \"Rahul\" }\n];\n\nconsole.log(uniqueObj(usersx, \"id\"));\n// [{ id: 1, name: 'Jeet' }, { id: 2, name: 'Rahul' }, { id: 3, name: 'Amit' }]",
+    "explanation": "We use an object called seen to track which key values have already appeared. For each object in the array, we only add it to the result if its key value hasn't been seen before, which effectively removes duplicates based on that key."
+  },
+  {
+    "id": 11,
+    "question": "How do you convert an array of key-value pairs into an object in JavaScript?",
+    "solution": "// Convert array into object (key-value)\nconst arrToObj = (arr) => {\n  const result = {};\n\n  for (let item of arr) {\n    const key = item[0];\n    const value = item[1];\n\n    result[key] = value;\n  }\n\n  return result;\n};\n\nconst arr = [\n  [\"name\", \"Jeet\"],\n  [\"age\", 23],\n  [\"city\", \"Kolkata\"]\n];\n\nconsole.log(arrToObj(arr));\n// { name: 'Jeet', age: 23, city: 'Kolkata' }",
+    "explanation": "Each item in the array is itself a two-element array, where the first element is the key and the second is the value. We loop through the array and assign each pair directly onto the result object."
+  },
+  {
+    "id": 12,
+    "question": "How do you merge two arrays of objects by a matching id in JavaScript?",
+    "solution": "// Merge arrays of objects by id\nconst margeArrofObj = (arr1, arr2) => {\n  const res = [];\n\n  for (let obj1 of arr1) {\n    const marged = { ...obj1 };\n\n    for (let obj2 of arr2) {\n      if (obj1.id === obj2.id) {\n        // Copy every property from the matching object\n        for (let key in obj2) {\n          marged[key] = obj2[key];\n        }\n      }\n    }\n\n    res.push(marged);\n  }\n\n  return res;\n};\n\nconst arr11 = [\n  { id: 1, name: \"Jeet\" },\n  { id: 2, name: \"Rahul\" }\n];\n\nconst arr22 = [\n  { id: 1, age: 23 },\n  { id: 2, age: 25 }\n];\n\nconsole.log(margeArrofObj(arr11, arr22));\n// [{ id: 1, name: 'Jeet', age: 23 }, { id: 2, name: 'Rahul', age: 25 }]",
+    "explanation": "For every object in the first array, we start by copying it into a new object. Then we search the second array for an object with a matching id. If found, we copy all of its properties onto our new object, combining the data from both arrays into one merged object per id."
+  }
+]
