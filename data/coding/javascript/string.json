@@ -7,21 +7,21 @@
   },
   {
     "id": 2,
-    "question": "How do you check if a string is a palindrome in JavaScript?",
-    "solution": "// Check whether a string reads the same forward and backward\nconst isPalindrome = (str) => {\n  let reversed = \"\";\n\n  // Reverse the string\n  for (let i = str.length - 1; i >= 0; i--) {\n    reversed += str[i];\n  }\n\n  // Compare the reversed string with the original string\n  return reversed === str;\n};\n\nconst result = isPalindrome(\"madam\");\n\nconsole.log(result ? \"Palindrome\" : \"Not a Palindrome\");",
-    "explanation": "A palindrome is a word that reads the same from both directions. For example, madam remains madam when reversed. We first reverse the string and then compare it with the original string. If both are equal, it is a palindrome."
-  },
-  {
-    "id": 3,
     "question": "How do you count vowels in a string in JavaScript?",
     "solution": "// Count the number of vowels in a string\nconst countVowels = (str) => {\n  const vowels = \"aeiouAEIOU\";\n  let count = 0;\n\n  // Check every character in the string\n  for (let i = 0; i < str.length; i++) {\n    // Increase count if the character is a vowel\n    if (vowels.includes(str[i])) {\n      count++;\n    }\n  }\n\n  return count;\n};\n\nconsole.log(countVowels(\"saheli\")); // 3",
     "explanation": "We store all lowercase and uppercase vowels in one string. Then we check every character of the input string. If vowels includes that character, we increase the count by one."
   },
   {
-    "id": 4,
+    "id": 3,
     "question": "How do you check if a string contains only digits in JavaScript?",
     "solution": "// Check whether every character is a digit\nconst containsOnlyDigits = (str) => {\n  // An empty string is not considered a valid number here\n  if (str.length === 0) return false;\n\n  for (const char of str) {\n    // Check whether the character is outside the range 0 to 9\n    if (char < \"0\" || char > \"9\") {\n      return false;\n    }\n  }\n\n  return true;\n};\n\nconsole.log(containsOnlyDigits(\"123456\")); // true\nconsole.log(containsOnlyDigits(\"12r1234\")); // false",
     "explanation": "We check every character one by one. A valid digit must be between 0 and 9. If we find any letter, space, or special character, we immediately return false. If every character is a digit, we return true."
+  },
+  {
+    "id": 4,
+    "question": "How do you check if a string is a palindrome in JavaScript?",
+    "solution": "// Check whether a string reads the same forward and backward\nconst isPalindrome = (str) => {\n  let reversed = \"\";\n\n  // Reverse the string\n  for (let i = str.length - 1; i >= 0; i--) {\n    reversed += str[i];\n  }\n\n  // Compare the reversed string with the original string\n  return reversed === str;\n};\n\nconst result = isPalindrome(\"madam\");\n\nconsole.log(result ? \"Palindrome\" : \"Not a Palindrome\");",
+    "explanation": "A palindrome is a word that reads the same from both directions. For example, madam remains madam when reversed. We first reverse the string and then compare it with the original string. If both are equal, it is a palindrome."
   },
   {
     "id": 5,
@@ -49,15 +49,15 @@
   },
   {
     "id": 9,
-    "question": "How do you find the first non-repeating character in a string in JavaScript?",
-    "solution": "// Find the first character that appears only once\nconst firstNonRepeatingCharacter = (str) => {\n  const frequency = {};\n\n  // Count how many times each character appears\n  for (const char of str) {\n    frequency[char] = (frequency[char] || 0) + 1;\n  }\n\n  // Find the first character with frequency 1\n  for (const char of str) {\n    if (frequency[char] === 1) {\n      return char;\n    }\n  }\n\n  return null;\n};\n\nconsole.log(firstNonRepeatingCharacter(\"aabbcdde\")); // \"c\"",
-    "explanation": "This solution uses two loops. The first loop counts how many times each character appears. The second loop checks the string in its original order and returns the first character whose count is exactly one."
-  },
-  {
-    "id": 10,
     "question": "How do you find the maximum occurring character in a string in JavaScript?",
     "solution": "// Find the character that appears the most times\nconst findMaxOccurringCharacter = (str) => {\n  const frequency = {};\n  let maxCharacter = \"\";\n  let maxCount = 0;\n\n  for (const char of str) {\n    // Increase the frequency of the current character\n    frequency[char] = (frequency[char] || 0) + 1;\n\n    // Update the maximum when a higher frequency is found\n    if (frequency[char] > maxCount) {\n      maxCount = frequency[char];\n      maxCharacter = char;\n    }\n  }\n\n  return {\n    character: maxCharacter,\n    count: maxCount\n  };\n};\n\nconsole.log(findMaxOccurringCharacter(\"javascript\"));",
     "explanation": "We use an object to count the frequency of every character. While counting, we also keep track of the character with the highest count. Whenever a character's count becomes greater than maxCount, we update both values."
+  },
+  {
+    "id": 10,
+    "question": "How do you check if one string is a rotation of another string in JavaScript?",
+    "solution": "// Check whether str2 is a rotation of str1\nconst isRotation = (str1, str2) => {\n  // Rotations must have the same length\n  if (str1.length !== str2.length) {\n    return false;\n  }\n\n  // A rotation will always exist inside str1 + str1\n  return (str1 + str1).includes(str2);\n};\n\nconsole.log(isRotation(\"abcd\", \"cdab\")); // true\nconsole.log(isRotation(\"abcd\", \"acbd\")); // false",
+    "explanation": "If two strings have different lengths, they cannot be rotations. For equal-length strings, we join the first string with itself. For example, abcd becomes abcdabcd. Every valid rotation of abcd, such as cdab, will appear inside that new string."
   },
   {
     "id": 11,
@@ -67,9 +67,9 @@
   },
   {
     "id": 12,
-    "question": "How do you check if one string is a rotation of another string in JavaScript?",
-    "solution": "// Check whether str2 is a rotation of str1\nconst isRotation = (str1, str2) => {\n  // Rotations must have the same length\n  if (str1.length !== str2.length) {\n    return false;\n  }\n\n  // A rotation will always exist inside str1 + str1\n  return (str1 + str1).includes(str2);\n};\n\nconsole.log(isRotation(\"abcd\", \"cdab\")); // true\nconsole.log(isRotation(\"abcd\", \"acbd\")); // false",
-    "explanation": "If two strings have different lengths, they cannot be rotations. For equal-length strings, we join the first string with itself. For example, abcd becomes abcdabcd. Every valid rotation of abcd, such as cdab, will appear inside that new string."
+    "question": "How do you find the first non-repeating character in a string in JavaScript?",
+    "solution": "// Find the first character that appears only once\nconst firstNonRepeatingCharacter = (str) => {\n  const frequency = {};\n\n  // Count how many times each character appears\n  for (const char of str) {\n    frequency[char] = (frequency[char] || 0) + 1;\n  }\n\n  // Find the first character with frequency 1\n  for (const char of str) {\n    if (frequency[char] === 1) {\n      return char;\n    }\n  }\n\n  return null;\n};\n\nconsole.log(firstNonRepeatingCharacter(\"aabbcdde\")); // \"c\"",
+    "explanation": "This solution uses two loops. The first loop counts how many times each character appears. The second loop checks the string in its original order and returns the first character whose count is exactly one."
   },
   {
     "id": 13,
@@ -91,14 +91,14 @@
   },
   {
     "id": 16,
-    "question": "How do you find the longest substring without repeating characters in JavaScript?",
-    "solution": "// Find the longest substring containing only unique characters\nconst longestSubstringWithoutRepeating = (str) => {\n  const characters = new Set();\n\n  let left = 0;\n  let start = 0;\n  let maxLength = 0;\n\n  // Move the right pointer through the string\n  for (let right = 0; right < str.length; right++) {\n    // Remove characters from the left until the duplicate is removed\n    while (characters.has(str[right])) {\n      characters.delete(str[left]);\n      left++;\n    }\n\n    // Add the current character to the window\n    characters.add(str[right]);\n\n    // Update the longest substring information\n    if (right - left + 1 > maxLength) {\n      maxLength = right - left + 1;\n      start = left;\n    }\n  }\n\n  return str.slice(start, start + maxLength);\n};\n\nconsole.log(longestSubstringWithoutRepeating(\"abcab\"));\n// \"abc\"",
-    "explanation": "This problem uses the sliding window technique. We maintain a window of unique characters using a Set. When we find a duplicate, we move the left pointer forward and remove characters until the duplicate disappears. We continuously track the largest valid window."
-  },
-  {
-    "id": 17,
     "question": "How do you check whether parentheses, brackets, and braces are valid in JavaScript?",
     "solution": "// Check whether all brackets are correctly opened and closed\nconst isValidParentheses = (str) => {\n  const stack = [];\n\n  // Define which opening bracket matches each closing bracket\n  const pairs = {\n    \")\": \"(\",\n    \"]\": \"[\",\n    \"}\": \"{\"\n  };\n\n  for (const char of str) {\n    // Add opening brackets to the stack\n    if (char === \"(\" || char === \"[\" || char === \"{\") {\n      stack.push(char);\n    } else if (pairs[char]) {\n      // The latest opening bracket must match the closing bracket\n      if (stack.pop() !== pairs[char]) {\n        return false;\n      }\n    }\n  }\n\n  // The stack must be empty if every bracket was matched\n  return stack.length === 0;\n};\n\nconsole.log(isValidParentheses(\"(){}[]\")); // true\nconsole.log(isValidParentheses(\"([)]\")); // false",
     "explanation": "We use a stack because brackets must close in the reverse order in which they open. Opening brackets are pushed into the stack. When we find a closing bracket, we remove the latest opening bracket and check whether they match. At the end, the stack must be empty."
+  },
+  {
+    "id": 17,
+    "question": "How do you find the longest substring without repeating characters in JavaScript?",
+    "solution": "// Find the longest substring containing only unique characters\nconst longestSubstringWithoutRepeating = (str) => {\n  const characters = new Set();\n\n  let left = 0;\n  let start = 0;\n  let maxLength = 0;\n\n  // Move the right pointer through the string\n  for (let right = 0; right < str.length; right++) {\n    // Remove characters from the left until the duplicate is removed\n    while (characters.has(str[right])) {\n      characters.delete(str[left]);\n      left++;\n    }\n\n    // Add the current character to the window\n    characters.add(str[right]);\n\n    // Update the longest substring information\n    if (right - left + 1 > maxLength) {\n      maxLength = right - left + 1;\n      start = left;\n    }\n  }\n\n  return str.slice(start, start + maxLength);\n};\n\nconsole.log(longestSubstringWithoutRepeating(\"abcab\"));\n// \"abc\"",
+    "explanation": "This problem uses the sliding window technique. We maintain a window of unique characters using a Set. When we find a duplicate, we move the left pointer forward and remove characters until the duplicate disappears. We continuously track the largest valid window."
   }
 ]

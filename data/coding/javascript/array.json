@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "question": "How do you remove falsy values from an array in JavaScript?",
+    "solution": "// Remove falsy values from array\nconst removeFalsy = (arr) => {\n  const result = [];\n\n  for (const item of arr) {\n    // Only keep values that are truthy\n    if (item) {\n      result.push(item);\n    }\n  }\n\n  return result;\n};\n\nconsole.log(removeFalsy([0, 1, false, 2, \"\", 3, null]));\n// [1, 2, 3]",
+    "explanation": "Falsy values in JavaScript include 0, false, empty string, null, undefined, and NaN. We loop through the array and only keep items that evaluate to true, which filters out all the falsy values."
+  },
+  {
+    "id": 2,
+    "question": "How do you group numbers into even and odd in JavaScript?",
+    "solution": "// Group numbers into even and odd\nconst groupNumberIntoEvenAndOdd = (arr) => {\n  const even = [];\n  const odd = [];\n\n  for (let item of arr) {\n    if (item % 2 === 0) {\n      even.push(item);\n    } else {\n      odd.push(item);\n    }\n  }\n\n  return {\n    Even: even,\n    Odd: odd\n  };\n};\n\nconsole.log(groupNumberIntoEvenAndOdd([1, 2, 3, 4, 5, 6]));\n// { Even: [2, 4, 6], Odd: [1, 3, 5] }",
+    "explanation": "We loop through the array and check each number using the modulo operator. If a number is divisible by 2, it is even and goes into the even array; otherwise it goes into the odd array."
+  },
+  {
+    "id": 3,
+    "question": "How do you remove duplicates from an array in JavaScript (without using Set)?",
+    "solution": "// Remove duplicates from an array (without using Set)\nconst removeDuplicate = (arr) => {\n  let seen = {};\n  let res = [];\n\n  // Add item to result only if it hasn't been seen before\n  for (let item of arr) {\n    if (!seen[item]) {\n      seen[item] = true;\n      res.push(item);\n    }\n  }\n\n  return res;\n};\n\nconsole.log(removeDuplicate([1, 2, 3, 1, 2, 4])); // [1, 2, 3, 4]",
+    "explanation": "We use an object called seen to keep track of which values have already appeared. As we loop through the array, we only push an item into the result if it hasn't been marked as seen yet."
+  },
+  {
+    "id": 4,
+    "question": "How do you count the frequency of elements in an array in JavaScript?",
+    "solution": "// Count frequency of elements in an array\nconst frequencyOfElement = (arr) => {\n  const freq = {};\n\n  for (let item of arr) {\n    freq[item] = (freq[item] || 0) + 1;\n  }\n\n  return freq;\n};\n\nconsole.log(frequencyOfElement([1, 2, 3, 1, 2])); // { '1': 2, '2': 2, '3': 1 }",
+    "explanation": "We use an object to store how many times each value appears. For every item in the array, we increase its count in the freq object by one, starting from zero if it hasn't appeared before."
+  },
+  {
+    "id": 5,
+    "question": "How do you find the missing number in a sequence from 1 to n in JavaScript?",
+    "solution": "// Find the missing number in a sequence (1 to n)\nconst findMissingNum = (arr, n) => {\n  const totalSum = (n * (n + 1)) / 2;\n  let sum = 0;\n\n  for (let item of arr) {\n    sum += item;\n  }\n\n  return totalSum - sum;\n};\n\nconsole.log(findMissingNum([1, 2, 3, 5, 6], 6)); // 4",
+    "explanation": "We calculate the expected sum of numbers from 1 to n using the formula n*(n+1)/2. Then we find the actual sum of the given array. The difference between the expected sum and the actual sum is the missing number."
+  },
+  {
+    "id": 6,
+    "question": "How do you left rotate an array by 1 step in JavaScript?",
+    "solution": "// Left rotation by 1 step\nconst leftRotationBy1step = (arr) => {\n  const copy = arr[0];\n\n  // Shift every element one position to the left\n  for (let i = 0; i < arr.length; i++) {\n    arr[i] = arr[i + 1];\n  }\n\n  // Place the first element at the end\n  arr[arr.length - 1] = copy;\n\n  return arr;\n};\n\nconsole.log(leftRotationBy1step([1, 2, 3, 4, 5])); // [2, 3, 4, 5, 1]",
+    "explanation": "We save the first element separately. Then we shift every element one position to the left. Finally, we place the saved first element at the end of the array."
+  },
+  {
+    "id": 7,
+    "question": "How do you right rotate an array by 1 step in JavaScript?",
+    "solution": "// Right rotation by 1 step\nconst rightRotationBy1Step = (arr) => {\n  const copy = arr[arr.length - 1];\n\n  // Shift every element one position to the right\n  for (let i = arr.length - 1; i > 0; i--) {\n    arr[i] = arr[i - 1];\n  }\n\n  // Place the last element at the start\n  arr[0] = copy;\n\n  return arr;\n};\n\nconsole.log(rightRotationBy1Step([1, 2, 3, 4, 5])); // [5, 1, 2, 3, 4]",
+    "explanation": "We save the last element separately. Then we shift every element one position to the right, starting from the end. Finally, we place the saved last element at the start of the array."
+  },
+  {
+    "id": 8,
+    "question": "How do you find the second largest number in an array in JavaScript?",
+    "solution": "// Find the second largest number\nconst secLargest = (arr) => {\n  let largest = -Infinity;\n  let secLargest = -Infinity;\n\n  for (let item of arr) {\n    if (item > largest) {\n      secLargest = largest;\n      largest = item;\n    } else if (item > secLargest || item !== largest) {\n      secLargest = item;\n    }\n  }\n\n  return secLargest;\n};\n\nconsole.log(secLargest([1, 2, 3, 4, 5])); // 4",
+    "explanation": "We track two values while looping: the largest and the second largest. Whenever we find a number bigger than the current largest, the old largest becomes the second largest. Otherwise, if the number is bigger than the second largest (and not a duplicate of the largest), we update the second largest."
+  },
+  {
+    "id": 9,
+    "question": "How do you find the intersection of two arrays in JavaScript?",
+    "solution": "// Find intersection of two arrays\nconst intersectionOfTwoArray = (arr1, arr2) => {\n  let intersection = [];\n\n  for (let i = 0; i < arr1.length; i++) {\n    for (let j = 0; j < arr2.length; j++) {\n      if (arr1[i] === arr2[j]) {\n        intersection.push(arr1[i]);\n        break;\n      }\n    }\n  }\n\n  return intersection;\n};\n\nconsole.log(intersectionOfTwoArray([1, 2, 3, 4], [1, 2, 3])); // [1, 2, 3]",
+    "explanation": "We compare every element of the first array with every element of the second array using nested loops. If a match is found, we add it to the intersection list and break out of the inner loop to avoid duplicate matches."
+  },
+  {
+    "id": 10,
+    "question": "How do you group an array of objects by a property in JavaScript?",
+    "solution": "// Group array of objects by property\nconst groupByProperty = (arr, key) => {\n  const result = {};\n\n  for (let obj of arr) {\n    const value = obj[key];\n\n    // Create a new array for this value if it doesn't exist yet\n    if (!result[value]) {\n      result[value] = [];\n    }\n\n    result[value].push(obj);\n  }\n\n  return result;\n};\n\nconst users = [\n  { name: \"Jeet\", city: \"Kolkata\" },\n  { name: \"Rahul\", city: \"Delhi\" },\n  { name: \"Amit\", city: \"Kolkata\" },\n  { name: \"Rohit\", city: \"Delhi\" },\n  { name: \"Priya\", city: \"Mumbai\" }\n];\n\nconsole.log(groupByProperty(users, \"city\"));\n// {\n//   Kolkata: [{ name: 'Jeet', city: 'Kolkata' }, { name: 'Amit', city: 'Kolkata' }],\n//   Delhi: [{ name: 'Rahul', city: 'Delhi' }, { name: 'Rohit', city: 'Delhi' }],\n//   Mumbai: [{ name: 'Priya', city: 'Mumbai' }]\n// }",
+    "explanation": "We loop through the array of objects and read the value of the given key from each object. That value becomes a key in our result object. If it doesn't exist yet, we create an empty array for it, then push the current object into that array."
+  },
+  {
+    "id": 11,
+    "question": "How do you left rotate an array by k steps in JavaScript?",
+    "solution": "// Left rotation of array by k steps\nconst leftRotationByKStep = (arr, k) => {\n  let resArr = new Array(arr.length);\n  k = k % arr.length;\n\n  for (let i = 0; i < arr.length; i++) {\n    // % gives the remainder, which wraps the index around\n    resArr[i] = arr[(i + k) % arr.length];\n  }\n\n  return resArr;\n};\n\nconsole.log(leftRotationByKStep([1, 2, 3, 4, 5], 2)); // [3, 4, 5, 1, 2]",
+    "explanation": "We first reduce k using the modulo operator so it never exceeds the array length. Then for every index i in the result array, we pick the element from position (i + k) % arr.length in the original array, which wraps values around correctly."
+  },
+  {
+    "id": 12,
+    "question": "How do you right rotate an array by k steps in JavaScript?",
+    "solution": "// Right rotation of array by k steps\nconst rightRotationByKStep = (arr, k) => {\n  let resArr = new Array(arr.length);\n  k = k % arr.length;\n\n  for (let i = 0; i < arr.length; i++) {\n    resArr[(i + k) % arr.length] = arr[i];\n  }\n\n  return resArr;\n};\n\nconsole.log(rightRotationByKStep([1, 2, 3, 4, 5], 2)); // [4, 5, 1, 2, 3]",
+    "explanation": "This is similar to the left rotation but works in the opposite direction. We place each element of the original array at index (i + k) % arr.length in the result array, which effectively shifts everything to the right by k positions."
+  },
+  {
+    "id": 13,
+    "question": "How do you move all zeros to the left of an array in JavaScript?",
+    "solution": "// Move all zeros to the left\nconst moveAllZeroToTheLeft = (arr) => {\n  let j = 0;\n\n  for (let i = 0; i < arr.length; i++) {\n    if (arr[i] === 0) {\n      // Swap the zero into position j\n      [arr[i], arr[j]] = [arr[j], arr[i]];\n      j++;\n    }\n  }\n\n  return arr;\n};\n\nconsole.log(moveAllZeroToTheLeft([0, 0, 1, 1, 2, 0, 3]));\n// [0, 0, 0, 1, 2, 1, 3]",
+    "explanation": "We use a pointer j to track the next position where a zero should go. Every time we find a zero at index i, we swap it with the element at index j and then move j forward. This pushes all zeros toward the left side of the array."
+  },
+  {
+    "id": 14,
+    "question": "How do you move all zeros to the right of an array in JavaScript?",
+    "solution": "// Move all zeros to the right\nconst moveAllZeroToTheRight = (arr) => {\n  let j = 0;\n\n  for (let i = 0; i < arr.length; i++) {\n    if (arr[i] !== 0) {\n      // Swap the non-zero value into position j\n      [arr[i], arr[j]] = [arr[j], arr[i]];\n      j++;\n    }\n  }\n\n  return arr;\n};\n\nconsole.log(moveAllZeroToTheRight([0, 0, 1, 1, 2, 0, 3]));\n// [1, 1, 2, 3, 0, 0, 0]",
+    "explanation": "This works the opposite way of moving zeros to the left. We use a pointer j to track where the next non-zero value should go. Whenever we find a non-zero element, we swap it into position j, which naturally pushes all zeros toward the end."
+  },
+  {
+    "id": 15,
+    "question": "How do you flatten a nested array in JavaScript?",
+    "solution": "// Flatten a nested array\nconst flattenArray = (arr) => {\n  const result = [];\n\n  for (const item of arr) {\n    if (Array.isArray(item)) {\n      // Recursively flatten nested arrays\n      result.push(...flattenArray(item));\n    } else {\n      result.push(item);\n    }\n  }\n\n  return result;\n};\n\nconsole.log(flattenArray([1, [2, [3, 4], 5], 6])); // [1, 2, 3, 4, 5, 6]",
+    "explanation": "We loop through each item in the array. If an item is itself an array, we call flattenArray recursively on it and spread the result into our output. If it's not an array, we simply push it directly. This handles any level of nesting."
+  }
+]
