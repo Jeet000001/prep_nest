@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "question": "How do you implement a debounce function in JavaScript?",
+    "solution": "const debounce = (fn, delay) => {\n  // fn = the function to run, delay = how long to wait after the last call\n  let timer;\n\n  return function (...args) {\n    // Cancel the previous timer if one was already running\n    clearTimeout(timer);\n\n    timer = setTimeout(() => {\n      fn(...args);\n    }, delay);\n  };\n};\n\nconst search = (text) => {\n  console.log(`Searching: ${text}`);\n};\n\nconst debounceSearch = debounce(search, 1000);\n\ndebounceSearch(\"J\");\ndebounceSearch(\"Je\");\ndebounceSearch(\"Jee\");\ndebounceSearch(\"Jeet\");\n// Only \"Searching: Jeet\" gets logged, 1000ms after the last call",
+    "explanation": "debounce wraps a function so it only runs after a period of inactivity. Every time the returned function is called, it clears the previous timer (if one was still waiting) and starts a new one. This means if calls keep happening quickly, fn never actually runs — only once the calls stop for the full delay does the timer finish and fn finally execute with the most recent arguments. This is commonly used for things like search-as-you-type, so the search only fires once the user pauses typing instead of on every keystroke."
+  }
+]

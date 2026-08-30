@@ -21,11 +21,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "array-polyfills": "Array_Polyfills.json",
     objects: "object.json",
     closure: "Closure.json",
-    conditionals: "conditional.json",
-    "es6-features": "es6.json",
-    "dom-manipulation": "dom.json",
-    events: "event.json",
-    "async-programming": "async.json",
+    debounce : "Debounce.json",
+    
   },
   react: {
     components: "component.json",

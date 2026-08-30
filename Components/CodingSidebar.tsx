@@ -27,14 +27,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Array Polyfills", href: "/coding/javascript/array-polyfills" },
       { name: "Objects", href: "/coding/javascript/objects" },
       { name: "Closure", href: "/coding/javascript/closure" },
-      { name: "Conditionals", href: "/coding/javascript/conditionals" },
-      { name: "ES6 Features", href: "/coding/javascript/es6-features" },
-      { name: "DOM Manipulation", href: "/coding/javascript/dom-manipulation" },
-      { name: "Events", href: "/coding/javascript/events" },
-      {
-        name: "Async Programming",
-        href: "/coding/javascript/async-programming",
-      },
+      { name: "Debounce ", href: "/coding/javascript/debounce" },
     ],
   },
   {
