@@ -29,6 +29,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Closure", href: "/coding/javascript/closure" },
       { name: "Debounce", href: "/coding/javascript/debounce" },
       { name: "Throttle", href: "/coding/javascript/throttle" },
+      { name: "Others", href: "/coding/javascript/others" },
     ],
   },
   {

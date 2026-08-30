@@ -23,6 +23,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     closure: "Closure.json",
     debounce: "Debounce.json",
     throttle: "Throttle.json",
+    others: "Others.json"
   },
   react: {
     components: "component.json",

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "question": "How do you check if a number is prime in JavaScript?",
+    "solution": "// Check if a number is prime\nconst isPrime = (num) => {\n  if (num <= 1) return false;\n  if (num === 2) return true;\n  if (num % 2 === 0) return false;\n\n  // Only need to check odd divisors up to the square root of num\n  for (let i = 3; i <= Math.floor(Math.sqrt(num)); i += 2) {\n    if (num % i === 0) return false;\n  }\n\n  return true;\n};\n\nconsole.log(isPrime(3));  // true\nconsole.log(isPrime(10)); // false",
+    "explanation": "Numbers less than or equal to 1 are never prime, and 2 is the only even prime, so we handle those cases directly. Any other even number can't be prime either. For the remaining odd numbers, we only need to test odd divisors up to the square root of num — if no divisor divides evenly in that range, the number is prime. This is much faster than checking every number up to num."
+  },
+  {
+    "id": 2,
+    "question": "How do you generate the Fibonacci series up to a given number N in JavaScript?",
+    "solution": "// Generate Fibonacci series up to N\nconst fibonacci = (n) => {\n  let series = [0, 1];\n\n  for (let i = 2; i <= n; i++) {\n    series[i] = series[i - 1] + series[i - 2];\n\n    // Stop once a term exceeds n\n    if (series[i] > n) {\n      series.pop();\n      break;\n    }\n  }\n\n  console.log(series);\n};\n\nfibonacci(50);\n// [0, 1, 1, 2, 3, 5, 8, 13, 21, 34]",
+    "explanation": "We start the series with the first two Fibonacci numbers, 0 and 1. Then, in a loop, each new term is the sum of the previous two terms. Since we're generating the series up to the value n (not a fixed count of terms), we check after adding each term whether it has exceeded n — if it has, we remove that last term and stop."
+  },
+  {
+    "id": 3,
+    "question": "How do you find all the factors of a number in JavaScript?",
+    "solution": "// Find factors of a number\nconst factorial = (num) => {\n  for (let i = 1; i <= Math.floor(num / 2); i++) {\n    if (num % i === 0) {\n      console.log(`${i} is a factor of ${num}`);\n    }\n  }\n};\n\nfactorial(10);\n// 1 is a factor of 10\n// 2 is a factor of 10\n// 5 is a factor of 10",
+    "explanation": "A factor of a number divides it evenly, with no remainder. We only need to check numbers up to half of num, since no factor other than num itself can be larger than num/2. For every i in that range, we check if num % i === 0 — if it is, i is a factor and gets logged."
+  }
+]
