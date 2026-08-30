@@ -18,8 +18,8 @@ const topicFiles: Record<string, Record<string, string>> = {
   javascript: {
     strings: "string.json",
     arrays: "array.json",
+    "array-polyfills": "Array_Polyfills.json",
     objects: "object.json",
-    functions: "function.json",
     loops: "loop.json",
     conditionals: "conditional.json",
     "es6-features": "es6.json",
@@ -76,12 +76,13 @@ export default async function TopicPage({
   const highlightedQuestions = await Promise.all(
     questions.map(async (item) => ({
       ...item,
-      highlightedCode: (item.code || item.solution)
-        ? await codeToHtml(item.code || item.solution || "", {
-            lang: language,
-            theme: "slack-dark",
-          })
-        : null,
+      highlightedCode:
+        item.code || item.solution
+          ? await codeToHtml(item.code || item.solution || "", {
+              lang: language,
+              theme: "slack-dark",
+            })
+          : null,
     })),
   );
 

@@ -24,9 +24,9 @@ const topicGroups: TopicGroup[] = [
     topics: [
       { name: "Strings", href: "/coding/javascript/strings" },
       { name: "Arrays", href: "/coding/javascript/arrays" },
+      { name: "Array Polyfills", href: "/coding/javascript/array-polyfills" },
       { name: "Objects", href: "/coding/javascript/objects" },
-      { name: "Functions", href: "/coding/javascript/functions" },
-      { name: "Loops", href: "/coding/javascript/loops" },
+      { name: "Closure", href: "/coding/javascript/closure" },
       { name: "Conditionals", href: "/coding/javascript/conditionals" },
       { name: "ES6 Features", href: "/coding/javascript/es6-features" },
       { name: "DOM Manipulation", href: "/coding/javascript/dom-manipulation" },

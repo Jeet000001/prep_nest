@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "question": "How do you implement a custom version of Array.prototype.map in JavaScript?",
+    "solution": "// Implement custom map\nArray.prototype.myMap = function (callback) {\n  const result = [];\n\n  for (let i = 0; i < this.length; i++) {\n    // callback receives currentValue, index, and the original array\n    result.push(callback(this[i], i, this));\n  }\n\n  return result;\n};\n\nconst arr = [1, 2, 3, 4];\nconst res = arr.myMap((num) => num * 2);\n\nconsole.log(res); // [2, 4, 6, 8]",
+    "explanation": "We add myMap onto Array.prototype so every array can use it. Inside, this refers to the array the method was called on. We loop through every element, call the callback with the current value, its index, and the array, and push the returned value into a new result array."
+  },
+  {
+    "id": 2,
+    "question": "How do you implement a custom version of Array.prototype.filter in JavaScript?",
+    "solution": "// Implement custom filter\nArray.prototype.myFilter = function (callback) {\n  const result = [];\n\n  for (let i = 0; i < this.length; i++) {\n    // Only keep elements where the callback returns true\n    if (callback(this[i], i, this)) {\n      result.push(this[i]);\n    }\n  }\n\n  return result;\n};\n\nconst arr2 = [1, 2, 3, 4, 5];\nconst res2 = arr2.myFilter((num) => num % 2 === 0);\n\nconsole.log(res2); // [2, 4]",
+    "explanation": "This works similarly to myMap, but instead of always pushing the transformed value, we call the callback as a condition. If the callback returns a truthy value for an element, we keep that original element in the result array; otherwise, we skip it."
+  },
+  {
+    "id": 3,
+    "question": "How do you implement a custom version of Array.prototype.forEach in JavaScript?",
+    "solution": "// Implement forEach\nArray.prototype.myForEach = function (callback) {\n  for (let i = 0; i < this.length; i++) {\n    callback(this[i], i, this);\n  }\n};\n\nconst arr4 = [1, 2, 3, 4];\n\narr4.myForEach((num) => {\n  console.log(num * 2);\n});\n// 2\n// 4\n// 6\n// 8",
+    "explanation": "myForEach simply loops through every element and calls the callback with the current value, index, and array, just like myMap. The difference is that it doesn't collect or return any results — it's used purely for running side effects like logging."
+  },
+  {
+    "id": 4,
+    "question": "How do you implement a custom version of Array.prototype.includes in JavaScript?",
+    "solution": "// Polyfill for includes\nArray.prototype.myIncludes = function (searchElement) {\n  for (let i = 0; i < this.length; i++) {\n    if (this[i] === searchElement) {\n      return true;\n    }\n  }\n\n  return false;\n};\n\nconst ar = [10, 20, 30];\nconsole.log(ar.myIncludes(20)); // true\nconsole.log(ar.myIncludes(50)); // false",
+    "explanation": "We loop through every element of the array and compare it with the searchElement using strict equality. As soon as we find a match, we return true immediately. If the loop finishes without finding a match, we return false."
+  },
+  {
+    "id": 5,
+    "question": "How do you chain multiple array methods together in JavaScript to filter, transform, and reduce data?",
+    "solution": "// Chain multiple array methods\nconst chainArrMethod = (arr) => {\n  return arr\n    .filter((num) => num % 2 === 0) // keep only even numbers\n    .map((num) => num * 2)          // double each even number\n    .reduce((acc, curr) => acc + curr, 0); // sum them all up\n};\n\nconsole.log(chainArrMethod([1, 2, 3, 4, 5, 6])); // 24",
+    "explanation": "Since filter and map both return new arrays, their results can be chained directly onto the next method call. Here we first filter out only the even numbers, then double each of them with map, and finally add them all together with reduce to get a single total."
+  },
+  {
+    "id": 6,
+    "question": "How do you implement a custom version of Array.prototype.reduce in JavaScript?",
+    "solution": "// Implement custom reduce\nArray.prototype.myReduce = function (callback, initialValue) {\n  let accumulator = initialValue;\n\n  for (let i = 0; i < this.length; i++) {\n    // Update the accumulator on every iteration using the callback\n    accumulator = callback(accumulator, this[i], i, this);\n  }\n\n  return accumulator;\n};\n\nconst arr3 = [1, 2, 3, 4];\n\nconst sum = arr3.myReduce((acc, curr) => {\n  return acc + curr;\n}, 0);\n\nconsole.log(sum); // 10",
+    "explanation": "We start with an accumulator set to the given initialValue. On every iteration, we call the callback with the current accumulator, the current element, its index, and the array, then store its return value back into the accumulator. After the loop finishes, the final accumulator value is returned. This is the trickiest of the four because the accumulator carries forward across every iteration instead of building a simple independent result."
+  }
+]
