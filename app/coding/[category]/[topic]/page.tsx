@@ -20,7 +20,7 @@ const topicFiles: Record<string, Record<string, string>> = {
     arrays: "array.json",
     "array-polyfills": "Array_Polyfills.json",
     objects: "object.json",
-    loops: "loop.json",
+    closure: "Closure.json",
     conditionals: "conditional.json",
     "es6-features": "es6.json",
     "dom-manipulation": "dom.json",

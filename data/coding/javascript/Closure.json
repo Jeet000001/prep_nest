@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "question": "How do you create a counter using closures in JavaScript?",
+    "solution": "// Create a counter using closure\nconst counter = () => {\n  let count = 0;\n\n  return () => {\n    count++;\n    return count;\n  };\n};\n\nconst counter1 = counter();\nconst counter2 = counter();\n\nconsole.log(counter1()); // 1\nconsole.log(counter1()); // 2\nconsole.log(counter2()); // 1",
+    "explanation": "The outer counter function creates a count variable and returns an inner function. That inner function keeps access to count even after the outer function has finished running, because of closure. Each call to counter() creates a brand new count variable, which is why counter1 and counter2 track their own independent counts."
+  },
+  {
+    "id": 2,
+    "question": "How do you implement a once() function in JavaScript that ensures a function only runs a single time?",
+    "solution": "// Function implement once()\nlet once = (fn) => {\n  let called = false;\n\n  // ...args = rest operator, collects multiple values into one array\n  return function (...args) {\n    if (!called) {\n      called = true;\n      // ...args = spread operator, spreads the array back into individual arguments\n      return fn(...args);\n    }\n  };\n};\n\nfunction greet(name) {\n  console.log(\"Hello\", name);\n}\n\nconst greetOnce = once(greet);\n\ngreetOnce(\"Jeet\");  // \"Hello Jeet\"\ngreetOnce(\"Rahul\"); // (nothing happens)\ngreetOnce(\"Amit\");  // (nothing happens)",
+    "explanation": "once() uses a closure variable called to remember whether the function has already been called. The first time the returned function runs, called is false, so it calls fn and flips called to true. On every later call, called is already true, so fn is never invoked again."
+  },
+  {
+    "id": 3,
+    "question": "How do you implement a memoization function in JavaScript to cache expensive function results?",
+    "solution": "// Memoization function\nconst memoize = (fn) => {\n  const cache = {};\n\n  return function (...args) {\n    // Convert the arguments array into a string key, e.g. [5] -> \"[5]\"\n    const key = JSON.stringify(args);\n\n    if (key in cache) {\n      console.log(\"From Cache\");\n      return cache[key];\n    }\n\n    console.log(\"Calculating...\");\n    const result = fn(...args);\n\n    cache[key] = result;\n\n    return result;\n  };\n};\n\nconst square = (n) => {\n  return n * n;\n};\n\nconst memoSquare = memoize(square);\n\nconsole.log(memoSquare(5));  // \"Calculating...\" -> 25\nconsole.log(memoSquare(5));  // \"From Cache\" -> 25\nconsole.log(memoSquare(10)); // \"Calculating...\" -> 100\nconsole.log(memoSquare(10)); // \"From Cache\" -> 100",
+    "explanation": "memoize keeps a cache object inside a closure. Every time the returned function is called, it turns the arguments into a string key using JSON.stringify. If that key already exists in the cache, it returns the stored result instantly. Otherwise, it runs the original function, stores the result under that key, and then returns it — so repeated calls with the same arguments skip the expensive calculation."
+  },
+  {
+    "id": 4,
+    "question": "How do you implement function composition in JavaScript?",
+    "solution": "// Function composition\nconst compose = (...fns) => {\n  return function (value) {\n    // reduceRight runs the functions from right to left\n    return fns.reduceRight((acc, fn) => {\n      return fn(acc);\n    }, value);\n  };\n};\n\nconst add2 = (x) => x + 2;\nconst multiply3 = (x) => x * 3;\nconst subtract1 = (x) => x - 1;\n\nconst result = compose(\n  subtract1,\n  multiply3,\n  add2\n);\n\nconsole.log(result(5));\n// add2(5) = 7 -> multiply3(7) = 21 -> subtract1(21) = 20",
+    "explanation": "compose takes any number of functions and returns a new function that runs them from right to left. We use reduceRight so the last function in the list runs first, using the initial value, and each subsequent function receives the previous function's output. This lets you build one function out of several smaller ones."
+  },
+  {
+    "id": 5,
+    "question": "What is a higher-order function in JavaScript, and how do you write one?",
+    "solution": "// Higher-order function example\nconst greett = (name) => {\n  return `hello ${name}`;\n};\n\nconst processUser = (name, callback) => {\n  return callback(name);\n};\n\nconsole.log(processUser(\"Jeet\", greett)); // \"hello Jeet\"",
+    "explanation": "A higher-order function is a function that either accepts another function as an argument or returns a function. Here, processUser takes a callback function as its second parameter and calls it internally, making it a higher-order function. This pattern allows the actual behavior (like how to greet the user) to be passed in and swapped out easily."
+  },
+  {
+    "id": 6,
+    "question": "How do you implement function currying in JavaScript?",
+    "solution": "// without currying\nconst sum = (a, b, c) => {\n  return a + b + c;\n};\n\nconsole.log(sum(1, 2, 3)); // 6\n\n// with currying\nconst sumCurried = (a) => {\n  return function (b) {\n    return function (c) {\n      return a + b + c;\n    };\n  };\n};\n\nconsole.log(sumCurried(1)(2)(3)); // 6",
+    "explanation": "Currying transforms a function that takes multiple arguments into a chain of functions that each take a single argument. Instead of calling sum(1, 2, 3) all at once, sumCurried(1) returns a new function waiting for b, which returns another function waiting for c. Only once all three arguments have been supplied does the final addition happen."
+  },
+  {
+    "id": 7,
+    "question": "How do you implement infinite currying in JavaScript, where a function can be called with any number of chained arguments?",
+    "solution": "// infinite currying\nconst sum = (a) => {\n  return function (b) {\n    // If called with no argument, stop and return the accumulated total\n    if (b === undefined) {\n      return a;\n    }\n\n    // Otherwise, keep currying with the running total\n    return sum(a + b);\n  };\n};\n\nconsole.log(sum(1)(2)(3)(4)(5)()); // 15",
+    "explanation": "This version of sum keeps returning a new curried function after every call, adding the new argument to a running total each time. Since we don't know in advance how many times it will be chained, we check if b is undefined — meaning the function was called with no arguments — and use that as the signal to stop and return the final accumulated value."
+  }
+]
