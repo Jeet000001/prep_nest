@@ -1,0 +1,8 @@
+[
+  {
+    "id": 1,
+    "question": "How do you implement a throttle function in JavaScript?",
+    "solution": "const throttle = (fn, delay) => {\n  let canRun = true;\n\n  return function (...args) {\n    // Ignore the call if we're still inside the cooldown period\n    if (!canRun) return;\n\n    fn(...args);\n\n    canRun = false;\n\n    setTimeout(() => {\n      canRun = true; // Allow calls again once the delay is over\n    }, delay);\n  };\n};\n\nconst click = () => {\n  console.log(\"Button Clicked\");\n};\n\nconst throttleClick = throttle(click, 1000);\n\nthrottleClick(); // \"Button Clicked\"\nthrottleClick(); // ignored\nthrottleClick(); // ignored\nthrottleClick(); // ignored",
+    "explanation": "throttle wraps a function so it can only run once every fixed interval, no matter how many times it's called. It uses a flag called canRun to track whether calls are currently allowed. The first call runs fn immediately and sets canRun to false, blocking any further calls. A setTimeout then flips canRun back to true after the delay, allowing the next call to run. This is commonly used for things like scroll or click handlers, where you want to limit how often an action fires rather than delaying it entirely like debounce does."
+  }
+]

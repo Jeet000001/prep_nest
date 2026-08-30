@@ -21,8 +21,8 @@ const topicFiles: Record<string, Record<string, string>> = {
     "array-polyfills": "Array_Polyfills.json",
     objects: "object.json",
     closure: "Closure.json",
-    debounce : "Debounce.json",
-    
+    debounce: "Debounce.json",
+    throttle: "Throttle.json",
   },
   react: {
     components: "component.json",
