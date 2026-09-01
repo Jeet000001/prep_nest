@@ -14,6 +14,7 @@ type Topic = {
 type TopicGroup = {
   name: string;
   icon: React.ElementType;
+  href?: string; // Optional direct link for groups like React
   topics: Topic[];
 };
 
@@ -35,6 +36,7 @@ const topicGroups: TopicGroup[] = [
   {
     name: "React",
     icon: Atom,
+    href: "/coding/react",
     topics: [
       { name: "Components", href: "/coding/react/components" },
       { name: "JSX", href: "/coding/react/jsx" },
@@ -163,6 +165,11 @@ const CodingSidebar = () => {
     return pathname === href;
   };
 
+  const isGroupActive = (href?: string) => {
+    if (!href) return false;
+    return pathname === href || pathname.startsWith(href + "/");
+  };
+
   const totalTopics = topicGroups.reduce(
     (total, group) => total + group.topics.length,
     0,
@@ -203,44 +210,75 @@ const CodingSidebar = () => {
                 {topicGroups.map((group) => {
                   const Icon = group.icon;
                   const isExpanded = expanded[group.name];
+                  const active = isGroupActive(group.href);
 
                   return (
                     <motion.div variants={groupItemVariants} key={group.name}>
                       {/* Parent */}
 
-                      <button
-                        type="button"
-                        onClick={() => toggleGroup(group.name)}
-                        className="
-                          flex w-full items-center justify-between
-                          rounded-lg px-3 py-2.5
-                          font-mono text-sm
-                          text-neutral-300
-                          transition-all duration-200
-                          hover:bg-white/4
-                          hover:text-white
-                        "
-                      >
-                        <span className="flex items-center gap-3">
-                          <Icon
-                            size={17}
-                            strokeWidth={1.7}
-                            className="text-amber-400/80"
-                          />
-
-                          <span>{group.name}</span>
-                        </span>
-
-                        <motion.span
-                          animate={{ rotate: isExpanded ? 180 : 0 }}
-                          transition={{
-                            duration: 0.3,
-                            ease: [0.25, 0.1, 0.25, 1],
-                          }}
+                      {group.href ? (
+                        <Link
+                          href={group.href}
+                          className={`
+                            flex w-full items-center justify-between
+                            rounded-lg px-3 py-2.5
+                            font-mono text-sm
+                            transition-all duration-200
+                            
+                            ${
+                              active
+                                ? "bg-amber-400/10 text-amber-400"
+                                : "text-neutral-300 hover:bg-white/4 hover:text-white"
+                            }
+                          `}
                         >
-                          <ChevronDown size={15} className="text-neutral-600" />
-                        </motion.span>
-                      </button>
+                          <span className="flex items-center gap-3">
+                            <Icon
+                              size={17}
+                              strokeWidth={1.7}
+                              className={`${
+                                active ? "text-amber-400" : "text-amber-400/80"
+                              }`}
+                            />
+
+                            <span>{group.name}</span>
+                          </span>
+                        </Link>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => toggleGroup(group.name)}
+                          className="
+                            flex w-full items-center justify-between
+                            rounded-lg px-3 py-2.5
+                            font-mono text-sm
+                            text-neutral-300
+                            transition-all duration-200
+                            hover:bg-white/4
+                            hover:text-white
+                          "
+                        >
+                          <span className="flex items-center gap-3">
+                            <Icon
+                              size={17}
+                              strokeWidth={1.7}
+                              className="text-amber-400/80"
+                            />
+
+                            <span>{group.name}</span>
+                          </span>
+
+                          <motion.span
+                            animate={{ rotate: isExpanded ? 180 : 0 }}
+                            transition={{
+                              duration: 0.3,
+                              ease: [0.25, 0.1, 0.25, 1],
+                            }}
+                          >
+                            <ChevronDown size={15} className="text-neutral-600" />
+                          </motion.span>
+                        </button>
+                      )}
 
                       {/* Subtopics */}
 

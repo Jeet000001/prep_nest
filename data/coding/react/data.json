@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "question": "How do you build a simple counter component in React using useState?",
+    "explanation": "We use the useState hook to create a count variable and a setCount function to update it. The button's onClick handler calls setCount, which updates the state and triggers React to re-render the component with the new count value. Since this is a single, self-contained component, everything lives in one file — App.tsx.",
+    "files": [
+      {
+        "fileName": "App.tsx",
+        "code": "import { useState } from \"react\";\n\nexport default function App() {\n  const [count, setCount] = useState(0);\n\n  return (\n    <div style={{ textAlign: \"center\", marginTop: \"40px\" }}>\n      <h2>Count: {count}</h2>\n      <button onClick={() => setCount(count + 1)}>Increment</button>\n      <button onClick={() => setCount(count - 1)} style={{ marginLeft: \"10px\" }}>\n        Decrement\n      </button>\n      <button onClick={() => setCount(0)} style={{ marginLeft: \"10px\" }}>\n        Reset\n      </button>\n    </div>\n  );\n}"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "How do you build a reusable modal component in React and control it from a parent component?",
+    "explanation": "The ModalCard component is built to be reusable — it accepts isOpen, title, message, and onClose as props, and only renders its content when isOpen is true. The App component owns the actual open/closed state using useState and passes it down to ModalCard along with a function to close it. This separation keeps the modal's UI logic in its own file while the parent decides when to show it, which is why the code is split across two files: App.tsx and ModalCard.tsx.",
+    "files": [
+      {
+        "fileName": "App.tsx",
+        "code": "import { useState } from \"react\";\nimport ModalCard from \"./ModalCard\";\n\nexport default function App() {\n  const [isModalOpen, setIsModalOpen] = useState(false);\n\n  return (\n    <div style={{ textAlign: \"center\", marginTop: \"40px\" }}>\n      <button onClick={() => setIsModalOpen(true)}>Open Modal</button>\n\n      <ModalCard\n        isOpen={isModalOpen}\n        title=\"Welcome\"\n        message=\"This is a reusable modal component.\"\n        onClose={() => setIsModalOpen(false)}\n      />\n    </div>\n  );\n}"
+      },
+      {
+        "fileName": "ModalCard.tsx",
+        "code": "type ModalCardProps = {\n  isOpen: boolean;\n  title: string;\n  message: string;\n  onClose: () => void;\n};\n\nexport default function ModalCard({\n  isOpen,\n  title,\n  message,\n  onClose\n}: ModalCardProps) {\n  if (!isOpen) return null;\n\n  return (\n    <div\n      style={{\n        position: \"fixed\",\n        top: 0,\n        left: 0,\n        width: \"100%\",\n        height: \"100%\",\n        background: \"rgba(0, 0, 0, 0.5)\",\n        display: \"flex\",\n        alignItems: \"center\",\n        justifyContent: \"center\"\n      }}\n    >\n      <div\n        style={{\n          background: \"#fff\",\n          padding: \"24px\",\n          borderRadius: \"8px\",\n          minWidth: \"280px\",\n          textAlign: \"center\"\n        }}\n      >\n        <h3>{title}</h3>\n        <p>{message}</p>\n        <button onClick={onClose}>Close</button>\n      </div>\n    </div>\n  );\n}"
+      }
+    ]
+  }
+]
