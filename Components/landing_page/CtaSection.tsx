@@ -85,7 +85,7 @@ const Cta = () => {
             >
               {/* Primary */}
               <Link
-                href="/"
+                href="/concepts"
                 className=" group inline-flex h-12 items-center justify-center gap-3 rounded-full bg-[#efb54d] px-6 text-[13px] font-semibold text-[#17120a] transition-all duration-200 hover:bg-[#f5c363] active:scale-[0.98]"
               >
                 <span>Browse All Topics</span>
@@ -99,7 +99,7 @@ const Cta = () => {
 
               {/* Secondary */}
               <Link
-                href="/"
+                href="/coding"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#332e27] bg-transparent px-6 text-[13px] font-semibold text-[#eee9e1] transition-all duration-200 hover:border-[#51493d] hover:bg-[#1a1713] active:scale-[0.98]"
               >
                 <Code2 size={15} />
@@ -109,12 +109,12 @@ const Cta = () => {
 
               {/* Third */}
               <Link
-                href="/"
+                href="/mock-tests"
                 className=" inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#332e27] bg-transparent px-6 text-[13px] font-semibold text-[#eee9e1] transition-all duration-200 hover:border-[#51493d] hover:bg-[#1a1713] active:scale-[0.98]"
               >
                 <BookOpen size={15} />
 
-                <span>React Theory Notes</span>
+                <span>Start Mock Tests</span>
               </Link>
             </motion.div>
           </motion.div>
