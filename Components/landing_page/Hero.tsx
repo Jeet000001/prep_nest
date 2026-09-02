@@ -95,10 +95,10 @@ const Hero = () => {
               className="mt-8 flex flex-col items-center gap-4 sm:mt-9 sm:flex-row sm:justify-center lg:justify-start"
             >
               <Link
-                href="/"
+                href="/coding"
                 className="group inline-flex h-11 w-full max-w-xs items-center justify-center gap-2 rounded-lg bg-amber-400 px-5 font-heading text-xs font-semibold text-[#0B0907] transition-all duration-300 hover:bg-amber-300 hover:shadow-[0_0_30px_rgba(246,218,160,0.15)] sm:h-12 sm:w-auto sm:max-w-none sm:px-6 sm:text-sm"
               >
-                Start Exploring Free Resources
+                Start Preparing for Machine Coding
                 <ArrowRight
                   size={17}
                   className="transition-transform duration-300 group-hover:translate-x-1 sm:h-[18px] sm:w-[18px]"
