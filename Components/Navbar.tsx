@@ -172,8 +172,10 @@ const Navbar = () => {
               <button
                 className={`${exploreButtonClass} h-11 w-full rounded-full`}
               >
-                Start Exploring
+                <Link href="/concepts" className="flex items-center gap-2">
+                Exploring Concepts
                 <ArrowRight size={18} />
+              </Link>
               </button>
             </nav>
           </div>
