@@ -1,17 +1,26 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, X, Star } from "lucide-react";
 import { useState } from "react";
 
 const Navbar = () => {
+  const pathname = usePathname();
   const [open, setOpen] = useState<boolean>(false);
 
-  const navLinkClass =
-    "font-mono text-sm text-neutral-400 transition-colors duration-300 hover:text-amber-400";
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 
-  const mobileLinkClass =
-    "block py-1 font-mono text-[15px] text-neutral-300 transition-colors duration-300 hover:text-amber-400";
+  const navLinkClass = (href: string) =>
+    `font-mono text-sm transition-colors duration-300 hover:text-amber-400 ${
+      isActive(href) ? "text-amber-400" : "text-neutral-400"
+    }`;
+
+  const mobileLinkClass = (href: string) =>
+    `block py-1 font-mono text-[15px] transition-colors duration-300 hover:text-amber-400 ${
+      isActive(href) ? "text-amber-400" : "text-neutral-300"
+    }`;
 
   const exploreButtonClass =
     "flex items-center justify-center gap-2 bg-amber-400 font-mono text-sm font-semibold text-black transition-colors duration-300 hover:bg-amber-300";
@@ -40,19 +49,35 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-9 lg:flex xl:gap-12">
-            <Link href="/concepts" className={navLinkClass}>
+            <Link
+              href="/concepts"
+              aria-current={isActive("/concepts") ? "page" : undefined}
+              className={navLinkClass("/concepts")}
+            >
               Concepts
             </Link>
 
-            <Link href="/coding" className={navLinkClass}>
-              Coding
+            <Link
+              href="/coding"
+              aria-current={isActive("/coding") ? "page" : undefined}
+              className={navLinkClass("/coding")}
+            >
+              Machine Coding
             </Link>
 
-            <Link href="/" className={navLinkClass}>
+            <Link
+              href="/"
+              aria-current={isActive("/") ? "page" : undefined}
+              className={navLinkClass("/")}
+            >
               Mock Tests
             </Link>
 
-            <Link href="/contact" className={navLinkClass}>
+            <Link
+              href="/contact"
+              aria-current={isActive("/contact") ? "page" : undefined}
+              className={navLinkClass("/contact")}
+            >
               Contact
             </Link>
           </nav>
@@ -71,9 +96,7 @@ const Navbar = () => {
             </a>
 
             {/* Start Exploring */}
-            <button
-              className={`${exploreButtonClass} h-11 rounded-lg px-6`}
-            >
+            <button className={`${exploreButtonClass} h-11 rounded-lg px-6`}>
               Start Exploring
               <ArrowRight size={18} />
             </button>
@@ -99,7 +122,8 @@ const Navbar = () => {
               <Link
                 href="/concepts"
                 onClick={() => setOpen(false)}
-                className={mobileLinkClass}
+                aria-current={isActive("/concepts") ? "page" : undefined}
+                className={mobileLinkClass("/concepts")}
               >
                 Concepts
               </Link>
@@ -107,15 +131,17 @@ const Navbar = () => {
               <Link
                 href="/coding"
                 onClick={() => setOpen(false)}
-                className={mobileLinkClass}
+                aria-current={isActive("/coding") ? "page" : undefined}
+                className={mobileLinkClass("/coding")}
               >
-                Coding
+                Machine Coding
               </Link>
 
               <Link
                 href="/"
                 onClick={() => setOpen(false)}
-                className={mobileLinkClass}
+                aria-current={isActive("/") ? "page" : undefined}
+                className={mobileLinkClass("/")}
               >
                 Mock Tests
               </Link>
@@ -123,7 +149,8 @@ const Navbar = () => {
               <Link
                 href="/contact"
                 onClick={() => setOpen(false)}
-                className={mobileLinkClass}
+                aria-current={isActive("/contact") ? "page" : undefined}
+                className={mobileLinkClass("/contact")}
               >
                 Contact
               </Link>
