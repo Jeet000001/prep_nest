@@ -5,6 +5,11 @@ import { codeToHtml } from "shiki";
 import QuestionList from "@/Components/concepts/QuestionList";
 import AnimatedHeader from "@/Components/concepts/Header";
 
+type CodeFile = {
+  fileName: string;
+  code: string;
+};
+
 type Question = {
   id: number;
   question: string;
@@ -12,30 +17,36 @@ type Question = {
   code?: string | null;
   solution?: string | null;
   explanation?: string;
+  files?: CodeFile[];
 };
 
-const topicFiles: Record<string, Record<string, string>> = {
+type TopicSource = {
+  fileName: string;
+  questionIds?: number[];
+};
+
+const topicFiles: Record<string, Record<string, TopicSource>> = {
   javascript: {
-    strings: "string.json",
-    arrays: "array.json",
-    "array-polyfills": "Array_Polyfills.json",
-    objects: "object.json",
-    closure: "Closure.json",
-    debounce: "Debounce.json",
-    throttle: "Throttle.json",
-    others: "Others.json"
+    strings: { fileName: "string.json" },
+    arrays: { fileName: "array.json" },
+    "array-polyfills": { fileName: "Array_Polyfills.json" },
+    objects: { fileName: "object.json" },
+    closure: { fileName: "Closure.json" },
+    debounce: { fileName: "Debounce.json" },
+    throttle: { fileName: "Throttle.json" },
+    others: { fileName: "Others.json" },
   },
   react: {
-    components: "component.json",
-    jsx: "jsx.json",
-    props: "prop.json",
-    state: "state.json",
-    hooks: "hook.json",
-    "event-handling": "eventHandling.json",
-    forms: "form.json",
-    "lists-keys": "listKeys.json",
-    "conditional-rendering": "conditionalRendering.json",
-    performance: "performance.json",
+    counter: { fileName: "data.json", questionIds: [1] },
+    stopwatch: { fileName: "data.json", questionIds: [2] },
+    tabs: { fileName: "data.json", questionIds: [3] },
+    "product-search": { fileName: "data.json", questionIds: [4] },
+    "category-filter": { fileName: "data.json", questionIds: [5] },
+    "star-rating": { fileName: "data.json", questionIds: [6] },
+    "sign-up-form": { fileName: "data.json", questionIds: [7] },
+    "multi-step-form": { fileName: "data.json", questionIds: [8] },
+    "shopping-cart": { fileName: "data.json", questionIds: [9] },
+    "task-manager": { fileName: "data.json", questionIds: [10] },
   },
 };
 
@@ -48,9 +59,9 @@ export default async function TopicPage({
   }>;
 }) {
   const { category, topic } = await params;
-  const fileName = topicFiles[category]?.[topic];
+  const topicSource = topicFiles[category]?.[topic];
 
-  if (!fileName) {
+  if (!topicSource) {
     notFound();
   }
 
@@ -59,10 +70,13 @@ export default async function TopicPage({
     "data",
     "coding",
     category,
-    fileName,
+    topicSource.fileName,
   );
   const file = await fs.readFile(filePath, "utf-8");
-  const questions = JSON.parse(file) as Question[];
+  const allQuestions = JSON.parse(file) as Question[];
+  const questions = topicSource.questionIds
+    ? allQuestions.filter((item) => topicSource.questionIds?.includes(item.id))
+    : allQuestions;
   const language =
     category === "html"
       ? "html"
@@ -71,17 +85,36 @@ export default async function TopicPage({
         : category === "react"
           ? "tsx"
           : "css";
+
   const highlightedQuestions = await Promise.all(
-    questions.map(async (item) => ({
-      ...item,
-      highlightedCode:
-        item.code || item.solution
-          ? await codeToHtml(item.code || item.solution || "", {
-              lang: language,
-              theme: "slack-dark",
-            })
-          : null,
-    })),
+    questions.map(async (item) => {
+      if (item.files && item.files.length > 0) {
+        return {
+          ...item,
+          highlightedCode: await Promise.all(
+            item.files.map(async (codeFile) => ({
+              fileName: codeFile.fileName,
+              code: codeFile.code,
+              highlightedCode: await codeToHtml(codeFile.code, {
+                lang: language,
+                theme: "slack-dark",
+              }),
+            })),
+          ),
+        };
+      }
+
+      return {
+        ...item,
+        highlightedCode:
+          item.code || item.solution
+            ? await codeToHtml(item.code || item.solution || "", {
+                lang: language,
+                theme: "slack-dark",
+              })
+            : null,
+      };
+    }),
   );
 
   return (

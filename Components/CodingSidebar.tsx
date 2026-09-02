@@ -36,21 +36,17 @@ const topicGroups: TopicGroup[] = [
   {
     name: "React",
     icon: Atom,
-    href: "/coding/react",
     topics: [
-      { name: "Components", href: "/coding/react/components" },
-      { name: "JSX", href: "/coding/react/jsx" },
-      { name: "Props", href: "/coding/react/props" },
-      { name: "State", href: "/coding/react/state" },
-      { name: "Hooks", href: "/coding/react/hooks" },
-      { name: "Event Handling", href: "/coding/react/event-handling" },
-      { name: "Forms", href: "/coding/react/forms" },
-      { name: "Lists & Keys", href: "/coding/react/lists-keys" },
-      {
-        name: "Conditional Rendering",
-        href: "/coding/react/conditional-rendering",
-      },
-      { name: "Performance", href: "/coding/react/performance" },
+      { name: "Counter", href: "/coding/react/counter" },
+      { name: "Stopwatch", href: "/coding/react/stopwatch" },
+      { name: "Tabs", href: "/coding/react/tabs" },
+      { name: "Product Search", href: "/coding/react/product-search" },
+      { name: "Category Filter", href: "/coding/react/category-filter" },
+      { name: "Star Rating", href: "/coding/react/star-rating" },
+      { name: "Sign Up Form", href: "/coding/react/sign-up-form" },
+      { name: "Multi-Step Form", href: "/coding/react/multi-step-form" },
+      { name: "Shopping Cart", href: "/coding/react/shopping-cart" },
+      { name: "Task Manager", href: "/coding/react/task-manager" },
     ],
   },
 ];
@@ -217,11 +213,10 @@ const CodingSidebar = () => {
                       {/* Parent */}
 
                       {group.href ? (
-                        <Link
-                          href={group.href}
+                        <div
                           className={`
-                            flex w-full items-center justify-between
-                            rounded-lg px-3 py-2.5
+                            flex w-full items-center
+                            rounded-lg
                             font-mono text-sm
                             transition-all duration-200
                             
@@ -232,18 +227,38 @@ const CodingSidebar = () => {
                             }
                           `}
                         >
-                          <span className="flex items-center gap-3">
+                          <Link
+                            href={group.href}
+                            className="flex min-w-0 flex-1 items-center gap-3 px-3 py-2.5"
+                          >
                             <Icon
                               size={17}
                               strokeWidth={1.7}
-                              className={`${
+                              className={` ${
                                 active ? "text-amber-400" : "text-amber-400/80"
                               }`}
                             />
 
                             <span>{group.name}</span>
-                          </span>
-                        </Link>
+                          </Link>
+
+                          <button
+                            type="button"
+                            onClick={() => toggleGroup(group.name)}
+                            aria-label={`${isExpanded ? "Collapse" : "Expand"} ${group.name} topics`}
+                            className="flex size-10 shrink-0 items-center justify-center rounded-lg text-neutral-600 transition-colors hover:text-neutral-300"
+                          >
+                            <motion.span
+                              animate={{ rotate: isExpanded ? 180 : 0 }}
+                              transition={{
+                                duration: 0.3,
+                                ease: [0.25, 0.1, 0.25, 1],
+                              }}
+                            >
+                              <ChevronDown size={15} />
+                            </motion.span>
+                          </button>
+                        </div>
                       ) : (
                         <button
                           type="button"
