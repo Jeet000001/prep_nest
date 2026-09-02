@@ -45,8 +45,10 @@ const topicFiles: Record<string, Record<string, TopicSource>> = {
     "star-rating": { fileName: "data.json", questionIds: [6] },
     "sign-up-form": { fileName: "data.json", questionIds: [7] },
     "multi-step-form": { fileName: "data.json", questionIds: [8] },
-    "shopping-cart": { fileName: "data.json", questionIds: [9] },
-    "task-manager": { fileName: "data.json", questionIds: [10] },
+    "api-fetching": { fileName: "data.json", questionIds: [9] },
+    "debounce-search": { fileName: "data.json", questionIds: [10] },
+    "shopping-cart": { fileName: "data.json", questionIds: [11] },
+    "task-manager": { fileName: "data.json", questionIds: [12] },
   },
 };
 

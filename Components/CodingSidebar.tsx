@@ -45,6 +45,8 @@ const topicGroups: TopicGroup[] = [
       { name: "Star Rating", href: "/coding/react/star-rating" },
       { name: "Sign Up Form", href: "/coding/react/sign-up-form" },
       { name: "Multi-Step Form", href: "/coding/react/multi-step-form" },
+      { name: "API Fetching", href: "/coding/react/api-fetching" },
+      { name: "Debounce Search", href: "/coding/react/debounce-search" },
       { name: "Shopping Cart", href: "/coding/react/shopping-cart" },
       { name: "Task Manager", href: "/coding/react/task-manager" },
     ],
