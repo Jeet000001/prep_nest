@@ -66,9 +66,9 @@ const Navbar = () => {
             </Link>
 
             <Link
-              href="/"
-              aria-current={isActive("/") ? "page" : undefined}
-              className={navLinkClass("/")}
+              href="/mock-tests"
+              aria-current={isActive("/mock-tests") ? "page" : undefined}
+              className={navLinkClass("/mock-tests")}
             >
               Mock Tests
             </Link>
@@ -97,8 +97,10 @@ const Navbar = () => {
 
             {/* Start Exploring */}
             <button className={`${exploreButtonClass} h-11 rounded-lg px-6`}>
-              Start Exploring
-              <ArrowRight size={18} />
+              <Link href="/concepts" className="flex items-center gap-2">
+                Exploring Concepts
+                <ArrowRight size={18} />
+              </Link>
             </button>
           </div>
 
