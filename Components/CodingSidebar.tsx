@@ -102,13 +102,15 @@ const CodingSidebar = () => {
   const [open, setOpen] = useState(false);
   const [isBottomBarHidden, setIsBottomBarHidden] = useState(false);
 
-  // Default opened groups
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({
-    HTML: true,
-    CSS: false,
-    JavaScript: true,
-    React: false,
-  });
+  const activeGroupName = topicGroups.find((group) =>
+    group.topics.some((topic) => pathname === topic.href),
+  )?.name;
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const [expandedPathname, setExpandedPathname] = useState(pathname);
+  const routeChanged = expandedPathname !== pathname;
+
+  const isGroupExpanded = (name: string) =>
+    routeChanged ? name === activeGroupName : expanded[name];
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -151,9 +153,12 @@ const CodingSidebar = () => {
   }, [pathname]);
 
   const toggleGroup = (name: string) => {
+    const currentlyExpanded = isGroupExpanded(name);
+
+    setExpandedPathname(pathname);
     setExpanded((prev) => ({
-      ...prev,
-      [name]: !prev[name],
+      ...Object.fromEntries(Object.keys(prev).map((groupName) => [groupName, false])),
+      [name]: !currentlyExpanded,
     }));
   };
 
@@ -205,7 +210,7 @@ const CodingSidebar = () => {
               >
                 {topicGroups.map((group) => {
                   const Icon = group.icon;
-                  const isExpanded = expanded[group.name];
+                  const isExpanded = isGroupExpanded(group.name);
                   const active = isGroupActive(group.href);
 
                   return (
@@ -500,7 +505,7 @@ const CodingSidebar = () => {
                 >
                   {topicGroups.map((group) => {
                     const Icon = group.icon;
-                    const isExpanded = expanded[group.name];
+                    const isExpanded = isGroupExpanded(group.name);
 
                     return (
                       <motion.div variants={groupItemVariants} key={group.name}>
