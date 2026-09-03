@@ -52,6 +52,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Modal", href: "/coding/react/modal" },
       { name: "OTP Input", href: "/coding/react/otp-input" },
       { name: "Toast Notification", href: "/coding/react/toast-notification" },
+      { name: "Data Table", href: "/coding/react/data-table" },
     ],
   },
 ];

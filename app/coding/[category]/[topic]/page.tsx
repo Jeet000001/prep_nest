@@ -52,6 +52,7 @@ const topicFiles: Record<string, Record<string, TopicSource>> = {
     "modal": { fileName: "data.json", questionIds: [13] },
     "otp-input": { fileName: "data.json", questionIds: [14] },
     "toast-notification": { fileName: "data.json", questionIds: [15] },
+    "data-table": { fileName: "data.json", questionIds: [16] },
   },
 };
 
