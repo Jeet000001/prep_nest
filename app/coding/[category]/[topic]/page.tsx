@@ -54,6 +54,7 @@ const topicFiles: Record<string, Record<string, TopicSource>> = {
     "toast-notification": { fileName: "data.json", questionIds: [15] },
     "data-table": { fileName: "data.json", questionIds: [16] },
     "pagination": { fileName: "data.json", questionIds: [17] },
+    "infinite-scrolling": { fileName: "data.json", questionIds: [18] },
   },
 };
 

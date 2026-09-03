@@ -54,6 +54,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Toast Notification", href: "/coding/react/toast-notification" },
       { name: "Data Table", href: "/coding/react/data-table" },
       { name: "Pagination", href: "/coding/react/pagination" },
+      { name: "Infinite Scrolling", href: "/coding/react/infinite-scrolling" },
     ],
   },
 ];
