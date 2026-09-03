@@ -50,6 +50,7 @@ const topicFiles: Record<string, Record<string, TopicSource>> = {
     "shopping-cart": { fileName: "data.json", questionIds: [11] },
     "task-manager": { fileName: "data.json", questionIds: [12] },
     "modal": { fileName: "data.json", questionIds: [13] },
+    "otp-input": { fileName: "data.json", questionIds: [14] },
   },
 };
 

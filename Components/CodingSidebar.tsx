@@ -50,6 +50,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Shopping Cart", href: "/coding/react/shopping-cart" },
       { name: "Task Manager", href: "/coding/react/task-manager" },
       { name: "Modal", href: "/coding/react/modal" },
+      { name: "OTP Input", href: "/coding/react/otp-input" },
     ],
   },
 ];
