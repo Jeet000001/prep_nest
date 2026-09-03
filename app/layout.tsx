@@ -4,7 +4,6 @@ import { Space_Grotesk, IBM_Plex_Mono, Geist } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "@/Components/Navbar";
-import Footer from "@/Components/Footer";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/Components/theme-provider";
 
