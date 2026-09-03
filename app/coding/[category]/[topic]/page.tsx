@@ -53,6 +53,7 @@ const topicFiles: Record<string, Record<string, TopicSource>> = {
     "otp-input": { fileName: "data.json", questionIds: [14] },
     "toast-notification": { fileName: "data.json", questionIds: [15] },
     "data-table": { fileName: "data.json", questionIds: [16] },
+    "pagination": { fileName: "data.json", questionIds: [17] },
   },
 };
 
