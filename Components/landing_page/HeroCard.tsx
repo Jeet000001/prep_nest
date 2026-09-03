@@ -2,7 +2,6 @@
 
 import {
   ArrowRight,
-  SquarePen,
   Check,
   Code2,
   Layers3,
@@ -23,14 +22,6 @@ const preparationSteps = [
     description: "UI · Logic · Edge cases",
     icon: Code2,
     status: "Practice",
-  },
-  {
-    number: "03",
-    title: "Mock Interviews",
-    description:
-      "Theory & coding MCQs across HTML, CSS, JavaScript, and React.",
-    icon: SquarePen,
-    status: "MCQ Practice",
   },
 ];
 

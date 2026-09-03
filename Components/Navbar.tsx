@@ -66,14 +66,6 @@ const Navbar = () => {
             </Link>
 
             <Link
-              href="/mock-tests"
-              aria-current={isActive("/mock-tests") ? "page" : undefined}
-              className={navLinkClass("/mock-tests")}
-            >
-              Mock Tests
-            </Link>
-
-            <Link
               href="/contact"
               aria-current={isActive("/contact") ? "page" : undefined}
               className={navLinkClass("/contact")}
@@ -137,15 +129,6 @@ const Navbar = () => {
                 className={mobileLinkClass("/coding")}
               >
                 Machine Coding
-              </Link>
-
-              <Link
-                href="/"
-                onClick={() => setOpen(false)}
-                aria-current={isActive("/") ? "page" : undefined}
-                className={mobileLinkClass("/")}
-              >
-                Mock Tests
               </Link>
 
               <Link

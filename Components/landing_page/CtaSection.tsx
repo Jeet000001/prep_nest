@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Code2, BookOpen } from "lucide-react";
+import { ArrowRight, Code2 } from "lucide-react";
 import { motion } from "framer-motion";
 
 import DotBackground from "../gradient_background/DotBackground";
@@ -52,7 +52,7 @@ const Cta = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.4 }}
-            className=" relative z-10 px-6 py-10 sm:px-8 sm:py-12 md:px-12 md:py-14 lg:px-16 lg:py-16"
+            className="relative z-10 px-6 py-10 text-center sm:px-8 sm:py-12 md:px-12 md:py-14 lg:px-16 lg:py-16"
           >
             {/* Eyebrow */}
             <motion.p
@@ -65,7 +65,7 @@ const Cta = () => {
             {/* Heading */}
             <motion.h2
               variants={itemVariants}
-              className="max-w-[700px] text-[38px] font-semibold leading-[1.02] tracking-[-0.045em] text-[#f4efe7] sm:text-[48px] md:text-[56px] lg:text-[60px]"
+              className="mx-auto max-w-[700px] text-[38px] font-semibold leading-[1.02] tracking-[-0.045em] text-[#f4efe7] sm:text-[48px] md:text-[56px] lg:text-[60px]"
             >
               Ready when you are.
             </motion.h2>
@@ -73,7 +73,7 @@ const Cta = () => {
             {/* Subtitle */}
             <motion.p
               variants={itemVariants}
-              className="mt-5 max-w-[620px] text-[15px] leading-7 text-[#a79e92] sm:text-[16px]"
+              className="mx-auto mt-5 max-w-[620px] text-[15px] leading-7 text-[#a79e92] sm:text-[16px]"
             >
               No signup. No payment. No waiting for a DM.
             </motion.p>
@@ -81,7 +81,7 @@ const Cta = () => {
             {/* Buttons */}
             <motion.div
               variants={itemVariants}
-              className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+              className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center"
             >
               {/* Primary */}
               <Link
@@ -107,15 +107,6 @@ const Cta = () => {
                 <span>Jump to Machine Coding</span>
               </Link>
 
-              {/* Third */}
-              <Link
-                href="/mock-tests"
-                className=" inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#332e27] bg-transparent px-6 text-[13px] font-semibold text-[#eee9e1] transition-all duration-200 hover:border-[#51493d] hover:bg-[#1a1713] active:scale-[0.98]"
-              >
-                <BookOpen size={15} />
-
-                <span>Start Mock Tests</span>
-              </Link>
             </motion.div>
           </motion.div>
         </div>
