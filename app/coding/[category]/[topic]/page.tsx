@@ -49,6 +49,7 @@ const topicFiles: Record<string, Record<string, TopicSource>> = {
     "debounce-search": { fileName: "data.json", questionIds: [10] },
     "shopping-cart": { fileName: "data.json", questionIds: [11] },
     "task-manager": { fileName: "data.json", questionIds: [12] },
+    "modal": { fileName: "data.json", questionIds: [13] },
   },
 };
 

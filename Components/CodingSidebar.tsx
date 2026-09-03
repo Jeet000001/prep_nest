@@ -49,6 +49,7 @@ const topicGroups: TopicGroup[] = [
       { name: "Debounce Search", href: "/coding/react/debounce-search" },
       { name: "Shopping Cart", href: "/coding/react/shopping-cart" },
       { name: "Task Manager", href: "/coding/react/task-manager" },
+      { name: "Modal", href: "/coding/react/modal" },
     ],
   },
 ];
